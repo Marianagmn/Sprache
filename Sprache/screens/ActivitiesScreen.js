@@ -1,20 +1,27 @@
 import React from 'react';
 import { Text, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
 import ActivityList from '../components/activities/ActivityList';
+import ScreenHeader from '../components/common/ScreenHeader';
+import ActivityFilter from '../components/activities/ActivityFilter';
 
-export default function ActivitiesScreen() {
+
+export default function ActivitiesScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scroll}>
-        <Text style={styles.headerTitle}>Actividades</Text>
-        <Text style={styles.headerSubtitle}>¿Qué te gustaría practicar hoy?</Text>
-
-        <ActivityList />
+      <ScrollView 
+        showsVerticalScrollIndicator={false} 
+        contentContainerStyle={styles.scroll}
+      >
+        <ScreenHeader 
+          title="Actividades" 
+          subtitle="¿Qué te gustaría practicar hoy?" 
+        />
+        <ActivityFilter />
+        <ActivityList />        
       </ScrollView>
     </SafeAreaView>
   );
 }
-
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#F9FAFB' },
   scroll: { padding: 20 },
