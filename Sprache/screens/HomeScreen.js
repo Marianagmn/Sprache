@@ -1,6 +1,5 @@
 import React from 'react';
 import { Text, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
 import AppButton from '../components/common/AppButton';
 import WelcomeHeader from '../components/home/WelcomeHeader';
 import StreakBadge from '../components/home/StreakBadge';
