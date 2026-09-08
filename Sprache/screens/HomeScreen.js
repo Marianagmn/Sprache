@@ -11,14 +11,18 @@ export default function HomeScreen() {
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scroll}>
         
-        <WelcomeHeader name="Mariana" level="Nivel A2">
-          <StreakBadge days="4" />
+        <WelcomeHeader name="Mariana" level="Nivel A2" greeting="Guten Morgen">
+          <StreakBadge days={4} />
         </WelcomeHeader>
 
-        <DailyGoalCard />
+        <DailyGoalCard completed={7} goal={10} unit="min" />
 
         <Text style={styles.sectionTitle}>Recomendado para ti</Text>
-        <RecommendationCard />
+        <RecommendationCard
+          title="Vocabulario"
+          description="Repasa palabras que has aprendido recientemente."
+          time="5 min"
+        />
 
         <AppButton title="Continuar práctica" style={styles.mainActionBtn} />
 

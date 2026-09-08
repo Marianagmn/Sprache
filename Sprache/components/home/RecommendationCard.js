@@ -2,17 +2,23 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-export default function RecommendationCard() {
+export default function RecommendationCard({
+	title = 'Vocabulario',
+	description = 'Repasa palabras que has aprendido recientemente.',
+	time = '5 min',
+	iconName = 'library',
+	onPress
+}) {
 	return (
-		<TouchableOpacity style={styles.card}>
+		<TouchableOpacity style={styles.card} onPress={onPress} activeOpacity={0.7}>
 			<View style={styles.icon}>
-				<Ionicons name="library" size={24} color="#1E3A8A" />
+				<Ionicons name={iconName} size={24} color="#1E3A8A" />
 			</View>
 			<View style={styles.textContainer}>
-				<Text style={styles.title}>Vocabulario</Text>
-				<Text style={styles.description}>Repasa palabras que has aprendido recientemente.</Text>
+				<Text style={styles.title}>{title}</Text>
+				<Text style={styles.description}>{description}</Text>
 			</View>
-			<Text style={styles.time}>5 min →</Text>
+			<Text style={styles.time}>{time} →</Text>
 		</TouchableOpacity>
 	);
 }

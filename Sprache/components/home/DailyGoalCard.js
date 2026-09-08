@@ -1,15 +1,17 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-export default function DailyGoalCard() {
+export default function DailyGoalCard({ completed = 0, goal = 10, unit = 'min', encouragement = '¡Ya casi terminas!' }) {
+	const progress = goal > 0 ? Math.min(Math.max(completed / goal, 0), 1) : 0;
+
 	return (
 		<View style={styles.card}>
 			<Text style={styles.title}>Tu objetivo de hoy</Text>
-			<Text style={styles.goal}>7 / 10 min</Text>
+			<Text style={styles.goal}>{completed} / {goal} {unit}</Text>
 			<View style={styles.progressBackground}>
-				<View style={styles.progressFill} />
+				<View style={[styles.progressFill, { width: `${progress * 100}%` }]} />
 			</View>
-			<Text style={styles.encouragement}>¡Ya casi terminas!</Text>
+			<Text style={styles.encouragement}>{encouragement}</Text>
 		</View>
 	);
 }

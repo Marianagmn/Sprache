@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-export default function WelcomeHeader({ name, level, children }) {
+export default function WelcomeHeader({ name, level, greeting = 'Guten Morgen', children }) {
 	return (
 		<View style={styles.header}>
 			<View>
-				<Text style={styles.greeting}>Guten Morgen, {name} 👋</Text>
+				<Text style={styles.greeting}>{greeting}, {name} 👋</Text>
 				<Text style={styles.level}>{level}</Text>
 			</View>
 			{children}
