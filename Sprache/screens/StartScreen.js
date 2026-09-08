@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
+import AppButton from '../components/common/AppButton';
 
 export default function StartScreen({ navigation }) {
   return (
@@ -16,15 +17,8 @@ export default function StartScreen({ navigation }) {
       </View>
 
       <View style={styles.footer}>
-        <TouchableOpacity 
-          style={styles.primaryButton} 
-          onPress={() => navigation.navigate('Register')}
-        >
-          <Text style={styles.primaryButtonText}>Comenzar</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.secondaryButton}>
-          <Text style={styles.secondaryButtonText}>Ya tengo una cuenta</Text>
-        </TouchableOpacity>
+        <AppButton title="Comenzar" onPress={() => navigation.navigate('Register')} style={styles.primaryButton} />
+        <AppButton title="Ya tengo una cuenta" variant="secondary" style={styles.secondaryButton} />
       </View>
     </SafeAreaView>
   );
@@ -39,8 +33,6 @@ const styles = StyleSheet.create({
   subtitle: { fontSize: 18, fontWeight: '600', color: '#1E3A8A', textAlign: 'center', marginBottom: 12 },
   description: { fontSize: 16, color: '#6B7280', textAlign: 'center', lineHeight: 24 },
   footer: { paddingBottom: 20 },
-  primaryButton: { backgroundColor: '#1E3A8A', paddingVertical: 16, borderRadius: 12, alignItems: 'center', marginBottom: 12 },
-  primaryButtonText: { color: '#FFFFFF', fontSize: 16, fontWeight: '600' },
+  primaryButton: { marginBottom: 12 },
   secondaryButton: { paddingVertical: 16, alignItems: 'center' },
-  secondaryButtonText: { color: '#1E3A8A', fontSize: 16, fontWeight: '600' }
 });

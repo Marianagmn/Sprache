@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, SafeAreaView, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import AppButton from '../components/common/AppButton';
+import AppInput from '../components/common/AppInput';
 
 export default function RegisterScreen({ navigation }) {
   const [name, setName] = useState('');
@@ -23,8 +25,7 @@ export default function RegisterScreen({ navigation }) {
         <Text style={styles.subtitle}>Empecemos a personalizar tu aprendizaje.</Text>
 
         <Text style={styles.sectionTitle}>¿Cómo te llamas?</Text>
-        <TextInput 
-          style={styles.input} 
+        <AppInput
           placeholder="Ej. Mariana" 
           value={name} 
           onChangeText={setName} 
@@ -58,12 +59,7 @@ export default function RegisterScreen({ navigation }) {
       </ScrollView>
 
       <View style={styles.footer}>
-        <TouchableOpacity 
-          style={styles.primaryButton} 
-          onPress={() => navigation.navigate('MainApp')}
-        >
-          <Text style={styles.primaryButtonText}>Crear perfil</Text>
-        </TouchableOpacity>
+        <AppButton title="Crear perfil" onPress={() => navigation.navigate('MainApp')} />
       </View>
     </SafeAreaView>
   );
@@ -76,13 +72,10 @@ const styles = StyleSheet.create({
   title: { fontSize: 32, fontWeight: 'bold', color: '#111827', marginBottom: 8 },
   subtitle: { fontSize: 16, color: '#6B7280', marginBottom: 32 },
   sectionTitle: { fontSize: 18, fontWeight: '600', color: '#111827', marginBottom: 12, marginTop: 16 },
-  input: { backgroundColor: '#FFFFFF', borderWidth: 1, borderColor: '#E5E7EB', borderRadius: 12, padding: 16, fontSize: 16, marginBottom: 16 },
   row: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 16 },
   pill: { flex: 1, backgroundColor: '#FFFFFF', borderWidth: 1, borderColor: '#E5E7EB', paddingVertical: 12, borderRadius: 12, alignItems: 'center', marginHorizontal: 4 },
   pillActive: { backgroundColor: '#1E3A8A', borderColor: '#1E3A8A' },
   pillText: { fontSize: 16, color: '#6B7280', fontWeight: '500' },
   pillTextActive: { color: '#FFFFFF' },
   footer: { padding: 20 },
-  primaryButton: { backgroundColor: '#1E3A8A', paddingVertical: 16, borderRadius: 12, alignItems: 'center' },
-  primaryButtonText: { color: '#FFFFFF', fontSize: 16, fontWeight: '600' }
 });
