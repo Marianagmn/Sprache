@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
 import ProfileHeader from '../components/profile/ProfileHeader';
 import GoalCard from '../components/profile/GoalCard';
+import ProfileStats from '../components/profile/ProfileStats';
 import SettingsSection from '../components/profile/SettingsSection';
 import SettingsRow from '../components/profile/SettingsRow';
 
@@ -13,6 +14,14 @@ export default function ProfileScreen({ navigation }) {
         <ProfileHeader name="Mariana" level="Nivel A2" />
 
         <GoalCard />
+
+        <ProfileStats
+          stats={[
+            { iconName: 'flame', color: '#F59E0B', value: '4 días', label: 'Racha' },
+            { iconName: 'time', color: '#1E3A8A', value: '42 min', label: 'Estudiados' },
+            { iconName: 'school', color: '#10B981', value: '127', label: 'Palabras' },
+          ]}
+        />
 
         <SettingsSection title="Preferencias">
           <SettingsRow iconName="notifications-outline" title="Notificaciones" />

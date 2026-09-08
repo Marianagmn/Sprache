@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-export default function ProfileHeader({ name, level }) {
+export default function ProfileHeader({ name = 'Usuario', level = '' }) {
 	return (
 		<View style={styles.container}>
 			<View style={styles.avatar}>
-				<Text style={styles.avatarText}>{name.charAt(0)}</Text>
+				<Text style={styles.avatarText}>{name.charAt(0).toUpperCase()}</Text>
 			</View>
 			<Text style={styles.name}>{name}</Text>
 			<Text style={styles.level}>{level}</Text>

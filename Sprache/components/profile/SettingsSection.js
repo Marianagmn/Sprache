@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from 'react-native';
 export default function SettingsSection({ title, children }) {
 	return (
 		<>
-			<Text style={styles.title}>{title}</Text>
+			{title && <Text style={styles.title}>{title}</Text>}
 			<View style={styles.group}>{children}</View>
 		</>
 	);

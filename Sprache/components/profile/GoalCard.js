@@ -1,13 +1,13 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-export default function GoalCard() {
+export default function GoalCard({ label = 'Tu objetivo', value = '10 minutos al día', badge = '🔥 Mantener una rutina' }) {
 	return (
 		<View style={styles.card}>
-			<Text style={styles.label}>Tu objetivo</Text>
-			<Text style={styles.value}>10 minutos al día</Text>
+			<Text style={styles.label}>{label}</Text>
+			<Text style={styles.value}>{value}</Text>
 			<View style={styles.badge}>
-				<Text style={styles.badgeText}>🔥 Mantener una rutina</Text>
+				<Text style={styles.badgeText}>{badge}</Text>
 			</View>
 		</View>
 	);

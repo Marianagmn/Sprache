@@ -9,8 +9,8 @@ export default function ProfileStats({ stats = [] }) {
 
 	return (
 		<View style={styles.container}>
-			{stats.map((stat) => (
-				<View key={stat.label} style={styles.stat}>
+			{stats.map((stat, index) => (
+				<View key={`${stat.label}-${index}`} style={styles.stat}>
 					<Ionicons name={stat.iconName} size={24} color={stat.color || '#1E3A8A'} />
 					<Text style={styles.value}>{stat.value}</Text>
 					<Text style={styles.label}>{stat.label}</Text>
