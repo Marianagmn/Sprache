@@ -1,11 +1,11 @@
 import React from 'react';
 import { Text, StyleSheet, View } from 'react-native';
 
-export default function ScreenHeader({ title, subtitle }) {
+export default function ScreenHeader({ title, subtitle, style, titleStyle, subtitleStyle }) {
 	return (
-		<View style={styles.container}>
-			<Text style={styles.title}>{title}</Text>
-			{subtitle && <Text style={styles.subtitle}>{subtitle}</Text>}
+		<View style={[styles.container, style]}>
+			<Text style={[styles.title, titleStyle]} accessibilityRole="header">{title}</Text>
+			{subtitle && <Text style={[styles.subtitle, subtitleStyle]}>{subtitle}</Text>}
 		</View>
 	);
 }
