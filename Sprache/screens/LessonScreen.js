@@ -1,0 +1,113 @@
+import React, { useState } from 'react';
+import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
+import { useApp } from '../context/AppContext';
+import { getLessonByActivityId } from '../services/lessonService';
+import AppButton from '../components/common/AppButton';
+import AnswerOption from '../components/learning/AnswerOption';
+import AudioButton from '../components/learning/AudioButton';
+import FeedbackMessage from '../components/learning/FeedbackMessage';
+import HintButton from '../components/learning/HintButton';
+import LessonHeader from '../components/learning/LessonHeader';
+import LessonProgress from '../components/learning/LessonProgress';
+import QuestionCard from '../components/learning/QuestionCard';
+import SessionSummary from '../components/learning/SessionSummary';
+
+export default function LessonScreen({ navigation, route }) {
+  const { completeActivity } = useApp();
+  const lesson = getLessonByActivityId(route.params?.activityId);
+  const [questionIndex, setQuestionIndex] = useState(0);
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [answered, setAnswered] = useState(false);
+  const [correctAnswers, setCorrectAnswers] = useState(0);
+  const [hintVisible, setHintVisible] = useState(false);
+  const [finished, setFinished] = useState(false);
+
+  const question = lesson.questions[questionIndex];
+  const isCorrect = selectedAnswer === question.answer;
+
+  const handleCheck = () => {
+    if (!selectedAnswer || answered) {
+      return;
+    }
+
+    setAnswered(true);
+    if (isCorrect) {
+      setCorrectAnswers((current) => current + 1);
+    }
+  };
+
+  const handleNext = () => {
+    if (questionIndex === lesson.questions.length - 1) {
+      completeActivity({
+        correctAnswers: correctAnswers + (isCorrect ? 1 : 0),
+        totalQuestions: lesson.questions.length,
+      });
+      setFinished(true);
+      return;
+    }
+
+    setQuestionIndex((current) => current + 1);
+    setSelectedAnswer(null);
+    setAnswered(false);
+    setHintVisible(false);
+  };
+
+  if (finished) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <SessionSummary
+          correctAnswers={correctAnswers}
+          totalQuestions={lesson.questions.length}
+          onFinish={() => navigation.goBack()}
+        />
+      </SafeAreaView>
+    );
+  }
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
+        <LessonHeader
+          title={lesson.title}
+          currentQuestion={questionIndex + 1}
+          totalQuestions={lesson.questions.length}
+          onClose={() => navigation.goBack()}
+        />
+        <LessonProgress current={questionIndex + 1} total={lesson.questions.length} />
+        <QuestionCard question={question.word} prompt={question.prompt} />
+        <AudioButton />
+        <View style={styles.options}>
+          {question.options.map((option) => (
+            <AnswerOption
+              key={option}
+              label={option}
+              selected={selectedAnswer === option}
+              correct={answered && option === question.answer}
+              incorrect={answered && selectedAnswer === option && option !== question.answer}
+              disabled={answered}
+              onPress={() => setSelectedAnswer(option)}
+            />
+          ))}
+        </View>
+        {!answered && <HintButton visible={hintVisible} hint={question.hint} onPress={() => setHintVisible(true)} />}
+        {answered && (
+          <FeedbackMessage
+            correct={isCorrect}
+            message={isCorrect ? 'La respuesta es correcta.' : `La respuesta correcta era ${question.answer}.`}
+          />
+        )}
+        <AppButton
+          title={answered ? (questionIndex === lesson.questions.length - 1 ? 'Ver resumen' : 'Siguiente') : 'Comprobar'}
+          onPress={answered ? handleNext : handleCheck}
+          disabled={!selectedAnswer}
+        />
+      </ScrollView>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: { flex: 1, backgroundColor: '#F9FAFB' },
+  content: { padding: 20, paddingBottom: 32 },
+  options: { marginBottom: 4 },
+});
