@@ -4,19 +4,21 @@ import { useApp } from '../context/AppContext';
 import LevelProgressCard from '../components/progress/LevelProgressCard';
 import WeeklyActivity from '../components/progress/WeeklyActivity';
 import ProgressStat from '../components/progress/ProgressStat';
+import { getWeeklyActivity } from '../services/progressService';
 
 export default function ProgressScreen() {
   const { user } = useApp();
+  const weeklyActivity = getWeeklyActivity(user.sessions);
 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scroll}>
         <Text style={styles.headerTitle}>Tu Progreso</Text>
         
-        <LevelProgressCard />
+        <LevelProgressCard level={user.level} studiedMinutes={user.studiedMinutes} learnedWords={user.learnedWords} />
 
         <Text style={styles.sectionTitle}>Actividad semanal</Text>
-        <WeeklyActivity />
+        <WeeklyActivity days={weeklyActivity} />
 
         <View style={styles.statsGrid}>
           <ProgressStat iconName="flame" color="#F59E0B" value={`${user.streak} días`} label="Racha actual" />

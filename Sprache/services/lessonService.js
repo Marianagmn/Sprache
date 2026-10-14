@@ -1,4 +1,4 @@
-import { vocabularyLesson } from '../data/lessons';
+import { vocabularyLesson } from '../data/lessons.js';
 
 const lessonsByActivityId = {
   [vocabularyLesson.activityId]: vocabularyLesson,

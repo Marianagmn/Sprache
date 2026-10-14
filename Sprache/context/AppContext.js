@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { login, logout, register, restoreSession, updateStoredUser } from '../services/authService';
 import { updateProfile } from '../services/profileService';
-import { recordActivity } from '../services/progressService';
+import { recordActivity, resetProgress } from '../services/progressService';
 
 const AppContext = createContext(null);
 
@@ -58,6 +58,12 @@ export function AppProvider({ children }) {
     return updatedUser;
   };
 
+  const resetUserProgress = async () => {
+    const updatedUser = await updateStoredUser(resetProgress);
+    setUser(updatedUser);
+    return updatedUser;
+  };
+
   const logoutUser = async () => {
     await logout();
     setUser(null);
@@ -70,6 +76,7 @@ export function AppProvider({ children }) {
     registerUser,
     loginUser,
     editProfile,
+    resetUserProgress,
     logoutUser,
   }), [user, isLoading]);
 

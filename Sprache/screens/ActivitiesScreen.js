@@ -1,11 +1,13 @@
-import React from 'react';
-import { Text, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, SafeAreaView, ScrollView } from 'react-native';
 import ActivityList from '../components/activities/ActivityList';
 import ScreenHeader from '../components/common/ScreenHeader';
 import ActivityFilter from '../components/activities/ActivityFilter';
 
 
 export default function ActivitiesScreen({ navigation }) {
+  const [activeFilter, setActiveFilter] = useState('Todos');
+
   const handleActivityPress = (activity) => {
     navigation.navigate('Lesson', { activityId: activity.id });
   };
@@ -20,8 +22,8 @@ export default function ActivitiesScreen({ navigation }) {
           title="Actividades" 
           subtitle="¿Qué te gustaría practicar hoy?" 
         />
-        <ActivityFilter />
-        <ActivityList onActivityPress={handleActivityPress} />
+        <ActivityFilter activeFilter={activeFilter} onChange={setActiveFilter} />
+        <ActivityList category={activeFilter} onActivityPress={handleActivityPress} />
       </ScrollView>
     </SafeAreaView>
   );

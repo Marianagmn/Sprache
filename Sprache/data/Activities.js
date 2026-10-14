@@ -1,4 +1,4 @@
-import { vocabularyLesson } from './lessons';
+import { vocabularyLesson } from './lessons.js';
 
 export const activities = [
   {
@@ -7,6 +7,7 @@ export const activities = [
     description: 'Amplía y repasa palabras en alemán.',
     time: '5 min',
     iconName: 'file-tray-stacked',
+    category: 'Vocabulario',
   },
 ];
 

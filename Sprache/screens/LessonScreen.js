@@ -24,6 +24,8 @@ export default function LessonScreen({ navigation, route }) {
   const [sessionSummary, setSessionSummary] = useState(null);
   const [hintVisible, setHintVisible] = useState(false);
   const [finished, setFinished] = useState(false);
+  const [isCompleting, setIsCompleting] = useState(false);
+  const [completionError, setCompletionError] = useState('');
   const completionRecorded = useRef(false);
 
   const question = lesson?.questions?.[questionIndex];
@@ -42,7 +44,7 @@ export default function LessonScreen({ navigation, route }) {
     });
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (!answered) {
       return;
     }
@@ -53,10 +55,19 @@ export default function LessonScreen({ navigation, route }) {
       }
 
       completionRecorded.current = true;
-      const completion = buildLessonCompletion(lesson, submittedAnswers);
-      completeActivity({ minutes: completion.minutes, words: completion.words });
-      setSessionSummary(completion);
-      setFinished(true);
+      setIsCompleting(true);
+      setCompletionError('');
+      try {
+        const completion = buildLessonCompletion(lesson, submittedAnswers, route.params?.activityId);
+        await completeActivity(completion);
+        setSessionSummary(completion);
+        setFinished(true);
+      } catch {
+        completionRecorded.current = false;
+        setCompletionError('No se pudo guardar tu sesión en este dispositivo. Comprueba el almacenamiento e inténtalo de nuevo.');
+      } finally {
+        setIsCompleting(false);
+      }
       return;
     }
 
@@ -123,10 +134,12 @@ export default function LessonScreen({ navigation, route }) {
             message={isCorrect ? 'La respuesta es correcta.' : `La respuesta correcta era ${question.answer}.`}
           />
         )}
+        {!!completionError && <FeedbackMessage correct={false} message={completionError} />}
         <AppButton
           title={answered ? (questionIndex === lesson.questions.length - 1 ? 'Ver resumen' : 'Siguiente') : 'Comprobar'}
           onPress={answered ? handleNext : handleCheck}
-          disabled={!selectedAnswer}
+          disabled={!selectedAnswer || isCompleting}
+          loading={isCompleting}
         />
       </ScrollView>
     </SafeAreaView>

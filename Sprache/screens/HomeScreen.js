@@ -6,9 +6,11 @@ import WelcomeHeader from '../components/home/WelcomeHeader';
 import StreakBadge from '../components/home/StreakBadge';
 import DailyGoalCard from '../components/home/DailyGoalCard';
 import RecommendationCard from '../components/home/RecommendationCard';
+import { getRecommendedActivity } from '../services/activityService';
 
 export default function HomeScreen({ navigation }) {
   const { user } = useApp();
+  const recommendation = getRecommendedActivity(user.sessions);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -22,9 +24,11 @@ export default function HomeScreen({ navigation }) {
 
         <Text style={styles.sectionTitle}>Recomendado para ti</Text>
         <RecommendationCard
-          title="Vocabulario"
-          description="Repasa palabras que has aprendido recientemente."
-          time="5 min"
+          title={recommendation.title}
+          description={recommendation.description}
+          time={recommendation.time}
+          iconName={recommendation.iconName}
+          onPress={() => navigation.navigate('Lesson', { activityId: recommendation.id })}
         />
 
         <AppButton title="Continuar práctica" onPress={() => navigation.navigate('Actividades')} style={styles.mainActionBtn} />

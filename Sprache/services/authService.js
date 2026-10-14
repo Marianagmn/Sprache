@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Crypto from 'expo-crypto';
 import { initialUser } from '../data/user';
+import { deriveProgress } from './progressService';
 
 const ACCOUNTS_KEY = '@sprache/demo/accounts-v1';
 const SESSION_KEY = '@sprache/demo/session-v1';
@@ -25,6 +26,20 @@ async function hashPassword(password, salt) {
     Crypto.CryptoDigestAlgorithm.SHA256,
     `${salt}:${password}`,
   );
+}
+
+function hydrateUser(storedUser) {
+  const user = {
+    ...initialUser,
+    ...storedUser,
+    sessions: Array.isArray(storedUser.sessions) ? storedUser.sessions : [],
+    preferences: {
+      ...initialUser.preferences,
+      ...storedUser.preferences,
+    },
+  };
+
+  return { ...user, ...deriveProgress(user) };
 }
 
 function toHex(bytes) {
@@ -61,6 +76,10 @@ export async function register({ name, email, password, level = 'A2', dailyGoal 
     studiedMinutes: 0,
     learnedWords: 0,
     streak: 0,
+    sessions: [],
+    preferences: {
+      notificationsEnabled: false,
+    },
   };
   const account = {
     email: normalizedEmail,
@@ -92,7 +111,11 @@ export async function login({ email, password }) {
   }
 
   await AsyncStorage.setItem(SESSION_KEY, normalizedEmail);
-  return account.user;
+  const user = hydrateUser(account.user);
+  const updatedAccounts = [...accounts];
+  updatedAccounts[accounts.indexOf(account)] = { ...account, user };
+  await AsyncStorage.setItem(ACCOUNTS_KEY, JSON.stringify(updatedAccounts));
+  return user;
 }
 
 export async function restoreSession() {
@@ -108,7 +131,11 @@ export async function restoreSession() {
     return null;
   }
 
-  return account.user;
+  const restoredUser = hydrateUser(account.user);
+  const updatedAccounts = [...accounts];
+  updatedAccounts[accounts.indexOf(account)] = { ...account, user: restoredUser };
+  await AsyncStorage.setItem(ACCOUNTS_KEY, JSON.stringify(updatedAccounts));
+  return restoredUser;
 }
 
 export async function updateStoredUser(update) {

@@ -21,6 +21,7 @@ export const vocabularyLesson = {
       options: ['Haus', 'Baum', 'Stuhl', 'Wasser'], 
 
       answer: 'Haus', 
+      vocabulary: { term: 'Haus', translation: 'casa' },
 
       hint: 'Empieza por la letra H.', 
 
@@ -37,6 +38,7 @@ export const vocabularyLesson = {
       options: ['Libro', 'Puerta', 'Mesa', 'Ventana'], 
 
       answer: 'Libro', 
+      vocabulary: { term: 'Buch', translation: 'libro' },
 
       hint: 'Es algo que puedes leer.', 
 
@@ -53,6 +55,7 @@ export const vocabularyLesson = {
       options: ['Morgen', 'Nacht', 'Welt', 'Tag'], 
 
       answer: 'Morgen', 
+      vocabulary: { term: 'Guten Morgen', translation: 'buenos días' },
 
       hint: 'Es el saludo que usamos por la mañana.', 
 

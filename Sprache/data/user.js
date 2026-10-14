@@ -6,12 +6,16 @@ export const initialUser = {
 
   dailyGoal: 10, 
 
-  studiedMinutes: 42, 
+  studiedMinutes: 0,
 
-  learnedWords: 127, 
+  learnedWords: 0,
 
-  streak: 4, 
+  streak: 0,
 
-  todayMinutes: 7, 
+  todayMinutes: 0,
+
+  sessions: [],
+
+  preferences: { notificationsEnabled: false },
 
 }; 

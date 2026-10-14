@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ScrollView, Text, TouchableOpacity, StyleSheet, View } from 'react-native';
 
-export default function ActivityFilter() {
-  const [activeFilter, setActiveFilter] = useState('Todos');
-
+export default function ActivityFilter({ activeFilter = 'Todos', onChange }) {
   const filters = ['Todos', 'Gramática', 'Vocabulario', 'Lectura', 'Escucha'];
 
   return (
@@ -23,7 +21,7 @@ export default function ActivityFilter() {
                 styles.filterChip,
                 isActive ? styles.activeChip : styles.inactiveChip
               ]}
-              onPress={() => setActiveFilter(filter)}
+              onPress={() => onChange?.(filter)}
               activeOpacity={0.7}
             >
               <Text 

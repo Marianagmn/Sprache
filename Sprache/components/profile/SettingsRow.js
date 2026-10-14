@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 export default function SettingsRow({ iconName, title, onPress, danger = false }) {
 	return (
-		<TouchableOpacity style={styles.row} onPress={onPress}>
+		<TouchableOpacity style={[styles.row, !onPress && styles.disabledRow]} onPress={onPress} disabled={!onPress} accessibilityRole="button" accessibilityState={{ disabled: !onPress }}>
 			<View style={styles.iconTitle}>
 				<Ionicons name={iconName} size={20} color={danger ? '#EF4444' : '#6B7280'} style={styles.icon} />
 				<Text style={[styles.text, danger && styles.dangerText]}>{title}</Text>
@@ -19,5 +19,6 @@ const styles = StyleSheet.create({
 	iconTitle: { flexDirection: 'row', alignItems: 'center' },
 	icon: { marginRight: 12 },
 	text: { fontSize: 16, color: '#111827' },
-	dangerText: { color: '#EF4444' }
+	dangerText: { color: '#EF4444' },
+	disabledRow: { opacity: 0.55 }
 });

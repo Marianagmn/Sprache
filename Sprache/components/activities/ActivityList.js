@@ -1,14 +1,20 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import ActivityCard from './ActivityCard';
-import { getActivities } from '../../services/activityService';
+import { filterActivities, getActivities } from '../../services/activityService';
+import EmptyState from '../common/EmptyState';
 
-export default function ActivityList({ onActivityPress }) {
-    const activities = getActivities();
+export default function ActivityList({ onActivityPress, category = 'Todos' }) {
+    const activities = filterActivities(getActivities(), category);
 
     return (
         <View style={styles.container}>
-            {activities.map((activity) => (
+            {activities.length === 0 ? (
+                <EmptyState
+                    title="No hay actividades aquí todavía"
+                    message="Prueba otro filtro; iremos añadiendo más prácticas pronto."
+                />
+            ) : activities.map((activity) => (
                 <ActivityCard 
                     key={activity.id} 
                     title={activity.title}
