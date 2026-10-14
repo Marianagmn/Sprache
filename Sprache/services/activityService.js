@@ -1,17 +1,9 @@
-import { activities, getActivityById } from '../data/activities'; 
+import { activities, getActivityById } from '../data/Activities';
 
- 
+export function getActivities() {
+  return activities;
+}
 
-export function getActivities() { 
-
-  return activities; 
-
-} 
-
- 
-
-export function getRecommendedActivity() { 
-
-  return getActivityById('vocabulary'); 
-
-} 
+export function getRecommendedActivity() {
+  return getActivityById('vocabulary');
+}
