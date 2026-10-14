@@ -9,8 +9,8 @@ const AppContext = createContext(null);
 export function AppProvider({ children }) {
   const [user, setUser] = useState(initialUser);
 
-  const completeActivity = (minutes, words = 0) => {
-    setUser((currentUser) => recordActivity(currentUser, { minutes, words }));
+  const completeActivity = (session) => {
+    setUser((currentUser) => recordActivity(currentUser, session));
   };
 
   const registerUser = async (credentials) => {

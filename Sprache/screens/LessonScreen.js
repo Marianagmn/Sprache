@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
 import { useApp } from '../context/AppContext';
 import { getLessonByActivityId } from '../services/lessonService';
@@ -21,6 +21,7 @@ export default function LessonScreen({ navigation, route }) {
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [hintVisible, setHintVisible] = useState(false);
   const [finished, setFinished] = useState(false);
+  const completionRecorded = useRef(false);
 
   const question = lesson.questions[questionIndex];
   const isCorrect = selectedAnswer === question.answer;
@@ -37,10 +38,19 @@ export default function LessonScreen({ navigation, route }) {
   };
 
   const handleNext = () => {
+    if (!answered) {
+      return;
+    }
+
     if (questionIndex === lesson.questions.length - 1) {
+      if (completionRecorded.current) {
+        return;
+      }
+
+      completionRecorded.current = true;
       completeActivity({
-        correctAnswers: correctAnswers + (isCorrect ? 1 : 0),
-        totalQuestions: lesson.questions.length,
+        minutes: lesson.durationMinutes,
+        words: correctAnswers,
       });
       setFinished(true);
       return;

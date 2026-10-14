@@ -6,6 +6,8 @@ export const vocabularyLesson = {
 
   activityId: 'vocabulary', 
 
+  durationMinutes: 5,
+
   questions: [ 
 
     { 
