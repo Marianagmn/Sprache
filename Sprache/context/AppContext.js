@@ -1,16 +1,43 @@
-import React, { createContext, useContext, useMemo, useState } from 'react';
-import { initialUser } from '../data/user';
-import { login, logout, register } from '../services/authService';
+import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { login, logout, register, restoreSession, updateStoredUser } from '../services/authService';
 import { updateProfile } from '../services/profileService';
 import { recordActivity } from '../services/progressService';
 
 const AppContext = createContext(null);
 
 export function AppProvider({ children }) {
-  const [user, setUser] = useState(initialUser);
+  const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const completeActivity = (session) => {
-    setUser((currentUser) => recordActivity(currentUser, session));
+  useEffect(() => {
+    let isMounted = true;
+
+    restoreSession()
+      .then((restoredUser) => {
+        if (isMounted) {
+          setUser(restoredUser);
+        }
+      })
+      .catch(() => {
+        if (isMounted) {
+          setUser(null);
+        }
+      })
+      .finally(() => {
+        if (isMounted) {
+          setIsLoading(false);
+        }
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const completeActivity = async (session) => {
+    const updatedUser = await updateStoredUser((currentUser) => recordActivity(currentUser, session));
+    setUser(updatedUser);
+    return updatedUser;
   };
 
   const registerUser = async (credentials) => {
@@ -25,23 +52,26 @@ export function AppProvider({ children }) {
     return loggedUser;
   };
 
-  const editProfile = (changes) => {
-    setUser((currentUser) => updateProfile(currentUser, changes));
+  const editProfile = async (changes) => {
+    const updatedUser = await updateStoredUser((currentUser) => updateProfile(currentUser, changes));
+    setUser(updatedUser);
+    return updatedUser;
   };
 
   const logoutUser = async () => {
     await logout();
-    setUser(initialUser);
+    setUser(null);
   };
 
   const value = useMemo(() => ({
     user,
+    isLoading,
     completeActivity,
     registerUser,
     loginUser,
     editProfile,
     logoutUser,
-  }), [user]);
+  }), [user, isLoading]);
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 }

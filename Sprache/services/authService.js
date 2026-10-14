@@ -1,83 +1,135 @@
-import { initialUser } from '../data/user'; 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as Crypto from 'expo-crypto';
+import { initialUser } from '../data/user';
 
- 
+const ACCOUNTS_KEY = '@sprache/demo/accounts-v1';
+const SESSION_KEY = '@sprache/demo/session-v1';
 
-let account = { 
+async function readAccounts() {
+  const storedAccounts = await AsyncStorage.getItem(ACCOUNTS_KEY);
+  if (!storedAccounts) {
+    return [];
+  }
 
-  email: 'mariana@sprache.app', 
+  try {
+    const accounts = JSON.parse(storedAccounts);
+    return Array.isArray(accounts) ? accounts : [];
+  } catch {
+    await AsyncStorage.removeItem(ACCOUNTS_KEY);
+    return [];
+  }
+}
 
-  password: 'sprache123', 
+async function hashPassword(password, salt) {
+  return Crypto.digestStringAsync(
+    Crypto.CryptoDigestAlgorithm.SHA256,
+    `${salt}:${password}`,
+  );
+}
 
-  user: initialUser, 
+function toHex(bytes) {
+  return Array.from(bytes, (byte) => byte.toString(16).padStart(2, '0')).join('');
+}
 
-}; 
+export async function register({ name, email, password, level = 'A2', dailyGoal = 10 }) {
+  const normalizedName = name?.trim();
+  const normalizedEmail = email?.trim().toLowerCase();
 
- 
+  if (!normalizedName || !normalizedEmail || !password) {
+    throw new Error('Completa todos los campos para crear tu cuenta.');
+  }
+  if (!/^\S+@\S+\.\S+$/.test(normalizedEmail)) {
+    throw new Error('Introduce un correo electrónico válido.');
+  }
+  if (password.length < 8) {
+    throw new Error('La contraseña debe tener al menos 8 caracteres.');
+  }
 
-export async function register({ name, email, password, level = 'A2', dailyGoal = 10 }) { 
+  const accounts = await readAccounts();
+  if (accounts.some((account) => account.email === normalizedEmail)) {
+    throw new Error('Ya existe una cuenta local con ese correo. Inicia sesión.');
+  }
 
-  if (!name || !email || !password) { 
+  const salt = toHex(await Crypto.getRandomBytesAsync(16));
+  const user = {
+    ...initialUser,
+    name: normalizedName,
+    email: normalizedEmail,
+    level: `Nivel ${level}`,
+    dailyGoal,
+    todayMinutes: 0,
+    studiedMinutes: 0,
+    learnedWords: 0,
+    streak: 0,
+  };
+  const account = {
+    email: normalizedEmail,
+    passwordSalt: salt,
+    passwordHash: await hashPassword(password, salt),
+    user,
+  };
 
-    throw new Error('Completa todos los campos para crear tu cuenta.'); 
+  await AsyncStorage.setItem(ACCOUNTS_KEY, JSON.stringify([...accounts, account]));
+  await AsyncStorage.setItem(SESSION_KEY, normalizedEmail);
+  return user;
+}
 
-  } 
+export async function login({ email, password }) {
+  const normalizedEmail = email?.trim().toLowerCase();
+  if (!normalizedEmail || !password) {
+    throw new Error('Introduce tu correo y contraseña.');
+  }
 
- 
+  const accounts = await readAccounts();
+  const account = accounts.find((savedAccount) => savedAccount.email === normalizedEmail);
+  if (!account) {
+    throw new Error('No encontramos una cuenta local con ese correo. Crea una cuenta primero.');
+  }
 
-  account = { 
+  const submittedHash = await hashPassword(password, account.passwordSalt);
+  if (submittedHash !== account.passwordHash) {
+    throw new Error('El correo o la contraseña no son correctos.');
+  }
 
-    email: email.trim().toLowerCase(), 
+  await AsyncStorage.setItem(SESSION_KEY, normalizedEmail);
+  return account.user;
+}
 
-    password, 
+export async function restoreSession() {
+  const email = await AsyncStorage.getItem(SESSION_KEY);
+  if (!email) {
+    return null;
+  }
 
-    user: { 
+  const accounts = await readAccounts();
+  const account = accounts.find((savedAccount) => savedAccount.email === email);
+  if (!account) {
+    await AsyncStorage.removeItem(SESSION_KEY);
+    return null;
+  }
 
-      ...initialUser, 
+  return account.user;
+}
 
-      name: name.trim(), 
+export async function updateStoredUser(update) {
+  const email = await AsyncStorage.getItem(SESSION_KEY);
+  if (!email) {
+    throw new Error('Inicia sesión para guardar los cambios.');
+  }
 
-      level: `Nivel ${level}`, 
+  const accounts = await readAccounts();
+  const accountIndex = accounts.findIndex((savedAccount) => savedAccount.email === email);
+  if (accountIndex < 0) {
+    throw new Error('No encontramos la cuenta local activa.');
+  }
 
-      dailyGoal, 
+  const updatedUser = update(accounts[accountIndex].user);
+  const updatedAccounts = [...accounts];
+  updatedAccounts[accountIndex] = { ...updatedAccounts[accountIndex], user: updatedUser };
+  await AsyncStorage.setItem(ACCOUNTS_KEY, JSON.stringify(updatedAccounts));
+  return updatedUser;
+}
 
-      todayMinutes: 0, 
-
-      studiedMinutes: 0, 
-
-      learnedWords: 0, 
-
-      streak: 0, 
-
-    }, 
-
-  }; 
-
- 
-
-  return account.user; 
-
-} 
-
- 
-
-export async function login({ email, password }) { 
-
-  if (email.trim().toLowerCase() !== account.email || password !== account.password) { 
-
-    throw new Error('El correo o la contraseña no son correctos.'); 
-
-  } 
-
- 
-
-  return account.user; 
-
-} 
-
- 
-
-export async function logout() { 
-
-  return null; 
-
-} 
+export async function logout() {
+  await AsyncStorage.removeItem(SESSION_KEY);
+}
