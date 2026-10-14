@@ -1,21 +1,24 @@
 import React from 'react';
 import { Text, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
+import { useApp } from '../context/AppContext';
 import AppButton from '../components/common/AppButton';
 import WelcomeHeader from '../components/home/WelcomeHeader';
 import StreakBadge from '../components/home/StreakBadge';
 import DailyGoalCard from '../components/home/DailyGoalCard';
 import RecommendationCard from '../components/home/RecommendationCard';
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
+  const { user } = useApp();
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scroll}>
         
-        <WelcomeHeader name="Mariana" level="Nivel A2" greeting="Guten Morgen">
-          <StreakBadge days={4} />
+        <WelcomeHeader name={user.name} level={user.level} greeting="Guten Morgen">
+          <StreakBadge days={user.streak} />
         </WelcomeHeader>
 
-        <DailyGoalCard completed={7} goal={10} unit="min" />
+        <DailyGoalCard completed={user.todayMinutes} goal={user.dailyGoal} unit="min" />
 
         <Text style={styles.sectionTitle}>Recomendado para ti</Text>
         <RecommendationCard
@@ -24,7 +27,7 @@ export default function HomeScreen() {
           time="5 min"
         />
 
-        <AppButton title="Continuar práctica" style={styles.mainActionBtn} />
+        <AppButton title="Continuar práctica" onPress={() => navigation.navigate('Actividades')} style={styles.mainActionBtn} />
 
       </ScrollView>
     </SafeAreaView>
