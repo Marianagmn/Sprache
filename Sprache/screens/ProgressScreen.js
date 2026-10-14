@@ -1,10 +1,13 @@
 import React from 'react';
 import { View, Text, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
+import { useApp } from '../context/AppContext';
 import LevelProgressCard from '../components/progress/LevelProgressCard';
 import WeeklyActivity from '../components/progress/WeeklyActivity';
 import ProgressStat from '../components/progress/ProgressStat';
 
 export default function ProgressScreen() {
+  const { user } = useApp();
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scroll}>
@@ -16,9 +19,9 @@ export default function ProgressScreen() {
         <WeeklyActivity />
 
         <View style={styles.statsGrid}>
-          <ProgressStat iconName="flame" color="#F59E0B" value="4 días" label="Racha actual" />
-          <ProgressStat iconName="time" color="#1E3A8A" value="42 min" label="Estudiados" />
-          <ProgressStat iconName="school" color="#10B981" value="127" label="Palabras" />
+          <ProgressStat iconName="flame" color="#F59E0B" value={`${user.streak} días`} label="Racha actual" />
+          <ProgressStat iconName="time" color="#1E3A8A" value={`${user.studiedMinutes} min`} label="Estudiados" />
+          <ProgressStat iconName="school" color="#10B981" value={`${user.learnedWords}`} label="Palabras" />
         </View>
       </ScrollView>
     </SafeAreaView>
