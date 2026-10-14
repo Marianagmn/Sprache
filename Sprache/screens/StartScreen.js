@@ -18,7 +18,7 @@ export default function StartScreen({ navigation }) {
 
       <View style={styles.footer}>
         <AppButton title="Comenzar" onPress={() => navigation.navigate('Register')} style={styles.primaryButton} />
-        <AppButton title="Ya tengo una cuenta" variant="secondary" style={styles.secondaryButton} />
+        <AppButton title="Ya tengo una cuenta" variant="secondary" onPress={() => navigation.navigate('Login')} style={styles.secondaryButton} />
       </View>
     </SafeAreaView>
   );

@@ -3,14 +3,40 @@ import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, ScrollView } fr
 import { Ionicons } from '@expo/vector-icons';
 import AppButton from '../components/common/AppButton';
 import AppInput from '../components/common/AppInput';
+import { useApp } from '../context/AppContext';
 
 export default function RegisterScreen({ navigation }) {
+  const { registerUser } = useApp();
   const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [level, setLevel] = useState('A2');
   const [time, setTime] = useState('10 min');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const levels = ['A1', 'A2', 'B1'];
   const times = ['5 min', '10 min', '20 min'];
+
+  const handleRegister = async () => {
+    setError('');
+    setLoading(true);
+
+    try {
+      await registerUser({
+        name,
+        email,
+        password,
+        level,
+        dailyGoal: Number.parseInt(time, 10),
+      });
+      navigation.replace('MainApp');
+    } catch (registerError) {
+      setError(registerError.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -29,6 +55,23 @@ export default function RegisterScreen({ navigation }) {
           placeholder="Ej. Mariana" 
           value={name} 
           onChangeText={setName} 
+        />
+
+        <Text style={styles.sectionTitle}>Correo electrónico</Text>
+        <AppInput
+          placeholder="tu@correo.com"
+          value={email}
+          onChangeText={setEmail}
+          autoCapitalize="none"
+          keyboardType="email-address"
+        />
+
+        <Text style={styles.sectionTitle}>Contraseña</Text>
+        <AppInput
+          placeholder="Mínimo 8 caracteres"
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry
         />
 
         <Text style={styles.sectionTitle}>Nivel actual</Text>
@@ -59,7 +102,8 @@ export default function RegisterScreen({ navigation }) {
       </ScrollView>
 
       <View style={styles.footer}>
-        <AppButton title="Crear perfil" onPress={() => navigation.navigate('MainApp')} />
+        {!!error && <Text style={styles.error}>{error}</Text>}
+        <AppButton title="Crear perfil" onPress={handleRegister} loading={loading} />
       </View>
     </SafeAreaView>
   );
@@ -77,5 +121,6 @@ const styles = StyleSheet.create({
   pillActive: { backgroundColor: '#1E3A8A', borderColor: '#1E3A8A' },
   pillText: { fontSize: 16, color: '#6B7280', fontWeight: '500' },
   pillTextActive: { color: '#FFFFFF' },
+  error: { color: '#B91C1C', fontSize: 14, marginBottom: 12 },
   footer: { padding: 20 },
 });
