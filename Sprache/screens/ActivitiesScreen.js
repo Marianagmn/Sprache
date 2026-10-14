@@ -6,6 +6,10 @@ import ActivityFilter from '../components/activities/ActivityFilter';
 
 
 export default function ActivitiesScreen({ navigation }) {
+  const handleActivityPress = (activity) => {
+    navigation.navigate('Lesson', { activityId: activity.id });
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView 
@@ -17,7 +21,7 @@ export default function ActivitiesScreen({ navigation }) {
           subtitle="¿Qué te gustaría practicar hoy?" 
         />
         <ActivityFilter />
-        <ActivityList />        
+        <ActivityList onActivityPress={handleActivityPress} />
       </ScrollView>
     </SafeAreaView>
   );
