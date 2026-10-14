@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
 import { useApp } from '../context/AppContext';
 import { getLessonByActivityId } from '../services/lessonService';
+import { buildLessonCompletion } from '../services/lessonProgressService';
 import AppButton from '../components/common/AppButton';
 import AnswerOption from '../components/learning/AnswerOption';
 import AudioButton from '../components/learning/AudioButton';
@@ -11,6 +12,7 @@ import LessonHeader from '../components/learning/LessonHeader';
 import LessonProgress from '../components/learning/LessonProgress';
 import QuestionCard from '../components/learning/QuestionCard';
 import SessionSummary from '../components/learning/SessionSummary';
+import EmptyState from '../components/common/EmptyState';
 
 export default function LessonScreen({ navigation, route }) {
   const { completeActivity } = useApp();
@@ -18,23 +20,26 @@ export default function LessonScreen({ navigation, route }) {
   const [questionIndex, setQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [answered, setAnswered] = useState(false);
-  const [correctAnswers, setCorrectAnswers] = useState(0);
+  const [submittedAnswers, setSubmittedAnswers] = useState([]);
+  const [sessionSummary, setSessionSummary] = useState(null);
   const [hintVisible, setHintVisible] = useState(false);
   const [finished, setFinished] = useState(false);
   const completionRecorded = useRef(false);
 
-  const question = lesson.questions[questionIndex];
-  const isCorrect = selectedAnswer === question.answer;
+  const question = lesson?.questions?.[questionIndex];
+  const isCorrect = question ? selectedAnswer === question.answer : false;
 
   const handleCheck = () => {
-    if (!selectedAnswer || answered) {
+    if (!selectedAnswer || answered || !question) {
       return;
     }
 
     setAnswered(true);
-    if (isCorrect) {
-      setCorrectAnswers((current) => current + 1);
-    }
+    setSubmittedAnswers((current) => {
+      const nextAnswers = [...current];
+      nextAnswers[questionIndex] = selectedAnswer;
+      return nextAnswers;
+    });
   };
 
   const handleNext = () => {
@@ -48,10 +53,9 @@ export default function LessonScreen({ navigation, route }) {
       }
 
       completionRecorded.current = true;
-      completeActivity({
-        minutes: lesson.durationMinutes,
-        words: correctAnswers,
-      });
+      const completion = buildLessonCompletion(lesson, submittedAnswers);
+      completeActivity({ minutes: completion.minutes, words: completion.words });
+      setSessionSummary(completion);
       setFinished(true);
       return;
     }
@@ -62,12 +66,25 @@ export default function LessonScreen({ navigation, route }) {
     setHintVisible(false);
   };
 
+  if (!lesson || !question) {
+    return (
+      <SafeAreaView style={[styles.container, styles.unavailable]}>
+        <EmptyState
+          title="Lección no disponible"
+          message="Esta actividad todavía no tiene una lección. Prueba otra actividad más tarde."
+          actionLabel="Volver a actividades"
+          onAction={() => navigation.goBack()}
+        />
+      </SafeAreaView>
+    );
+  }
+
   if (finished) {
     return (
       <SafeAreaView style={styles.container}>
         <SessionSummary
-          correctAnswers={correctAnswers}
-          totalQuestions={lesson.questions.length}
+          correctAnswers={sessionSummary.correctAnswers}
+          totalQuestions={sessionSummary.totalQuestions}
           onFinish={() => navigation.goBack()}
         />
       </SafeAreaView>
@@ -118,6 +135,7 @@ export default function LessonScreen({ navigation, route }) {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#F9FAFB' },
+  unavailable: { justifyContent: 'center' },
   content: { padding: 20, paddingBottom: 32 },
   options: { marginBottom: 4 },
 });

@@ -1,9 +1,9 @@
 import { vocabularyLesson } from '../data/lessons';
 
-export function getLessonByActivityId(activityId) {
-  if (activityId === vocabularyLesson.activityId) {
-    return vocabularyLesson;
-  }
+const lessonsByActivityId = {
+  [vocabularyLesson.activityId]: vocabularyLesson,
+};
 
-  return vocabularyLesson;
+export function getLessonByActivityId(activityId) {
+  return lessonsByActivityId[activityId] ?? null;
 }

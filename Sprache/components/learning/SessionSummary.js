@@ -2,9 +2,10 @@ import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet, Text, View } from 'react-native';
 import AppButton from '../common/AppButton';
+import { calculateSessionSummary } from '../../services/lessonProgressService';
 
 export default function SessionSummary({ correctAnswers, totalQuestions, onFinish }) {
-  const percentage = totalQuestions > 0 ? Math.round((correctAnswers / totalQuestions) * 100) : 0;
+  const summary = calculateSessionSummary(correctAnswers, totalQuestions);
 
   return (
     <View style={styles.container}>
@@ -14,8 +15,8 @@ export default function SessionSummary({ correctAnswers, totalQuestions, onFinis
       <Text style={styles.title}>Sesión completada</Text>
       <Text style={styles.subtitle}>Has practicado vocabulario y sumado una nueva sesión a tu progreso.</Text>
       <View style={styles.score}>
-        <Text style={styles.scoreValue}>{percentage}%</Text>
-        <Text style={styles.scoreLabel}>{correctAnswers} de {totalQuestions} respuestas correctas</Text>
+        <Text style={styles.scoreValue}>{summary.percentage}%</Text>
+        <Text style={styles.scoreLabel}>{summary.correctAnswers} de {summary.totalQuestions} respuestas correctas</Text>
       </View>
       <AppButton title="Volver a actividades" onPress={onFinish} style={styles.button} />
     </View>
