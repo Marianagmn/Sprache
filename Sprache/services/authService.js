@@ -46,7 +46,7 @@ function toHex(bytes) {
   return Array.from(bytes, (byte) => byte.toString(16).padStart(2, '0')).join('');
 }
 
-export async function register({ name, email, password, level = 'A2', dailyGoal = 10 }) {
+export async function register({ name, email, password, level = 'A2', dailyGoal = 10, motivation }) {
   const normalizedName = name?.trim();
   const normalizedEmail = email?.trim().toLowerCase();
 
@@ -70,7 +70,8 @@ export async function register({ name, email, password, level = 'A2', dailyGoal 
     ...initialUser,
     name: normalizedName,
     email: normalizedEmail,
-    level: `Nivel ${level}`,
+    level: level ? `Nivel ${level}` : initialUser.level,
+    motivation: motivation || initialUser.motivation || 'Viajar',
     dailyGoal,
     todayMinutes: 0,
     studiedMinutes: 0,

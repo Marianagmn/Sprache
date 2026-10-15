@@ -7,12 +7,32 @@ import { useApp } from '../context/AppContext';
 
 const steps = [
   { id: 'profile', title: 'Datos básicos', description: 'Cuéntanos quién eres' },
-  { id: 'level', title: 'Tu nivel', description: 'Elige tu punto de partida' },
-  { id: 'goal', title: 'Meta diaria', description: 'Define tu ritmo ideal' },
+  { id: 'level', title: 'Tu nivel', description: 'Qué tan familiarizado estás con el alemán' },
+  { id: 'motivation', title: '¿Por qué aprendes?', description: 'Esto nos ayudará a personalizar tu camino' },
+  { id: 'goal', title: 'Tu meta diaria', description: 'Define un ritmo realista y sostenible' },
 ];
 
-const levels = ['A1', 'A2', 'B1'];
-const times = ['5 min', '10 min', '20 min'];
+const levelOptions = [
+  { value: 'Principiante', description: 'Estoy empezando desde cero' },
+  { value: 'Básico', description: 'Entiendo frases sencillas' },
+  { value: 'Intermedio', description: 'Puedo mantener conversaciones' },
+  { value: 'Avanzado', description: 'Quiero perfeccionar fluidez y precisión' },
+];
+
+const motivationOptions = [
+  { value: 'Viajar', description: 'Quiero comunicarme al viajar' },
+  { value: 'Trabajo', description: 'Me ayuda en mi carrera o negocio' },
+  { value: 'Estudios', description: 'Necesito alemán para estudiar' },
+  { value: 'Familia y personas', description: 'Quiero conectar con otras personas' },
+  { value: 'Examen', description: 'Busco certificarme o aprobar un examen' },
+];
+
+const goalOptions = [
+  { value: '5 min', description: 'Para mantener la constancia' },
+  { value: '10 min', description: 'Ritmo equilibrado y sostenible' },
+  { value: '20 min', description: 'Avance más intenso' },
+  { value: '30 min', description: 'Sesión profunda y enfocada' },
+];
 
 export default function RegisterScreen({ navigation }) {
   const { registerUser } = useApp();
@@ -21,7 +41,8 @@ export default function RegisterScreen({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [level, setLevel] = useState('A2');
+  const [level, setLevel] = useState('Básico');
+  const [motivation, setMotivation] = useState('Viajar');
   const [time, setTime] = useState('10 min');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -36,11 +57,16 @@ export default function RegisterScreen({ navigation }) {
   const passwordValid = password.length >= 8 && /[A-Za-z]/.test(password) && /\d/.test(password);
   const profileReady = nameValid && emailValid && passwordValid;
 
+  const selectedLevel = levelOptions.find((option) => option.value === level) ?? levelOptions[1];
+  const selectedMotivation = motivationOptions.find((option) => option.value === motivation) ?? motivationOptions[0];
+  const selectedGoal = goalOptions.find((option) => option.value === time) ?? goalOptions[1];
+
   const stepSummary = useMemo(() => {
     if (stepIndex === 0) return name.trim() || 'Tu nombre';
-    if (stepIndex === 1) return `Nivel ${level}`;
-    return `Meta ${time}`;
-  }, [name, level, time, stepIndex]);
+    if (stepIndex === 1) return selectedLevel.value;
+    if (stepIndex === 2) return selectedMotivation.value;
+    return selectedGoal.value;
+  }, [name, selectedLevel, selectedMotivation, selectedGoal, stepIndex]);
 
   const validateCurrentStep = () => {
     if (currentStep.id === 'profile') {
@@ -85,6 +111,7 @@ export default function RegisterScreen({ navigation }) {
         email,
         password,
         level,
+        motivation,
         dailyGoal: Number.parseInt(time, 10),
       });
       navigation.replace('MainApp');
@@ -150,14 +177,35 @@ export default function RegisterScreen({ navigation }) {
       return (
         <View>
           <Text style={styles.sectionTitle}>¿Qué nivel tienes ahora?</Text>
-          <View style={styles.row}>
-            {levels.map((option) => (
+          <View style={styles.optionsGrid}>
+            {levelOptions.map((option) => (
               <TouchableOpacity
-                key={option}
-                style={[styles.pill, level === option && styles.pillActive]}
-                onPress={() => setLevel(option)}
+                key={option.value}
+                style={[styles.optionCard, level === option.value && styles.optionCardActive]}
+                onPress={() => setLevel(option.value)}
               >
-                <Text style={[styles.pillText, level === option && styles.pillTextActive]}>{option}</Text>
+                <Text style={[styles.optionTitle, level === option.value && styles.optionTitleActive]}>{option.value}</Text>
+                <Text style={[styles.optionDescription, level === option.value && styles.optionDescriptionActive]}>{option.description}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        </View>
+      );
+    }
+
+    if (currentStep.id === 'motivation') {
+      return (
+        <View>
+          <Text style={styles.sectionTitle}>¿Para qué quieres aprender alemán?</Text>
+          <View style={styles.optionsGrid}>
+            {motivationOptions.map((option) => (
+              <TouchableOpacity
+                key={option.value}
+                style={[styles.optionCard, motivation === option.value && styles.optionCardActive]}
+                onPress={() => setMotivation(option.value)}
+              >
+                <Text style={[styles.optionTitle, motivation === option.value && styles.optionTitleActive]}>{option.value}</Text>
+                <Text style={[styles.optionDescription, motivation === option.value && styles.optionDescriptionActive]}>{option.description}</Text>
               </TouchableOpacity>
             ))}
           </View>
@@ -168,14 +216,16 @@ export default function RegisterScreen({ navigation }) {
     return (
       <View>
         <Text style={styles.sectionTitle}>¿Cuánto quieres practicar hoy?</Text>
-        <View style={styles.row}>
-          {times.map((option) => (
+        <Text style={styles.helperText}>Un ritmo realista hace que puedas mantenerlo en el tiempo.</Text>
+        <View style={styles.optionsGrid}>
+          {goalOptions.map((option) => (
             <TouchableOpacity
-              key={option}
-              style={[styles.pill, time === option && styles.pillActive]}
-              onPress={() => setTime(option)}
+              key={option.value}
+              style={[styles.optionCard, time === option.value && styles.optionCardActive]}
+              onPress={() => setTime(option.value)}
             >
-              <Text style={[styles.pillText, time === option && styles.pillTextActive]}>{option}</Text>
+              <Text style={[styles.optionTitle, time === option.value && styles.optionTitleActive]}>{option.value}</Text>
+              <Text style={[styles.optionDescription, time === option.value && styles.optionDescriptionActive]}>{option.description}</Text>
             </TouchableOpacity>
           ))}
         </View>
@@ -275,6 +325,7 @@ const styles = StyleSheet.create({
   cardDescription: { fontSize: 14, color: '#6B7280', marginBottom: 12 },
   summary: { fontSize: 15, color: '#1E3A8A', fontWeight: '600' },
   sectionTitle: { fontSize: 18, fontWeight: '600', color: '#111827', marginBottom: 12, marginTop: 8 },
+  helperText: { fontSize: 13, color: '#6B7280', marginBottom: 12 },
   helper: { fontSize: 12, color: '#B91C1C', marginTop: -8, marginBottom: 12 },
   successText: { fontSize: 12, color: '#15803D', marginTop: -8, marginBottom: 12 },
   passwordFieldWrapper: { position: 'relative', marginBottom: 8 },
@@ -285,20 +336,32 @@ const styles = StyleSheet.create({
     top: 14,
     padding: 4,
   },
-  row: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 16 },
-  pill: {
-    flex: 1,
+  optionsGrid: { gap: 10 },
+  optionCard: {
     backgroundColor: '#FFFFFF',
     borderWidth: 1,
     borderColor: '#E5E7EB',
-    paddingVertical: 14,
-    borderRadius: 12,
-    alignItems: 'center',
-    marginHorizontal: 4,
+    borderRadius: 14,
+    padding: 16,
+    marginBottom: 10,
   },
-  pillActive: { backgroundColor: '#1E3A8A', borderColor: '#1E3A8A' },
-  pillText: { fontSize: 16, color: '#6B7280', fontWeight: '600' },
-  pillTextActive: { color: '#FFFFFF' },
+  optionCardActive: {
+    backgroundColor: '#EEF2FF',
+    borderColor: '#1E3A8A',
+  },
+  optionTitle: {
+    fontSize: 17,
+    fontWeight: '700',
+    color: '#111827',
+    marginBottom: 4,
+  },
+  optionTitleActive: { color: '#1E3A8A' },
+  optionDescription: {
+    fontSize: 13,
+    color: '#6B7280',
+    lineHeight: 18,
+  },
+  optionDescriptionActive: { color: '#1E3A8A' },
   footer: { paddingHorizontal: 20, paddingBottom: 20 },
   error: { color: '#B91C1C', fontSize: 14, marginBottom: 12 },
   actions: { flexDirection: 'row', alignItems: 'center' },
