@@ -29,9 +29,14 @@ test('el catálogo tiene IDs únicos y cada actividad apunta a una lección', ()
 });
 
 test('los filtros devuelven solo la categoría seleccionada', () => {
+  const vocabActivities = activities.filter((activity) => activity.category === 'Vocabulario');
+  const readingActivities = activities.filter((activity) => activity.category === 'Lectura');
+  const grammarActivities = activities.filter((activity) => activity.category === 'Gramática');
+
   assert.deepEqual(filterActivities(activities, 'Todos'), activities);
-  assert.deepEqual(filterActivities(activities, 'Vocabulario'), activities);
-  assert.deepEqual(filterActivities(activities, 'Gramática'), []);
+  assert.deepEqual(filterActivities(activities, 'Vocabulario'), vocabActivities);
+  assert.deepEqual(filterActivities(activities, 'Lectura'), readingActivities);
+  assert.deepEqual(filterActivities(activities, 'Gramática'), grammarActivities);
 });
 
 test('una actividad desconocida no abre otra lección por defecto', () => {

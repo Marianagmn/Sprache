@@ -1,8 +1,8 @@
-import { vocabularyLesson } from '../data/lessons.js';
+import { lessons } from '../data/lessons.js';
 
-const lessonsByActivityId = {
-  [vocabularyLesson.activityId]: vocabularyLesson,
-};
+const lessonsByActivityId = Object.fromEntries(
+  lessons.map((lesson) => [lesson.activityId, lesson]),
+);
 
 export function getLessonByActivityId(activityId) {
   return lessonsByActivityId[activityId] ?? null;
