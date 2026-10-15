@@ -20,6 +20,7 @@ export default function RegisterScreen({ navigation }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [level, setLevel] = useState('A2');
   const [time, setTime] = useState('10 min');
   const [error, setError] = useState('');
@@ -30,6 +31,11 @@ export default function RegisterScreen({ navigation }) {
   const progress = ((stepIndex + 1) / steps.length) * 100;
   const remainingSteps = steps.length - (stepIndex + 1);
 
+  const nameValid = name.trim().length >= 2;
+  const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const passwordValid = password.length >= 8 && /[A-Za-z]/.test(password) && /\d/.test(password);
+  const profileReady = nameValid && emailValid && passwordValid;
+
   const stepSummary = useMemo(() => {
     if (stepIndex === 0) return name.trim() || 'Tu nombre';
     if (stepIndex === 1) return `Nivel ${level}`;
@@ -38,23 +44,18 @@ export default function RegisterScreen({ navigation }) {
 
   const validateCurrentStep = () => {
     if (currentStep.id === 'profile') {
-      if (!name.trim()) {
-        setError('Añade tu nombre para continuar.');
+      if (!nameValid) {
+        setError('Usa un nombre con al menos 2 letras.');
         return false;
       }
 
-      if (!email.trim()) {
-        setError('Ingresa tu correo electrónico.');
-        return false;
-      }
-
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      if (!emailValid) {
         setError('Introduce un correo válido.');
         return false;
       }
 
-      if (password.length < 8) {
-        setError('La contraseña debe tener al menos 8 caracteres.');
+      if (!passwordValid) {
+        setError('La contraseña necesita 8+ caracteres, letras y números.');
         return false;
       }
     }
@@ -94,31 +95,55 @@ export default function RegisterScreen({ navigation }) {
     }
   };
 
+  const renderProfileFields = () => (
+    <View>
+      <Text style={styles.sectionTitle}>¿Cómo te llamas?</Text>
+      <AppInput
+        placeholder="Ej. Mariana"
+        value={name}
+        onChangeText={setName}
+        autoCapitalize="words"
+      />
+      {name.length > 0 && !nameValid && <Text style={styles.helper}>Necesita al menos 2 caracteres.</Text>}
+
+      <Text style={styles.sectionTitle}>Correo electrónico</Text>
+      <AppInput
+        placeholder="tu@correo.com"
+        value={email}
+        onChangeText={setEmail}
+        autoCapitalize="none"
+        keyboardType="email-address"
+      />
+      {email.length > 0 && !emailValid && <Text style={styles.helper}>Usa un formato de correo válido.</Text>}
+
+      <Text style={styles.sectionTitle}>Contraseña</Text>
+      <View style={styles.passwordFieldWrapper}>
+        <AppInput
+          placeholder="Mínimo 8 caracteres"
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry={!showPassword}
+          style={styles.passwordInput}
+        />
+        <TouchableOpacity
+          style={styles.togglePassword}
+          onPress={() => setShowPassword((previous) => !previous)}
+          accessibilityRole="button"
+        >
+          <Ionicons name={showPassword ? 'eye-off-outline' : 'eye-outline'} size={20} color="#6B7280" />
+        </TouchableOpacity>
+      </View>
+
+      {password.length > 0 && !passwordValid && (
+        <Text style={styles.helper}>Debe tener 8+ caracteres, letras y números.</Text>
+      )}
+      {password.length > 0 && passwordValid && <Text style={styles.successText}>Contraseña segura.</Text>}
+    </View>
+  );
+
   const renderStepContent = () => {
     if (currentStep.id === 'profile') {
-      return (
-        <View>
-          <Text style={styles.sectionTitle}>¿Cómo te llamas?</Text>
-          <AppInput placeholder="Ej. Mariana" value={name} onChangeText={setName} />
-
-          <Text style={styles.sectionTitle}>Correo electrónico</Text>
-          <AppInput
-            placeholder="tu@correo.com"
-            value={email}
-            onChangeText={setEmail}
-            autoCapitalize="none"
-            keyboardType="email-address"
-          />
-
-          <Text style={styles.sectionTitle}>Contraseña</Text>
-          <AppInput
-            placeholder="Mínimo 8 caracteres"
-            value={password}
-            onChangeText={setPassword}
-            secureTextEntry
-          />
-        </View>
-      );
+      return renderProfileFields();
     }
 
     if (currentStep.id === 'level') {
@@ -202,6 +227,7 @@ export default function RegisterScreen({ navigation }) {
             title={isLastStep ? 'Crear perfil' : 'Continuar'}
             onPress={handleNextStep}
             loading={loading}
+            disabled={currentStep.id === 'profile' && !profileReady}
             style={[styles.primaryButton, stepIndex === 0 && styles.fullWidthButton]}
           />
         </View>
@@ -249,6 +275,16 @@ const styles = StyleSheet.create({
   cardDescription: { fontSize: 14, color: '#6B7280', marginBottom: 12 },
   summary: { fontSize: 15, color: '#1E3A8A', fontWeight: '600' },
   sectionTitle: { fontSize: 18, fontWeight: '600', color: '#111827', marginBottom: 12, marginTop: 8 },
+  helper: { fontSize: 12, color: '#B91C1C', marginTop: -8, marginBottom: 12 },
+  successText: { fontSize: 12, color: '#15803D', marginTop: -8, marginBottom: 12 },
+  passwordFieldWrapper: { position: 'relative', marginBottom: 8 },
+  passwordInput: { paddingRight: 46 },
+  togglePassword: {
+    position: 'absolute',
+    right: 12,
+    top: 14,
+    padding: 4,
+  },
   row: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 16 },
   pill: {
     flex: 1,
