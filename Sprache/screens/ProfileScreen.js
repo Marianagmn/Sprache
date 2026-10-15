@@ -41,7 +41,7 @@ export default function ProfileScreen({ navigation }) {
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scroll}>
         
-        <ProfileHeader name={user.name} level={user.level} />
+        <ProfileHeader name={user.name} level={user.level} motivation={user.motivation} />
 
         <GoalCard dailyGoal={user.dailyGoal} onGoalChange={handleGoalChange} />
 

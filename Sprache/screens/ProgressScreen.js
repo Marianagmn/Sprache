@@ -15,7 +15,13 @@ export default function ProgressScreen() {
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scroll}>
         <Text style={styles.headerTitle}>Tu Progreso</Text>
         
-        <LevelProgressCard level={user.level} studiedMinutes={user.studiedMinutes} learnedWords={user.learnedWords} />
+        <LevelProgressCard
+          level={user.level}
+          motivation={user.motivation}
+          dailyGoal={user.dailyGoal}
+          studiedMinutes={user.studiedMinutes}
+          learnedWords={user.learnedWords}
+        />
 
         <Text style={styles.sectionTitle}>Actividad semanal</Text>
         <WeeklyActivity days={weeklyActivity} />
