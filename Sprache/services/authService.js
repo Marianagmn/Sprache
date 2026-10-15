@@ -62,7 +62,7 @@ export async function register({ name, email, password, level = 'A2', dailyGoal 
 
   const accounts = await readAccounts();
   if (accounts.some((account) => account.email === normalizedEmail)) {
-    throw new Error('Ya existe una cuenta local con ese correo. Inicia sesión.');
+    throw new Error('Ya existe una cuenta con este correo. Inicia sesión para continuar.');
   }
 
   const salt = toHex(await Crypto.getRandomBytesAsync(16));
@@ -103,12 +103,12 @@ export async function login({ email, password }) {
   const accounts = await readAccounts();
   const account = accounts.find((savedAccount) => savedAccount.email === normalizedEmail);
   if (!account) {
-    throw new Error('No encontramos una cuenta local con ese correo. Crea una cuenta primero.');
+    throw new Error('No encontramos una cuenta con ese correo. Crea una cuenta antes de iniciar sesión.');
   }
 
   const submittedHash = await hashPassword(password, account.passwordSalt);
   if (submittedHash !== account.passwordHash) {
-    throw new Error('El correo o la contraseña no son correctos.');
+    throw new Error('La contraseña no es correcta. Revisa la contraseña e inténtalo otra vez.');
   }
 
   await AsyncStorage.setItem(SESSION_KEY, normalizedEmail);

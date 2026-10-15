@@ -162,9 +162,9 @@ export default function RegisterScreen({ navigation }) {
       </View>
 
       {password.length > 0 && !passwordValid && (
-        <Text style={styles.helper}>Debe tener 8+ caracteres, letras y números.</Text>
+        <Text style={styles.helper}>La contraseña debe tener al menos 8 caracteres, incluir letras y números.</Text>
       )}
-      {password.length > 0 && passwordValid && <Text style={styles.successText}>Contraseña segura.</Text>}
+      {password.length > 0 && passwordValid && <Text style={styles.successText}>Contraseña segura y válida.</Text>}
     </View>
   );
 
