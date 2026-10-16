@@ -7,6 +7,8 @@ import { getLessonByActivityId } from '../services/lessonService.js';
 import { buildLessonCompletion, calculateSessionSummary } from '../services/lessonProgressService.js';
 import { getSpacedReviewLesson } from '../services/lessonService.js';
 import { calculateNextReview, getDueWords } from '../services/spacedRepetitionService.js';
+import { evaluatePlacement, PLACEMENT_QUESTIONS, skipPlacementAssessment } from '../services/placementAssessmentService.js';
+import { getLearningPath, LEARNING_LEVELS } from '../services/learningPathService.js';
 import { deriveProgress, getWeeklyActivity, recordActivity, resetProgress } from '../services/progressService.js';
 
 const referenceDate = new Date(2026, 9, 14, 12, 0, 0);
@@ -160,6 +162,40 @@ test('el repaso elige primero las palabras difíciles que ya vencieron', () => {
   assert.deepEqual(dueWords.map((word) => word.term), ['Buch', 'Haus']);
   assert.deepEqual(reviewLesson.questions.map((question) => question.vocabulary.term), ['Buch', 'Haus']);
   assert.equal(reviewLesson.activityId, 'spaced-review');
+});
+
+test('la evaluación inicial recomienda A1 o A2 según las respuestas correctas', () => {
+  const beginner = evaluatePlacement(['Casa', 'incorrecta', 'incorrecta'], referenceDate);
+  const readyForA2 = evaluatePlacement(PLACEMENT_QUESTIONS.map((question) => question.answer), referenceDate);
+  const skipped = skipPlacementAssessment(referenceDate);
+
+  assert.equal(beginner.recommendedLevel, 'A1');
+  assert.equal(beginner.correctAnswers, 1);
+  assert.equal(readyForA2.recommendedLevel, 'A2');
+  assert.equal(readyForA2.correctAnswers, PLACEMENT_QUESTIONS.length);
+  assert.equal(skipped.recommendedLevel, 'A1');
+  assert.equal(skipped.source, 'self-selected');
+});
+
+test('la ruta desbloquea lecciones en orden y respeta el nivel recomendado', () => {
+  const initialA1Path = getLearningPath([], { recommendedLevel: 'A1' });
+  const a1Ids = LEARNING_LEVELS[0].activityIds;
+  const completedA1Sessions = a1Ids.map((activityId) => ({ activityId }));
+  const advancedPath = getLearningPath([], { recommendedLevel: 'A2' });
+  const unlockedA2Path = getLearningPath(completedA1Sessions, { recommendedLevel: 'A1' });
+
+  assert.equal(initialA1Path.nextLesson.id, a1Ids[0]);
+  assert.equal(initialA1Path.levels[1].status, 'locked');
+  assert.equal(advancedPath.nextLesson.levelCode, 'A2');
+  assert.equal(advancedPath.levels[0].status, 'review');
+  assert.equal(unlockedA2Path.nextLesson.id, LEARNING_LEVELS[1].activityIds[0]);
+  assert.equal(unlockedA2Path.levels[1].status, 'available');
+});
+
+test('la ruta agrupa una sola vez todas las lecciones del catálogo', () => {
+  const activityIds = LEARNING_LEVELS.flatMap((level) => level.activityIds);
+  assert.equal(new Set(activityIds).size, activityIds.length);
+  assert.deepEqual([...activityIds].sort(), activities.map((activity) => activity.id).sort());
 });
 
 test('el progreso semanal y la racha se derivan de fechas de sesiones', () => {

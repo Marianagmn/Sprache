@@ -4,12 +4,13 @@ import { useApp } from '../context/AppContext';
 import LevelProgressCard from '../components/progress/LevelProgressCard';
 import WeeklyActivity from '../components/progress/WeeklyActivity';
 import ProgressStat from '../components/progress/ProgressStat';
+import LearningPath from '../components/progress/LearningPath';
 import BrandLogo from '../components/common/BrandLogo';
 import { getWeeklyActivity } from '../services/progressService';
 import { getNextReviewIntervalLabel } from '../services/spacedRepetitionService';
 import { colors, typography } from '../theme';
 
-export default function ProgressScreen() {
+export default function ProgressScreen({ navigation }) {
   const { user } = useApp();
   const weeklyActivity = getWeeklyActivity(user.sessions);
   const studiedTime = user.studiedSeconds >= 60
@@ -31,6 +32,13 @@ export default function ProgressScreen() {
           dailyGoal={user.dailyGoal}
           studiedSeconds={user.studiedSeconds || 0}
           learnedWords={user.learnedWords}
+        />
+
+        <Text style={styles.sectionTitle}>Tu ruta de aprendizaje</Text>
+        <LearningPath
+          sessions={user.sessions}
+          placementAssessment={user.placementAssessment}
+          onStartLesson={(activityId) => navigation.navigate('Lesson', { activityId })}
         />
 
         <Text style={styles.sectionTitle}>Actividad semanal</Text>
