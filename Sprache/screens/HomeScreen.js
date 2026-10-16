@@ -7,11 +7,16 @@ import StreakBadge from '../components/home/StreakBadge';
 import DailyGoalCard from '../components/home/DailyGoalCard';
 import RecommendationCard from '../components/home/RecommendationCard';
 import { getRecommendedActivity } from '../services/activityService';
+import { getSpacedReviewLesson } from '../services/lessonService';
+import { getDueWords } from '../services/spacedRepetitionService';
 import { colors, spacing, typography } from '../theme';
 
 export default function HomeScreen({ navigation }) {
   const { user } = useApp();
   const recommendation = getRecommendedActivity(user.sessions);
+  const dueWords = getDueWords(user.wordProgress || {});
+  const reviewLesson = getSpacedReviewLesson(user.wordProgress || {});
+  const hasReview = Boolean(reviewLesson);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -23,13 +28,17 @@ export default function HomeScreen({ navigation }) {
 
         <DailyGoalCard completedSeconds={user.todaySeconds || 0} goal={user.dailyGoal} unit="min" />
 
-        <Text style={styles.sectionTitle}>Recomendado para ti</Text>
+        <Text style={styles.sectionTitle}>{hasReview ? 'Repaso recomendado' : 'Recomendado para ti'}</Text>
         <RecommendationCard
-          title={recommendation.title}
-          description={recommendation.description}
-          time={recommendation.time}
-          iconName={recommendation.iconName}
-          onPress={() => navigation.navigate('Lesson', { activityId: recommendation.id })}
+          title={hasReview ? 'Repasar palabras' : recommendation.title}
+          description={hasReview
+            ? `${dueWords.length} ${dueWords.length === 1 ? 'palabra necesita' : 'palabras necesitan'} un repaso. Empezamos por las que más cuestan.`
+            : recommendation.description}
+          time={hasReview ? `${reviewLesson.questions.length} palabras` : recommendation.time}
+          iconName={hasReview ? 'refresh' : recommendation.iconName}
+          onPress={() => navigation.navigate('Lesson', hasReview
+            ? { activityId: reviewLesson.activityId, reviewLesson }
+            : { activityId: recommendation.id })}
         />
 
         <AppButton title="Continuar práctica" onPress={() => navigation.navigate('Actividades')} style={styles.mainActionBtn} />

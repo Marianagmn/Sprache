@@ -17,7 +17,7 @@ import { colors } from '../theme';
 
 export default function LessonScreen({ navigation, route }) {
   const { completeActivity } = useApp();
-  const lesson = getLessonByActivityId(route.params?.activityId);
+  const lesson = route.params?.reviewLesson || getLessonByActivityId(route.params?.activityId);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [answered, setAnswered] = useState(false);

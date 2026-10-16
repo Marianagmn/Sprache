@@ -5,6 +5,8 @@ import { vocabularyLesson } from '../data/lessons.js';
 import { getActivities, filterActivities, getRecommendedActivity } from '../services/activityService.js';
 import { getLessonByActivityId } from '../services/lessonService.js';
 import { buildLessonCompletion, calculateSessionSummary } from '../services/lessonProgressService.js';
+import { getSpacedReviewLesson } from '../services/lessonService.js';
+import { calculateNextReview, getDueWords } from '../services/spacedRepetitionService.js';
 import { deriveProgress, getWeeklyActivity, recordActivity, resetProgress } from '../services/progressService.js';
 
 const referenceDate = new Date(2026, 9, 14, 12, 0, 0);
@@ -112,6 +114,40 @@ test('repetir una palabra acumula intentos y actualiza su última fecha', () => 
     hints: 1,
     lastPracticedAt: nextDate.toISOString(),
   });
+});
+
+test('los errores y las pistas programan repasos más próximos que los aciertos sólidos', () => {
+  const difficult = calculateNextReview({}, { correct: false }, referenceDate);
+  const hinted = calculateNextReview({}, { correct: true, hintUsed: true }, referenceDate);
+  const mastered = calculateNextReview({ reviewStreak: 2 }, { correct: true }, referenceDate);
+
+  assert.equal(difficult.intervalMinutes, 10);
+  assert.equal(hinted.intervalMinutes, 240);
+  assert.equal(mastered.intervalMinutes, 7 * 24 * 60);
+  assert.equal(new Date(difficult.nextReviewAt).getTime() - referenceDate.getTime(), 10 * 60 * 1000);
+});
+
+test('el repaso elige primero las palabras difíciles que ya vencieron', () => {
+  const wordProgress = {
+    haus: {
+      term: 'Haus', correctAnswers: 4, mistakes: 0, hints: 0,
+      lastPracticedAt: referenceDate.toISOString(), nextReviewAt: new Date(referenceDate.getTime() - 1000).toISOString(),
+    },
+    buch: {
+      term: 'Buch', correctAnswers: 1, mistakes: 3, hints: 2,
+      lastPracticedAt: referenceDate.toISOString(), nextReviewAt: new Date(referenceDate.getTime() - 1000).toISOString(),
+    },
+    morgen: {
+      term: 'Guten Morgen', correctAnswers: 0, mistakes: 1, hints: 0,
+      lastPracticedAt: referenceDate.toISOString(), nextReviewAt: new Date(referenceDate.getTime() + 60000).toISOString(),
+    },
+  };
+  const dueWords = getDueWords(wordProgress, referenceDate);
+  const reviewLesson = getSpacedReviewLesson(wordProgress, referenceDate);
+
+  assert.deepEqual(dueWords.map((word) => word.term), ['Buch', 'Haus']);
+  assert.deepEqual(reviewLesson.questions.map((question) => question.vocabulary.term), ['Buch', 'Haus']);
+  assert.equal(reviewLesson.activityId, 'spaced-review');
 });
 
 test('el progreso semanal y la racha se derivan de fechas de sesiones', () => {

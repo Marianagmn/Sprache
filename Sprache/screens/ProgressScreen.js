@@ -6,6 +6,7 @@ import WeeklyActivity from '../components/progress/WeeklyActivity';
 import ProgressStat from '../components/progress/ProgressStat';
 import BrandLogo from '../components/common/BrandLogo';
 import { getWeeklyActivity } from '../services/progressService';
+import { getNextReviewIntervalLabel } from '../services/spacedRepetitionService';
 import { colors, typography } from '../theme';
 
 export default function ProgressScreen() {
@@ -75,6 +76,9 @@ export default function ProgressScreen() {
               </Text>
               <Text style={styles.wordDate}>
                 Última práctica: {new Date(word.lastPracticedAt).toLocaleDateString()}
+              </Text>
+              <Text style={styles.wordDate}>
+                Próximo repaso: {getNextReviewIntervalLabel(word)}
               </Text>
             </View>
           ))}

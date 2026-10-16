@@ -1,3 +1,5 @@
+import { calculateNextReview } from './spacedRepetitionService.js';
+
 function toDate(value, fallback = new Date()) {
   const date = value ? new Date(value) : fallback;
   return Number.isNaN(date.getTime()) ? fallback : date;
@@ -148,6 +150,7 @@ export function recordActivity(user, session, now = new Date()) {
     const term = result.term.trim();
     const key = term.toLocaleLowerCase();
     const previous = wordProgress[key] || {};
+    const schedule = calculateNextReview(previous, result, completedAt);
     wordProgress[key] = {
       term: previous.term || term,
       translation: result.translation || previous.translation || '',
@@ -155,6 +158,7 @@ export function recordActivity(user, session, now = new Date()) {
       mistakes: (previous.mistakes || 0) + (result.correct ? 0 : 1),
       hints: (previous.hints || 0) + (result.hintUsed ? 1 : 0),
       lastPracticedAt: completedAt.toISOString(),
+      ...schedule,
     };
   });
   const updatedUser = { ...user, sessions: [...sessions, newSession], wordProgress };
