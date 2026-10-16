@@ -33,7 +33,7 @@ export default function ProgressScreen() {
 
         <View style={styles.statsGrid}>
           <ProgressStat iconName="flame" color={colors.red} value={`${user.streak} días`} label="Racha actual" />
-          <ProgressStat iconName="time" color={colors.black} value={`${user.studiedMinutes} min`} label="Estudiados" />
+          <ProgressStat iconName="time" color={colors.black} value={`${user.studiedMinutes} min`} label="Minutos practicados" />
           <ProgressStat iconName="school" color={colors.gold} value={`${user.learnedWords}`} label="Palabras" />
         </View>
 
@@ -47,7 +47,7 @@ export default function ProgressScreen() {
                 {!!word.translation && <Text style={styles.wordTranslation}>{word.translation}</Text>}
               </View>
               <Text style={styles.wordMetrics}>
-                Aciertos: {word.correctAnswers} · Errores: {word.mistakes} · Pistas: {word.hints}
+                Aciertos: {word.correctAnswers} · Respuestas incorrectas: {word.mistakes} · Pistas usadas: {word.hints}
               </Text>
               <Text style={styles.wordDate}>
                 Última práctica: {new Date(word.lastPracticedAt).toLocaleDateString()}
@@ -55,7 +55,7 @@ export default function ProgressScreen() {
             </View>
           ))}
         {Object.keys(user.wordProgress || {}).length === 0 && (
-          <Text style={styles.emptyWords}>Completa una lección para ver aciertos, errores, pistas y fechas por palabra.</Text>
+          <Text style={styles.emptyWords}>Aquí verás tus aciertos, respuestas incorrectas, pistas usadas y última práctica de cada palabra.</Text>
         )}
       </ScrollView>
     </SafeAreaView>

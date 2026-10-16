@@ -17,7 +17,7 @@ export default function HomeScreen({ navigation }) {
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scroll}>
         
-        <WelcomeHeader name={user.name} level={user.level} motivation={user.motivation} greeting="Guten Morgen">
+        <WelcomeHeader name={user.name} level={user.level} motivation={user.motivation} greeting="Hola">
           <StreakBadge days={user.streak} />
         </WelcomeHeader>
 

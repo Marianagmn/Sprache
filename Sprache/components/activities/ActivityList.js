@@ -11,8 +11,8 @@ export default function ActivityList({ onActivityPress, category = 'Todos' }) {
         <View style={styles.container}>
             {activities.length === 0 ? (
                 <EmptyState
-                    title="No hay actividades aquí todavía"
-                    message="Prueba otro filtro; iremos añadiendo más prácticas pronto."
+                    title="No hay actividades en esta categoría"
+                    message="Puedes elegir otra categoría para seguir explorando."
                 />
             ) : activities.map((activity) => (
                 <ActivityCard 

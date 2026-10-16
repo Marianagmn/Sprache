@@ -2,8 +2,15 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { colors, radii, spacing, typography } from '../../theme';
 
-export default function DailyGoalCard({ completed = 0, goal = 10, unit = 'min', encouragement = '¡Ya casi terminas!' }) {
+export default function DailyGoalCard({ completed = 0, goal = 10, unit = 'min', encouragement }) {
 	const progress = goal > 0 ? Math.min(Math.max(completed / goal, 0), 1) : 0;
+	const message = encouragement || (
+		progress >= 1
+			? '¡Objetivo cumplido! Buen trabajo.'
+			: completed > 0
+				? 'Buen trabajo, esos minutos cuentan.'
+				: 'Tu ritmo está bien; practica cuando te venga bien.'
+	);
 
 	return (
 		<View style={styles.card}>
@@ -12,7 +19,7 @@ export default function DailyGoalCard({ completed = 0, goal = 10, unit = 'min', 
 			<View style={styles.progressBackground}>
 				<View style={[styles.progressFill, { width: `${progress * 100}%` }]} />
 			</View>
-			<Text style={styles.encouragement}>{encouragement}</Text>
+			<Text style={styles.encouragement}>{message}</Text>
 		</View>
 	);
 }

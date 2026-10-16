@@ -52,18 +52,18 @@ export async function register({ name, email, password, level = 'A2', dailyGoal 
   const normalizedEmail = email?.trim().toLowerCase();
 
   if (!normalizedName || !normalizedEmail || !password) {
-    throw new Error('Completa todos los campos para crear tu cuenta.');
+    throw new Error('Revisa los datos: necesitamos tu nombre, correo y contraseña para crear la cuenta.');
   }
   if (!/^\S+@\S+\.\S+$/.test(normalizedEmail)) {
-    throw new Error('Introduce un correo electrónico válido.');
+    throw new Error('Revisa el correo: debe tener un formato válido.');
   }
   if (password.length < 8) {
-    throw new Error('La contraseña debe tener al menos 8 caracteres.');
+    throw new Error('La contraseña debe tener al menos 8 caracteres. Puedes actualizarla e intentarlo de nuevo.');
   }
 
   const accounts = await readAccounts();
   if (accounts.some((account) => account.email === normalizedEmail)) {
-    throw new Error('Ya existe una cuenta con este correo. Inicia sesión para continuar.');
+    throw new Error('Ya hay una cuenta con este correo. Si es tuya, puedes iniciar sesión.');
   }
 
   const salt = toHex(await Crypto.getRandomBytesAsync(16));
@@ -99,18 +99,18 @@ export async function register({ name, email, password, level = 'A2', dailyGoal 
 export async function login({ email, password }) {
   const normalizedEmail = email?.trim().toLowerCase();
   if (!normalizedEmail || !password) {
-    throw new Error('Introduce tu correo y contraseña.');
+    throw new Error('Escribe tu correo y contraseña para iniciar sesión.');
   }
 
   const accounts = await readAccounts();
   const account = accounts.find((savedAccount) => savedAccount.email === normalizedEmail);
   if (!account) {
-    throw new Error('No encontramos una cuenta con ese correo. Crea una cuenta antes de iniciar sesión.');
+    throw new Error('No encontramos una cuenta con ese correo. Revisa los datos o crea una cuenta.');
   }
 
   const submittedHash = await hashPassword(password, account.passwordSalt);
   if (submittedHash !== account.passwordHash) {
-    throw new Error('La contraseña no es correcta. Revisa la contraseña e inténtalo otra vez.');
+    throw new Error('La contraseña no coincide. Revísala e inténtalo de nuevo.');
   }
 
   await AsyncStorage.setItem(SESSION_KEY, normalizedEmail);

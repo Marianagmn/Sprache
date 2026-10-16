@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import BrandLogo from '../common/BrandLogo';
 import { colors, spacing, typography } from '../../theme';
 
-export default function WelcomeHeader({ name, level, motivation = '', greeting = 'Guten Morgen', children }) {
+export default function WelcomeHeader({ name, level, motivation = '', greeting = 'Hola', children }) {
 	return (
 		<View style={styles.header}>
 			<View style={styles.identity}>

@@ -54,7 +54,7 @@ export default function ProfileScreen({ navigation }) {
         <ProfileStats
           stats={[
             { iconName: 'flame', color: colors.red, value: `${user.streak} días`, label: 'Racha' },
-            { iconName: 'time', color: colors.black, value: `${user.studiedMinutes} min`, label: 'Estudiados' },
+            { iconName: 'time', color: colors.black, value: `${user.studiedMinutes} min`, label: 'Minutos practicados' },
             { iconName: 'school', color: colors.gold, value: `${user.learnedWords}`, label: 'Palabras' },
           ]}
         />

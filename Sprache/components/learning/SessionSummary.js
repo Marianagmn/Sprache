@@ -13,11 +13,14 @@ export default function SessionSummary({ correctAnswers, totalQuestions, onFinis
       <View style={styles.iconContainer}>
         <Ionicons name="trophy" size={42} color={colors.black} />
       </View>
-      <Text style={styles.title}>Sesión completada</Text>
-      <Text style={styles.subtitle}>Has practicado vocabulario y sumado una nueva sesión a tu progreso.</Text>
+      <Text style={styles.title}>¡Sesión lista!</Text>
+      <Text style={styles.subtitle}>Gracias por practicar. Cada sesión suma experiencia; puedes volver cuando te venga bien.</Text>
       <View style={styles.score}>
         <Text style={styles.scoreValue}>{summary.percentage}%</Text>
-        <Text style={styles.scoreLabel}>{summary.correctAnswers} de {summary.totalQuestions} respuestas correctas</Text>
+        <Text style={styles.scoreLabel}>Respuestas correctas: {summary.correctAnswers} de {summary.totalQuestions}</Text>
+        {summary.correctAnswers < summary.totalQuestions && (
+          <Text style={styles.reviewNote}>Si quieres, puedes repasar las respuestas que hoy costaron más.</Text>
+        )}
       </View>
       <AppButton title="Volver a actividades" onPress={onFinish} style={styles.button} />
     </View>
@@ -32,5 +35,6 @@ const styles = StyleSheet.create({
   score: { alignItems: 'center', marginBottom: 28 },
   scoreValue: { color: colors.black, fontSize: 38, fontWeight: typography.heavy },
   scoreLabel: { color: colors.muted, fontSize: 14, marginTop: 4 },
+  reviewNote: { color: colors.muted, fontSize: 14, lineHeight: 20, textAlign: 'center', maxWidth: 300, marginTop: 12 },
   button: { width: '100%' },
 });

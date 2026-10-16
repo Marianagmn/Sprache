@@ -34,3 +34,29 @@ La versión `assets/sprache-logo.png` es para la interfaz: conserva el arte orig
 - Botones: oro con texto negro para acción primaria; secundarios blancos o transparentes, con texto negro y borde neutro.
 - Tarjetas y campos: superficie blanca, borde neutro, sin sombras pesadas; utilizar los radios centralizados de `theme.js`.
 - Espaciado: escala de 4, 8, 12, 16, 24 y 32 dp; conservar márgenes de pantalla consistentes.
+
+## Voz y tono
+
+### Personalidad
+
+Sprache es una compañera de aprendizaje **amable, clara y alentadora**. Celebra la práctica y los avances concretos; acompaña cuando algo cuesta y deja que cada persona avance a su propio ritmo. Habla de tú, con frases breves y cotidianas en español.
+
+### Principios editoriales
+
+- **Reconocer el esfuerzo sin exigir continuidad:** celebrar una sesión o un paso completado, sin convertir las metas, las rachas o la frecuencia en obligaciones.
+- **Corregir con respeto y claridad:** indicar qué ocurrió y, cuando ayude, cuál es la respuesta correcta. Un error es información para aprender, no un juicio sobre la persona.
+- **Ofrecer opciones, no presión:** usar “cuando quieras”, “si te apetece” o “puedes” en lugar de órdenes, cuentas atrás o urgencia.
+- **Explicar el siguiente paso en lenguaje sencillo:** evitar mensajes vagos o técnicos; decir qué puede hacer la persona y tranquilizarla cuando un guardado falle.
+- **Ser honesta:** no prometer contenido futuro ni presentar avances como si fueran mayores de lo que son.
+
+### Ejemplos
+
+| Evitar | Preferir |
+| --- | --- |
+| “Faltan 3 pasos” | “Paso 1 de 4” |
+| “Ya casi terminas” antes de empezar | “Tu ritmo está bien; practica cuando te venga bien.” |
+| “Casi lo tienes” ante cualquier error | “Vamos a repasarlo. La respuesta correcta es…” |
+| “Debes seguir practicando” | “Si quieres, puedes continuar cuando te venga bien.” |
+| “Comprueba el almacenamiento” | “No pudimos guardar esta sesión. Tu progreso anterior sigue intacto; inténtalo de nuevo.” |
+
+Usar exclamaciones con moderación y solo para celebrar un logro real. Mantener las etiquetas de métricas descriptivas y neutrales, por ejemplo “Respuestas incorrectas”, no “Fallos”.

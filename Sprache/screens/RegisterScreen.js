@@ -30,10 +30,10 @@ const motivationOptions = [
 ];
 
 const goalOptions = [
-  { value: '5 min', description: 'Para mantener la constancia' },
-  { value: '10 min', description: 'Ritmo equilibrado y sostenible' },
-  { value: '20 min', description: 'Avance más intenso' },
-  { value: '30 min', description: 'Sesión profunda y enfocada' },
+  { value: '5 min', description: 'Una práctica breve' },
+  { value: '10 min', description: 'Un ritmo cómodo' },
+  { value: '20 min', description: 'Un poco más de práctica' },
+  { value: '30 min', description: 'Para dedicarle más tiempo' },
 ];
 
 export default function RegisterScreen({ navigation }) {
@@ -52,7 +52,6 @@ export default function RegisterScreen({ navigation }) {
   const currentStep = steps[stepIndex];
   const isLastStep = stepIndex === steps.length - 1;
   const progress = ((stepIndex + 1) / steps.length) * 100;
-  const remainingSteps = steps.length - (stepIndex + 1);
 
   const nameValid = name.trim().length >= 2;
   const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -73,17 +72,17 @@ export default function RegisterScreen({ navigation }) {
   const validateCurrentStep = () => {
     if (currentStep.id === 'profile') {
       if (!nameValid) {
-        setError('Usa un nombre con al menos 2 letras.');
+        setError('Escribe al menos 2 caracteres para tu nombre.');
         return false;
       }
 
       if (!emailValid) {
-        setError('Introduce un correo válido.');
+        setError('Revisa el correo: debe tener un formato válido.');
         return false;
       }
 
       if (!passwordValid) {
-        setError('La contraseña necesita 8+ caracteres, letras y números.');
+        setError('La contraseña debe tener al menos 8 caracteres e incluir letras y números.');
         return false;
       }
     }
@@ -136,7 +135,7 @@ export default function RegisterScreen({ navigation }) {
         onChangeText={setName}
         autoCapitalize="words"
       />
-      {name.length > 0 && !nameValid && <Text style={styles.helper}>Necesita al menos 2 caracteres.</Text>}
+      {name.length > 0 && !nameValid && <Text style={styles.helper}>Escribe al menos 2 caracteres para tu nombre.</Text>}
 
       <Text style={styles.sectionTitle}>Correo electrónico</Text>
       <AppInput
@@ -148,7 +147,7 @@ export default function RegisterScreen({ navigation }) {
         autoCapitalize="none"
         keyboardType="email-address"
       />
-      {email.length > 0 && !emailValid && <Text style={styles.helper}>Usa un formato de correo válido.</Text>}
+      {email.length > 0 && !emailValid && <Text style={styles.helper}>Revisa el correo: debe tener un formato válido.</Text>}
 
       <Text style={styles.sectionTitle}>Contraseña</Text>
       <View style={styles.passwordFieldWrapper}>
@@ -278,9 +277,7 @@ export default function RegisterScreen({ navigation }) {
       >
         <View style={styles.progressHeader}>
           <Text style={styles.stepLabel} accessibilityRole="header" accessibilityLiveRegion="polite">Paso {stepIndex + 1} de {steps.length}</Text>
-          <Text style={styles.remainingText}>
-            {remainingSteps > 0 ? `Faltan ${remainingSteps} pasos` : 'Todo listo'}
-          </Text>
+          <Text style={styles.remainingText}>{currentStep.title}</Text>
         </View>
 
         <View

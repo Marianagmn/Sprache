@@ -66,7 +66,7 @@ export default function LessonScreen({ navigation, route }) {
         setFinished(true);
       } catch {
         completionRecorded.current = false;
-        setCompletionError('No se pudo guardar tu sesión en este dispositivo. Comprueba el almacenamiento e inténtalo de nuevo.');
+        setCompletionError('No pudimos guardar esta sesión. Tu progreso anterior sigue intacto; inténtalo de nuevo cuando quieras.');
       } finally {
         setIsCompleting(false);
       }

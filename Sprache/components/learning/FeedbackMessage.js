@@ -8,7 +8,9 @@ export default function FeedbackMessage({ correct, message }) {
     <View style={[styles.container, correct ? styles.success : styles.error]}>
       <Ionicons name={correct ? 'checkmark-circle' : 'information-circle'} size={22} color={correct ? colors.success : colors.red} />
       <View style={styles.textContainer}>
-        <Text style={[styles.title, { color: correct ? colors.success : colors.red }]}>{correct ? '¡Muy bien!' : 'Casi lo tienes'}</Text>
+        <Text style={[styles.title, { color: correct ? colors.success : colors.red }]}>
+          {correct ? '¡Bien hecho!' : 'Vamos a repasarlo'}
+        </Text>
         <Text style={styles.message}>{message}</Text>
       </View>
     </View>
