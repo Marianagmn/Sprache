@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { colors, elevation, radii } from '../../theme';
 
 export default function WeeklyActivity({ days = [] }) {
 	const maxMinutes = Math.max(20, ...days.map((day) => day.minutes));
@@ -20,12 +21,12 @@ export default function WeeklyActivity({ days = [] }) {
 }
 
 const styles = StyleSheet.create({
-	container: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end', backgroundColor: '#FFFFFF', padding: 20, borderRadius: 16, marginBottom: 32, shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.05, shadowRadius: 2, elevation: 2, minHeight: 118 },
+	container: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end', backgroundColor: colors.surface, padding: 20, borderRadius: radii.lg, marginBottom: 32, ...elevation.card, minHeight: 118 },
 	dayColumn: { alignItems: 'center', flex: 1 },
-	dayLabel: { fontSize: 14, color: '#6B7280', marginBottom: 8 },
+	dayLabel: { fontSize: 14, color: colors.muted, marginBottom: 8 },
 	barContainer: { height: 56, justifyContent: 'flex-end' },
 	dayBar: { width: 14, borderRadius: 7 },
-	activeBar: { backgroundColor: '#10B981' },
-	inactiveBar: { backgroundColor: '#E5E7EB' },
-	minutes: { minHeight: 16, marginTop: 5, color: '#6B7280', fontSize: 10, fontWeight: '600' }
+	activeBar: { backgroundColor: colors.gold },
+	inactiveBar: { backgroundColor: colors.border },
+	minutes: { minHeight: 16, marginTop: 5, color: colors.muted, fontSize: 10, fontWeight: '600' }
 });

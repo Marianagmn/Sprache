@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { colors, typography } from '../../theme';
 
 export default function ProfileHeader({ name = 'Usuario', level = '', motivation = '' }) {
 	return (
@@ -16,9 +17,9 @@ export default function ProfileHeader({ name = 'Usuario', level = '', motivation
 
 const styles = StyleSheet.create({
 	container: { alignItems: 'center', marginBottom: 24, marginTop: 16 },
-	avatar: { width: 80, height: 80, backgroundColor: '#1E3A8A', borderRadius: 40, justifyContent: 'center', alignItems: 'center', marginBottom: 12 },
-	avatarText: { fontSize: 32, color: '#FFFFFF', fontWeight: 'bold' },
-	name: { fontSize: 24, fontWeight: 'bold', color: '#111827' },
-	level: { fontSize: 16, color: '#6B7280', marginTop: 4 },
-	motivation: { fontSize: 14, color: '#1E3A8A', marginTop: 4, fontWeight: '600' }
+	avatar: { width: 80, height: 80, backgroundColor: colors.gold, borderRadius: 40, justifyContent: 'center', alignItems: 'center', marginBottom: 12 },
+	avatarText: { fontSize: 32, color: colors.black, fontWeight: 'bold' },
+	name: { fontSize: 24, fontWeight: 'bold', color: colors.black },
+	level: { fontSize: 16, color: colors.muted, marginTop: 4 },
+	motivation: { fontSize: 14, color: colors.black, marginTop: 4, fontWeight: typography.semibold }
 });

@@ -1,13 +1,14 @@
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet, Text, View } from 'react-native';
+import { colors, radii, spacing, typography } from '../../theme';
 
 export default function FeedbackMessage({ correct, message }) {
   return (
     <View style={[styles.container, correct ? styles.success : styles.error]}>
-      <Ionicons name={correct ? 'checkmark-circle' : 'information-circle'} size={22} color={correct ? '#047857' : '#B91C1C'} />
+      <Ionicons name={correct ? 'checkmark-circle' : 'information-circle'} size={22} color={correct ? colors.success : colors.red} />
       <View style={styles.textContainer}>
-        <Text style={[styles.title, { color: correct ? '#047857' : '#B91C1C' }]}>{correct ? '¡Muy bien!' : 'Casi lo tienes'}</Text>
+        <Text style={[styles.title, { color: correct ? colors.success : colors.red }]}>{correct ? '¡Muy bien!' : 'Casi lo tienes'}</Text>
         <Text style={styles.message}>{message}</Text>
       </View>
     </View>
@@ -15,10 +16,10 @@ export default function FeedbackMessage({ correct, message }) {
 }
 
 const styles = StyleSheet.create({
-  container: { flexDirection: 'row', alignItems: 'flex-start', padding: 14, borderRadius: 12, marginTop: 4, marginBottom: 16 },
-  success: { backgroundColor: '#ECFDF5' },
-  error: { backgroundColor: '#FEF2F2' },
+  container: { flexDirection: 'row', alignItems: 'flex-start', padding: 14, borderRadius: radii.md, marginTop: 4, marginBottom: spacing.lg },
+  success: { backgroundColor: colors.successSoft },
+  error: { backgroundColor: colors.redSoft },
   textContainer: { flex: 1, marginLeft: 10 },
   title: { fontSize: 15, fontWeight: '800', marginBottom: 3 },
-  message: { color: '#4B5563', fontSize: 14, lineHeight: 20 },
+  message: { color: colors.muted, fontSize: typography.small, lineHeight: 20 },
 });

@@ -5,6 +5,7 @@ import HomeScreen from '../../screens/HomeScreen';
 import ActivitiesScreen from '../../screens/ActivitiesScreen';
 import ProgressScreen from '../../screens/ProgressScreen';
 import ProfileScreen from '../../screens/ProfileScreen';
+import { colors } from '../../theme';
 
 const Tab = createBottomTabNavigator();
 
@@ -21,10 +22,10 @@ export default function MainTabs() {
           };
           return <Ionicons name={icons[route.name]} size={size} color={color} />;
         },
-        tabBarActiveTintColor: '#1E3A8A',
-        tabBarInactiveTintColor: '#6B7280',
+        tabBarActiveTintColor: colors.black,
+        tabBarInactiveTintColor: colors.muted,
         headerShown: false,
-        tabBarStyle: { paddingBottom: 5, paddingTop: 5, height: 60, backgroundColor: '#FFFFFF' },
+        tabBarStyle: { paddingBottom: 5, paddingTop: 5, height: 60, backgroundColor: colors.surface, borderTopColor: colors.border },
       })}
     >
       <Tab.Screen name="Home" component={HomeScreen} />

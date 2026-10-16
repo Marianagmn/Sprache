@@ -5,20 +5,33 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
+    "backgroundColor": "#F4F4F5",
+    "primaryColor": "#FFCE00",
     "userInterfaceStyle": "light",
+    "plugins": [
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/sprache-logo.png",
+          "imageWidth": 208,
+          "resizeMode": "contain",
+          "backgroundColor": "#F4F4F5"
+        }
+      ]
+    ],
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/android-icon-foreground.png",
-        "backgroundImage": "./assets/android-icon-background.png",
-        "monochromeImage": "./assets/android-icon-monochrome.png"
+        "backgroundColor": "#FFCE00",
+        "foregroundImage": "./assets/icon.png"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/favicon.png",
+      "themeColor": "#FFCE00",
+      "backgroundColor": "#F4F4F5"
     }
   }
 }

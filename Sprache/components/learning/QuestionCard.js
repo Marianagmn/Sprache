@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { colors, elevation, radii, spacing, typography } from '../../theme';
 
 export default function QuestionCard({ question, prompt }) {
   return (
@@ -12,8 +13,8 @@ export default function QuestionCard({ question, prompt }) {
 }
 
 const styles = StyleSheet.create({
-  card: { backgroundColor: '#FFFFFF', borderRadius: 16, padding: 24, marginBottom: 20, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.05, shadowRadius: 6, elevation: 2 },
-  eyebrow: { color: '#10B981', fontSize: 12, fontWeight: '700', textTransform: 'uppercase', letterSpacing: 0.5, marginBottom: 18 },
-  word: { color: '#1E3A8A', fontSize: 30, fontWeight: '800', marginBottom: 12 },
-  prompt: { color: '#374151', fontSize: 17, lineHeight: 24 },
+  card: { backgroundColor: colors.surface, borderRadius: radii.lg, padding: spacing.xl, marginBottom: 20, ...elevation.card },
+  eyebrow: { color: colors.red, fontSize: typography.caption, fontWeight: typography.bold, textTransform: 'uppercase', letterSpacing: 0.5, marginBottom: 18 },
+  word: { color: colors.black, fontSize: 30, fontWeight: typography.heavy, marginBottom: spacing.md },
+  prompt: { color: colors.text, fontSize: 17, lineHeight: 24 },
 });

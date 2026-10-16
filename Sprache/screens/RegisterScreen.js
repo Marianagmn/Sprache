@@ -3,7 +3,9 @@ import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, ScrollView } fr
 import { Ionicons } from '@expo/vector-icons';
 import AppButton from '../components/common/AppButton';
 import AppInput from '../components/common/AppInput';
+import BrandLogo from '../components/common/BrandLogo';
 import { useApp } from '../context/AppContext';
+import { colors, elevation, radii, spacing, typography } from '../theme';
 
 const steps = [
   { id: 'profile', title: 'Datos básicos', description: 'Cuéntanos quién eres' },
@@ -157,7 +159,7 @@ export default function RegisterScreen({ navigation }) {
           onPress={() => setShowPassword((previous) => !previous)}
           accessibilityRole="button"
         >
-          <Ionicons name={showPassword ? 'eye-off-outline' : 'eye-outline'} size={20} color="#6B7280" />
+          <Ionicons name={showPassword ? 'eye-off-outline' : 'eye-outline'} size={20} color={colors.muted} />
         </TouchableOpacity>
       </View>
 
@@ -237,8 +239,9 @@ export default function RegisterScreen({ navigation }) {
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => (stepIndex === 0 ? navigation.goBack() : setStepIndex((previous) => previous - 1))}>
-          <Ionicons name="arrow-back" size={24} color="#111827" />
+          <Ionicons name="arrow-back" size={24} color={colors.black} />
         </TouchableOpacity>
+        <BrandLogo variant="tab" />
       </View>
 
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scroll}>
@@ -287,8 +290,8 @@ export default function RegisterScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#F9FAFB' },
-  header: { paddingHorizontal: 20, paddingTop: 20, paddingBottom: 8 },
+  container: { flex: 1, backgroundColor: colors.background },
+  header: { paddingHorizontal: 20, paddingTop: 20, paddingBottom: 8, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   scroll: { paddingHorizontal: 20, paddingBottom: 24 },
   progressHeader: {
     flexDirection: 'row',
@@ -296,11 +299,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 12,
   },
-  stepLabel: { fontSize: 12, fontWeight: '700', letterSpacing: 1.2, color: '#1E3A8A', textTransform: 'uppercase' },
-  remainingText: { fontSize: 14, color: '#6B7280', fontWeight: '600' },
+  stepLabel: { fontSize: typography.caption, fontWeight: typography.bold, letterSpacing: 1.2, color: colors.black, textTransform: 'uppercase' },
+  remainingText: { fontSize: typography.small, color: colors.muted, fontWeight: typography.semibold },
   progressTrack: {
     height: 10,
-    backgroundColor: '#E5E7EB',
+    backgroundColor: colors.border,
     borderRadius: 999,
     overflow: 'hidden',
     marginBottom: 20,
@@ -308,26 +311,22 @@ const styles = StyleSheet.create({
   progressFill: {
     height: '100%',
     borderRadius: 999,
-    backgroundColor: '#1E3A8A',
+    backgroundColor: colors.gold,
   },
   card: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 18,
+    backgroundColor: colors.surface,
+    borderRadius: radii.lg,
     padding: 18,
     marginBottom: 24,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.06,
-    shadowRadius: 4,
-    elevation: 2,
+    ...elevation.card,
   },
-  cardLabel: { fontSize: 20, fontWeight: '700', color: '#111827', marginBottom: 6 },
-  cardDescription: { fontSize: 14, color: '#6B7280', marginBottom: 12 },
-  summary: { fontSize: 15, color: '#1E3A8A', fontWeight: '600' },
-  sectionTitle: { fontSize: 18, fontWeight: '600', color: '#111827', marginBottom: 12, marginTop: 8 },
-  helperText: { fontSize: 13, color: '#6B7280', marginBottom: 12 },
-  helper: { fontSize: 12, color: '#B91C1C', marginTop: -8, marginBottom: 12 },
-  successText: { fontSize: 12, color: '#15803D', marginTop: -8, marginBottom: 12 },
+  cardLabel: { fontSize: typography.subtitle, fontWeight: typography.bold, color: colors.black, marginBottom: 6 },
+  cardDescription: { fontSize: typography.small, color: colors.muted, marginBottom: spacing.md },
+  summary: { fontSize: 15, color: colors.black, fontWeight: typography.semibold },
+  sectionTitle: { fontSize: 18, fontWeight: typography.semibold, color: colors.black, marginBottom: spacing.md, marginTop: spacing.sm },
+  helperText: { fontSize: 13, color: colors.muted, marginBottom: spacing.md },
+  helper: { fontSize: typography.caption, color: colors.red, marginTop: -8, marginBottom: spacing.md },
+  successText: { fontSize: typography.caption, color: colors.success, marginTop: -8, marginBottom: spacing.md },
   passwordFieldWrapper: { position: 'relative', marginBottom: 8 },
   passwordInput: { paddingRight: 46 },
   togglePassword: {
@@ -338,32 +337,32 @@ const styles = StyleSheet.create({
   },
   optionsGrid: { gap: 10 },
   optionCard: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: colors.surface,
     borderWidth: 1,
-    borderColor: '#E5E7EB',
-    borderRadius: 14,
+    borderColor: colors.border,
+    borderRadius: radii.lg,
     padding: 16,
     marginBottom: 10,
   },
   optionCardActive: {
-    backgroundColor: '#EEF2FF',
-    borderColor: '#1E3A8A',
+    backgroundColor: colors.goldSoft,
+    borderColor: colors.gold,
   },
   optionTitle: {
     fontSize: 17,
     fontWeight: '700',
-    color: '#111827',
+    color: colors.black,
     marginBottom: 4,
   },
-  optionTitleActive: { color: '#1E3A8A' },
+  optionTitleActive: { color: colors.black },
   optionDescription: {
     fontSize: 13,
-    color: '#6B7280',
+    color: colors.muted,
     lineHeight: 18,
   },
-  optionDescriptionActive: { color: '#1E3A8A' },
+  optionDescriptionActive: { color: colors.black },
   footer: { paddingHorizontal: 20, paddingBottom: 20 },
-  error: { color: '#B91C1C', fontSize: 14, marginBottom: 12 },
+  error: { color: colors.red, fontSize: typography.small, marginBottom: spacing.md },
   actions: { flexDirection: 'row', alignItems: 'center' },
   backButton: { flex: 0.9, marginRight: 12 },
   primaryButton: { flex: 1 },

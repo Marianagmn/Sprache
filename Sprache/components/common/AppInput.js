@@ -1,12 +1,13 @@
 import React from 'react';
 import { TextInput, StyleSheet } from 'react-native';
+import { colors, radii, spacing, typography } from '../../theme';
 
-export default function AppInput({ style, placeholderTextColor = '#9CA3AF', ...props }) {
+export default function AppInput({ style, placeholderTextColor = colors.muted, ...props }) {
 	return (
 		<TextInput
 			style={[styles.input, style]}
 			placeholderTextColor={placeholderTextColor}
-			selectionColor="#1E3A8A"
+			selectionColor={colors.gold}
 			accessibilityRole="text"
 			{...props}
 		/>
@@ -14,5 +15,5 @@ export default function AppInput({ style, placeholderTextColor = '#9CA3AF', ...p
 }
 
 const styles = StyleSheet.create({
-	input: { backgroundColor: '#FFFFFF', borderWidth: 1, borderColor: '#E5E7EB', borderRadius: 12, padding: 16, fontSize: 16, marginBottom: 16 }
+	input: { backgroundColor: colors.surface, borderWidth: 1, borderColor: colors.border, borderRadius: radii.md, padding: spacing.lg, fontSize: typography.body, color: colors.text, marginBottom: spacing.lg }
 });

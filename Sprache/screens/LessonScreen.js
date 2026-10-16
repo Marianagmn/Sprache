@@ -13,6 +13,7 @@ import LessonProgress from '../components/learning/LessonProgress';
 import QuestionCard from '../components/learning/QuestionCard';
 import SessionSummary from '../components/learning/SessionSummary';
 import EmptyState from '../components/common/EmptyState';
+import { colors } from '../theme';
 
 export default function LessonScreen({ navigation, route }) {
   const { completeActivity } = useApp();
@@ -147,7 +148,7 @@ export default function LessonScreen({ navigation, route }) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#F9FAFB' },
+  container: { flex: 1, backgroundColor: colors.background },
   unavailable: { justifyContent: 'center' },
   content: { padding: 20, paddingBottom: 32 },
   options: { marginBottom: 4 },

@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { colors, radii, spacing, typography } from '../../theme';
 
 export default function DailyGoalCard({ completed = 0, goal = 10, unit = 'min', encouragement = '¡Ya casi terminas!' }) {
 	const progress = goal > 0 ? Math.min(Math.max(completed / goal, 0), 1) : 0;
@@ -17,10 +18,10 @@ export default function DailyGoalCard({ completed = 0, goal = 10, unit = 'min', 
 }
 
 const styles = StyleSheet.create({
-	card: { backgroundColor: '#1E3A8A', padding: 20, borderRadius: 16, marginBottom: 24, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.1, shadowRadius: 4, elevation: 3 },
-	title: { color: '#D1D5DB', fontSize: 14, fontWeight: '600', marginBottom: 8 },
-	goal: { color: '#FFFFFF', fontSize: 28, fontWeight: 'bold', marginBottom: 16 },
-	progressBackground: { height: 8, backgroundColor: 'rgba(255,255,255,0.2)', borderRadius: 4, marginBottom: 12 },
-	progressFill: { height: 8, width: '70%', backgroundColor: '#10B981', borderRadius: 4 },
-	encouragement: { color: '#10B981', fontSize: 14, fontWeight: '600' }
+	card: { backgroundColor: colors.black, padding: 20, borderRadius: radii.lg, marginBottom: spacing.xl },
+	title: { color: colors.white, fontSize: typography.small, fontWeight: typography.semibold, marginBottom: spacing.sm },
+	goal: { color: colors.gold, fontSize: typography.title, fontWeight: typography.bold, marginBottom: spacing.lg },
+	progressBackground: { height: 8, backgroundColor: 'rgba(255,255,255,0.22)', borderRadius: 4, marginBottom: spacing.md },
+	progressFill: { height: 8, width: '70%', backgroundColor: colors.gold, borderRadius: 4 },
+	encouragement: { color: colors.gold, fontSize: typography.small, fontWeight: typography.semibold }
 });

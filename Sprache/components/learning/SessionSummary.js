@@ -3,6 +3,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet, Text, View } from 'react-native';
 import AppButton from '../common/AppButton';
 import { calculateSessionSummary } from '../../services/lessonProgressService';
+import { colors, radii, spacing, typography } from '../../theme';
 
 export default function SessionSummary({ correctAnswers, totalQuestions, onFinish }) {
   const summary = calculateSessionSummary(correctAnswers, totalQuestions);
@@ -10,7 +11,7 @@ export default function SessionSummary({ correctAnswers, totalQuestions, onFinis
   return (
     <View style={styles.container}>
       <View style={styles.iconContainer}>
-        <Ionicons name="trophy" size={42} color="#D97706" />
+        <Ionicons name="trophy" size={42} color={colors.black} />
       </View>
       <Text style={styles.title}>Sesión completada</Text>
       <Text style={styles.subtitle}>Has practicado vocabulario y sumado una nueva sesión a tu progreso.</Text>
@@ -25,11 +26,11 @@ export default function SessionSummary({ correctAnswers, totalQuestions, onFinis
 
 const styles = StyleSheet.create({
   container: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: 24 },
-  iconContainer: { width: 88, height: 88, borderRadius: 44, backgroundColor: '#FEF3C7', alignItems: 'center', justifyContent: 'center', marginBottom: 24 },
-  title: { color: '#111827', fontSize: 26, fontWeight: '800', textAlign: 'center', marginBottom: 10 },
-  subtitle: { color: '#6B7280', fontSize: 15, lineHeight: 22, textAlign: 'center', maxWidth: 320, marginBottom: 24 },
+  iconContainer: { width: 88, height: 88, borderRadius: radii.pill, backgroundColor: colors.gold, alignItems: 'center', justifyContent: 'center', marginBottom: spacing.xl },
+  title: { color: colors.black, fontSize: 26, fontWeight: typography.heavy, textAlign: 'center', marginBottom: 10 },
+  subtitle: { color: colors.muted, fontSize: 15, lineHeight: 22, textAlign: 'center', maxWidth: 320, marginBottom: spacing.xl },
   score: { alignItems: 'center', marginBottom: 28 },
-  scoreValue: { color: '#1E3A8A', fontSize: 38, fontWeight: '800' },
-  scoreLabel: { color: '#4B5563', fontSize: 14, marginTop: 4 },
+  scoreValue: { color: colors.black, fontSize: 38, fontWeight: typography.heavy },
+  scoreLabel: { color: colors.muted, fontSize: 14, marginTop: 4 },
   button: { width: '100%' },
 });

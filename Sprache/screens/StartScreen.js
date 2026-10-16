@@ -1,16 +1,15 @@
 import React from 'react';
 import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
 import AppButton from '../components/common/AppButton';
+import BrandLogo from '../components/common/BrandLogo';
+import { colors, elevation, radii, spacing, typography } from '../theme';
 
 export default function StartScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
         <View style={styles.brandCard}>
-          <View style={styles.logoContainer}>
-            <Text style={styles.logoText}>S</Text>
-          </View>
-          <Text style={styles.title}>SPRACHE</Text>
+          <BrandLogo variant="splash" style={styles.brandLogo} />
           <Text style={styles.subtitle}>Aprende alemán en minutos cada día.</Text>
         </View>
 
@@ -52,7 +51,7 @@ export default function StartScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#F9FAFB' },
+  container: { flex: 1, backgroundColor: colors.background },
   content: {
     flex: 1,
     justifyContent: 'center',
@@ -61,39 +60,25 @@ const styles = StyleSheet.create({
     paddingVertical: 28,
   },
   brandCard: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 24,
-    padding: 26,
+    backgroundColor: colors.surface,
+    borderRadius: radii.xl,
+    padding: spacing.xl,
     alignItems: 'center',
     width: '100%',
     maxWidth: 360,
     marginBottom: 18,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.05,
-    shadowRadius: 4,
-    elevation: 2,
+    ...elevation.card,
   },
-  logoContainer: {
-    width: 94,
-    height: 94,
-    backgroundColor: '#1E3A8A',
-    borderRadius: 24,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  logoText: { fontSize: 44, color: '#FFFFFF', fontWeight: 'bold' },
-  title: { fontSize: 34, fontWeight: '800', color: '#111827', marginBottom: 8 },
+  brandLogo: { marginBottom: spacing.md },
   subtitle: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: '#1E3A8A',
+    fontSize: typography.subtitle,
+    fontWeight: typography.semibold,
+    color: colors.black,
     textAlign: 'center',
   },
   description: {
-    fontSize: 16,
-    color: '#6B7280',
+    fontSize: typography.body,
+    color: colors.muted,
     textAlign: 'center',
     lineHeight: 24,
     maxWidth: 360,
@@ -102,8 +87,8 @@ const styles = StyleSheet.create({
   benefits: {
     width: '100%',
     maxWidth: 340,
-    backgroundColor: '#FFFFFF',
-    borderRadius: 16,
+    backgroundColor: colors.surface,
+    borderRadius: radii.lg,
     paddingVertical: 10,
     paddingHorizontal: 14,
     shadowColor: '#000',
@@ -119,13 +104,13 @@ const styles = StyleSheet.create({
   },
   benefitDot: {
     fontSize: 20,
-    color: '#10B981',
+    color: colors.red,
     marginRight: 8,
     fontWeight: '700',
   },
   benefitText: {
     fontSize: 15,
-    color: '#374151',
+    color: colors.text,
     fontWeight: '500',
   },
   footer: { paddingHorizontal: 20, paddingBottom: 20, width: '100%' },

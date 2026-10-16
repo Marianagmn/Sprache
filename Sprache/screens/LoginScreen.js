@@ -3,7 +3,9 @@ import { SafeAreaView, StyleSheet, Text, View, TouchableOpacity } from 'react-na
 import { Ionicons } from '@expo/vector-icons';
 import AppButton from '../components/common/AppButton';
 import AppInput from '../components/common/AppInput';
+import BrandLogo from '../components/common/BrandLogo';
 import { useApp } from '../context/AppContext';
+import { colors, elevation, radii, spacing, typography } from '../theme';
 
 export default function LoginScreen({ navigation }) {
   const { loginUser } = useApp();
@@ -31,15 +33,13 @@ export default function LoginScreen({ navigation }) {
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
         <View style={styles.headerCard}>
-          <View style={styles.logoContainer}>
-            <Text style={styles.logoText}>S</Text>
-          </View>
+          <BrandLogo variant="screen" style={styles.brandLogo} />
           <Text style={styles.title}>Qué bueno verte</Text>
           <Text style={styles.subtitle}>Continúa tu rutina de alemán.</Text>
         </View>
 
         <View style={styles.noticeBox}>
-          <Ionicons name="information-circle-outline" size={18} color="#1E3A8A" style={styles.noticeIcon} />
+          <Ionicons name="information-circle-outline" size={18} color={colors.black} style={styles.noticeIcon} />
           <Text style={styles.localNotice}>
             Esta demo guarda tu cuenta y progreso solo en este dispositivo.
           </Text>
@@ -67,7 +67,7 @@ export default function LoginScreen({ navigation }) {
               onPress={() => setShowPassword((previous) => !previous)}
               accessibilityRole="button"
             >
-              <Ionicons name={showPassword ? 'eye-off-outline' : 'eye-outline'} size={20} color="#6B7280" />
+              <Ionicons name={showPassword ? 'eye-off-outline' : 'eye-outline'} size={20} color={colors.muted} />
             </TouchableOpacity>
           </View>
 
@@ -100,7 +100,7 @@ export default function LoginScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#F9FAFB' },
+  container: { flex: 1, backgroundColor: colors.background },
   content: {
     flex: 1,
     justifyContent: 'center',
@@ -108,42 +108,29 @@ const styles = StyleSheet.create({
     paddingVertical: 28,
   },
   headerCard: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 24,
+    backgroundColor: colors.surface,
+    borderRadius: radii.xl,
     padding: 24,
     alignItems: 'center',
     marginBottom: 20,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.05,
-    shadowRadius: 4,
-    elevation: 2,
+    ...elevation.card,
   },
-  logoContainer: {
-    width: 74,
-    height: 74,
-    backgroundColor: '#1E3A8A',
-    borderRadius: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 16,
-  },
-  logoText: { fontSize: 36, color: '#FFFFFF', fontWeight: 'bold' },
-  title: { color: '#111827', fontSize: 28, fontWeight: '800', marginBottom: 6 },
-  subtitle: { color: '#6B7280', fontSize: 16, fontWeight: '500', textAlign: 'center' },
+  brandLogo: { marginBottom: spacing.md },
+  title: { color: colors.black, fontSize: typography.title, fontWeight: typography.heavy, marginBottom: 6 },
+  subtitle: { color: colors.muted, fontSize: typography.body, fontWeight: typography.medium, textAlign: 'center' },
   noticeBox: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#EFF6FF',
-    borderRadius: 14,
+    backgroundColor: colors.goldSoft,
+    borderRadius: radii.lg,
     paddingHorizontal: 14,
     paddingVertical: 12,
     marginBottom: 20,
   },
   noticeIcon: { marginRight: 8 },
-  localNotice: { flex: 1, color: '#374151', fontSize: 13, lineHeight: 18 },
+  localNotice: { flex: 1, color: colors.text, fontSize: 13, lineHeight: 18 },
   form: { width: '100%' },
-  label: { color: '#374151', fontSize: 14, fontWeight: '700', marginBottom: 8 },
+  label: { color: colors.text, fontSize: typography.small, fontWeight: typography.bold, marginBottom: spacing.sm },
   passwordFieldWrapper: { position: 'relative' },
   passwordInput: { paddingRight: 46 },
   togglePassword: {
@@ -152,7 +139,7 @@ const styles = StyleSheet.create({
     top: 14,
     padding: 4,
   },
-  error: { color: '#B91C1C', fontSize: 14, marginTop: 8, marginBottom: 12 },
+  error: { color: colors.red, fontSize: typography.small, marginTop: spacing.sm, marginBottom: spacing.md },
   button: { marginTop: 8, marginBottom: 8 },
   dividerRow: {
     flexDirection: 'row',
@@ -162,10 +149,10 @@ const styles = StyleSheet.create({
   dividerLine: {
     flex: 1,
     height: 1,
-    backgroundColor: '#E5E7EB',
+    backgroundColor: colors.border,
   },
   dividerText: {
-    color: '#6B7280',
+    color: colors.muted,
     fontSize: 12,
     fontWeight: '600',
     marginHorizontal: 12,

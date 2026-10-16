@@ -7,6 +7,7 @@ import StreakBadge from '../components/home/StreakBadge';
 import DailyGoalCard from '../components/home/DailyGoalCard';
 import RecommendationCard from '../components/home/RecommendationCard';
 import { getRecommendedActivity } from '../services/activityService';
+import { colors, spacing, typography } from '../theme';
 
 export default function HomeScreen({ navigation }) {
   const { user } = useApp();
@@ -39,8 +40,8 @@ export default function HomeScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#F9FAFB' },
+  container: { flex: 1, backgroundColor: colors.background },
   scroll: { padding: 20 },
-  sectionTitle: { fontSize: 20, fontWeight: '600', color: '#111827', marginBottom: 16 },
+  sectionTitle: { fontSize: typography.subtitle, fontWeight: typography.semibold, color: colors.black, marginBottom: spacing.lg },
   mainActionBtn: { marginTop: 0 }
 });

@@ -5,6 +5,7 @@ import LevelProgressCard from '../components/progress/LevelProgressCard';
 import WeeklyActivity from '../components/progress/WeeklyActivity';
 import ProgressStat from '../components/progress/ProgressStat';
 import { getWeeklyActivity } from '../services/progressService';
+import { colors, typography } from '../theme';
 
 export default function ProgressScreen() {
   const { user } = useApp();
@@ -27,9 +28,9 @@ export default function ProgressScreen() {
         <WeeklyActivity days={weeklyActivity} />
 
         <View style={styles.statsGrid}>
-          <ProgressStat iconName="flame" color="#F59E0B" value={`${user.streak} días`} label="Racha actual" />
-          <ProgressStat iconName="time" color="#1E3A8A" value={`${user.studiedMinutes} min`} label="Estudiados" />
-          <ProgressStat iconName="school" color="#10B981" value={`${user.learnedWords}`} label="Palabras" />
+          <ProgressStat iconName="flame" color={colors.red} value={`${user.streak} días`} label="Racha actual" />
+          <ProgressStat iconName="time" color={colors.black} value={`${user.studiedMinutes} min`} label="Estudiados" />
+          <ProgressStat iconName="school" color={colors.gold} value={`${user.learnedWords}`} label="Palabras" />
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -37,9 +38,9 @@ export default function ProgressScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#F9FAFB' },
+  container: { flex: 1, backgroundColor: colors.background },
   scroll: { padding: 20 },
-  headerTitle: { fontSize: 28, fontWeight: 'bold', color: '#111827', marginBottom: 24 },
-  sectionTitle: { fontSize: 18, fontWeight: '600', color: '#111827', marginBottom: 16 },
+  headerTitle: { fontSize: typography.title, fontWeight: 'bold', color: colors.black, marginBottom: 24 },
+  sectionTitle: { fontSize: 18, fontWeight: '600', color: colors.black, marginBottom: 16 },
   statsGrid: { flexDirection: 'row', justifyContent: 'space-between' }
 });

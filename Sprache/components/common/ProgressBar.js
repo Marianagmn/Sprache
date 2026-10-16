@@ -1,10 +1,11 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
+import { colors } from '../../theme';
 
 export default function ProgressBar({
 	progress = 0,
-	color = '#10B981',
-	backgroundColor = '#E5E7EB',
+	color = colors.gold,
+	backgroundColor = colors.border,
 	height = 8,
 	style
 }) {

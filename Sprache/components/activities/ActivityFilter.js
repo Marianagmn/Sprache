@@ -1,5 +1,6 @@
 import React from 'react';
 import { ScrollView, Text, TouchableOpacity, StyleSheet, View } from 'react-native';
+import { colors, radii } from '../../theme';
 
 export default function ActivityFilter({ activeFilter = 'Todos', onChange }) {
   const filters = ['Todos', 'Gramática', 'Vocabulario', 'Lectura', 'Escucha'];
@@ -50,24 +51,24 @@ const styles = StyleSheet.create({
   filterChip: {
     paddingHorizontal: 16,
     paddingVertical: 8,
-    borderRadius: 20,
+    borderRadius: radii.pill,
     marginRight: 12,
     borderWidth: 1,
   },
   activeChip: {
-    backgroundColor: '#1E3A8A', 
-    borderColor: '#1E3A8A',
+    backgroundColor: colors.gold,
+    borderColor: colors.gold,
   },
   activeText: {
-    color: '#FFFFFF',
+    color: colors.black,
     fontWeight: '600',
   },
   inactiveChip: {
     backgroundColor: 'transparent',
-    borderColor: '#D1D5DB', 
+    borderColor: colors.border,
   },
   inactiveText: {
-    color: '#6B7280', 
+    color: colors.muted,
     fontWeight: '500',
   },
 });

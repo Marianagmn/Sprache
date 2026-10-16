@@ -7,6 +7,7 @@ import GoalCard from '../components/profile/GoalCard';
 import ProfileStats from '../components/profile/ProfileStats';
 import SettingsSection from '../components/profile/SettingsSection';
 import SettingsRow from '../components/profile/SettingsRow';
+import { colors, radii, spacing, typography } from '../theme';
 
 export default function ProfileScreen({ navigation }) {
   const { user, editProfile, logoutUser, resetUserProgress } = useApp();
@@ -47,9 +48,9 @@ export default function ProfileScreen({ navigation }) {
 
         <ProfileStats
           stats={[
-            { iconName: 'flame', color: '#F59E0B', value: `${user.streak} días`, label: 'Racha' },
-            { iconName: 'time', color: '#1E3A8A', value: `${user.studiedMinutes} min`, label: 'Estudiados' },
-            { iconName: 'school', color: '#10B981', value: `${user.learnedWords}`, label: 'Palabras' },
+            { iconName: 'flame', color: colors.red, value: `${user.streak} días`, label: 'Racha' },
+            { iconName: 'time', color: colors.black, value: `${user.studiedMinutes} min`, label: 'Estudiados' },
+            { iconName: 'school', color: colors.gold, value: `${user.learnedWords}`, label: 'Palabras' },
           ]}
         />
 
@@ -82,11 +83,11 @@ export default function ProfileScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#F9FAFB' },
+  container: { flex: 1, backgroundColor: colors.background },
   scroll: { padding: 20 },
-  modalBackdrop: { flex: 1, justifyContent: 'center', padding: 24, backgroundColor: 'rgba(17, 24, 39, 0.45)' },
-  modalCard: { backgroundColor: '#FFFFFF', borderRadius: 18, padding: 22 },
-  modalTitle: { color: '#111827', fontSize: 20, fontWeight: '700', marginBottom: 16 },
-  nameInput: { borderWidth: 1, borderColor: '#D1D5DB', borderRadius: 12, padding: 14, fontSize: 16, marginBottom: 16 },
-  modalButton: { marginBottom: 8 },
+  modalBackdrop: { flex: 1, justifyContent: 'center', padding: 24, backgroundColor: 'rgba(0, 0, 0, 0.45)' },
+  modalCard: { backgroundColor: colors.surface, borderRadius: radii.xl, padding: 22 },
+  modalTitle: { color: colors.black, fontSize: typography.subtitle, fontWeight: typography.bold, marginBottom: spacing.lg },
+  nameInput: { borderWidth: 1, borderColor: colors.border, borderRadius: radii.md, padding: 14, fontSize: typography.body, color: colors.black, marginBottom: spacing.lg },
+  modalButton: { marginBottom: spacing.sm },
 });

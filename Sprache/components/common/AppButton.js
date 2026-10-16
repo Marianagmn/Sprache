@@ -1,5 +1,6 @@
 import React from 'react';
 import { ActivityIndicator, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { colors, radii, spacing, typography } from '../../theme';
 
 export default function AppButton({
 	title,
@@ -29,7 +30,7 @@ export default function AppButton({
 			{...props}
 		>
 			{loading ? (
-				<ActivityIndicator color={variant === 'secondary' ? '#1E3A8A' : '#FFFFFF'} />
+				<ActivityIndicator color={variant === 'secondary' ? colors.black : colors.black} />
 			) : (
 				<Text style={[styles.text, variant === 'secondary' && styles.secondaryText, textStyle]}>
 					{title}
@@ -40,9 +41,9 @@ export default function AppButton({
 }
 
 const styles = StyleSheet.create({
-	button: { backgroundColor: '#1E3A8A', paddingVertical: 16, borderRadius: 12, alignItems: 'center' },
-	secondaryButton: { backgroundColor: 'transparent' },
+	button: { backgroundColor: colors.gold, paddingVertical: spacing.lg, borderRadius: radii.md, alignItems: 'center', borderWidth: 1, borderColor: colors.gold },
+	secondaryButton: { backgroundColor: colors.surface, borderColor: colors.border },
 	disabledButton: { opacity: 0.5 },
-	text: { color: '#FFFFFF', fontSize: 16, fontWeight: '600' },
-	secondaryText: { color: '#1E3A8A' }
+	text: { color: colors.black, fontSize: typography.body, fontWeight: typography.bold },
+	secondaryText: { color: colors.black }
 });

@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { colors, elevation, radii, spacing } from '../../theme';
 
 export default function ActivityCard({ 
     title, 
@@ -16,7 +17,7 @@ export default function ActivityCard({
             activeOpacity={0.7}
         >
             <View style={styles.iconContainer}>
-                <Ionicons name={iconName || 'play-outline'} size={24} color="#1E3A8A" />
+                <Ionicons name={iconName || 'play-outline'} size={24} color={colors.black} />
             </View>
             
             <View style={styles.textContainer}>
@@ -26,7 +27,7 @@ export default function ActivityCard({
             
             <View style={styles.actionContainer}>
                 <Text style={styles.timeText}>{time}</Text>
-                <Ionicons name="chevron-forward" size={18} color="#9CA3AF" />
+                <Ionicons name="chevron-forward" size={18} color={colors.muted} />
             </View>
         </TouchableOpacity>
     );
@@ -34,20 +35,16 @@ export default function ActivityCard({
 
 const styles = StyleSheet.create({
     card: { 
-        backgroundColor: '#FFFFFF', 
-        borderRadius: 16, 
-        padding: 16, 
+        backgroundColor: colors.surface,
+        borderRadius: radii.lg,
+        padding: spacing.lg,
         flexDirection: 'row', 
         alignItems: 'center', 
         marginBottom: 16, 
-        shadowColor: '#000', 
-        shadowOffset: { width: 0, height: 1 }, 
-        shadowOpacity: 0.05, 
-        shadowRadius: 2, 
-        elevation: 2 
+        ...elevation.card
     },
     iconContainer: { 
-        backgroundColor: '#EFF6FF', 
+        backgroundColor: colors.goldSoft,
         padding: 12, 
         borderRadius: 12, 
         marginRight: 16 
@@ -58,12 +55,12 @@ const styles = StyleSheet.create({
     cardTitle: { 
         fontSize: 16, 
         fontWeight: '600', 
-        color: '#111827', 
+        color: colors.black,
         marginBottom: 4 
     },
     cardDesc: { 
         fontSize: 14, 
-        color: '#6B7280' 
+        color: colors.muted
     },
     actionContainer: {
         flexDirection: 'row',
@@ -73,7 +70,7 @@ const styles = StyleSheet.create({
     timeText: { 
         fontSize: 14, 
         fontWeight: 'bold', 
-        color: '#10B981', 
+        color: colors.black,
         marginRight: 4 
     }
 });
