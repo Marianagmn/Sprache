@@ -11,7 +11,13 @@ export function calculateSessionSummary(correctAnswers, totalQuestions) {
   };
 }
 
-export function buildLessonCompletion(lesson, submittedAnswers, activityId = lesson?.activityId, hintUsage = []) {
+export function buildLessonCompletion(
+  lesson,
+  submittedAnswers,
+  activityId = lesson?.activityId,
+  hintUsage = [],
+  durationSeconds = 0,
+) {
   const questions = Array.isArray(lesson?.questions) ? lesson.questions : [];
   const answers = Array.isArray(submittedAnswers) ? submittedAnswers : [];
   const usedHints = Array.isArray(hintUsage) ? hintUsage : [];
@@ -41,7 +47,7 @@ export function buildLessonCompletion(lesson, submittedAnswers, activityId = les
 
   return {
     activityId,
-    durationMinutes: Number.isFinite(lesson?.durationMinutes) ? Math.max(0, lesson.durationMinutes) : 0,
+    durationSeconds: Number.isFinite(durationSeconds) ? Math.max(0, Math.floor(durationSeconds)) : 0,
     learnedWords,
     wordResults,
     ...summary,

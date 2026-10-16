@@ -32,7 +32,13 @@ function hydrateUser(storedUser) {
   const user = {
     ...initialUser,
     ...storedUser,
-    sessions: Array.isArray(storedUser.sessions) ? storedUser.sessions : [],
+    sessions: Array.isArray(storedUser.sessions)
+      ? storedUser.sessions.map((session) => (
+        session && Number.isFinite(session.durationSeconds)
+          ? session
+          : { ...(session || {}), durationSeconds: 0, durationSource: 'estimated' }
+      ))
+      : [],
     wordProgress: storedUser.wordProgress && typeof storedUser.wordProgress === 'object' ? storedUser.wordProgress : {},
     preferences: {
       ...initialUser.preferences,

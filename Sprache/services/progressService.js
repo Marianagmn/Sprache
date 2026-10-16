@@ -17,11 +17,13 @@ function getSessionDateKey(session) {
 export function deriveProgress(user, now = new Date()) {
   const sessions = Array.isArray(user.sessions) ? user.sessions : [];
   const todayKey = dateKey(now);
-  const todayMinutes = sessions.reduce(
-    (total, session) => total + (getSessionDateKey(session) === todayKey ? (session.durationMinutes || 0) : 0),
+  const todaySeconds = sessions.reduce(
+    (total, session) => total + (getSessionDateKey(session) === todayKey ? (session.durationSeconds || 0) : 0),
     0,
   );
-  const studiedMinutes = sessions.reduce((total, session) => total + (session.durationMinutes || 0), 0);
+  const studiedSeconds = sessions.reduce((total, session) => total + (session.durationSeconds || 0), 0);
+  const totalQuestions = sessions.reduce((total, session) => total + (session.totalQuestions || 0), 0);
+  const correctAnswers = sessions.reduce((total, session) => total + (session.correctAnswers || 0), 0);
   const learnedWords = new Map();
   const activeDays = new Set();
 
@@ -48,8 +50,14 @@ export function deriveProgress(user, now = new Date()) {
   }
 
   return {
-    todayMinutes,
-    studiedMinutes,
+    todaySeconds,
+    todayMinutes: todaySeconds / 60,
+    studiedSeconds,
+    studiedMinutes: studiedSeconds / 60,
+    totalSessions: sessions.length,
+    totalQuestions,
+    correctAnswers,
+    accuracy: totalQuestions > 0 ? Math.round((correctAnswers / totalQuestions) * 100) : 0,
     learnedWords: learnedWords.size,
     streak,
   };
@@ -59,11 +67,14 @@ export function getWeeklyActivity(sessions = [], now = new Date()) {
   const weekStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
   const mondayOffset = (weekStart.getDay() + 6) % 7;
   weekStart.setDate(weekStart.getDate() - mondayOffset);
-  const minutesByDate = new Map();
+  const totalsByDate = new Map();
 
   sessions.forEach((session) => {
     const key = getSessionDateKey(session);
-    minutesByDate.set(key, (minutesByDate.get(key) || 0) + (session.durationMinutes || 0));
+    const totals = totalsByDate.get(key) || { seconds: 0, sessions: 0 };
+    totals.seconds += session.durationSeconds || 0;
+    totals.sessions += 1;
+    totalsByDate.set(key, totals);
   });
 
   const labels = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
@@ -71,8 +82,15 @@ export function getWeeklyActivity(sessions = [], now = new Date()) {
     const date = new Date(weekStart);
     date.setDate(weekStart.getDate() + index);
     const key = dateKey(date);
-    const minutes = minutesByDate.get(key) || 0;
-    return { date: key, label, minutes, active: minutes > 0 };
+    const totals = totalsByDate.get(key) || { seconds: 0, sessions: 0 };
+    return {
+      date: key,
+      label,
+      seconds: totals.seconds,
+      minutes: totals.seconds / 60,
+      sessions: totals.sessions,
+      active: totals.sessions > 0,
+    };
   });
 }
 
@@ -88,8 +106,8 @@ export function recordActivity(user, session, now = new Date()) {
   const correctAnswers = Number.isFinite(session.correctAnswers)
     ? Math.min(totalQuestions, Math.max(0, Math.floor(session.correctAnswers)))
     : 0;
-  const durationMinutes = Number.isFinite(session.durationMinutes)
-    ? Math.max(0, session.durationMinutes)
+  const durationSeconds = Number.isFinite(session.durationSeconds)
+    ? Math.max(0, Math.floor(session.durationSeconds))
     : 0;
   const learnedWords = Array.isArray(session.learnedWords)
     ? session.learnedWords.filter((word) => typeof word?.term === 'string' && word.term.trim())
@@ -99,7 +117,8 @@ export function recordActivity(user, session, now = new Date()) {
     id: `${completedAt.getTime()}-${sessions.length + 1}`,
     activityId: session.activityId || 'unknown',
     completedAt: completedAt.toISOString(),
-    durationMinutes,
+    durationSeconds,
+    durationSource: 'measured',
     correctAnswers,
     totalQuestions,
     learnedWords,
@@ -133,8 +152,14 @@ export function resetProgress(user) {
     ...user,
     sessions: [],
     wordProgress: {},
+    todaySeconds: 0,
     todayMinutes: 0,
+    studiedSeconds: 0,
     studiedMinutes: 0,
+    totalSessions: 0,
+    totalQuestions: 0,
+    correctAnswers: 0,
+    accuracy: 0,
     learnedWords: 0,
     streak: 0,
   };

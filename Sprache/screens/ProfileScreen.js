@@ -14,6 +14,9 @@ export default function ProfileScreen({ navigation }) {
   const { user, editProfile, logoutUser, resetUserProgress } = useApp();
   const [isEditing, setIsEditing] = useState(false);
   const [name, setName] = useState(user.name);
+  const studiedTime = user.studiedSeconds >= 60
+    ? `${Math.floor(user.studiedSeconds / 60)} min ${user.studiedSeconds % 60} s`
+    : `${user.studiedSeconds || 0} s`;
 
   const handleLogout = async () => {
     await logoutUser();
@@ -54,7 +57,7 @@ export default function ProfileScreen({ navigation }) {
         <ProfileStats
           stats={[
             { iconName: 'flame', color: colors.red, value: `${user.streak} días`, label: 'Racha' },
-            { iconName: 'time', color: colors.black, value: `${user.studiedMinutes} min`, label: 'Minutos practicados' },
+            { iconName: 'time', color: colors.black, value: studiedTime, label: 'Tiempo practicado' },
             { iconName: 'school', color: colors.gold, value: `${user.learnedWords}`, label: 'Palabras' },
           ]}
         />

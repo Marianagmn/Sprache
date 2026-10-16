@@ -11,6 +11,10 @@ import { colors, typography } from '../theme';
 export default function ProgressScreen() {
   const { user } = useApp();
   const weeklyActivity = getWeeklyActivity(user.sessions);
+  const studiedTime = user.studiedSeconds >= 60
+    ? `${Math.floor(user.studiedSeconds / 60)} min ${user.studiedSeconds % 60} s`
+    : `${user.studiedSeconds || 0} s`;
+  const trackedHints = Object.values(user.wordProgress || {}).reduce((total, word) => total + (word.hints || 0), 0);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -24,17 +28,31 @@ export default function ProgressScreen() {
           level={user.level}
           motivation={user.motivation}
           dailyGoal={user.dailyGoal}
-          studiedMinutes={user.studiedMinutes}
+          studiedSeconds={user.studiedSeconds || 0}
           learnedWords={user.learnedWords}
         />
 
         <Text style={styles.sectionTitle}>Actividad semanal</Text>
-        <WeeklyActivity days={weeklyActivity} />
+        {user.sessions.length ? (
+          <WeeklyActivity days={weeklyActivity} />
+        ) : (
+          <Text style={styles.emptyWords}>Cuando completes una práctica, aquí verás tu actividad de esta semana.</Text>
+        )}
 
         <View style={styles.statsGrid}>
           <ProgressStat iconName="flame" color={colors.red} value={`${user.streak} días`} label="Racha actual" />
-          <ProgressStat iconName="time" color={colors.black} value={`${user.studiedMinutes} min`} label="Minutos practicados" />
-          <ProgressStat iconName="school" color={colors.gold} value={`${user.learnedWords}`} label="Palabras" />
+          <ProgressStat iconName="time" color={colors.black} value={studiedTime} label="Tiempo practicado" />
+          <ProgressStat iconName="school" color={colors.gold} value={`${user.totalSessions || 0}`} label="Prácticas completadas" />
+          <ProgressStat
+            iconName="checkmark-circle"
+            color={colors.success}
+            value={user.totalQuestions ? `${user.accuracy}%` : '—'}
+            label={user.totalQuestions
+              ? `Precisión · ${user.correctAnswers}/${user.totalQuestions} respuestas`
+              : 'Precisión · sin respuestas todavía'}
+          />
+          <ProgressStat iconName="bulb" color={colors.gold} value={`${trackedHints}`} label="Pistas utilizadas" />
+          <ProgressStat iconName="book" color={colors.black} value={`${user.learnedWords}`} label="Palabras con acierto" />
         </View>
 
         <Text style={styles.sectionTitle}>Práctica por palabra</Text>

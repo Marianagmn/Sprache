@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { colors, elevation, radii } from '../../theme';
 
 export default function WeeklyActivity({ days = [] }) {
-	const maxMinutes = Math.max(20, ...days.map((day) => day.minutes));
+	const maxSeconds = Math.max(60, ...days.map((day) => day.seconds || 0));
 
 	return (
 		<View style={styles.container}>
@@ -11,9 +11,15 @@ export default function WeeklyActivity({ days = [] }) {
 				<View key={day.date} style={styles.dayColumn}>
 					<Text style={styles.dayLabel}>{day.label}</Text>
 					<View style={styles.barContainer}>
-						<View style={[styles.dayBar, day.active ? styles.activeBar : styles.inactiveBar, { height: day.active ? Math.max(6, (day.minutes / maxMinutes) * 52) : 6 }]} />
+						<View style={[styles.dayBar, day.active ? styles.activeBar : styles.inactiveBar, { height: day.active ? Math.max(6, ((day.seconds || 0) / maxSeconds) * 52) : 6 }]} />
 					</View>
-					<Text style={styles.minutes}>{day.minutes ? `${day.minutes}m` : '·'}</Text>
+						<Text style={styles.minutes}>
+							{day.sessions
+								? day.seconds > 0
+									? (day.seconds >= 60 ? `${Math.floor(day.seconds / 60)}m` : `${day.seconds}s`)
+									: `${day.sessions} ses.`
+								: '·'}
+						</Text>
 				</View>
 			))}
 		</View>

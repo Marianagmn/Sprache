@@ -21,7 +21,7 @@ export default function HomeScreen({ navigation }) {
           <StreakBadge days={user.streak} />
         </WelcomeHeader>
 
-        <DailyGoalCard completed={user.todayMinutes} goal={user.dailyGoal} unit="min" />
+        <DailyGoalCard completedSeconds={user.todaySeconds || 0} goal={user.dailyGoal} unit="min" />
 
         <Text style={styles.sectionTitle}>Recomendado para ti</Text>
         <RecommendationCard

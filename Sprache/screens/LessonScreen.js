@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
+import { AppState, SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
 import { useApp } from '../context/AppContext';
 import { getLessonByActivityId } from '../services/lessonService';
 import { buildLessonCompletion } from '../services/lessonProgressService';
@@ -29,6 +29,26 @@ export default function LessonScreen({ navigation, route }) {
   const [isCompleting, setIsCompleting] = useState(false);
   const [completionError, setCompletionError] = useState('');
   const completionRecorded = useRef(false);
+  const elapsedActiveMs = useRef(0);
+  const activeSinceMs = useRef(Date.now());
+
+  React.useEffect(() => {
+    const subscription = AppState.addEventListener('change', (nextState) => {
+      if (nextState === 'active') {
+        if (activeSinceMs.current === null) {
+          activeSinceMs.current = Date.now();
+        }
+        return;
+      }
+
+      if (activeSinceMs.current !== null) {
+        elapsedActiveMs.current += Math.max(0, Date.now() - activeSinceMs.current);
+        activeSinceMs.current = null;
+      }
+    });
+
+    return () => subscription.remove();
+  }, []);
 
   const question = lesson?.questions?.[questionIndex];
   const isCorrect = question ? selectedAnswer === question.answer : false;
@@ -60,7 +80,17 @@ export default function LessonScreen({ navigation, route }) {
       setIsCompleting(true);
       setCompletionError('');
       try {
-        const completion = buildLessonCompletion(lesson, submittedAnswers, route.params?.activityId, hintUsage);
+        const activeDurationMs = elapsedActiveMs.current + (
+          activeSinceMs.current === null ? 0 : Math.max(0, Date.now() - activeSinceMs.current)
+        );
+        const durationSeconds = Math.floor(activeDurationMs / 1000);
+        const completion = buildLessonCompletion(
+          lesson,
+          submittedAnswers,
+          route.params?.activityId,
+          hintUsage,
+          durationSeconds,
+        );
         await completeActivity(completion);
         setSessionSummary(completion);
         setFinished(true);

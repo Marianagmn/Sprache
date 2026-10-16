@@ -2,12 +2,15 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { colors, elevation, radii } from '../../theme';
 
-export default function LevelProgressCard({ level = 'Nivel A1', motivation = '', dailyGoal = 10, studiedMinutes = 0, learnedWords = 0 }) {
+export default function LevelProgressCard({ level = 'Nivel A1', motivation = '', dailyGoal = 10, studiedSeconds = 0, learnedWords = 0 }) {
+	const studiedTime = studiedSeconds >= 60
+		? `${Math.floor(studiedSeconds / 60)} min ${studiedSeconds % 60} s`
+		: `${studiedSeconds} s`;
 	return (
 		<View style={styles.card}>
 			<View style={styles.header}>
-				<Text style={styles.level}>{level}</Text>
-				<Text style={styles.xp}>{studiedMinutes} min de estudio</Text>
+				<Text style={styles.level}>Nivel de partida: {level}</Text>
+				<Text style={styles.xp}>{studiedTime} de práctica</Text>
 			</View>
 			{motivation ? <Text style={styles.motivation}>Motivación: {motivation}</Text> : null}
 			<Text style={styles.caption}>{dailyGoal} min diarios • {learnedWords} palabras aprendidas en tus sesiones</Text>

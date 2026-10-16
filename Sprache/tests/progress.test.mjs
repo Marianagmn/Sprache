@@ -43,14 +43,15 @@ test('una actividad desconocida no abre otra lección por defecto', () => {
   assert.equal(getLessonByActivityId('not-yet-implemented'), null);
 });
 
-test('completar una lección registra duración, aciertos, vocabulario y práctica por palabra', () => {
-  const completion = buildLessonCompletion(vocabularyLesson, ['Haus', 'Puerta', 'Morgen'], undefined, [true, false, true]);
+test('completar una lección registra duración real, aciertos, vocabulario y práctica por palabra', () => {
+  const completion = buildLessonCompletion(vocabularyLesson, ['Haus', 'Puerta', 'Morgen'], undefined, [true, false, true], 93);
   const updatedUser = recordActivity(emptyUser, completion, referenceDate);
   const [session] = updatedUser.sessions;
 
   assert.equal(session.activityId, vocabularyLesson.activityId);
   assert.equal(session.completedAt, referenceDate.toISOString());
-  assert.equal(session.durationMinutes, vocabularyLesson.durationMinutes);
+  assert.equal(session.durationSeconds, 93);
+  assert.equal(session.durationSource, 'measured');
   assert.equal(session.correctAnswers, 2);
   assert.equal(session.totalQuestions, vocabularyLesson.questions.length);
   assert.deepEqual(session.learnedWords, [
@@ -83,9 +84,14 @@ test('completar una lección registra duración, aciertos, vocabulario y prácti
       lastPracticedAt: referenceDate.toISOString(),
     },
   });
-  assert.equal(updatedUser.studiedMinutes, vocabularyLesson.durationMinutes);
+  assert.equal(updatedUser.studiedSeconds, 93);
+  assert.equal(updatedUser.studiedMinutes, 93 / 60);
   assert.equal(updatedUser.learnedWords, 2);
-  assert.equal(updatedUser.todayMinutes, vocabularyLesson.durationMinutes);
+  assert.equal(updatedUser.todaySeconds, 93);
+  assert.equal(updatedUser.totalSessions, 1);
+  assert.equal(updatedUser.totalQuestions, 3);
+  assert.equal(updatedUser.correctAnswers, 2);
+  assert.equal(updatedUser.accuracy, 67);
   assert.equal(updatedUser.streak, 1);
 });
 
@@ -112,19 +118,43 @@ test('el progreso semanal y la racha se derivan de fechas de sesiones', () => {
   const yesterday = new Date(2026, 9, 13, 12, 0, 0).toISOString();
   const today = referenceDate.toISOString();
   const sessions = [
-    { completedAt: yesterday, durationMinutes: 8, learnedWords: [{ term: 'Haus' }] },
-    { completedAt: today, durationMinutes: 5, learnedWords: [{ term: 'Buch' }] },
+    { completedAt: yesterday, durationSeconds: 480, totalQuestions: 4, correctAnswers: 3, learnedWords: [{ term: 'Haus' }] },
+    { completedAt: today, durationSeconds: 300, totalQuestions: 3, correctAnswers: 2, learnedWords: [{ term: 'Buch' }] },
   ];
   const metrics = deriveProgress({ ...emptyUser, sessions }, referenceDate);
   const week = getWeeklyActivity(sessions, referenceDate);
 
   assert.equal(metrics.studiedMinutes, 13);
+  assert.equal(metrics.studiedSeconds, 780);
   assert.equal(metrics.todayMinutes, 5);
+  assert.equal(metrics.totalSessions, 2);
+  assert.equal(metrics.totalQuestions, 7);
+  assert.equal(metrics.correctAnswers, 5);
+  assert.equal(metrics.accuracy, 71);
   assert.equal(metrics.learnedWords, 2);
   assert.equal(metrics.streak, 2);
   assert.equal(week.length, 7);
-  assert.equal(week[1].minutes, 8);
-  assert.equal(week[2].minutes, 5);
+  assert.equal(week[1].seconds, 480);
+  assert.equal(week[1].sessions, 1);
+  assert.equal(week[2].seconds, 300);
+});
+
+test('las sesiones antiguas sin tiempo medido no suman minutos estimados', () => {
+  const sessions = [{
+    completedAt: referenceDate.toISOString(),
+    durationMinutes: vocabularyLesson.durationMinutes,
+    totalQuestions: 3,
+    correctAnswers: 2,
+  }];
+  const metrics = deriveProgress({ ...emptyUser, sessions }, referenceDate);
+  const week = getWeeklyActivity(sessions, referenceDate);
+
+  assert.equal(metrics.studiedSeconds, 0);
+  assert.equal(metrics.todaySeconds, 0);
+  assert.equal(metrics.totalSessions, 1);
+  assert.equal(metrics.accuracy, 67);
+  assert.equal(week[2].seconds, 0);
+  assert.equal(week[2].sessions, 1);
 });
 
 test('el resumen limita aciertos y maneja sesiones sin preguntas', () => {
@@ -144,7 +174,7 @@ test('reiniciar progreso conserva perfil/meta y borra las sesiones', () => {
   const user = {
     ...emptyUser,
     name: 'Mariana',
-    sessions: [{ completedAt: referenceDate.toISOString(), durationMinutes: 5, learnedWords: [] }],
+    sessions: [{ completedAt: referenceDate.toISOString(), durationSeconds: 300, learnedWords: [] }],
     wordProgress: { haus: { correctAnswers: 2 } },
     todayMinutes: 5,
     studiedMinutes: 5,
@@ -157,6 +187,9 @@ test('reiniciar progreso conserva perfil/meta y borra las sesiones', () => {
   assert.equal(reset.dailyGoal, 10);
   assert.deepEqual(reset.sessions, []);
   assert.deepEqual(reset.wordProgress, {});
+  assert.equal(reset.studiedSeconds, 0);
+  assert.equal(reset.todaySeconds, 0);
+  assert.equal(reset.totalSessions, 0);
   assert.equal(reset.todayMinutes, 0);
   assert.equal(reset.studiedMinutes, 0);
   assert.equal(reset.learnedWords, 0);
