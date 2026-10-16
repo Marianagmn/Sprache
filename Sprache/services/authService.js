@@ -33,6 +33,7 @@ function hydrateUser(storedUser) {
     ...initialUser,
     ...storedUser,
     sessions: Array.isArray(storedUser.sessions) ? storedUser.sessions : [],
+    wordProgress: storedUser.wordProgress && typeof storedUser.wordProgress === 'object' ? storedUser.wordProgress : {},
     preferences: {
       ...initialUser.preferences,
       ...storedUser.preferences,
@@ -78,6 +79,7 @@ export async function register({ name, email, password, level = 'A2', dailyGoal 
     learnedWords: 0,
     streak: 0,
     sessions: [],
+    wordProgress: {},
     preferences: {
       notificationsEnabled: false,
     },

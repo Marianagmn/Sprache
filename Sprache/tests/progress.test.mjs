@@ -43,8 +43,8 @@ test('una actividad desconocida no abre otra lección por defecto', () => {
   assert.equal(getLessonByActivityId('not-yet-implemented'), null);
 });
 
-test('completar una lección registra duración, aciertos y vocabulario aprendido', () => {
-  const completion = buildLessonCompletion(vocabularyLesson, ['Haus', 'Puerta', 'Morgen']);
+test('completar una lección registra duración, aciertos, vocabulario y práctica por palabra', () => {
+  const completion = buildLessonCompletion(vocabularyLesson, ['Haus', 'Puerta', 'Morgen'], undefined, [true, false, true]);
   const updatedUser = recordActivity(emptyUser, completion, referenceDate);
   const [session] = updatedUser.sessions;
 
@@ -57,10 +57,55 @@ test('completar una lección registra duración, aciertos y vocabulario aprendid
     vocabularyLesson.questions[0].vocabulary,
     vocabularyLesson.questions[2].vocabulary,
   ]);
+  assert.deepEqual(updatedUser.wordProgress, {
+    haus: {
+      term: 'Haus',
+      translation: 'casa',
+      correctAnswers: 1,
+      mistakes: 0,
+      hints: 1,
+      lastPracticedAt: referenceDate.toISOString(),
+    },
+    buch: {
+      term: 'Buch',
+      translation: 'libro',
+      correctAnswers: 0,
+      mistakes: 1,
+      hints: 0,
+      lastPracticedAt: referenceDate.toISOString(),
+    },
+    'guten morgen': {
+      term: 'Guten Morgen',
+      translation: 'buenos días',
+      correctAnswers: 1,
+      mistakes: 0,
+      hints: 1,
+      lastPracticedAt: referenceDate.toISOString(),
+    },
+  });
   assert.equal(updatedUser.studiedMinutes, vocabularyLesson.durationMinutes);
   assert.equal(updatedUser.learnedWords, 2);
   assert.equal(updatedUser.todayMinutes, vocabularyLesson.durationMinutes);
   assert.equal(updatedUser.streak, 1);
+});
+
+test('repetir una palabra acumula intentos y actualiza su última fecha', () => {
+  const firstAttempt = recordActivity(emptyUser, {
+    wordResults: [{ term: 'Haus', translation: 'casa', correct: false, hintUsed: true }],
+  }, referenceDate);
+  const nextDate = new Date(2026, 9, 15, 12, 0, 0);
+  const secondAttempt = recordActivity(firstAttempt, {
+    wordResults: [{ term: 'haus', translation: 'casa', correct: true, hintUsed: false }],
+  }, nextDate);
+
+  assert.deepEqual(secondAttempt.wordProgress.haus, {
+    term: 'Haus',
+    translation: 'casa',
+    correctAnswers: 1,
+    mistakes: 1,
+    hints: 1,
+    lastPracticedAt: nextDate.toISOString(),
+  });
 });
 
 test('el progreso semanal y la racha se derivan de fechas de sesiones', () => {
@@ -100,6 +145,7 @@ test('reiniciar progreso conserva perfil/meta y borra las sesiones', () => {
     ...emptyUser,
     name: 'Mariana',
     sessions: [{ completedAt: referenceDate.toISOString(), durationMinutes: 5, learnedWords: [] }],
+    wordProgress: { haus: { correctAnswers: 2 } },
     todayMinutes: 5,
     studiedMinutes: 5,
     learnedWords: 0,
@@ -110,6 +156,7 @@ test('reiniciar progreso conserva perfil/meta y borra las sesiones', () => {
   assert.equal(reset.name, 'Mariana');
   assert.equal(reset.dailyGoal, 10);
   assert.deepEqual(reset.sessions, []);
+  assert.deepEqual(reset.wordProgress, {});
   assert.equal(reset.todayMinutes, 0);
   assert.equal(reset.studiedMinutes, 0);
   assert.equal(reset.learnedWords, 0);

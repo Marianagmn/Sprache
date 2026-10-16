@@ -8,5 +8,6 @@ export const initialUser = {
   streak: 0,
   todayMinutes: 0,
   sessions: [],
+  wordProgress: {},
   preferences: { notificationsEnabled: false },
 };

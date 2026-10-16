@@ -103,8 +103,27 @@ export function recordActivity(user, session, now = new Date()) {
     correctAnswers,
     totalQuestions,
     learnedWords,
+    wordResults: Array.isArray(session.wordResults) ? session.wordResults : [],
   };
-  const updatedUser = { ...user, sessions: [...sessions, newSession] };
+  const wordProgress = { ...(user.wordProgress || {}) };
+  newSession.wordResults.forEach((result) => {
+    if (typeof result?.term !== 'string' || !result.term.trim()) {
+      return;
+    }
+
+    const term = result.term.trim();
+    const key = term.toLocaleLowerCase();
+    const previous = wordProgress[key] || {};
+    wordProgress[key] = {
+      term: previous.term || term,
+      translation: result.translation || previous.translation || '',
+      correctAnswers: (previous.correctAnswers || 0) + (result.correct ? 1 : 0),
+      mistakes: (previous.mistakes || 0) + (result.correct ? 0 : 1),
+      hints: (previous.hints || 0) + (result.hintUsed ? 1 : 0),
+      lastPracticedAt: completedAt.toISOString(),
+    };
+  });
+  const updatedUser = { ...user, sessions: [...sessions, newSession], wordProgress };
 
   return { ...updatedUser, ...deriveProgress(updatedUser, completedAt) };
 }
@@ -113,6 +132,7 @@ export function resetProgress(user) {
   return {
     ...user,
     sessions: [],
+    wordProgress: {},
     todayMinutes: 0,
     studiedMinutes: 0,
     learnedWords: 0,

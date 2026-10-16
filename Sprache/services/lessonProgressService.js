@@ -11,9 +11,10 @@ export function calculateSessionSummary(correctAnswers, totalQuestions) {
   };
 }
 
-export function buildLessonCompletion(lesson, submittedAnswers, activityId = lesson?.activityId) {
+export function buildLessonCompletion(lesson, submittedAnswers, activityId = lesson?.activityId, hintUsage = []) {
   const questions = Array.isArray(lesson?.questions) ? lesson.questions : [];
   const answers = Array.isArray(submittedAnswers) ? submittedAnswers : [];
+  const usedHints = Array.isArray(hintUsage) ? hintUsage : [];
   const correctAnswers = questions.reduce(
     (total, question, index) => total + (answers[index] === question.answer ? 1 : 0),
     0,
@@ -25,11 +26,24 @@ export function buildLessonCompletion(lesson, submittedAnswers, activityId = les
     }
     return words;
   }, []);
+  const wordResults = questions.reduce((results, question, index) => {
+    const term = question.vocabulary?.term || question.word;
+    if (typeof term === 'string' && term.trim()) {
+      results.push({
+        term: term.trim(),
+        translation: question.vocabulary?.translation || '',
+        correct: answers[index] === question.answer,
+        hintUsed: Boolean(usedHints[index]),
+      });
+    }
+    return results;
+  }, []);
 
   return {
     activityId,
     durationMinutes: Number.isFinite(lesson?.durationMinutes) ? Math.max(0, lesson.durationMinutes) : 0,
     learnedWords,
+    wordResults,
     ...summary,
   };
 }

@@ -22,6 +22,7 @@ export default function LessonScreen({ navigation, route }) {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [answered, setAnswered] = useState(false);
   const [submittedAnswers, setSubmittedAnswers] = useState([]);
+  const [hintUsage, setHintUsage] = useState([]);
   const [sessionSummary, setSessionSummary] = useState(null);
   const [hintVisible, setHintVisible] = useState(false);
   const [finished, setFinished] = useState(false);
@@ -59,7 +60,7 @@ export default function LessonScreen({ navigation, route }) {
       setIsCompleting(true);
       setCompletionError('');
       try {
-        const completion = buildLessonCompletion(lesson, submittedAnswers, route.params?.activityId);
+        const completion = buildLessonCompletion(lesson, submittedAnswers, route.params?.activityId, hintUsage);
         await completeActivity(completion);
         setSessionSummary(completion);
         setFinished(true);
@@ -128,7 +129,20 @@ export default function LessonScreen({ navigation, route }) {
             />
           ))}
         </View>
-        {!answered && <HintButton visible={hintVisible} hint={question.hint} onPress={() => setHintVisible(true)} />}
+        {!answered && (
+          <HintButton
+            visible={hintVisible}
+            hint={question.hint}
+            onPress={() => {
+              setHintVisible(true);
+              setHintUsage((current) => {
+                const nextUsage = [...current];
+                nextUsage[questionIndex] = true;
+                return nextUsage;
+              });
+            }}
+          />
+        )}
         {answered && (
           <FeedbackMessage
             correct={isCorrect}

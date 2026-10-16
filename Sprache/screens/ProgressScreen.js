@@ -36,6 +36,27 @@ export default function ProgressScreen() {
           <ProgressStat iconName="time" color={colors.black} value={`${user.studiedMinutes} min`} label="Estudiados" />
           <ProgressStat iconName="school" color={colors.gold} value={`${user.learnedWords}`} label="Palabras" />
         </View>
+
+        <Text style={styles.sectionTitle}>Práctica por palabra</Text>
+        {Object.values(user.wordProgress || {})
+          .sort((first, second) => new Date(second.lastPracticedAt) - new Date(first.lastPracticedAt))
+          .map((word) => (
+            <View key={word.term.toLocaleLowerCase()} style={styles.wordCard}>
+              <View style={styles.wordHeading}>
+                <Text style={styles.wordTerm}>{word.term}</Text>
+                {!!word.translation && <Text style={styles.wordTranslation}>{word.translation}</Text>}
+              </View>
+              <Text style={styles.wordMetrics}>
+                Aciertos: {word.correctAnswers} · Errores: {word.mistakes} · Pistas: {word.hints}
+              </Text>
+              <Text style={styles.wordDate}>
+                Última práctica: {new Date(word.lastPracticedAt).toLocaleDateString()}
+              </Text>
+            </View>
+          ))}
+        {Object.keys(user.wordProgress || {}).length === 0 && (
+          <Text style={styles.emptyWords}>Completa una lección para ver aciertos, errores, pistas y fechas por palabra.</Text>
+        )}
       </ScrollView>
     </SafeAreaView>
   );
@@ -47,5 +68,12 @@ const styles = StyleSheet.create({
   header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 24 },
   headerTitle: { fontSize: typography.title, fontWeight: 'bold', color: colors.black },
   sectionTitle: { fontSize: 18, fontWeight: '600', color: colors.black, marginBottom: 16 },
-  statsGrid: { flexDirection: 'row', justifyContent: 'space-between' }
+  statsGrid: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', marginBottom: 24 },
+  wordCard: { backgroundColor: colors.surface, borderRadius: 12, padding: 16, marginBottom: 10 },
+  wordHeading: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'baseline', marginBottom: 6 },
+  wordTerm: { color: colors.black, fontSize: 16, fontWeight: '700', marginRight: 8 },
+  wordTranslation: { color: colors.muted, fontSize: 14 },
+  wordMetrics: { color: colors.black, fontSize: 14, lineHeight: 21 },
+  wordDate: { color: colors.muted, fontSize: 13, marginTop: 4 },
+  emptyWords: { color: colors.muted, fontSize: 14, lineHeight: 21 },
 });
