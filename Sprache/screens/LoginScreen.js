@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { KeyboardAvoidingView, Platform, SafeAreaView, ScrollView, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import AppButton from '../components/common/AppButton';
 import AppInput from '../components/common/AppInput';
@@ -31,10 +31,15 @@ export default function LoginScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.content}>
+      <KeyboardAvoidingView style={styles.keyboardArea} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+        <ScrollView
+          contentContainerStyle={styles.content}
+          keyboardShouldPersistTaps="handled"
+          keyboardDismissMode="on-drag"
+        >
         <View style={styles.headerCard}>
           <BrandLogo variant="screen" style={styles.brandLogo} />
-          <Text style={styles.title}>Qué bueno verte</Text>
+          <Text style={styles.title} accessibilityRole="header">Qué bueno verte</Text>
           <Text style={styles.subtitle}>Continúa tu rutina de alemán.</Text>
         </View>
 
@@ -48,30 +53,40 @@ export default function LoginScreen({ navigation }) {
         <View style={styles.form}>
           <Text style={styles.label}>Correo electrónico</Text>
           <AppInput
+            accessibilityLabel="Correo electrónico"
+            accessibilityHint="Introduce el correo asociado a tu cuenta."
             value={email}
             onChangeText={setEmail}
             autoCapitalize="none"
             keyboardType="email-address"
+            returnKeyType="next"
           />
 
           <Text style={styles.label}>Contraseña</Text>
           <View style={styles.passwordFieldWrapper}>
             <AppInput
+              accessibilityLabel="Contraseña"
+              accessibilityHint="Introduce la contraseña de tu cuenta."
               value={password}
               onChangeText={setPassword}
               secureTextEntry={!showPassword}
               style={styles.passwordInput}
+              returnKeyType="go"
+              onSubmitEditing={handleLogin}
             />
             <TouchableOpacity
               style={styles.togglePassword}
               onPress={() => setShowPassword((previous) => !previous)}
               accessibilityRole="button"
+              accessibilityLabel={showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}
+              accessibilityState={{ expanded: showPassword }}
+              hitSlop={8}
             >
               <Ionicons name={showPassword ? 'eye-off-outline' : 'eye-outline'} size={20} color={colors.muted} />
             </TouchableOpacity>
           </View>
 
-          {!!error && <Text style={styles.error}>{error}</Text>}
+          {!!error && <Text style={styles.error} accessibilityRole="alert" accessibilityLiveRegion="polite">{error}</Text>}
 
           <AppButton
             title="Iniciar sesión"
@@ -94,18 +109,20 @@ export default function LoginScreen({ navigation }) {
             style={styles.secondaryButton}
           />
         </View>
-      </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.background },
+  keyboardArea: { flex: 1 },
   content: {
-    flex: 1,
+    flexGrow: 1,
     justifyContent: 'center',
     paddingHorizontal: 20,
-    paddingVertical: 28,
+    paddingVertical: 20,
   },
   headerCard: {
     backgroundColor: colors.surface,
@@ -137,7 +154,10 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 12,
     top: 14,
-    padding: 4,
+    width: 44,
+    height: 44,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   error: { color: colors.red, fontSize: typography.small, marginTop: spacing.sm, marginBottom: spacing.md },
   button: { marginTop: 8, marginBottom: 8 },

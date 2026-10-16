@@ -28,6 +28,7 @@ export default function AppButton({
 			accessibilityRole="button"
 			accessibilityState={{ disabled: isDisabled, busy: loading }}
 			{...props}
+			accessibilityLabel={props.accessibilityLabel ?? title}
 		>
 			{loading ? (
 				<ActivityIndicator color={colors.black} />

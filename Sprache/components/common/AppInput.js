@@ -8,7 +8,6 @@ export default function AppInput({ style, placeholderTextColor = colors.muted, .
 			style={[styles.input, style]}
 			placeholderTextColor={placeholderTextColor}
 			selectionColor={colors.gold}
-			accessibilityRole="text"
 			{...props}
 		/>
 	);

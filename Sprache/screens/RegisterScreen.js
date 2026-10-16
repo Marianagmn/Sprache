@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
+import { Keyboard, KeyboardAvoidingView, Platform, View, Text, StyleSheet, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import AppButton from '../components/common/AppButton';
 import AppInput from '../components/common/AppInput';
@@ -96,6 +96,7 @@ export default function RegisterScreen({ navigation }) {
     if (!validateCurrentStep()) return;
 
     if (!isLastStep) {
+      Keyboard.dismiss();
       setStepIndex((previous) => previous + 1);
       return;
     }
@@ -128,6 +129,8 @@ export default function RegisterScreen({ navigation }) {
     <View>
       <Text style={styles.sectionTitle}>¿Cómo te llamas?</Text>
       <AppInput
+        accessibilityLabel="Nombre"
+        accessibilityHint="Escribe el nombre que aparecerá en tu perfil."
         placeholder="Ej. Mariana"
         value={name}
         onChangeText={setName}
@@ -137,6 +140,8 @@ export default function RegisterScreen({ navigation }) {
 
       <Text style={styles.sectionTitle}>Correo electrónico</Text>
       <AppInput
+        accessibilityLabel="Correo electrónico"
+        accessibilityHint="Usaremos este correo para iniciar sesión."
         placeholder="tu@correo.com"
         value={email}
         onChangeText={setEmail}
@@ -148,6 +153,8 @@ export default function RegisterScreen({ navigation }) {
       <Text style={styles.sectionTitle}>Contraseña</Text>
       <View style={styles.passwordFieldWrapper}>
         <AppInput
+          accessibilityLabel="Contraseña"
+          accessibilityHint="Debe tener al menos 8 caracteres, letras y números."
           placeholder="Mínimo 8 caracteres"
           value={password}
           onChangeText={setPassword}
@@ -158,6 +165,9 @@ export default function RegisterScreen({ navigation }) {
           style={styles.togglePassword}
           onPress={() => setShowPassword((previous) => !previous)}
           accessibilityRole="button"
+          accessibilityLabel={showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}
+          accessibilityState={{ expanded: showPassword }}
+          hitSlop={8}
         >
           <Ionicons name={showPassword ? 'eye-off-outline' : 'eye-outline'} size={20} color={colors.muted} />
         </TouchableOpacity>
@@ -185,6 +195,9 @@ export default function RegisterScreen({ navigation }) {
                 key={option.value}
                 style={[styles.optionCard, level === option.value && styles.optionCardActive]}
                 onPress={() => setLevel(option.value)}
+                accessibilityRole="radio"
+                accessibilityLabel={`${option.value}. ${option.description}`}
+                accessibilityState={{ selected: level === option.value }}
               >
                 <Text style={[styles.optionTitle, level === option.value && styles.optionTitleActive]}>{option.value}</Text>
                 <Text style={[styles.optionDescription, level === option.value && styles.optionDescriptionActive]}>{option.description}</Text>
@@ -205,6 +218,9 @@ export default function RegisterScreen({ navigation }) {
                 key={option.value}
                 style={[styles.optionCard, motivation === option.value && styles.optionCardActive]}
                 onPress={() => setMotivation(option.value)}
+                accessibilityRole="radio"
+                accessibilityLabel={`${option.value}. ${option.description}`}
+                accessibilityState={{ selected: motivation === option.value }}
               >
                 <Text style={[styles.optionTitle, motivation === option.value && styles.optionTitleActive]}>{option.value}</Text>
                 <Text style={[styles.optionDescription, motivation === option.value && styles.optionDescriptionActive]}>{option.description}</Text>
@@ -225,6 +241,9 @@ export default function RegisterScreen({ navigation }) {
               key={option.value}
               style={[styles.optionCard, time === option.value && styles.optionCardActive]}
               onPress={() => setTime(option.value)}
+              accessibilityRole="radio"
+              accessibilityLabel={`${option.value}. ${option.description}`}
+              accessibilityState={{ selected: time === option.value }}
             >
               <Text style={[styles.optionTitle, time === option.value && styles.optionTitleActive]}>{option.value}</Text>
               <Text style={[styles.optionDescription, time === option.value && styles.optionDescriptionActive]}>{option.description}</Text>
@@ -237,8 +256,21 @@ export default function RegisterScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
+      <KeyboardAvoidingView style={styles.keyboardArea} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.scroll}
+        keyboardShouldPersistTaps="handled"
+        keyboardDismissMode="on-drag"
+      >
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => (stepIndex === 0 ? navigation.goBack() : setStepIndex((previous) => previous - 1))}>
+        <TouchableOpacity
+          onPress={() => (stepIndex === 0 ? navigation.goBack() : setStepIndex((previous) => previous - 1))}
+          accessibilityRole="button"
+          accessibilityLabel="Volver al paso anterior"
+          hitSlop={8}
+          style={styles.backControl}
+        >
           <Ionicons name="arrow-back" size={24} color={colors.black} />
         </TouchableOpacity>
         <BrandLogo variant="tab" />
@@ -246,27 +278,31 @@ export default function RegisterScreen({ navigation }) {
 
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scroll}>
         <View style={styles.progressHeader}>
-          <Text style={styles.stepLabel}>Paso {stepIndex + 1} de {steps.length}</Text>
+          <Text style={styles.stepLabel} accessibilityRole="header" accessibilityLiveRegion="polite">Paso {stepIndex + 1} de {steps.length}</Text>
           <Text style={styles.remainingText}>
             {remainingSteps > 0 ? `Faltan ${remainingSteps} pasos` : 'Todo listo'}
           </Text>
         </View>
 
-        <View style={styles.progressTrack}>
+        <View
+          style={styles.progressTrack}
+          accessible
+          accessibilityRole="progressbar"
+          accessibilityLabel="Progreso del registro"
+          accessibilityValue={{ min: 0, max: 100, now: progress, text: `Paso ${stepIndex + 1} de ${steps.length}` }}
+        >
           <View style={[styles.progressFill, { width: `${progress}%` }]} />
         </View>
 
         <View style={styles.card}>
-          <Text style={styles.cardLabel}>{currentStep.title}</Text>
+          <Text style={styles.cardLabel} accessibilityRole="header">{currentStep.title}</Text>
           <Text style={styles.cardDescription}>{currentStep.description}</Text>
           <Text style={styles.summary}>{stepSummary}</Text>
         </View>
 
         {renderStepContent()}
-      </ScrollView>
-
       <View style={styles.footer}>
-        {!!error && <Text style={styles.error}>{error}</Text>}
+        {!!error && <Text style={styles.error} accessibilityRole="alert" accessibilityLiveRegion="polite">{error}</Text>}
         <View style={styles.actions}>
           {stepIndex > 0 && (
             <AppButton
@@ -285,14 +321,18 @@ export default function RegisterScreen({ navigation }) {
           />
         </View>
       </View>
+      </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.background },
+  keyboardArea: { flex: 1 },
   header: { paddingHorizontal: 20, paddingTop: 20, paddingBottom: 8, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
-  scroll: { paddingHorizontal: 20, paddingBottom: 24 },
+  backControl: { minWidth: 44, minHeight: 44, alignItems: 'flex-start', justifyContent: 'center' },
+  scroll: { flexGrow: 1, paddingHorizontal: 20, paddingBottom: 24 },
   progressHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -333,7 +373,10 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 12,
     top: 14,
-    padding: 4,
+    width: 44,
+    height: 44,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   optionsGrid: { gap: 10 },
   optionCard: {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
 import AppButton from '../components/common/AppButton';
 import BrandLogo from '../components/common/BrandLogo';
 import { colors, elevation, radii, spacing, typography } from '../theme';
@@ -7,10 +7,11 @@ import { colors, elevation, radii, spacing, typography } from '../theme';
 export default function StartScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
+      <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
       <View style={styles.content}>
         <View style={styles.brandCard}>
           <BrandLogo variant="splash" style={styles.brandLogo} />
-          <Text style={styles.subtitle}>Aprende alemán en minutos cada día.</Text>
+          <Text style={styles.subtitle} accessibilityRole="header">Aprende alemán en minutos cada día.</Text>
         </View>
 
         <Text style={styles.description}>
@@ -31,8 +32,6 @@ export default function StartScreen({ navigation }) {
             <Text style={styles.benefitText}>Progreso visible</Text>
           </View>
         </View>
-      </View>
-
       <View style={styles.footer}>
         <AppButton
           title="Crear cuenta"
@@ -46,18 +45,21 @@ export default function StartScreen({ navigation }) {
           style={styles.secondaryButton}
         />
       </View>
+      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.background },
+  scroll: { flexGrow: 1 },
   content: {
-    flex: 1,
+    flexGrow: 1,
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 20,
-    paddingVertical: 28,
+    paddingVertical: 20,
   },
   brandCard: {
     backgroundColor: colors.surface,

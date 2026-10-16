@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert, Modal, Text, TextInput, StyleSheet, SafeAreaView, ScrollView, View } from 'react-native';
+import { Alert, KeyboardAvoidingView, Modal, Platform, Text, TextInput, StyleSheet, SafeAreaView, ScrollView, View } from 'react-native';
 import { useApp } from '../context/AppContext';
 import AppButton from '../components/common/AppButton';
 import ProfileHeader from '../components/profile/ProfileHeader';
@@ -67,9 +67,10 @@ export default function ProfileScreen({ navigation }) {
       </ScrollView>
 
       <Modal visible={isEditing} transparent animationType="fade" onRequestClose={() => setIsEditing(false)}>
-        <View style={styles.modalBackdrop}>
+        <KeyboardAvoidingView style={styles.modalBackdrop} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+          <ScrollView contentContainerStyle={styles.modalScroll} keyboardShouldPersistTaps="handled">
           <View style={styles.modalCard}>
-            <Text style={styles.modalTitle}>Editar perfil</Text>
+            <Text style={styles.modalTitle} accessibilityRole="header">Editar perfil</Text>
             <TextInput
               style={styles.nameInput}
               value={name}
@@ -77,11 +78,14 @@ export default function ProfileScreen({ navigation }) {
               placeholder="Tu nombre"
               autoCapitalize="words"
               accessibilityLabel="Nombre del perfil"
+              accessibilityHint="Escribe el nuevo nombre que se mostrará en tu perfil."
+              returnKeyType="done"
             />
             <AppButton title="Guardar" onPress={handleSaveProfile} disabled={!name.trim()} style={styles.modalButton} />
             <AppButton title="Cancelar" variant="secondary" onPress={() => setIsEditing(false)} />
           </View>
-        </View>
+          </ScrollView>
+        </KeyboardAvoidingView>
       </Modal>
     </SafeAreaView>
   );
@@ -93,6 +97,7 @@ const styles = StyleSheet.create({
   brandHeader: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: spacing.md },
   brandTitle: { color: colors.black, fontSize: typography.title, fontWeight: typography.bold },
   modalBackdrop: { flex: 1, justifyContent: 'center', padding: 24, backgroundColor: 'rgba(0, 0, 0, 0.45)' },
+  modalScroll: { flexGrow: 1, justifyContent: 'center' },
   modalCard: { backgroundColor: colors.surface, borderRadius: radii.xl, padding: 22 },
   modalTitle: { color: colors.black, fontSize: typography.subtitle, fontWeight: typography.bold, marginBottom: spacing.lg },
   nameInput: { borderWidth: 1, borderColor: colors.border, borderRadius: radii.md, padding: 14, fontSize: typography.body, color: colors.black, marginBottom: spacing.lg },
