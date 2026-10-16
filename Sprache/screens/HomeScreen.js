@@ -9,6 +9,7 @@ import RecommendationCard from '../components/home/RecommendationCard';
 import { getRecommendedActivity } from '../services/activityService';
 import { getSpacedReviewLesson } from '../services/lessonService';
 import { getDueWords } from '../services/spacedRepetitionService';
+import { getLearningPath } from '../services/learningPathService';
 import { colors, spacing, typography } from '../theme';
 
 export default function HomeScreen({ navigation }) {
@@ -17,6 +18,9 @@ export default function HomeScreen({ navigation }) {
   const dueWords = getDueWords(user.wordProgress || {});
   const reviewLesson = getSpacedReviewLesson(user.wordProgress || {});
   const hasReview = Boolean(reviewLesson);
+  const learningPath = getLearningPath(user.sessions, user.placementAssessment);
+  const nextPathLesson = learningPath.nextLesson;
+  const hasPathLesson = !hasReview && Boolean(nextPathLesson);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -28,17 +32,21 @@ export default function HomeScreen({ navigation }) {
 
         <DailyGoalCard completedSeconds={user.todaySeconds || 0} goal={user.dailyGoal} unit="min" />
 
-        <Text style={styles.sectionTitle}>{hasReview ? 'Repaso recomendado' : 'Recomendado para ti'}</Text>
+        <Text style={styles.sectionTitle}>
+          {hasReview ? 'Repaso recomendado' : hasPathLesson ? `Tu ruta · nivel ${nextPathLesson.levelCode}` : 'Recomendado para ti'}
+        </Text>
         <RecommendationCard
-          title={hasReview ? 'Repasar palabras' : recommendation.title}
+          title={hasReview ? 'Repasar palabras' : hasPathLesson ? nextPathLesson.title : recommendation.title}
           description={hasReview
             ? `${dueWords.length} ${dueWords.length === 1 ? 'palabra necesita' : 'palabras necesitan'} un repaso. Empezamos por las que más cuestan.`
-            : recommendation.description}
-          time={hasReview ? `${reviewLesson.questions.length} palabras` : recommendation.time}
-          iconName={hasReview ? 'refresh' : recommendation.iconName}
+            : hasPathLesson
+              ? `Siguiente paso de tu ruta de nivel ${nextPathLesson.levelCode}. ${nextPathLesson.time}`
+              : recommendation.description}
+          time={hasReview ? `${reviewLesson.questions.length} palabras` : hasPathLesson ? nextPathLesson.time : recommendation.time}
+          iconName={hasReview ? 'refresh' : hasPathLesson ? 'school-outline' : recommendation.iconName}
           onPress={() => navigation.navigate('Lesson', hasReview
             ? { activityId: reviewLesson.activityId, reviewLesson }
-            : { activityId: recommendation.id })}
+            : { activityId: hasPathLesson ? nextPathLesson.id : recommendation.id })}
         />
 
         <AppButton title="Continuar práctica" onPress={() => navigation.navigate('Actividades')} style={styles.mainActionBtn} />

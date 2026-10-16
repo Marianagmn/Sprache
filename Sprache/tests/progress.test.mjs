@@ -68,6 +68,9 @@ test('completar una lección registra duración real, aciertos, vocabulario y pr
       mistakes: 0,
       hints: 1,
       lastPracticedAt: referenceDate.toISOString(),
+      reviewStreak: 0,
+      intervalMinutes: 240,
+      nextReviewAt: new Date(referenceDate.getTime() + 4 * 60 * 60 * 1000).toISOString(),
     },
     buch: {
       term: 'Buch',
@@ -76,6 +79,9 @@ test('completar una lección registra duración real, aciertos, vocabulario y pr
       mistakes: 1,
       hints: 0,
       lastPracticedAt: referenceDate.toISOString(),
+      reviewStreak: 0,
+      intervalMinutes: 10,
+      nextReviewAt: new Date(referenceDate.getTime() + 10 * 60 * 1000).toISOString(),
     },
     'guten morgen': {
       term: 'Guten Morgen',
@@ -84,6 +90,9 @@ test('completar una lección registra duración real, aciertos, vocabulario y pr
       mistakes: 0,
       hints: 1,
       lastPracticedAt: referenceDate.toISOString(),
+      reviewStreak: 0,
+      intervalMinutes: 240,
+      nextReviewAt: new Date(referenceDate.getTime() + 4 * 60 * 60 * 1000).toISOString(),
     },
   });
   assert.equal(updatedUser.studiedSeconds, 93);
@@ -113,6 +122,9 @@ test('repetir una palabra acumula intentos y actualiza su última fecha', () => 
     mistakes: 1,
     hints: 1,
     lastPracticedAt: nextDate.toISOString(),
+    reviewStreak: 1,
+    intervalMinutes: 24 * 60,
+    nextReviewAt: new Date(nextDate.getTime() + 24 * 60 * 60 * 1000).toISOString(),
   });
 });
 

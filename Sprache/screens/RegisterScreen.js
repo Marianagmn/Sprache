@@ -5,20 +5,14 @@ import AppButton from '../components/common/AppButton';
 import AppInput from '../components/common/AppInput';
 import BrandLogo from '../components/common/BrandLogo';
 import { useApp } from '../context/AppContext';
+import { evaluatePlacement, PLACEMENT_QUESTIONS, skipPlacementAssessment } from '../services/placementAssessmentService';
 import { colors, elevation, radii, spacing, typography } from '../theme';
 
 const steps = [
   { id: 'profile', title: 'Datos básicos', description: 'Cuéntanos quién eres' },
-  { id: 'level', title: 'Tu nivel', description: 'Qué tan familiarizado estás con el alemán' },
+  { id: 'assessment', title: 'Una evaluación breve', description: 'Tres preguntas para sugerirte por dónde empezar' },
   { id: 'motivation', title: '¿Por qué aprendes?', description: 'Esto nos ayudará a personalizar tu camino' },
   { id: 'goal', title: 'Tu meta diaria', description: 'Define un ritmo realista y sostenible' },
-];
-
-const levelOptions = [
-  { value: 'Principiante', description: 'Estoy empezando desde cero' },
-  { value: 'Básico', description: 'Entiendo frases sencillas' },
-  { value: 'Intermedio', description: 'Puedo mantener conversaciones' },
-  { value: 'Avanzado', description: 'Quiero perfeccionar fluidez y precisión' },
 ];
 
 const motivationOptions = [
@@ -43,7 +37,8 @@ export default function RegisterScreen({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [level, setLevel] = useState('Básico');
+  const [assessmentAnswers, setAssessmentAnswers] = useState([]);
+  const [placementAssessment, setPlacementAssessment] = useState(null);
   const [motivation, setMotivation] = useState('Viajar');
   const [time, setTime] = useState('10 min');
   const [error, setError] = useState('');
@@ -58,16 +53,17 @@ export default function RegisterScreen({ navigation }) {
   const passwordValid = password.length >= 8 && /[A-Za-z]/.test(password) && /\d/.test(password);
   const profileReady = nameValid && emailValid && passwordValid;
 
-  const selectedLevel = levelOptions.find((option) => option.value === level) ?? levelOptions[1];
   const selectedMotivation = motivationOptions.find((option) => option.value === motivation) ?? motivationOptions[0];
   const selectedGoal = goalOptions.find((option) => option.value === time) ?? goalOptions[1];
 
   const stepSummary = useMemo(() => {
     if (stepIndex === 0) return name.trim() || 'Tu nombre';
-    if (stepIndex === 1) return selectedLevel.value;
+    if (stepIndex === 1) return placementAssessment
+      ? `Inicio sugerido: ${placementAssessment.recommendedLevel}`
+      : '3 preguntas · menos de un minuto';
     if (stepIndex === 2) return selectedMotivation.value;
     return selectedGoal.value;
-  }, [name, selectedLevel, selectedMotivation, selectedGoal, stepIndex]);
+  }, [name, placementAssessment, selectedMotivation, selectedGoal, stepIndex]);
 
   const validateCurrentStep = () => {
     if (currentStep.id === 'profile') {
@@ -87,6 +83,11 @@ export default function RegisterScreen({ navigation }) {
       }
     }
 
+    if (currentStep.id === 'assessment' && PLACEMENT_QUESTIONS.some((_, index) => !assessmentAnswers[index])) {
+      setError('Responde las tres preguntas o elige empezar desde A1.');
+      return false;
+    }
+
     setError('');
     return true;
   };
@@ -95,6 +96,9 @@ export default function RegisterScreen({ navigation }) {
     if (!validateCurrentStep()) return;
 
     if (!isLastStep) {
+      if (currentStep.id === 'assessment') {
+        setPlacementAssessment(evaluatePlacement(assessmentAnswers));
+      }
       Keyboard.dismiss();
       setStepIndex((previous) => previous + 1);
       return;
@@ -112,7 +116,8 @@ export default function RegisterScreen({ navigation }) {
         name,
         email,
         password,
-        level,
+        level: placementAssessment?.recommendedLevel || 'A1',
+        placementAssessment: placementAssessment || skipPlacementAssessment(),
         motivation,
         dailyGoal: Number.parseInt(time, 10),
       });
@@ -184,26 +189,50 @@ export default function RegisterScreen({ navigation }) {
       return renderProfileFields();
     }
 
-    if (currentStep.id === 'level') {
+    if (currentStep.id === 'assessment') {
       return (
         <View>
-          <Text style={styles.sectionTitle}>¿Qué nivel tienes ahora?</Text>
-          <View style={styles.optionsGrid}>
-            {levelOptions.map((option) => (
-              <TouchableOpacity
-                key={option.value}
-                style={[styles.optionCard, level === option.value && styles.optionCardActive]}
-                onPress={() => setLevel(option.value)}
-                accessibilityRole="radio"
-                accessibilityLabel={`${option.value}. ${option.description}`}
-                accessibilityState={{ selected: level === option.value }}
-              >
-                <Text style={[styles.optionTitle, level === option.value && styles.optionTitleActive]}>{option.value}</Text>
-                <Text style={[styles.optionDescription, level === option.value && styles.optionDescriptionActive]}>{option.description}</Text>
-              </TouchableOpacity>
-            ))}
+          <Text style={styles.sectionTitle}>Elige una respuesta en cada pregunta</Text>
+          <Text style={styles.helperText}>No es un examen: solo nos ayuda a recomendar un punto de partida.</Text>
+          {PLACEMENT_QUESTIONS.map((question, questionIndex) => (
+            <View key={question.id} style={styles.assessmentQuestion}>
+              <Text style={styles.questionPrompt}>{`${questionIndex + 1}. ${question.prompt}`}</Text>
+              <View style={styles.optionsGrid}>
+                {question.options.map((option) => {
+                  const selected = assessmentAnswers[questionIndex] === option;
+                  return (
+                    <TouchableOpacity
+                      key={option}
+                      style={[styles.answerCard, selected && styles.optionCardActive]}
+                      onPress={() => setAssessmentAnswers((current) => {
+                        const answers = [...current];
+                        answers[questionIndex] = option;
+                        return answers;
+                      })}
+                      accessibilityRole="radio"
+                      accessibilityLabel={option}
+                      accessibilityState={{ selected }}
+                    >
+                      <Text style={[styles.optionTitle, selected && styles.optionTitleActive]}>{option}</Text>
+                    </TouchableOpacity>
+                  );
+                })}
+              </View>
+            </View>
+          ))}
+          <TouchableOpacity
+            style={styles.skipAssessment}
+            onPress={() => {
+              setPlacementAssessment(skipPlacementAssessment());
+              setError('');
+              Keyboard.dismiss();
+              setStepIndex((previous) => previous + 1);
+            }}
+            accessibilityRole="button"
+          >
+            <Text style={styles.skipAssessmentText}>Empezar desde lo básico sin evaluación</Text>
+          </TouchableOpacity>
           </View>
-        </View>
       );
     }
 
@@ -383,6 +412,11 @@ const styles = StyleSheet.create({
     padding: 16,
     marginBottom: 10,
   },
+  assessmentQuestion: { marginBottom: spacing.md },
+  questionPrompt: { color: colors.black, fontSize: typography.body, fontWeight: typography.semibold, marginBottom: spacing.sm },
+  answerCard: { backgroundColor: colors.surface, borderWidth: 1, borderColor: colors.border, borderRadius: radii.md, paddingHorizontal: 14, paddingVertical: 10, minHeight: 44, justifyContent: 'center', marginBottom: 6 },
+  skipAssessment: { alignItems: 'center', paddingVertical: 12, marginBottom: spacing.md },
+  skipAssessmentText: { color: colors.muted, fontSize: typography.small, textDecorationLine: 'underline', textAlign: 'center' },
   optionCardActive: {
     backgroundColor: colors.goldSoft,
     borderColor: colors.gold,

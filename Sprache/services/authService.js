@@ -32,6 +32,7 @@ function hydrateUser(storedUser) {
   const user = {
     ...initialUser,
     ...storedUser,
+    placementAssessment: storedUser.placementAssessment || null,
     sessions: Array.isArray(storedUser.sessions)
       ? storedUser.sessions.map((session) => (
         session && Number.isFinite(session.durationSeconds)
@@ -53,7 +54,7 @@ function toHex(bytes) {
   return Array.from(bytes, (byte) => byte.toString(16).padStart(2, '0')).join('');
 }
 
-export async function register({ name, email, password, level = 'A2', dailyGoal = 10, motivation }) {
+export async function register({ name, email, password, level = 'A1', dailyGoal = 10, motivation, placementAssessment = null }) {
   const normalizedName = name?.trim();
   const normalizedEmail = email?.trim().toLowerCase();
 
@@ -77,7 +78,8 @@ export async function register({ name, email, password, level = 'A2', dailyGoal 
     ...initialUser,
     name: normalizedName,
     email: normalizedEmail,
-    level: level ? `Nivel ${level}` : initialUser.level,
+    level: level?.startsWith('Nivel ') ? level : `Nivel ${level}`,
+    placementAssessment,
     motivation: motivation || initialUser.motivation || 'Viajar',
     dailyGoal,
     todayMinutes: 0,

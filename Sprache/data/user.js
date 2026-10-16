@@ -1,6 +1,7 @@
 export const initialUser = {
   name: 'Mariana',
   level: 'Nivel Básico',
+  placementAssessment: null,
   motivation: 'Viajar',
   dailyGoal: 10,
   studiedSeconds: 0,
