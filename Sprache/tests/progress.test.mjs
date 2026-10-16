@@ -157,6 +157,19 @@ test('las sesiones antiguas sin tiempo medido no suman minutos estimados', () =>
   assert.equal(week[2].sessions, 1);
 });
 
+test('las metas diarias se comprueban con el tiempo real acumulado por día', () => {
+  const anotherDay = new Date(2026, 9, 15, 12, 0, 0).toISOString();
+  const sessions = [
+    { completedAt: referenceDate.toISOString(), durationSeconds: 120, dailyGoalMinutes: 5 },
+    { completedAt: referenceDate.toISOString(), durationSeconds: 180, dailyGoalMinutes: 5 },
+    { completedAt: anotherDay, durationSeconds: 299, dailyGoalMinutes: 5 },
+  ];
+  const metrics = deriveProgress({ ...emptyUser, sessions }, referenceDate);
+
+  assert.equal(metrics.goalDaysReached, 1);
+  assert.equal(metrics.goalDaysTracked, 2);
+});
+
 test('el resumen limita aciertos y maneja sesiones sin preguntas', () => {
   assert.deepEqual(calculateSessionSummary(2, 3), {
     correctAnswers: 2,
@@ -190,6 +203,8 @@ test('reiniciar progreso conserva perfil/meta y borra las sesiones', () => {
   assert.equal(reset.studiedSeconds, 0);
   assert.equal(reset.todaySeconds, 0);
   assert.equal(reset.totalSessions, 0);
+  assert.equal(reset.goalDaysReached, 0);
+  assert.equal(reset.goalDaysTracked, 0);
   assert.equal(reset.todayMinutes, 0);
   assert.equal(reset.studiedMinutes, 0);
   assert.equal(reset.learnedWords, 0);

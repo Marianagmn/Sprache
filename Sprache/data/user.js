@@ -13,6 +13,8 @@ export const initialUser = {
   totalQuestions: 0,
   correctAnswers: 0,
   accuracy: 0,
+  goalDaysReached: 0,
+  goalDaysTracked: 0,
   sessions: [],
   wordProgress: {},
   preferences: { notificationsEnabled: false },

@@ -52,7 +52,7 @@ export default function ProfileScreen({ navigation }) {
 
         <ProfileHeader name={user.name} level={user.level} motivation={user.motivation} />
 
-        <GoalCard dailyGoal={user.dailyGoal} onGoalChange={handleGoalChange} />
+        <GoalCard dailyGoal={user.dailyGoal} completedSeconds={user.todaySeconds || 0} onGoalChange={handleGoalChange} />
 
         <ProfileStats
           stats={[

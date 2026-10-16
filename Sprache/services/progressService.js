@@ -26,9 +26,17 @@ export function deriveProgress(user, now = new Date()) {
   const correctAnswers = sessions.reduce((total, session) => total + (session.correctAnswers || 0), 0);
   const learnedWords = new Map();
   const activeDays = new Set();
+  const goalProgressByDay = new Map();
 
   sessions.forEach((session) => {
-    activeDays.add(getSessionDateKey(session));
+    const sessionDay = getSessionDateKey(session);
+    activeDays.add(sessionDay);
+    if (Number.isFinite(session.dailyGoalMinutes) && session.dailyGoalMinutes > 0) {
+      const dayProgress = goalProgressByDay.get(sessionDay) || { seconds: 0, goalMinutes: session.dailyGoalMinutes };
+      dayProgress.seconds += session.durationSeconds || 0;
+      dayProgress.goalMinutes = session.dailyGoalMinutes;
+      goalProgressByDay.set(sessionDay, dayProgress);
+    }
     (session.learnedWords || []).forEach((word) => {
       const term = typeof word === 'string' ? word : word.term;
       if (term) {
@@ -58,6 +66,10 @@ export function deriveProgress(user, now = new Date()) {
     totalQuestions,
     correctAnswers,
     accuracy: totalQuestions > 0 ? Math.round((correctAnswers / totalQuestions) * 100) : 0,
+    goalDaysReached: Array.from(goalProgressByDay.values()).filter(
+      (day) => day.seconds >= day.goalMinutes * 60,
+    ).length,
+    goalDaysTracked: goalProgressByDay.size,
     learnedWords: learnedWords.size,
     streak,
   };
@@ -119,6 +131,9 @@ export function recordActivity(user, session, now = new Date()) {
     completedAt: completedAt.toISOString(),
     durationSeconds,
     durationSource: 'measured',
+    dailyGoalMinutes: Number.isFinite(session.dailyGoalMinutes)
+      ? Math.max(1, session.dailyGoalMinutes)
+      : (Number.isFinite(user.dailyGoal) ? Math.max(1, user.dailyGoal) : 10),
     correctAnswers,
     totalQuestions,
     learnedWords,
@@ -160,6 +175,8 @@ export function resetProgress(user) {
     totalQuestions: 0,
     correctAnswers: 0,
     accuracy: 0,
+    goalDaysReached: 0,
+    goalDaysTracked: 0,
     learnedWords: 0,
     streak: 0,
   };

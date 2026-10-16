@@ -53,6 +53,12 @@ export default function ProgressScreen() {
           />
           <ProgressStat iconName="bulb" color={colors.gold} value={`${trackedHints}`} label="Pistas utilizadas" />
           <ProgressStat iconName="book" color={colors.black} value={`${user.learnedWords}`} label="Palabras con acierto" />
+          <ProgressStat
+            iconName="flag"
+            color={colors.red}
+            value={user.goalDaysTracked ? `${user.goalDaysReached}/${user.goalDaysTracked}` : '—'}
+            label="Metas diarias alcanzadas"
+          />
         </View>
 
         <Text style={styles.sectionTitle}>Práctica por palabra</Text>
