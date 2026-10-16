@@ -15,6 +15,8 @@ export default function ActivityCard({
             style={styles.card} 
             onPress={onPress} 
             activeOpacity={0.7}
+            accessibilityRole="button"
+            accessibilityLabel={`${title}. ${description}. Duración: ${time}`}
         >
             <View style={styles.iconContainer}>
                 <Ionicons name={iconName || 'play-outline'} size={24} color={colors.black} />

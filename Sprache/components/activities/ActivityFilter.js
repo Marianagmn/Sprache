@@ -24,6 +24,9 @@ export default function ActivityFilter({ activeFilter = 'Todos', onChange }) {
               ]}
               onPress={() => onChange?.(filter)}
               activeOpacity={0.7}
+              accessibilityRole="radio"
+              accessibilityLabel={`Filtrar por ${filter}`}
+              accessibilityState={{ selected: isActive }}
             >
               <Text 
                 style={[

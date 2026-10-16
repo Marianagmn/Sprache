@@ -257,12 +257,6 @@ export default function RegisterScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView style={styles.keyboardArea} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.scroll}
-        keyboardShouldPersistTaps="handled"
-        keyboardDismissMode="on-drag"
-      >
       <View style={styles.header}>
         <TouchableOpacity
           onPress={() => (stepIndex === 0 ? navigation.goBack() : setStepIndex((previous) => previous - 1))}
@@ -276,7 +270,12 @@ export default function RegisterScreen({ navigation }) {
         <BrandLogo variant="tab" />
       </View>
 
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scroll}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.scroll}
+        keyboardShouldPersistTaps="handled"
+        keyboardDismissMode="on-drag"
+      >
         <View style={styles.progressHeader}>
           <Text style={styles.stepLabel} accessibilityRole="header" accessibilityLiveRegion="polite">Paso {stepIndex + 1} de {steps.length}</Text>
           <Text style={styles.remainingText}>

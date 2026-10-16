@@ -43,7 +43,7 @@ export default function ProfileScreen({ navigation }) {
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scroll}>
         <View style={styles.brandHeader}>
-          <Text style={styles.brandTitle}>Tu Perfil</Text>
+          <Text style={styles.brandTitle} accessibilityRole="header">Tu Perfil</Text>
           <BrandLogo variant="tab" />
         </View>
 

@@ -13,7 +13,8 @@ export default function GoalCard({ dailyGoal = 10, onGoalChange, label = 'Tu obj
 				{goals.map((goal) => (
 					<TouchableOpacity
 						key={goal}
-						accessibilityRole="button"
+						accessibilityRole="radio"
+						accessibilityLabel={`${goal} minutos al día`}
 						accessibilityState={{ selected: dailyGoal === goal }}
 						onPress={() => onGoalChange?.(goal)}
 						style={[styles.goalOption, dailyGoal === goal && styles.selectedGoal]}
@@ -33,7 +34,7 @@ const styles = StyleSheet.create({
 	card: { backgroundColor: colors.surface, padding: 20, borderRadius: radii.lg, alignItems: 'center', marginBottom: 32, ...elevation.card },
 	label: { fontSize: 14, color: colors.muted, marginBottom: 4 },
 	value: { fontSize: 18, fontWeight: 'bold', color: colors.black, marginBottom: 12 },
-	goalOptions: { flexDirection: 'row', marginBottom: 12 },
+	goalOptions: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', marginBottom: 12 },
 	goalOption: { borderWidth: 1, borderColor: colors.border, borderRadius: radii.pill, paddingVertical: 7, paddingHorizontal: 14, marginHorizontal: 4 },
 	selectedGoal: { backgroundColor: colors.gold, borderColor: colors.gold },
 	goalText: { color: colors.muted, fontSize: 13, fontWeight: typography.semibold },

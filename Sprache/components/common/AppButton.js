@@ -8,6 +8,7 @@ export default function AppButton({
 	variant = 'primary',
 	loading = false,
 	disabled = false,
+	accessibilityLabel,
 	style,
 	textStyle,
 	...props
@@ -28,7 +29,7 @@ export default function AppButton({
 			accessibilityRole="button"
 			accessibilityState={{ disabled: isDisabled, busy: loading }}
 			{...props}
-			accessibilityLabel={props.accessibilityLabel ?? title}
+			accessibilityLabel={accessibilityLabel ?? title}
 		>
 			{loading ? (
 				<ActivityIndicator color={colors.black} />

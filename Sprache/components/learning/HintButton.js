@@ -5,7 +5,14 @@ import { colors, typography } from '../../theme';
 
 export default function HintButton({ visible, hint, onPress }) {
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress} activeOpacity={0.8} accessibilityRole="button">
+    <TouchableOpacity
+      style={styles.container}
+      onPress={onPress}
+      activeOpacity={0.8}
+      accessibilityRole="button"
+      accessibilityLabel={visible ? `Pista: ${hint}` : 'Mostrar pista'}
+      accessibilityState={{ expanded: visible }}
+    >
       <Ionicons name="bulb-outline" size={18} color={colors.black} />
       <Text style={styles.label}>{visible ? hint : 'Necesito una pista'}</Text>
     </TouchableOpacity>

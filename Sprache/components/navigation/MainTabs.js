@@ -25,7 +25,9 @@ export default function MainTabs() {
         tabBarActiveTintColor: colors.black,
         tabBarInactiveTintColor: colors.muted,
         headerShown: false,
-        tabBarStyle: { paddingBottom: 5, paddingTop: 5, height: 60, backgroundColor: colors.surface, borderTopColor: colors.border },
+        tabBarHideOnKeyboard: true,
+        tabBarLabelStyle: { fontSize: 12, flexShrink: 1 },
+        tabBarStyle: { minHeight: 60, paddingBottom: 5, paddingTop: 5, backgroundColor: colors.surface, borderTopColor: colors.border },
       })}
     >
       <Tab.Screen name="Home" component={HomeScreen} />

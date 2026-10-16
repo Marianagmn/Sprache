@@ -11,7 +11,13 @@ export default function RecommendationCard({
 	onPress
 }) {
 	return (
-		<TouchableOpacity style={styles.card} onPress={onPress} activeOpacity={0.7}>
+		<TouchableOpacity
+			style={styles.card}
+			onPress={onPress}
+			activeOpacity={0.7}
+			accessibilityRole="button"
+			accessibilityLabel={`${title}. ${description}. Duración: ${time}`}
+		>
 			<View style={styles.icon}>
 				<Ionicons name={iconName} size={24} color={colors.black} />
 			</View>
