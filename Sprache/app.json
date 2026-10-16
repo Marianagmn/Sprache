@@ -25,7 +25,7 @@
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#FFCE00",
-        "foregroundImage": "./assets/icon.png"
+        "foregroundImage": "./assets/sprache-logo.png"
       }
     },
     "web": {

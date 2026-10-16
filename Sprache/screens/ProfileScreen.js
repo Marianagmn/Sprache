@@ -3,6 +3,7 @@ import { Alert, Modal, Text, TextInput, StyleSheet, SafeAreaView, ScrollView, Vi
 import { useApp } from '../context/AppContext';
 import AppButton from '../components/common/AppButton';
 import ProfileHeader from '../components/profile/ProfileHeader';
+import BrandLogo from '../components/common/BrandLogo';
 import GoalCard from '../components/profile/GoalCard';
 import ProfileStats from '../components/profile/ProfileStats';
 import SettingsSection from '../components/profile/SettingsSection';
@@ -41,7 +42,11 @@ export default function ProfileScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scroll}>
-        
+        <View style={styles.brandHeader}>
+          <Text style={styles.brandTitle}>Tu Perfil</Text>
+          <BrandLogo variant="tab" />
+        </View>
+
         <ProfileHeader name={user.name} level={user.level} motivation={user.motivation} />
 
         <GoalCard dailyGoal={user.dailyGoal} onGoalChange={handleGoalChange} />
@@ -85,6 +90,8 @@ export default function ProfileScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.background },
   scroll: { padding: 20 },
+  brandHeader: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: spacing.md },
+  brandTitle: { color: colors.black, fontSize: typography.title, fontWeight: typography.bold },
   modalBackdrop: { flex: 1, justifyContent: 'center', padding: 24, backgroundColor: 'rgba(0, 0, 0, 0.45)' },
   modalCard: { backgroundColor: colors.surface, borderRadius: radii.xl, padding: 22 },
   modalTitle: { color: colors.black, fontSize: typography.subtitle, fontWeight: typography.bold, marginBottom: spacing.lg },

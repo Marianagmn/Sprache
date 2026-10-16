@@ -20,6 +20,6 @@ export default function LessonProgress({ current, total }) {
 const styles = StyleSheet.create({
   container: { marginBottom: 24 },
   labels: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 8 },
-  label: { color: '#6B7280', fontSize: 13, fontWeight: '600' },
+  label: { color: colors.muted, fontSize: 13, fontWeight: '600' },
   value: { color: colors.black, fontSize: 13, fontWeight: '800' },
 });

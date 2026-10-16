@@ -1,6 +1,7 @@
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import BrandLogo from '../common/BrandLogo';
 import { colors } from '../../theme';
 
 export default function LessonHeader({ title, currentQuestion, totalQuestions, onClose }) {
@@ -13,7 +14,7 @@ export default function LessonHeader({ title, currentQuestion, totalQuestions, o
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.counter}>{currentQuestion} de {totalQuestions}</Text>
       </View>
-      <View style={styles.placeholder} />
+      <BrandLogo variant="tab" />
     </View>
   );
 }
@@ -24,5 +25,4 @@ const styles = StyleSheet.create({
   titleContainer: { alignItems: 'center' },
   title: { color: colors.black, fontSize: 17, fontWeight: '700' },
   counter: { color: colors.muted, fontSize: 13, marginTop: 2 },
-  placeholder: { width: 40 },
 });

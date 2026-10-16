@@ -3,7 +3,7 @@ import { StyleSheet, SafeAreaView, ScrollView } from 'react-native';
 import ActivityList from '../components/activities/ActivityList';
 import ScreenHeader from '../components/common/ScreenHeader';
 import ActivityFilter from '../components/activities/ActivityFilter';
-import { colors } from '../theme';
+import { colors, typography } from '../theme';
 
 
 export default function ActivitiesScreen({ navigation }) {
@@ -32,6 +32,6 @@ export default function ActivitiesScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.background },
   scroll: { padding: 20 },
-  headerTitle: { fontSize: 28, fontWeight: 'bold', color: '#111827', marginBottom: 4 },
-  headerSubtitle: { fontSize: 16, color: '#6B7280', marginBottom: 24 },
+  headerTitle: { fontSize: typography.title, fontWeight: 'bold', color: colors.black, marginBottom: 4 },
+  headerSubtitle: { fontSize: typography.body, color: colors.muted, marginBottom: 24 },
 });

@@ -6,8 +6,9 @@ El original de marca es `imagenes/logo.jpeg`; se conserva sin modificar. Los PNG
 
 | Uso | Recurso / tamaño de referencia | Aplicación |
 | --- | --- | --- |
-| Icono iOS, Android y web | `assets/icon.png`, 1024 × 1024 px | Arte cuadrado con fondo dorado; dejar que cada sistema aplique su máscara de icono. |
-| Splash de Expo | `assets/splash-icon.png`, 1024 × 1024 px; logo de 520 px sobre fondo gris claro | Centrado, sin estirar ni añadir otra caja de esquinas redondeadas. |
+| Icono iOS y web | `assets/icon.png`, 1024 × 1024 px | Arte cuadrado con fondo dorado; dejar que cada sistema aplique su máscara de icono. |
+| Icono adaptable Android | `assets/sprache-logo.png`, 512 × 512 px con transparencia | Foreground sobre fondo dorado; Android aplica su propia máscara. |
+| Splash de Expo | `assets/sprache-logo.png`, 512 × 512 px; se muestra a 208 dp sobre fondo gris claro | Centrado, sin estirar ni añadir otra caja de esquinas redondeadas. |
 | Encabezado de pantalla | `BrandLogo` con `variant="header"`, 48 × 48 dp | Marca compacta en barras o cabeceras. |
 | Marca de inicio de sesión | `BrandLogo` con `variant="screen"`, 136 × 136 dp | Presentación de marca en pantallas de acceso y bienvenida. |
 | Pantalla inicial nativa | `BrandLogo` con `variant="splash"`, 208 × 208 dp | Marca principal de gran tamaño. |

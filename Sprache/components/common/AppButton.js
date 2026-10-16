@@ -30,7 +30,7 @@ export default function AppButton({
 			{...props}
 		>
 			{loading ? (
-				<ActivityIndicator color={variant === 'secondary' ? colors.black : colors.black} />
+				<ActivityIndicator color={colors.black} />
 			) : (
 				<Text style={[styles.text, variant === 'secondary' && styles.secondaryText, textStyle]}>
 					{title}
