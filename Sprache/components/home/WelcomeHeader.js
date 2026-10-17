@@ -9,7 +9,7 @@ export default function WelcomeHeader({ name, level, motivation = '', greeting =
 			<View style={styles.identity}>
 				<BrandLogo variant="header" />
 				<View style={styles.greetingContainer}>
-					<Text style={styles.greeting}>{greeting}, {name} 👋</Text>
+					<Text style={styles.greeting} accessibilityRole="header">{greeting}, {name} 👋</Text>
 					<Text style={styles.meta}>{level}{motivation ? ` • ${motivation}` : ''}</Text>
 				</View>
 			</View>

@@ -18,9 +18,15 @@ export default function DailyGoalCard({ completedSeconds = 0, goal = 10, unit = 
 
 	return (
 		<View style={styles.card}>
-			<Text style={styles.title}>Tu objetivo de hoy</Text>
+			<Text style={styles.title} accessibilityRole="header">Tu objetivo de hoy</Text>
 			<Text style={styles.goal}>{formattedTime} / {goal} {unit}</Text>
-			<View style={styles.progressBackground}>
+			<View
+				style={styles.progressBackground}
+				accessible
+				accessibilityRole="progressbar"
+				accessibilityLabel="Progreso de tu objetivo diario"
+				accessibilityValue={{ min: 0, max: goal * 60, now: Math.min(completedSeconds, goal * 60), text: `${Math.round(progress * 100)} por ciento` }}
+			>
 				<View style={[styles.progressFill, { width: `${progress * 100}%` }]} />
 			</View>
 			<Text style={styles.encouragement}>{message}</Text>

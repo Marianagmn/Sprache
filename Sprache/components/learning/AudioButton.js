@@ -11,14 +11,21 @@ export default function AudioButton({ label = 'Escuchar pronunciación' }) {
   };
 
   return (
-    <TouchableOpacity style={styles.button} onPress={handlePress} activeOpacity={0.8} accessibilityRole="button" accessibilityLabel={label}>
-      <Ionicons name={playing ? 'pause' : 'volume-medium'} size={18} color={colors.black} />
+    <TouchableOpacity
+      style={styles.button}
+      onPress={handlePress}
+      activeOpacity={0.8}
+      accessibilityRole="button"
+      accessibilityLabel={playing ? 'Pausar pronunciación' : label}
+      accessibilityState={{ selected: playing }}
+    >
+      <Ionicons accessible={false} name={playing ? 'pause' : 'volume-medium'} size={18} color={colors.black} />
       <Text style={styles.label}>{playing ? 'Reproduciendo...' : label}</Text>
     </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
-  button: { alignSelf: 'flex-start', flexDirection: 'row', alignItems: 'center', paddingVertical: spacing.sm, paddingHorizontal: spacing.md, borderRadius: radii.pill, backgroundColor: colors.goldSoft, marginBottom: spacing.xl },
-  label: { color: colors.black, fontSize: 13, fontWeight: typography.bold, marginLeft: 7 },
+  button: { minHeight: 44, alignSelf: 'flex-start', flexDirection: 'row', alignItems: 'center', paddingVertical: spacing.sm, paddingHorizontal: spacing.md, borderRadius: radii.pill, backgroundColor: colors.goldSoft, marginBottom: spacing.xl },
+  label: { color: colors.black, fontSize: typography.small, fontWeight: typography.bold, marginLeft: 7 },
 });

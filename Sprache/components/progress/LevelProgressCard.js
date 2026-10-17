@@ -20,9 +20,9 @@ export default function LevelProgressCard({ level = 'Nivel A1', motivation = '',
 
 const styles = StyleSheet.create({
 	card: { backgroundColor: colors.surface, padding: 20, borderRadius: radii.lg, marginBottom: 32, ...elevation.card },
-	header: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 12 },
-	level: { fontSize: 18, fontWeight: 'bold', color: colors.black },
-	xp: { fontSize: 16, fontWeight: '600', color: colors.muted },
+	header: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 12 },
+	level: { flexShrink: 1, fontSize: 18, fontWeight: 'bold', color: colors.black },
+	xp: { flexShrink: 1, fontSize: 16, fontWeight: '600', color: colors.muted, marginTop: 4 },
 	motivation: { color: colors.muted, fontSize: 13, fontWeight: '600', marginBottom: 6 },
 	caption: { color: colors.muted, fontSize: 13 }
 });

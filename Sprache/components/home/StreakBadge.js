@@ -5,9 +5,9 @@ import { colors, radii } from '../../theme';
 
 export default function StreakBadge({ days = 0 }) {
 	return (
-		<View style={styles.container}>
-			<Ionicons name="flame" size={20} color={colors.red} />
-			<Text style={styles.text}>{days}</Text>
+		<View style={styles.container} accessible accessibilityRole="text" accessibilityLabel={`Racha actual: ${days} ${days === 1 ? 'día' : 'días'}`}>
+			<Ionicons accessible={false} name="flame" size={20} color={colors.red} />
+			<Text style={styles.text} accessible={false}>{days}</Text>
 		</View>
 	);
 }

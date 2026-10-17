@@ -5,10 +5,14 @@ import { colors, radii, spacing, typography } from '../../theme';
 
 export default function FeedbackMessage({ correct, message }) {
   return (
-    <View style={[styles.container, correct ? styles.success : styles.error]}>
-      <Ionicons name={correct ? 'checkmark-circle' : 'information-circle'} size={22} color={correct ? colors.success : colors.red} />
+    <View
+      style={[styles.container, correct ? styles.success : styles.error]}
+      accessibilityRole="alert"
+      accessibilityLiveRegion="polite"
+    >
+      <Ionicons accessible={false} name={correct ? 'checkmark-circle' : 'information-circle'} size={22} color={correct ? colors.success : colors.redText} />
       <View style={styles.textContainer}>
-        <Text style={[styles.title, { color: correct ? colors.success : colors.red }]}>
+        <Text style={[styles.title, { color: correct ? colors.success : colors.redText }]}>
           {correct ? '¡Bien hecho!' : 'Vamos a repasarlo'}
         </Text>
         <Text style={styles.message}>{message}</Text>

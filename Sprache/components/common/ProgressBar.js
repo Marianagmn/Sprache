@@ -7,12 +7,20 @@ export default function ProgressBar({
 	color = colors.gold,
 	backgroundColor = colors.border,
 	height = 8,
+	accessibilityLabel = 'Progreso',
+	accessibilityValue,
 	style
 }) {
 	const progressPercentage = Math.min(Math.max(Number(progress) || 0, 0), 100);
 
 	return (
-		<View style={[styles.background, { backgroundColor, height, borderRadius: height / 2 }, style]}>
+		<View
+			style={[styles.background, { backgroundColor, height, borderRadius: height / 2 }, style]}
+			accessible
+			accessibilityRole="progressbar"
+			accessibilityLabel={accessibilityLabel}
+			accessibilityValue={accessibilityValue || { min: 0, max: 100, now: progressPercentage, text: `${Math.round(progressPercentage)} por ciento` }}
+		>
 			<View
 				style={[
 					styles.fill,

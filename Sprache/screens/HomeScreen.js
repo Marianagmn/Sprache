@@ -35,7 +35,7 @@ export default function HomeScreen({ navigation }) {
 
         <AchievementPanel sessions={user.sessions} compact />
 
-        <Text style={styles.sectionTitle}>
+        <Text style={styles.sectionTitle} accessibilityRole="header">
           {hasReview ? 'Repaso recomendado' : hasPathLesson ? `Tu ruta · nivel ${nextPathLesson.levelCode}` : 'Recomendado para ti'}
         </Text>
         <RecommendationCard

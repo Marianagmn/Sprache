@@ -20,7 +20,7 @@ export default function LearningPath({ sessions, placementAssessment, onStartLes
             <View style={styles.levelHeading}>
               <Text style={styles.levelCode}>{level.code}</Text>
               <View style={styles.levelTitles}>
-                <Text style={styles.levelTitle}>{level.title}</Text>
+                <Text style={styles.levelTitle} accessibilityRole="header">{level.title}</Text>
                 <Text style={styles.levelDescription}>{level.description}</Text>
               </View>
             </View>
@@ -52,9 +52,9 @@ export default function LearningPath({ sessions, placementAssessment, onStartLes
                 accessibilityLabel={`${lesson.title}. ${actionLabel}${lesson.time ? `. ${lesson.time}` : ''}`}
                 accessibilityState={{ disabled, selected: lesson.completed }}
               >
-                <Ionicons name={icon} size={20} color={lesson.completed ? colors.success : disabled ? colors.muted : colors.black} />
-                <Text style={[styles.lessonTitle, disabled && styles.disabledText]}>{lesson.title}</Text>
-                <Text style={[styles.lessonAction, disabled && styles.disabledText]}>{lesson.time || actionLabel}</Text>
+                <Ionicons accessible={false} name={icon} size={20} color={lesson.completed ? colors.success : disabled ? colors.muted : colors.black} />
+                <Text style={[styles.lessonTitle, disabled && styles.disabledText]} accessible={false}>{lesson.title}</Text>
+                <Text style={[styles.lessonAction, disabled && styles.disabledText]} accessible={false}>{lesson.time || actionLabel}</Text>
               </TouchableOpacity>
             );
           })}

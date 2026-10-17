@@ -1,6 +1,7 @@
 export const colors = {
   black: '#000000',
   red: '#DD0000',
+  redText: '#B00000',
   gold: '#FFCE00',
   white: '#FFFFFF',
   background: '#F4F4F5',

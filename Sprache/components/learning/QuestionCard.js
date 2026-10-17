@@ -5,8 +5,8 @@ import { colors, elevation, radii, spacing, typography } from '../../theme';
 export default function QuestionCard({ question, prompt }) {
   return (
     <View style={styles.card}>
-      <Text style={styles.eyebrow}>Traduce y aprende</Text>
-      <Text style={styles.word}>{question}</Text>
+      <Text style={styles.eyebrow} accessibilityRole="header">Traduce y aprende</Text>
+      <Text style={styles.word} accessibilityRole="header">{question}</Text>
       <Text style={styles.prompt}>{prompt}</Text>
     </View>
   );

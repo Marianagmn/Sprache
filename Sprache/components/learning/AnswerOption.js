@@ -9,9 +9,9 @@ export default function AnswerOption({ label, selected, correct, incorrect, disa
   const iconColor = correct ? colors.success : incorrect ? colors.red : selected ? colors.black : colors.muted;
 
   return (
-    <TouchableOpacity style={[styles.option, stateStyle]} onPress={onPress} disabled={disabled} activeOpacity={0.8} accessibilityRole="radio" accessibilityState={{ selected, disabled }}>
-      <Text style={[styles.label, (correct || incorrect) && styles.stateLabel]}>{label}</Text>
-      <Ionicons name={icon} size={23} color={iconColor} />
+    <TouchableOpacity style={[styles.option, stateStyle]} onPress={onPress} disabled={disabled} activeOpacity={0.8} accessibilityRole="radio" accessibilityLabel={label} accessibilityState={{ selected, disabled }}>
+      <Text style={[styles.label, (correct || incorrect) && styles.stateLabel]} accessible={false}>{label}</Text>
+      <Ionicons accessible={false} name={icon} size={23} color={iconColor} />
     </TouchableOpacity>
   );
 }

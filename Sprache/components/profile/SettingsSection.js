@@ -5,7 +5,7 @@ import { colors, elevation, radii } from '../../theme';
 export default function SettingsSection({ title, children }) {
 	return (
 		<>
-			{title && <Text style={styles.title}>{title}</Text>}
+			{title && <Text style={styles.title} accessibilityRole="header">{title}</Text>}
 			<View style={styles.group}>{children}</View>
 		</>
 	);

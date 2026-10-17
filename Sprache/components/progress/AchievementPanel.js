@@ -69,11 +69,17 @@ export default function AchievementPanel({ sessions = [], compact = false }) {
       {shownBadges.length > 0 ? (
         <View style={styles.badgesGrid}>
           {shownBadges.map((badge) => (
-            <View key={badge.id} style={[styles.badgeCard, !badge.earned && styles.badgeLocked]}>
-              <Ionicons name={badge.icon} size={24} color={badge.earned ? colors.black : colors.muted} />
-              <Text style={[styles.badgeTitle, !badge.earned && styles.lockedText]}>{badge.title}</Text>
-              {!compact && <Text style={styles.badgeDescription}>{badge.description}</Text>}
-              <Text style={styles.badgeState}>{badge.earned ? 'Conseguida' : 'Por conseguir'}</Text>
+            <View
+                key={badge.id}
+                style={[styles.badgeCard, !badge.earned && styles.badgeLocked]}
+                accessible
+                accessibilityRole="text"
+                accessibilityLabel={`${badge.title}. ${badge.description} ${badge.earned ? 'Conseguida' : 'Por conseguir'}.`}
+              >
+                <Ionicons accessible={false} name={badge.icon} size={24} color={badge.earned ? colors.black : colors.muted} />
+                <Text style={[styles.badgeTitle, !badge.earned && styles.lockedText]} accessible={false}>{badge.title}</Text>
+                {!compact && <Text style={styles.badgeDescription} accessible={false}>{badge.description}</Text>}
+                <Text style={styles.badgeState} accessible={false}>{badge.earned ? 'Conseguida' : 'Por conseguir'}</Text>
             </View>
           ))}
         </View>

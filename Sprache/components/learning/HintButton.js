@@ -13,13 +13,13 @@ export default function HintButton({ visible, hint, onPress }) {
       accessibilityLabel={visible ? `Pista: ${hint}` : 'Mostrar pista'}
       accessibilityState={{ expanded: visible }}
     >
-      <Ionicons name="bulb-outline" size={18} color={colors.black} />
+      <Ionicons accessible={false} name="bulb-outline" size={18} color={colors.black} />
       <Text style={styles.label}>{visible ? hint : 'Necesito una pista'}</Text>
     </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flexDirection: 'row', alignItems: 'center', alignSelf: 'center', padding: 8, marginBottom: 12 },
+  container: { minHeight: 44, flexDirection: 'row', alignItems: 'center', alignSelf: 'center', paddingHorizontal: 12, paddingVertical: 8, marginBottom: 12 },
   label: { color: colors.black, fontSize: typography.small, fontWeight: typography.bold, marginLeft: 7 },
 });

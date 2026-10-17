@@ -23,7 +23,7 @@ export default function ProgressScreen({ navigation }) {
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scroll}>
         <View style={styles.header}>
-          <Text style={styles.headerTitle}>Tu Progreso</Text>
+          <Text style={styles.headerTitle} accessibilityRole="header">Tu Progreso</Text>
           <BrandLogo variant="tab" />
         </View>
         
@@ -35,17 +35,17 @@ export default function ProgressScreen({ navigation }) {
           learnedWords={user.learnedWords}
         />
 
-        <Text style={styles.sectionTitle}>Tu ruta de aprendizaje</Text>
+        <Text style={styles.sectionTitle} accessibilityRole="header">Tu ruta de aprendizaje</Text>
         <LearningPath
           sessions={user.sessions}
           placementAssessment={user.placementAssessment}
           onStartLesson={(activityId) => navigation.navigate('Lesson', { activityId })}
         />
 
-        <Text style={styles.sectionTitle}>Experiencia y logros</Text>
+        <Text style={styles.sectionTitle} accessibilityRole="header">Experiencia y logros</Text>
         <AchievementPanel sessions={user.sessions} />
 
-        <Text style={styles.sectionTitle}>Actividad semanal</Text>
+        <Text style={styles.sectionTitle} accessibilityRole="header">Actividad semanal</Text>
         {user.sessions.length ? (
           <WeeklyActivity days={weeklyActivity} />
         ) : (
@@ -74,7 +74,7 @@ export default function ProgressScreen({ navigation }) {
           />
         </View>
 
-        <Text style={styles.sectionTitle}>Práctica por palabra</Text>
+        <Text style={styles.sectionTitle} accessibilityRole="header">Práctica por palabra</Text>
         {Object.values(user.wordProgress || {})
           .sort((first, second) => new Date(second.lastPracticedAt) - new Date(first.lastPracticedAt))
           .map((word) => (

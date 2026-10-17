@@ -14,7 +14,7 @@ export default function SessionSummary({ correctAnswers, totalQuestions, earnedX
       <View style={styles.iconContainer}>
         <Ionicons name="trophy" size={42} color={colors.black} />
       </View>
-      <Text style={styles.title}>¡Gracias por practicar!</Text>
+      <Text style={styles.title} accessibilityRole="header">¡Gracias por practicar!</Text>
       <Text style={styles.subtitle}>Terminaste una práctica y eso ya cuenta. Cada paso suma, sin importar el resultado.</Text>
       <View style={styles.score}>
         <Text style={styles.scoreValue}>{summary.percentage}%</Text>

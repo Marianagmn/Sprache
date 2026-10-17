@@ -52,8 +52,10 @@ const styles = StyleSheet.create({
     paddingRight: 20, 
   },
   filterChip: {
+    minHeight: 44,
     paddingHorizontal: 16,
-    paddingVertical: 8,
+    paddingVertical: 10,
+    justifyContent: 'center',
     borderRadius: radii.pill,
     marginRight: 12,
     borderWidth: 1,

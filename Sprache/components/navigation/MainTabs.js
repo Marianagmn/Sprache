@@ -13,6 +13,8 @@ export default function MainTabs() {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
+        tabBarLabel: ({ Home: 'Inicio', Actividades: 'Actividades', Progreso: 'Progreso', Perfil: 'Perfil' })[route.name],
+        tabBarAccessibilityLabel: ({ Home: 'Inicio, resumen y práctica recomendada', Actividades: 'Explorar actividades', Progreso: 'Progreso, logros y ruta de aprendizaje', Perfil: 'Perfil y ajustes' })[route.name],
         tabBarIcon: ({ focused, color, size }) => {
           const icons = {
             Home: focused ? 'home' : 'home-outline',

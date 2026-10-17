@@ -5,11 +5,17 @@ import { colors, radii, spacing, typography } from '../../theme';
 
 export default function CelebrationNotice({ title, message, icon = 'sparkles' }) {
   return (
-    <View style={styles.notice} accessibilityRole="summary" accessibilityLiveRegion="polite">
+    <View
+      style={styles.notice}
+      accessible
+      accessibilityRole="summary"
+      accessibilityLabel={`${title}. ${message}`}
+      accessibilityLiveRegion="polite"
+    >
       <View style={styles.iconWrap}>
-        <Ionicons name={icon} size={20} color={colors.black} />
+        <Ionicons accessible={false} name={icon} size={20} color={colors.black} />
       </View>
-      <View style={styles.copy}>
+      <View style={styles.copy} accessible={false}>
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.message}>{message}</Text>
       </View>
