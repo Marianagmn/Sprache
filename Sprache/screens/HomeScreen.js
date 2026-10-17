@@ -10,6 +10,7 @@ import { getRecommendedActivity } from '../services/activityService';
 import { getSpacedReviewLesson } from '../services/lessonService';
 import { getDueWords } from '../services/spacedRepetitionService';
 import { getLearningPath } from '../services/learningPathService';
+import AchievementPanel from '../components/progress/AchievementPanel';
 import { colors, spacing, typography } from '../theme';
 
 export default function HomeScreen({ navigation }) {
@@ -31,6 +32,8 @@ export default function HomeScreen({ navigation }) {
         </WelcomeHeader>
 
         <DailyGoalCard completedSeconds={user.todaySeconds || 0} goal={user.dailyGoal} unit="min" />
+
+        <AchievementPanel sessions={user.sessions} compact />
 
         <Text style={styles.sectionTitle}>
           {hasReview ? 'Repaso recomendado' : hasPathLesson ? `Tu ruta · nivel ${nextPathLesson.levelCode}` : 'Recomendado para ti'}

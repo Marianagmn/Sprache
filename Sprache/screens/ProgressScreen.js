@@ -5,6 +5,7 @@ import LevelProgressCard from '../components/progress/LevelProgressCard';
 import WeeklyActivity from '../components/progress/WeeklyActivity';
 import ProgressStat from '../components/progress/ProgressStat';
 import LearningPath from '../components/progress/LearningPath';
+import AchievementPanel from '../components/progress/AchievementPanel';
 import BrandLogo from '../components/common/BrandLogo';
 import { getWeeklyActivity } from '../services/progressService';
 import { getNextReviewIntervalLabel } from '../services/spacedRepetitionService';
@@ -40,6 +41,9 @@ export default function ProgressScreen({ navigation }) {
           placementAssessment={user.placementAssessment}
           onStartLesson={(activityId) => navigation.navigate('Lesson', { activityId })}
         />
+
+        <Text style={styles.sectionTitle}>Experiencia y logros</Text>
+        <AchievementPanel sessions={user.sessions} />
 
         <Text style={styles.sectionTitle}>Actividad semanal</Text>
         {user.sessions.length ? (

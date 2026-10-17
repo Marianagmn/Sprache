@@ -5,7 +5,7 @@ import AppButton from '../common/AppButton';
 import { calculateSessionSummary } from '../../services/lessonProgressService';
 import { colors, radii, spacing, typography } from '../../theme';
 
-export default function SessionSummary({ correctAnswers, totalQuestions, onFinish }) {
+export default function SessionSummary({ correctAnswers, totalQuestions, earnedXp = correctAnswers * 10, onFinish }) {
   const summary = calculateSessionSummary(correctAnswers, totalQuestions);
 
   return (
@@ -18,6 +18,7 @@ export default function SessionSummary({ correctAnswers, totalQuestions, onFinis
       <View style={styles.score}>
         <Text style={styles.scoreValue}>{summary.percentage}%</Text>
         <Text style={styles.scoreLabel}>Respuestas correctas: {summary.correctAnswers} de {summary.totalQuestions}</Text>
+        <Text style={styles.xpEarned}>+{earnedXp} XP por esta práctica</Text>
         {summary.correctAnswers < summary.totalQuestions && (
           <Text style={styles.reviewNote}>Si quieres, puedes repasar las respuestas que hoy costaron más.</Text>
         )}
@@ -35,6 +36,7 @@ const styles = StyleSheet.create({
   score: { alignItems: 'center', marginBottom: 28 },
   scoreValue: { color: colors.black, fontSize: 38, fontWeight: typography.heavy },
   scoreLabel: { color: colors.muted, fontSize: 14, marginTop: 4 },
+  xpEarned: { color: colors.black, backgroundColor: colors.goldSoft, borderRadius: radii.pill, paddingHorizontal: 14, paddingVertical: 8, fontSize: 15, fontWeight: typography.bold, marginTop: 12 },
   reviewNote: { color: colors.muted, fontSize: 14, lineHeight: 20, textAlign: 'center', maxWidth: 300, marginTop: 12 },
   button: { width: '100%' },
 });

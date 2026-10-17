@@ -128,6 +128,7 @@ export default function LessonScreen({ navigation, route }) {
         <SessionSummary
           correctAnswers={sessionSummary.correctAnswers}
           totalQuestions={sessionSummary.totalQuestions}
+          earnedXp={sessionSummary.correctAnswers * 10}
           onFinish={() => navigation.goBack()}
         />
       </SafeAreaView>
