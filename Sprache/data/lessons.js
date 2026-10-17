@@ -334,7 +334,137 @@ export const grammarLessonAccusative = {
   ],
 };
 
-export const vocabularyLessons = [vocabularyLesson, vocabularyLessonDaily, vocabularyLessonFood, vocabularyLessonTravel, vocabularyLessonFamily, vocabularyLessonShopping];
-export const readingLessons = [readingLessonCity, readingLessonCafe, readingLessonStation, readingLessonMarket, readingLessonWeather];
-export const grammarLessons = [grammarLessonArticles, grammarLessonWordOrder, grammarLessonPresent, grammarLessonNegation, grammarLessonAccusative];
+export const vocabularyLessonHome = {
+  id: 'vocabulary-home',
+  title: 'La casa y sus habitaciones',
+  activityId: 'vocabulary-home',
+  durationMinutes: 6,
+  questions: [
+    { id: 'home-q1', prompt: '¿Qué significa “die Wohnung”?', word: 'Wohnung', options: ['El apartamento', 'La estación', 'La oficina', 'El jardín'], answer: 'El apartamento', vocabulary: { term: 'die Wohnung', translation: 'el apartamento' }, hint: 'Es el lugar donde vives.' },
+    { id: 'home-q2', prompt: '¿Cómo se dice “cocina” en alemán?', word: 'cocina', options: ['Küche', 'Fenster', 'Zimmer', 'Tür'], answer: 'Küche', vocabulary: { term: 'die Küche', translation: 'la cocina' }, hint: 'Es la habitación donde preparas la comida.' },
+    { id: 'home-q3', prompt: '¿Qué significa “das Schlafzimmer”?', word: 'Schlafzimmer', options: ['El dormitorio', 'El baño', 'El salón', 'El pasillo'], answer: 'El dormitorio', vocabulary: { term: 'das Schlafzimmer', translation: 'el dormitorio' }, hint: 'Schlaf se relaciona con dormir.' },
+  ],
+};
+
+export const vocabularyLessonHealth = {
+  id: 'vocabulary-health',
+  title: 'Salud y bienestar',
+  activityId: 'vocabulary-health',
+  durationMinutes: 6,
+  questions: [
+    { id: 'health-q1', prompt: '¿Qué significa “der Kopf”?', word: 'Kopf', options: ['La cabeza', 'La mano', 'La espalda', 'El pie'], answer: 'La cabeza', vocabulary: { term: 'der Kopf', translation: 'la cabeza' }, hint: 'Está sobre el cuello.' },
+    { id: 'health-q2', prompt: '¿Cómo se dice “médico” en alemán?', word: 'médico', options: ['Arzt', 'Lehrer', 'Koch', 'Fahrer'], answer: 'Arzt', vocabulary: { term: 'der Arzt', translation: 'el médico' }, hint: 'Visitas a esta persona cuando estás enfermo.' },
+    { id: 'health-q3', prompt: '¿Qué significa “Ich bin krank”?', word: 'krank', options: ['Estoy enfermo', 'Tengo hambre', 'Estoy de viaje', 'Estoy cansado'], answer: 'Estoy enfermo', vocabulary: { term: 'krank', translation: 'enfermo' }, hint: 'Describe cómo te sientes cuando necesitas descansar.' },
+  ],
+};
+
+export const vocabularyLessonHobbies = {
+  id: 'vocabulary-hobbies',
+  title: 'Tiempo libre y aficiones',
+  activityId: 'vocabulary-hobbies',
+  durationMinutes: 6,
+  questions: [
+    { id: 'hobbies-q1', prompt: '¿Qué significa “lesen”?', word: 'lesen', options: ['Leer', 'Cocinar', 'Bailar', 'Nadar'], answer: 'Leer', vocabulary: { term: 'lesen', translation: 'leer' }, hint: 'Lo haces cuando disfrutas de un libro.' },
+    { id: 'hobbies-q2', prompt: '¿Cómo se dice “música” en alemán?', word: 'música', options: ['Musik', 'Sport', 'Film', 'Reise'], answer: 'Musik', vocabulary: { term: 'die Musik', translation: 'la música' }, hint: 'Se escucha y puede tener ritmo y melodía.' },
+    { id: 'hobbies-q3', prompt: '¿Qué significa “Ich spiele gern Fußball”?', word: 'Fußball', options: ['Me gusta jugar al fútbol', 'Veo una película', 'Leo un libro', 'Cocino con gusto'], answer: 'Me gusta jugar al fútbol', vocabulary: { term: 'Fußball spielen', translation: 'jugar al fútbol' }, hint: 'Fußball es un deporte de equipo.' },
+  ],
+};
+
+export const vocabularyLessonWork = {
+  id: 'vocabulary-work',
+  title: 'En el trabajo',
+  activityId: 'vocabulary-work',
+  durationMinutes: 6,
+  questions: [
+    { id: 'work-q1', prompt: '¿Qué significa “der Kollege”?', word: 'Kollege', options: ['El compañero de trabajo', 'El vecino', 'El cliente', 'El profesor'], answer: 'El compañero de trabajo', vocabulary: { term: 'der Kollege', translation: 'el compañero de trabajo' }, hint: 'Trabaja contigo en el mismo lugar.' },
+    { id: 'work-q2', prompt: '¿Cómo se dice “reunión” en alemán?', word: 'reunión', options: ['Besprechung', 'Pause', 'Aufgabe', 'Büro'], answer: 'Besprechung', vocabulary: { term: 'die Besprechung', translation: 'la reunión' }, hint: 'Es una conversación de trabajo entre varias personas.' },
+    { id: 'work-q3', prompt: '¿Qué significa “Ich arbeite von zu Hause”?', word: 'zu Hause', options: ['Trabajo desde casa', 'Trabajo en el centro', 'Voy al trabajo', 'Termino de trabajar'], answer: 'Trabajo desde casa', vocabulary: { term: 'von zu Hause arbeiten', translation: 'trabajar desde casa' }, hint: 'Zu Hause significa “en casa”.' },
+  ],
+};
+
+export const readingLessonDoctor = {
+  id: 'reading-doctor',
+  title: 'Lectura: En la consulta médica',
+  activityId: 'reading-doctor',
+  durationMinutes: 7,
+  questions: [
+    { id: 'doctor-q1', prompt: 'El médico pregunta “Was fehlt Ihnen?”. ¿Qué quiere saber?', word: 'Was fehlt Ihnen?', options: ['Qué le pasa al paciente', 'Dónde vive el paciente', 'Cuándo viaja', 'Qué desea comer'], answer: 'Qué le pasa al paciente', vocabulary: { term: 'fehlen', translation: 'faltar / encontrarse mal' }, hint: 'Es una forma habitual de preguntar por los síntomas.' },
+    { id: 'doctor-q2', prompt: 'El paciente dice “Seit gestern habe ich Fieber”. ¿Desde cuándo tiene fiebre?', word: 'seit gestern', options: ['Desde ayer', 'Desde hoy', 'Desde hace una semana', 'Desde la mañana'], answer: 'Desde ayer', vocabulary: { term: 'seit gestern', translation: 'desde ayer' }, hint: 'Gestern significa ayer.' },
+    { id: 'doctor-q3', prompt: '¿Qué significa “Nehmen Sie diese Tabletten zweimal täglich”?', word: 'Tabletten', options: ['Tome estas pastillas dos veces al día', 'Descanse durante dos días', 'Vuelva la semana próxima', 'Beba agua antes de dormir'], answer: 'Tome estas pastillas dos veces al día', vocabulary: { term: 'zweimal täglich', translation: 'dos veces al día' }, hint: 'Zweimal significa dos veces y täglich, diariamente.' },
+  ],
+};
+
+export const readingLessonWeekend = {
+  id: 'reading-weekend',
+  title: 'Lectura: Planes para el fin de semana',
+  activityId: 'reading-weekend',
+  durationMinutes: 7,
+  questions: [
+    { id: 'weekend-q1', prompt: 'Anna dice “Am Samstag fahre ich an den See”. ¿Adónde va?', word: 'See', options: ['Al lago', 'A la oficina', 'A la estación', 'Al médico'], answer: 'Al lago', vocabulary: { term: 'der See', translation: 'el lago' }, hint: 'Es un lugar con agua rodeado de tierra.' },
+    { id: 'weekend-q2', prompt: '¿Qué significa “Wir treffen uns um drei Uhr”?', word: 'treffen', options: ['Nos encontramos a las tres', 'Salimos a las cuatro', 'Llegamos a las dos', 'Nos vemos mañana'], answer: 'Nos encontramos a las tres', vocabulary: { term: 'sich treffen', translation: 'encontrarse' }, hint: 'Drei Uhr indica las tres.' },
+    { id: 'weekend-q3', prompt: 'Si llueve el domingo, ¿qué harán Anna y sus amigos?', word: 'regnen', options: ['Se quedarán en casa y verán una película', 'Irán al lago', 'Jugarán al fútbol fuera', 'Viajarán a otra ciudad'], answer: 'Se quedarán en casa y verán una película', vocabulary: { term: 'zu Hause bleiben', translation: 'quedarse en casa' }, hint: 'El plan alternativo es bajo techo.' },
+  ],
+};
+
+export const readingLessonApartment = {
+  id: 'reading-apartment',
+  title: 'Lectura: Buscar apartamento',
+  activityId: 'reading-apartment',
+  durationMinutes: 7,
+  questions: [
+    { id: 'apartment-q1', prompt: 'La oferta dice “Die Wohnung hat zwei Zimmer”. ¿Cuántas habitaciones tiene?', word: 'zwei Zimmer', options: ['Dos', 'Una', 'Tres', 'Cuatro'], answer: 'Dos', vocabulary: { term: 'das Zimmer', translation: 'la habitación' }, hint: 'Zwei significa dos.' },
+    { id: 'apartment-q2', prompt: '¿Qué significa “Die Miete beträgt 800 Euro”?', word: 'Miete', options: ['El alquiler es de 800 euros', 'El piso tiene 800 metros', 'La visita es a las ocho', 'El piso está en el centro'], answer: 'El alquiler es de 800 euros', vocabulary: { term: 'die Miete', translation: 'el alquiler' }, hint: 'Miete es el dinero que pagas por vivir en una vivienda.' },
+    { id: 'apartment-q3', prompt: 'El anuncio dice “Die Wohnung ist ab Juni frei”. ¿Desde cuándo está disponible?', word: 'ab Juni', options: ['Desde junio', 'Hasta junio', 'Desde julio', 'Durante un año'], answer: 'Desde junio', vocabulary: { term: 'frei sein', translation: 'estar disponible' }, hint: 'Ab indica desde un momento.' },
+  ],
+};
+
+export const grammarLessonModalVerbs = {
+  id: 'grammar-modal-verbs',
+  title: 'Verbos modales: können y müssen',
+  activityId: 'grammar-modal-verbs',
+  durationMinutes: 8,
+  questions: [
+    { id: 'modal-q1', prompt: 'Completa: Ich ___ heute länger arbeiten. (Tengo que trabajar más tiempo.)', word: 'müssen', options: ['muss', 'musst', 'müssen', 'kann'], answer: 'muss', vocabulary: { term: 'müssen', translation: 'tener que' }, hint: 'Con ich, müssen se conjuga muss.' },
+    { id: 'modal-q2', prompt: 'Completa: ___ du mir helfen? (¿Puedes ayudarme?)', word: 'können', options: ['Kannst', 'Kann', 'Können', 'Musst'], answer: 'Kannst', vocabulary: { term: 'können', translation: 'poder' }, hint: 'La pregunta va dirigida a du.' },
+    { id: 'modal-q3', prompt: '¿Dónde va el infinitivo en “Wir können heute ___”?', word: 'infinitivo', options: ['Al final de la frase', 'Antes del sujeto', 'Justo después del sujeto', 'No se usa infinitivo'], answer: 'Al final de la frase', vocabulary: { term: 'der Infinitiv', translation: 'el infinitivo' }, hint: 'El verbo modal conjugado ocupa la segunda posición.' },
+  ],
+};
+
+export const grammarLessonDative = {
+  id: 'grammar-dative',
+  title: 'El dativo en frases cotidianas',
+  activityId: 'grammar-dative',
+  durationMinutes: 8,
+  questions: [
+    { id: 'dative-q1', prompt: 'Completa: Ich helfe ___ Mann. (Ayudo al hombre.)', word: 'helfen', options: ['dem', 'den', 'der', 'das'], answer: 'dem', vocabulary: { term: 'dem Mann', translation: 'al hombre (dativo)' }, hint: 'Helfen rige dativo y Mann es masculino.' },
+    { id: 'dative-q2', prompt: 'Completa: Sie spricht mit ___ Freundin. (Habla con la amiga.)', word: 'mit', options: ['der', 'die', 'dem', 'den'], answer: 'der', vocabulary: { term: 'mit der Freundin', translation: 'con la amiga' }, hint: 'Mit siempre va seguido de dativo; Freundin es femenino.' },
+    { id: 'dative-q3', prompt: '¿Qué significa “Das Buch gehört dem Kind”?', word: 'gehören', options: ['El libro pertenece al niño', 'El niño lee el libro', 'El libro está sobre el niño', 'El niño compra el libro'], answer: 'El libro pertenece al niño', vocabulary: { term: 'gehören', translation: 'pertenecer' }, hint: 'Gehören expresa a quién pertenece algo.' },
+  ],
+};
+
+export const grammarLessonPerfect = {
+  id: 'grammar-perfect',
+  title: 'Pasado: Perfekt con haben y sein',
+  activityId: 'grammar-perfect',
+  durationMinutes: 8,
+  questions: [
+    { id: 'perfect-q1', prompt: 'Completa: Ich ___ gestern Deutsch gelernt.', word: 'lernen', options: ['habe', 'bin', 'hat', 'seid'], answer: 'habe', vocabulary: { term: 'lernen', translation: 'aprender' }, hint: 'Lernen forma el Perfekt con haben.' },
+    { id: 'perfect-q2', prompt: 'Completa: Wir ___ nach Berlin gefahren.', word: 'fahren', options: ['sind', 'haben', 'ist', 'seid'], answer: 'sind', vocabulary: { term: 'fahren', translation: 'ir / viajar en vehículo' }, hint: 'Los verbos de desplazamiento suelen formar el Perfekt con sein.' },
+    { id: 'perfect-q3', prompt: '¿Dónde suele colocarse el participio en “Sie hat einen Film gesehen”?', word: 'Partizip II', options: ['Al final de la frase', 'Antes del sujeto', 'Después del sujeto', 'No aparece'], answer: 'Al final de la frase', vocabulary: { term: 'gesehen', translation: 'visto' }, hint: 'El participio suele ir al final en una oración principal.' },
+  ],
+};
+
+export const vocabularyLessons = [
+  vocabularyLesson, vocabularyLessonDaily, vocabularyLessonFood, vocabularyLessonTravel,
+  vocabularyLessonFamily, vocabularyLessonShopping, vocabularyLessonHome, vocabularyLessonHealth,
+  vocabularyLessonHobbies, vocabularyLessonWork,
+];
+export const readingLessons = [
+  readingLessonCity, readingLessonCafe, readingLessonStation, readingLessonMarket, readingLessonWeather,
+  readingLessonDoctor, readingLessonWeekend, readingLessonApartment,
+];
+export const grammarLessons = [
+  grammarLessonArticles, grammarLessonWordOrder, grammarLessonPresent, grammarLessonNegation,
+  grammarLessonAccusative, grammarLessonModalVerbs, grammarLessonDative, grammarLessonPerfect,
+];
 export const lessons = [...vocabularyLessons, ...readingLessons, ...grammarLessons];

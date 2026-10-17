@@ -10,11 +10,14 @@ export const LEARNING_LEVELS = [
   {
     code: 'A2',
     title: 'Construye frases',
-    description: 'Amplía vocabulario y practica frases y situaciones habituales.',
+    description: 'Amplía vocabulario y practica frases, lecturas y situaciones habituales.',
     activityIds: [
       'grammar-word-order', 'grammar-present', 'vocabulary-travel', 'vocabulary-shopping',
       'reading-cafe', 'reading-station', 'reading-market', 'reading-weather',
       'grammar-negation', 'grammar-accusative', 'vocabulary-family',
+      'vocabulary-home', 'vocabulary-health', 'vocabulary-hobbies', 'vocabulary-work',
+      'reading-doctor', 'reading-weekend', 'reading-apartment',
+      'grammar-modal-verbs', 'grammar-dative', 'grammar-perfect',
     ],
   },
 ];

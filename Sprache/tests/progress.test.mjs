@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { activities } from '../data/Activities.js';
-import { vocabularyLesson } from '../data/lessons.js';
+import { lessons, vocabularyLesson } from '../data/lessons.js';
 import { getActivities, filterActivities, getRecommendedActivity } from '../services/activityService.js';
 import { getLessonByActivityId } from '../services/lessonService.js';
 import { buildLessonCompletion, calculateSessionSummary } from '../services/lessonProgressService.js';
@@ -30,6 +30,19 @@ test('el catálogo tiene IDs únicos y cada actividad apunta a una lección', ()
   assert.equal(new Set(ids).size, ids.length);
   assert.ok(listedActivities.every((activity) => getLessonByActivityId(activity.id)));
   assert.equal(getRecommendedActivity([]).id, vocabularyLesson.activityId);
+});
+
+test('las diez lecciones nuevas están completas y accesibles desde el catálogo y la ruta', () => {
+  assert.equal(lessons.length, 26);
+  assert.equal(activities.length, 26);
+  assert.ok(lessons.every((lesson) => lesson.questions.length >= 3));
+  assert.ok(lessons.every((lesson) => lesson.questions.every((question) => (
+    question.options.includes(question.answer)
+    && question.vocabulary?.term
+    && question.vocabulary?.translation
+    && question.hint
+  ))));
+  assert.equal(LEARNING_LEVELS[1].activityIds.length, 21);
 });
 
 test('los filtros devuelven solo la categoría seleccionada', () => {
