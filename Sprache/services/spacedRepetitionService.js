@@ -46,9 +46,9 @@ export function getDueWords(wordProgress = {}, now = new Date(), limit = 5) {
       return Number.isFinite(dueAt) && dueAt <= nowMs;
     })
     .sort((first, second) => {
-      const difficultyDifference = getReviewDifficulty(second) - getReviewDifficulty(first);
-      if (difficultyDifference) return difficultyDifference;
-      return new Date(first.nextReviewAt).getTime() - new Date(second.nextReviewAt).getTime();
+      const overdueDifference = new Date(first.nextReviewAt).getTime() - new Date(second.nextReviewAt).getTime();
+      if (overdueDifference) return overdueDifference;
+      return getReviewDifficulty(second) - getReviewDifficulty(first);
     })
     .slice(0, Math.max(0, limit));
 }

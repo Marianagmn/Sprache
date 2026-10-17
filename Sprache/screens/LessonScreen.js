@@ -163,7 +163,10 @@ export default function LessonScreen({ navigation, route }) {
         />
         <LessonProgress current={questionIndex + 1} total={lesson.questions.length} />
         <QuestionCard question={question.word} prompt={question.prompt} />
-        <AudioButton />
+        <AudioButton
+          wordText={question.audioWord || question.vocabulary?.term || question.word}
+          phraseText={question.audioPhrase}
+        />
         <View style={styles.options}>
           {question.options.map((option) => (
             <AnswerOption
@@ -194,7 +197,7 @@ export default function LessonScreen({ navigation, route }) {
         {answered && (
           <FeedbackMessage
             correct={isCorrect}
-            message={isCorrect ? 'La respuesta es correcta.' : `La respuesta correcta era ${question.answer}.`}
+            message={`${isCorrect ? 'La respuesta es correcta.' : `La respuesta correcta es ${question.answer}.`} ${question.explanation || question.hint}`}
           />
         )}
         {!!completionError && <FeedbackMessage correct={false} message={completionError} />}

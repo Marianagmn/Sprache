@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { StyleSheet, SafeAreaView, ScrollView } from 'react-native';
+import { useApp } from '../context/AppContext';
 import ActivityList from '../components/activities/ActivityList';
 import ScreenHeader from '../components/common/ScreenHeader';
 import ActivityFilter from '../components/activities/ActivityFilter';
-import { colors, typography } from '../theme';
-
+import { colors } from '../theme';
 
 export default function ActivitiesScreen({ navigation }) {
-  const [activeFilter, setActiveFilter] = useState('Todos');
+  const { user } = useApp();
+  const [activeLevel, setActiveLevel] = useState(user.placementAssessment?.recommendedLevel || 'A1');
 
   const handleActivityPress = (activity) => {
     navigation.navigate('Lesson', { activityId: activity.id });
@@ -15,16 +16,16 @@ export default function ActivitiesScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView 
-        showsVerticalScrollIndicator={false} 
+      <ScrollView
+        showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.scroll}
       >
-        <ScreenHeader 
-          title="Actividades" 
-          subtitle="¿Qué te gustaría practicar hoy?" 
+        <ScreenHeader
+          title="Actividades"
+          subtitle="Elige un nivel y explora las lecciones por tema."
         />
-        <ActivityFilter activeFilter={activeFilter} onChange={setActiveFilter} />
-        <ActivityList category={activeFilter} onActivityPress={handleActivityPress} />
+        <ActivityFilter activeFilter={activeLevel} onChange={setActiveLevel} />
+        <ActivityList levelCode={activeLevel} onActivityPress={handleActivityPress} />
       </ScrollView>
     </SafeAreaView>
   );
@@ -32,6 +33,4 @@ export default function ActivitiesScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.background },
   scroll: { padding: 20 },
-  headerTitle: { fontSize: typography.title, fontWeight: 'bold', color: colors.black, marginBottom: 4 },
-  headerSubtitle: { fontSize: typography.body, color: colors.muted, marginBottom: 24 },
 });

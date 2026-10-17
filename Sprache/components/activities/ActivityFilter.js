@@ -3,7 +3,11 @@ import { ScrollView, Text, TouchableOpacity, StyleSheet, View } from 'react-nati
 import { colors, radii } from '../../theme';
 
 export default function ActivityFilter({ activeFilter = 'Todos', onChange }) {
-  const filters = ['Todos', 'Gramática', 'Vocabulario', 'Lectura', 'Escucha'];
+  const filters = [
+    { value: 'Todos', label: 'Todos los niveles' },
+    { value: 'A1', label: 'A1 · Inicial' },
+    { value: 'A2', label: 'A2 · Elemental' },
+  ];
 
   return (
     <View style={styles.container}>
@@ -13,19 +17,19 @@ export default function ActivityFilter({ activeFilter = 'Todos', onChange }) {
         contentContainerStyle={styles.scrollContent}
       >
         {filters.map((filter) => {
-          const isActive = activeFilter === filter;
+          const isActive = activeFilter === filter.value;
           
           return (
             <TouchableOpacity
-              key={filter}
+              key={filter.value}
               style={[
                 styles.filterChip,
                 isActive ? styles.activeChip : styles.inactiveChip
               ]}
-              onPress={() => onChange?.(filter)}
+              onPress={() => onChange?.(filter.value)}
               activeOpacity={0.7}
               accessibilityRole="radio"
-              accessibilityLabel={`Filtrar por ${filter}`}
+              accessibilityLabel={`Filtrar por nivel: ${filter.label}`}
               accessibilityState={{ selected: isActive }}
             >
               <Text 
@@ -34,7 +38,7 @@ export default function ActivityFilter({ activeFilter = 'Todos', onChange }) {
                   isActive ? styles.activeText : styles.inactiveText
                 ]}
               >
-                {filter}
+                {filter.label}
               </Text>
             </TouchableOpacity>
           );

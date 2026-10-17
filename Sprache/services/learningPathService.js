@@ -5,7 +5,10 @@ export const LEARNING_LEVELS = [
     code: 'A1',
     title: 'Primeros pasos',
     description: 'Vocabulario cotidiano, artículos y primeras lecturas.',
-    activityIds: ['vocabulary', 'vocabulary-food', 'grammar-articles', 'vocabulary-daily', 'reading-city'],
+    activityIds: [
+      'vocabulary', 'vocabulary-greetings', 'vocabulary-food', 'vocabulary-study',
+      'grammar-articles', 'vocabulary-daily', 'reading-city',
+    ],
   },
   {
     code: 'A2',
@@ -17,6 +20,7 @@ export const LEARNING_LEVELS = [
       'grammar-negation', 'grammar-accusative', 'vocabulary-family',
       'vocabulary-home', 'vocabulary-health', 'vocabulary-hobbies', 'vocabulary-work',
       'reading-doctor', 'reading-weekend', 'reading-apartment',
+      'reading-conversation',
       'grammar-modal-verbs', 'grammar-dative', 'grammar-perfect',
     ],
   },

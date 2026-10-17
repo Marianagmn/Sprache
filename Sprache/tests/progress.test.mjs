@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { activities } from '../data/Activities.js';
 import { lessons, vocabularyLesson } from '../data/lessons.js';
-import { getActivities, filterActivities, getRecommendedActivity } from '../services/activityService.js';
+import { getActivities, filterActivities, filterActivitiesByLevel, getRecommendedActivity } from '../services/activityService.js';
 import { getLessonByActivityId } from '../services/lessonService.js';
 import { buildLessonCompletion, calculateSessionSummary } from '../services/lessonProgressService.js';
 import { getSpacedReviewLesson } from '../services/lessonService.js';
@@ -53,9 +53,9 @@ test('el catálogo tiene IDs únicos y cada actividad apunta a una lección', ()
   assert.equal(getRecommendedActivity([]).id, vocabularyLesson.activityId);
 });
 
-test('las diez lecciones nuevas están completas y accesibles desde el catálogo y la ruta', () => {
-  assert.equal(lessons.length, 26);
-  assert.equal(activities.length, 26);
+test('las lecciones están completas, agrupadas por nivel y tema, y accesibles desde la ruta', () => {
+  assert.equal(lessons.length, 29);
+  assert.equal(activities.length, 29);
   assert.ok(lessons.every((lesson) => lesson.questions.length >= 3));
   assert.ok(lessons.every((lesson) => lesson.questions.every((question) => (
     question.options.includes(question.answer)
@@ -63,7 +63,15 @@ test('las diez lecciones nuevas están completas y accesibles desde el catálogo
     && question.vocabulary?.translation
     && question.hint
   ))));
-  assert.equal(LEARNING_LEVELS[1].activityIds.length, 21);
+  assert.ok(activities.every((activity) => activity.levelCode && activity.topic));
+  assert.equal(LEARNING_LEVELS[0].activityIds.length, 7);
+  assert.equal(LEARNING_LEVELS[1].activityIds.length, 22);
+  assert.ok(getLessonByActivityId('vocabulary-greetings'));
+  assert.ok(getLessonByActivityId('vocabulary-study'));
+  assert.ok(getLessonByActivityId('reading-conversation'));
+  assert.ok(['Saludos', 'Comida', 'Transporte', 'Estudio', 'Conversación'].every((topic) => (
+    activities.some((activity) => activity.topic === topic)
+  )));
 });
 
 test('los filtros devuelven solo la categoría seleccionada', () => {
@@ -75,6 +83,12 @@ test('los filtros devuelven solo la categoría seleccionada', () => {
   assert.deepEqual(filterActivities(activities, 'Vocabulario'), vocabActivities);
   assert.deepEqual(filterActivities(activities, 'Lectura'), readingActivities);
   assert.deepEqual(filterActivities(activities, 'Gramática'), grammarActivities);
+});
+
+test('el filtro por nivel solo muestra las lecciones de ese nivel', () => {
+  assert.deepEqual(filterActivitiesByLevel(activities, 'Todos'), activities);
+  assert.ok(filterActivitiesByLevel(activities, 'A1').every((activity) => activity.levelCode === 'A1'));
+  assert.ok(filterActivitiesByLevel(activities, 'A2').every((activity) => activity.levelCode === 'A2'));
 });
 
 test('una actividad desconocida no abre otra lección por defecto', () => {
@@ -196,6 +210,23 @@ test('el repaso elige primero las palabras difíciles que ya vencieron', () => {
   assert.deepEqual(dueWords.map((word) => word.term), ['Buch', 'Haus']);
   assert.deepEqual(reviewLesson.questions.map((question) => question.vocabulary.term), ['Buch', 'Haus']);
   assert.equal(reviewLesson.activityId, 'spaced-review');
+});
+
+test('el repaso prioriza las palabras cuyo momento recomendado pasó hace más tiempo', () => {
+  const wordProgress = {
+    older: {
+      term: 'älter', correctAnswers: 4, mistakes: 0, hints: 0,
+      lastPracticedAt: new Date(referenceDate.getTime() - 14 * 24 * 60 * 60 * 1000).toISOString(),
+      nextReviewAt: new Date(referenceDate.getTime() - 7 * 24 * 60 * 60 * 1000).toISOString(),
+    },
+    recent: {
+      term: 'neu', correctAnswers: 0, mistakes: 4, hints: 2,
+      lastPracticedAt: new Date(referenceDate.getTime() - 60 * 60 * 1000).toISOString(),
+      nextReviewAt: new Date(referenceDate.getTime() - 60 * 1000).toISOString(),
+    },
+  };
+
+  assert.deepEqual(getDueWords(wordProgress, referenceDate).map((word) => word.term), ['älter', 'neu']);
 });
 
 test('la evaluación inicial recomienda A1 o A2 según las respuestas correctas', () => {

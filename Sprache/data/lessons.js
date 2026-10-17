@@ -382,6 +382,96 @@ export const vocabularyLessonWork = {
   ],
 };
 
+export const vocabularyLessonGreetings = {
+  id: 'vocabulary-greetings',
+  title: 'Saludos y presentaciones',
+  activityId: 'vocabulary-greetings',
+  durationMinutes: 5,
+  questions: [
+    {
+      id: 'greetings-q1',
+      prompt: '¿Cómo saludas por la mañana en alemán?',
+      word: 'buenos días',
+      audioWord: 'Morgen',
+      audioPhrase: 'Guten Morgen! Wie geht es dir?',
+      options: ['Guten Morgen', 'Gute Nacht', 'Auf Wiedersehen', 'Danke schön'],
+      answer: 'Guten Morgen',
+      vocabulary: { term: 'Guten Morgen', translation: 'buenos días' },
+      hint: 'Guten Morgen se usa durante la mañana.',
+      explanation: 'Guten Morgen es el saludo habitual por la mañana.',
+    },
+    {
+      id: 'greetings-q2',
+      prompt: '¿Qué significa “Wie heißt du?”?',
+      word: 'Wie heißt du?',
+      audioWord: 'heißen',
+      audioPhrase: 'Wie heißt du?',
+      options: ['¿Cómo te llamas?', '¿Dónde vives?', '¿Cuántos años tienes?', '¿Cómo estás?'],
+      answer: '¿Cómo te llamas?',
+      vocabulary: { term: 'Wie heißt du?', translation: '¿Cómo te llamas?' },
+      hint: 'Heißt pregunta por el nombre.',
+      explanation: 'Heißt viene del verbo heißen, que se usa para decir cómo se llama alguien.',
+    },
+    {
+      id: 'greetings-q3',
+      prompt: '¿Cómo te despides diciendo “hasta pronto”?',
+      word: 'hasta pronto',
+      audioWord: 'bald',
+      audioPhrase: 'Bis bald!',
+      options: ['Bis bald', 'Guten Abend', 'Bitte sehr', 'Gute Reise'],
+      answer: 'Bis bald',
+      vocabulary: { term: 'Bis bald', translation: 'hasta pronto' },
+      hint: 'Bald significa pronto.',
+      explanation: 'Bis bald expresa que esperas volver a ver a esa persona pronto.',
+    },
+  ],
+};
+
+export const vocabularyLessonStudy = {
+  id: 'vocabulary-study',
+  title: 'En clase y al estudiar',
+  activityId: 'vocabulary-study',
+  durationMinutes: 6,
+  questions: [
+    {
+      id: 'study-q1',
+      prompt: '¿Cómo se dice “cuaderno” en alemán?',
+      word: 'cuaderno',
+      audioWord: 'Heft',
+      audioPhrase: 'Das Heft liegt auf dem Tisch.',
+      options: ['das Heft', 'der Stift', 'die Tafel', 'das Buch'],
+      answer: 'das Heft',
+      vocabulary: { term: 'das Heft', translation: 'el cuaderno' },
+      hint: 'Es donde escribes apuntes.',
+      explanation: 'Das Heft es un cuaderno; es un sustantivo neutro.',
+    },
+    {
+      id: 'study-q2',
+      prompt: '¿Qué significa “Ich lerne Deutsch”?',
+      word: 'Ich lerne Deutsch',
+      audioWord: 'lernen',
+      audioPhrase: 'Ich lerne Deutsch.',
+      options: ['Estudio alemán', 'Enseño alemán', 'Hablo inglés', 'Leo un libro'],
+      answer: 'Estudio alemán',
+      vocabulary: { term: 'lernen', translation: 'aprender / estudiar' },
+      hint: 'Lernen describe adquirir conocimientos.',
+      explanation: 'Ich lerne Deutsch significa “estudio alemán”; lerne es la forma de lernen con ich.',
+    },
+    {
+      id: 'study-q3',
+      prompt: '¿Cómo se dice “profesora” en alemán?',
+      word: 'profesora',
+      audioWord: 'Lehrerin',
+      audioPhrase: 'Die Lehrerin erklärt die Aufgabe.',
+      options: ['die Lehrerin', 'die Schülerin', 'die Freundin', 'die Ärztin'],
+      answer: 'die Lehrerin',
+      vocabulary: { term: 'die Lehrerin', translation: 'la profesora' },
+      hint: 'Es la persona que enseña en clase.',
+      explanation: 'Lehrerin es la forma femenina de Lehrer, “profesor”.',
+    },
+  ],
+};
+
 export const readingLessonDoctor = {
   id: 'reading-doctor',
   title: 'Lectura: En la consulta médica',
@@ -415,6 +505,56 @@ export const readingLessonApartment = {
     { id: 'apartment-q1', prompt: 'La oferta dice “Die Wohnung hat zwei Zimmer”. ¿Cuántas habitaciones tiene?', word: 'zwei Zimmer', options: ['Dos', 'Una', 'Tres', 'Cuatro'], answer: 'Dos', vocabulary: { term: 'das Zimmer', translation: 'la habitación' }, hint: 'Zwei significa dos.' },
     { id: 'apartment-q2', prompt: '¿Qué significa “Die Miete beträgt 800 Euro”?', word: 'Miete', options: ['El alquiler es de 800 euros', 'El piso tiene 800 metros', 'La visita es a las ocho', 'El piso está en el centro'], answer: 'El alquiler es de 800 euros', vocabulary: { term: 'die Miete', translation: 'el alquiler' }, hint: 'Miete es el dinero que pagas por vivir en una vivienda.' },
     { id: 'apartment-q3', prompt: 'El anuncio dice “Die Wohnung ist ab Juni frei”. ¿Desde cuándo está disponible?', word: 'ab Juni', options: ['Desde junio', 'Hasta junio', 'Desde julio', 'Durante un año'], answer: 'Desde junio', vocabulary: { term: 'frei sein', translation: 'estar disponible' }, hint: 'Ab indica desde un momento.' },
+  ],
+};
+
+export const readingLessonConversation = {
+  id: 'reading-conversation',
+  title: 'Conversación: Conocerse',
+  activityId: 'reading-conversation',
+  durationMinutes: 6,
+  questions: [
+    {
+      id: 'conversation-q1',
+      prompt: 'Ana pregunta “Woher kommst du?”. ¿Qué quiere saber?',
+      word: 'Woher kommst du?',
+      audioWord: 'kommen',
+      audioPhrase: 'Woher kommst du?',
+      options: ['De dónde eres', 'Dónde estudias', 'Adónde viajas', 'Qué idioma hablas'],
+      answer: 'De dónde eres',
+      vocabulary: { term: 'Woher kommst du?', translation: '¿De dónde eres?' },
+      hint: 'Woher pregunta por el origen.',
+      explanation: 'Woher kommst du? pregunta por el lugar de origen de la otra persona.',
+    },
+    {
+      id: 'conversation-q2',
+      prompt: 'Luis responde “Ich komme aus Kolumbien”. ¿De dónde es?',
+      word: 'Ich komme aus Kolumbien',
+      audioWord: 'Kolumbien',
+      audioPhrase: 'Ich komme aus Kolumbien.',
+      options: ['De Colombia', 'De Alemania', 'De España', 'De Austria'],
+      answer: 'De Colombia',
+      vocabulary: { term: 'aus Kolumbien', translation: 'de Colombia' },
+      hint: 'Kolumbien es el nombre alemán de Colombia.',
+      explanation: 'Aus significa “de” al hablar del origen; Kolumbien es Colombia en alemán.',
+    },
+    {
+      id: 'conversation-q3',
+      prompt: '¿Qué dice Luis para pedir que repitan más despacio?',
+      word: '¿Puedes repetirlo?',
+      audioWord: 'wiederholen',
+      audioPhrase: 'Kannst du das bitte langsamer wiederholen?',
+      options: [
+        'Kannst du das bitte langsamer wiederholen?',
+        'Ich möchte jetzt gehen.',
+        'Wo ist der Bahnhof?',
+        'Das schmeckt sehr gut.',
+      ],
+      answer: 'Kannst du das bitte langsamer wiederholen?',
+      vocabulary: { term: 'wiederholen', translation: 'repetir' },
+      hint: 'Wiederholen significa hacer o decir algo otra vez.',
+      explanation: 'La frase pide amablemente que repitan algo más despacio.',
+    },
   ],
 };
 
@@ -457,11 +597,11 @@ export const grammarLessonPerfect = {
 export const vocabularyLessons = [
   vocabularyLesson, vocabularyLessonDaily, vocabularyLessonFood, vocabularyLessonTravel,
   vocabularyLessonFamily, vocabularyLessonShopping, vocabularyLessonHome, vocabularyLessonHealth,
-  vocabularyLessonHobbies, vocabularyLessonWork,
+  vocabularyLessonHobbies, vocabularyLessonWork, vocabularyLessonGreetings, vocabularyLessonStudy,
 ];
 export const readingLessons = [
   readingLessonCity, readingLessonCafe, readingLessonStation, readingLessonMarket, readingLessonWeather,
-  readingLessonDoctor, readingLessonWeekend, readingLessonApartment,
+  readingLessonDoctor, readingLessonWeekend, readingLessonApartment, readingLessonConversation,
 ];
 export const grammarLessons = [
   grammarLessonArticles, grammarLessonWordOrder, grammarLessonPresent, grammarLessonNegation,

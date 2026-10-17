@@ -12,6 +12,14 @@ export function filterActivities(activityList, category = 'Todos') {
   return activityList.filter((activity) => activity.category === category);
 }
 
+export function filterActivitiesByLevel(activityList, levelCode = 'Todos') {
+  if (levelCode === 'Todos') {
+    return activityList;
+  }
+
+  return activityList.filter((activity) => activity.levelCode === levelCode);
+}
+
 export function getRecommendedActivity(sessions = []) {
   const activityCounts = new Map();
   const lastCompleted = new Map();

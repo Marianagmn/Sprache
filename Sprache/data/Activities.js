@@ -25,6 +25,9 @@ import {
   grammarLessonModalVerbs,
   grammarLessonDative,
   grammarLessonPerfect,
+  vocabularyLessonGreetings,
+  vocabularyLessonStudy,
+  readingLessonConversation,
 } from './lessons.js';
 
 export const activities = [
@@ -236,7 +239,70 @@ export const activities = [
     iconName: 'time-outline',
     category: 'Gramática',
   },
+  {
+    id: vocabularyLessonGreetings.activityId,
+    title: vocabularyLessonGreetings.title,
+    description: 'Aprende saludos y frases para presentarte.',
+    time: `${vocabularyLessonGreetings.durationMinutes} min`,
+    iconName: 'hand-left-outline',
+    category: 'Vocabulario',
+  },
+  {
+    id: vocabularyLessonStudy.activityId,
+    title: vocabularyLessonStudy.title,
+    description: 'Practica palabras útiles para estudiar y participar en clase.',
+    time: `${vocabularyLessonStudy.durationMinutes} min`,
+    iconName: 'pencil-outline',
+    category: 'Vocabulario',
+  },
+  {
+    id: readingLessonConversation.activityId,
+    title: readingLessonConversation.title,
+    description: 'Practica una conversación para conocer a alguien y pedir ayuda.',
+    time: `${readingLessonConversation.durationMinutes} min`,
+    iconName: 'chatbubble-ellipses-outline',
+    category: 'Lectura',
+  },
 ];
+
+const activityTopics = {
+  vocabulary: ['A1', 'Vocabulario básico'],
+  'vocabulary-daily': ['A1', 'Rutina'],
+  'vocabulary-food': ['A1', 'Comida'],
+  'vocabulary-travel': ['A2', 'Transporte'],
+  'vocabulary-family': ['A2', 'Familia'],
+  'vocabulary-shopping': ['A2', 'Compras'],
+  'reading-city': ['A1', 'Ciudad'],
+  'reading-cafe': ['A2', 'Conversación'],
+  'reading-station': ['A2', 'Transporte'],
+  'reading-market': ['A2', 'Comida'],
+  'reading-weather': ['A2', 'Tiempo'],
+  'grammar-articles': ['A1', 'Gramática'],
+  'grammar-word-order': ['A2', 'Gramática'],
+  'grammar-present': ['A2', 'Gramática'],
+  'grammar-negation': ['A2', 'Gramática'],
+  'grammar-accusative': ['A2', 'Gramática'],
+  'vocabulary-home': ['A2', 'Hogar'],
+  'vocabulary-health': ['A2', 'Salud'],
+  'vocabulary-hobbies': ['A2', 'Ocio'],
+  'vocabulary-work': ['A2', 'Trabajo'],
+  'reading-doctor': ['A2', 'Salud'],
+  'reading-weekend': ['A2', 'Ocio'],
+  'reading-apartment': ['A2', 'Hogar'],
+  'grammar-modal-verbs': ['A2', 'Gramática'],
+  'grammar-dative': ['A2', 'Gramática'],
+  'grammar-perfect': ['A2', 'Gramática'],
+  'vocabulary-greetings': ['A1', 'Saludos'],
+  'vocabulary-study': ['A1', 'Estudio'],
+  'reading-conversation': ['A2', 'Conversación'],
+};
+
+for (const activity of activities) {
+  const topic = activityTopics[activity.id];
+  if (topic) {
+    [activity.levelCode, activity.topic] = topic;
+  }
+}
 
 export function getActivityById(activityId) {
   return activities.find((activity) => activity.id === activityId);
