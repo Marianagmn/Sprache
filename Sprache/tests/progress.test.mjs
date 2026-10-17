@@ -10,7 +10,7 @@ import { calculateNextReview, getDueWords } from '../services/spacedRepetitionSe
 import { evaluatePlacement, PLACEMENT_QUESTIONS, skipPlacementAssessment } from '../services/placementAssessmentService.js';
 import { getLearningPath, LEARNING_LEVELS } from '../services/learningPathService.js';
 import { deriveProgress, getWeeklyActivity, recordActivity, resetProgress } from '../services/progressService.js';
-import { getAchievements, getExperience, getWeeklyChallenges } from '../services/achievementService.js';
+import { getAchievements, getExperience, getNewlyUnlockedAchievements, getWeeklyChallenges } from '../services/achievementService.js';
 
 const referenceDate = new Date(2026, 9, 14, 12, 0, 0);
 
@@ -268,7 +268,7 @@ test('las metas diarias se comprueban con el tiempo real acumulado por día', ()
   assert.equal(metrics.goalDaysTracked, 2);
 });
 
-test('la experiencia se deriva de las respuestas correctas del historial', () => {
+test('la experiencia reconoce práctica completada, tiempo dedicado y aciertos', () => {
   const sessions = [
     { completedAt: referenceDate.toISOString(), correctAnswers: 3 },
     { completedAt: referenceDate.toISOString(), correctAnswers: 7 },
@@ -276,26 +276,35 @@ test('la experiencia se deriva de las respuestas correctas del historial', () =>
   const experience = getExperience(sessions);
 
   assert.equal(getExperience([]).xp, 0);
-  assert.equal(experience.xp, 100);
+  assert.equal(experience.xp, 140);
   assert.equal(experience.level, 2);
-  assert.equal(experience.progressToNextLevel, 0);
+  assert.equal(experience.progressToNextLevel, 40);
+  assert.equal(experience.completedSessions, 2);
+  assert.equal(getExperience([{
+    completedAt: referenceDate.toISOString(),
+    correctAnswers: 0,
+    durationSeconds: 300,
+  }]).xp, 25);
 });
 
-test('los retos semanales usan días activos, aciertos y palabras distintas de esta semana', () => {
+test('los retos semanales reconocen días, prácticas, tiempo y palabras distintas', () => {
   const sessions = [
     {
       completedAt: new Date(2026, 9, 12, 12).toISOString(),
-      correctAnswers: 8,
+      correctAnswers: 0,
+      durationSeconds: 600,
       learnedWords: [{ term: 'Haus' }, { term: 'Buch' }],
     },
     {
       completedAt: new Date(2026, 9, 14, 12).toISOString(),
-      correctAnswers: 7,
+      correctAnswers: 0,
+      durationSeconds: 300,
       learnedWords: [{ term: 'haus' }, { term: 'Morgen' }, { term: 'Brot' }],
     },
     {
       completedAt: new Date(2026, 9, 11, 12).toISOString(),
-      correctAnswers: 20,
+      correctAnswers: 0,
+      durationSeconds: 600,
       learnedWords: [{ term: 'Wasser' }],
     },
   ];
@@ -303,9 +312,30 @@ test('los retos semanales usan días activos, aciertos y palabras distintas de e
 
   assert.deepEqual(challenges.map(({ id, progress, completed }) => ({ id, progress, completed })), [
     { id: 'practice-days', progress: 2, completed: false },
-    { id: 'correct-answers', progress: 15, completed: true },
+    { id: 'completed-sessions', progress: 2, completed: false },
+    { id: 'practice-time', progress: 15, completed: true },
     { id: 'new-words', progress: 4, completed: false },
   ]);
+});
+
+test('los avisos de celebración aparecen al desbloquear retos o insignias, no en cada visita', () => {
+  const previousSessions = [
+    { completedAt: new Date(2026, 9, 12, 12).toISOString(), durationSeconds: 600, learnedWords: [{ term: 'Haus' }] },
+    { completedAt: new Date(2026, 9, 14, 12).toISOString(), durationSeconds: 300, learnedWords: [{ term: 'Buch' }] },
+  ];
+  const currentSessions = [
+    ...previousSessions,
+    { completedAt: new Date(2026, 9, 16, 12).toISOString(), durationSeconds: 60, learnedWords: [{ term: 'Brot' }] },
+  ];
+  const notices = getNewlyUnlockedAchievements(previousSessions, currentSessions, referenceDate);
+  const noticeIds = notices.map((notice) => notice.id);
+  const firstSessionNotices = getNewlyUnlockedAchievements([], previousSessions, referenceDate).map((notice) => notice.id);
+
+  assert.ok(firstSessionNotices.includes('badge-first-session'));
+  assert.ok(noticeIds.includes('challenge-completed-sessions'));
+  assert.ok(noticeIds.includes('challenge-practice-days'));
+  assert.ok(!noticeIds.includes('challenge-practice-time'));
+  assert.deepEqual(getNewlyUnlockedAchievements(currentSessions, currentSessions, referenceDate), []);
 });
 
 test('las insignias se obtienen por logros históricos', () => {

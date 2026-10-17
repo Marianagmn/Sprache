@@ -13,10 +13,11 @@ import LessonProgress from '../components/learning/LessonProgress';
 import QuestionCard from '../components/learning/QuestionCard';
 import SessionSummary from '../components/learning/SessionSummary';
 import EmptyState from '../components/common/EmptyState';
+import { getExperience, getNewlyUnlockedAchievements } from '../services/achievementService.js';
 import { colors } from '../theme';
 
 export default function LessonScreen({ navigation, route }) {
-  const { completeActivity } = useApp();
+  const { user, completeActivity } = useApp();
   const lesson = route.params?.reviewLesson || getLessonByActivityId(route.params?.activityId);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
@@ -91,8 +92,22 @@ export default function LessonScreen({ navigation, route }) {
           hintUsage,
           durationSeconds,
         );
-        await completeActivity(completion);
-        setSessionSummary(completion);
+        const previousSessions = user.sessions || [];
+        const updatedUser = await completeActivity(completion);
+        const previousExperience = getExperience(previousSessions);
+        const currentExperience = getExperience(updatedUser.sessions);
+        const sessionNotice = {
+          id: 'practice-completed',
+          title: '¡Un paso más en tu camino!',
+          message: `Completaste tu práctica: +${currentExperience.xp - previousExperience.xp} XP por dedicarte, intentarlo y aprender.`,
+          icon: 'heart',
+        };
+        setSessionSummary({
+          ...completion,
+          earnedXp: currentExperience.xp - previousExperience.xp,
+          practiceMinutes: Math.floor(durationSeconds / 60),
+          celebrations: [sessionNotice, ...getNewlyUnlockedAchievements(previousSessions, updatedUser.sessions)],
+        });
         setFinished(true);
       } catch {
         completionRecorded.current = false;
@@ -128,7 +143,9 @@ export default function LessonScreen({ navigation, route }) {
         <SessionSummary
           correctAnswers={sessionSummary.correctAnswers}
           totalQuestions={sessionSummary.totalQuestions}
-          earnedXp={sessionSummary.correctAnswers * 10}
+          earnedXp={sessionSummary.earnedXp}
+          practiceMinutes={sessionSummary.practiceMinutes}
+          celebrations={sessionSummary.celebrations}
           onFinish={() => navigation.goBack()}
         />
       </SafeAreaView>

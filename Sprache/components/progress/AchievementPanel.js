@@ -34,7 +34,7 @@ export default function AchievementPanel({ sessions = [], compact = false }) {
           <View style={[styles.progressFill, { width: `${experience.progressToNextLevel}%` }]} />
         </View>
         <Text style={styles.helperText}>
-          {experience.nextLevelXp - experience.progressToNextLevel} XP para el siguiente nivel · 10 XP por respuesta correcta
+          {experience.nextLevelXp - experience.progressToNextLevel} XP para el siguiente nivel · sumas XP al completar, dedicar tiempo y acertar
         </Text>
       </View>
 
