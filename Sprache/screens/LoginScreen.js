@@ -44,7 +44,7 @@ export default function LoginScreen({ navigation }) {
         </View>
 
         <View style={styles.noticeBox}>
-          <Ionicons name="information-circle-outline" size={18} color={colors.black} style={styles.noticeIcon} />
+          <Ionicons accessible={false} name="information-circle-outline" size={18} color={colors.black} style={styles.noticeIcon} />
           <Text style={styles.localNotice}>
             Esta demo guarda tu cuenta y progreso solo en este dispositivo.
           </Text>
@@ -82,7 +82,7 @@ export default function LoginScreen({ navigation }) {
               accessibilityState={{ expanded: showPassword }}
               hitSlop={8}
             >
-              <Ionicons name={showPassword ? 'eye-off-outline' : 'eye-outline'} size={20} color={colors.muted} />
+              <Ionicons accessible={false} name={showPassword ? 'eye-off-outline' : 'eye-outline'} size={20} color={colors.muted} />
             </TouchableOpacity>
           </View>
 

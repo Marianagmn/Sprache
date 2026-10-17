@@ -11,10 +11,10 @@ export default function ProfileStats({ stats = [] }) {
 	return (
 		<View style={styles.container}>
 			{stats.map((stat, index) => (
-				<View key={`${stat.label}-${index}`} style={styles.stat}>
-					<Ionicons name={stat.iconName} size={24} color={stat.color || colors.black} />
-					<Text style={styles.value}>{stat.value}</Text>
-					<Text style={styles.label}>{stat.label}</Text>
+				<View key={`${stat.label}-${index}`} style={styles.stat} accessible accessibilityRole="text" accessibilityLabel={`${stat.label}: ${stat.value}`}>
+					<Ionicons accessible={false} name={stat.iconName} size={24} color={stat.color || colors.black} />
+					<Text style={styles.value} accessible={false}>{stat.value}</Text>
+					<Text style={styles.label} accessible={false}>{stat.label}</Text>
 				</View>
 			))}
 		</View>

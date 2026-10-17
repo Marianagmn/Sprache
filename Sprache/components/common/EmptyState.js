@@ -11,8 +11,8 @@ export default function EmptyState({
 }) {
 	return (
 		<View style={[styles.container, style]}>
-			<Text style={styles.icon}>-</Text>
-			<Text style={styles.title}>{title}</Text>
+			<Text style={styles.icon} accessible={false}>-</Text>
+			<Text style={styles.title} accessibilityRole="header">{title}</Text>
 			{message && <Text style={styles.message}>{message}</Text>}
 			{actionLabel && onAction && (
 				<TouchableOpacity style={styles.button} onPress={onAction} accessibilityRole="button" accessibilityLabel={actionLabel}>

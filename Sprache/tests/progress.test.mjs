@@ -11,6 +11,7 @@ import { evaluatePlacement, PLACEMENT_QUESTIONS, skipPlacementAssessment } from 
 import { getLearningPath, LEARNING_LEVELS } from '../services/learningPathService.js';
 import { deriveProgress, getWeeklyActivity, recordActivity, resetProgress } from '../services/progressService.js';
 import { getAchievements, getExperience, getNewlyUnlockedAchievements, getWeeklyChallenges } from '../services/achievementService.js';
+import { colors } from '../theme.js';
 
 const referenceDate = new Date(2026, 9, 14, 12, 0, 0);
 
@@ -22,6 +23,25 @@ const emptyUser = {
   learnedWords: 0,
   streak: 0,
 };
+
+function getContrastRatio(foreground, background) {
+  const luminance = (hex) => {
+    const channels = hex.match(/[A-Fa-f0-9]{2}/g).map((channel) => parseInt(channel, 16) / 255);
+    const [red, green, blue] = channels.map((channel) => (
+      channel <= 0.04045 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4
+    ));
+    return 0.2126 * red + 0.7152 * green + 0.0722 * blue;
+  };
+  const values = [luminance(foreground), luminance(background)].sort((first, second) => second - first);
+  return (values[0] + 0.05) / (values[1] + 0.05);
+}
+
+test('los colores de texto y feedback cumplen contraste WCAG AA para texto normal', () => {
+  assert.ok(getContrastRatio(colors.redText, colors.redSoft) >= 4.5);
+  assert.ok(getContrastRatio(colors.muted, colors.background) >= 4.5);
+  assert.ok(getContrastRatio(colors.muted, colors.goldSoft) >= 4.5);
+  assert.ok(getContrastRatio(colors.success, colors.successSoft) >= 4.5);
+});
 
 test('el catálogo tiene IDs únicos y cada actividad apunta a una lección', () => {
   const listedActivities = getActivities();

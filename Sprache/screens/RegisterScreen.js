@@ -293,7 +293,7 @@ export default function RegisterScreen({ navigation }) {
           hitSlop={8}
           style={styles.backControl}
         >
-          <Ionicons name="arrow-back" size={24} color={colors.black} />
+          <Ionicons accessible={false} name="arrow-back" size={24} color={colors.black} />
         </TouchableOpacity>
         <BrandLogo variant="tab" />
       </View>
@@ -305,7 +305,7 @@ export default function RegisterScreen({ navigation }) {
         keyboardDismissMode="on-drag"
       >
         <View style={styles.progressHeader}>
-          <Text style={styles.stepLabel} accessibilityRole="header" accessibilityLiveRegion="polite">Paso {stepIndex + 1} de {steps.length}</Text>
+          <Text style={styles.stepLabel} accessibilityLiveRegion="polite">Paso {stepIndex + 1} de {steps.length}</Text>
           <Text style={styles.remainingText}>{currentStep.title}</Text>
         </View>
 
