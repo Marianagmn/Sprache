@@ -20,7 +20,6 @@ export default function ProfileScreen({ navigation }) {
 
   const handleLogout = async () => {
     await logoutUser();
-    navigation.navigate('Start');
   };
 
   const handleSaveProfile = async () => {

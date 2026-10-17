@@ -44,12 +44,23 @@ function RootNavigation() {
   return (
     <NavigationContainer theme={navigationTheme}>
       <StatusBar style="dark" backgroundColor={colors.background} />
-      <Stack.Navigator initialRouteName={user ? 'MainApp' : 'Start'} screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Start" component={StartScreen} />
-        <Stack.Screen name="Register" component={RegisterScreen} />
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="MainApp" component={MainTabs} />
-        <Stack.Screen name="Lesson" component={LessonScreen} />
+      <Stack.Navigator
+        key={user ? 'authenticated' : 'guest'}
+        initialRouteName={user ? 'MainApp' : 'Start'}
+        screenOptions={{ headerShown: false }}
+      >
+        {user ? (
+          <Stack.Group>
+            <Stack.Screen name="MainApp" component={MainTabs} />
+            <Stack.Screen name="Lesson" component={LessonScreen} />
+          </Stack.Group>
+        ) : (
+          <Stack.Group>
+            <Stack.Screen name="Start" component={StartScreen} />
+            <Stack.Screen name="Register" component={RegisterScreen} />
+            <Stack.Screen name="Login" component={LoginScreen} />
+          </Stack.Group>
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   );

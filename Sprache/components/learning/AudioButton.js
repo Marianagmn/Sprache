@@ -11,6 +11,11 @@ const SPEEDS = [
 ];
 const REPETITIONS = [1, 2, 3];
 
+function getSpeechErrorMessage(error) {
+  const detail = typeof error?.message === 'string' ? error.message.trim() : '';
+  return detail || 'El navegador o dispositivo no pudo generar una voz alemana.';
+}
+
 export default function AudioButton({ wordText, phraseText }) {
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [selectedText, setSelectedText] = useState('word');
@@ -49,7 +54,7 @@ export default function AudioButton({ wordText, phraseText }) {
       onError: (error) => {
         sequenceId.current += 1;
         setIsSpeaking(false);
-        setSpeechError(`No se pudo reproducir el audio: ${error.message}`);
+        setSpeechError(`No se pudo reproducir el audio. ${getSpeechErrorMessage(error)}`);
       },
     });
   };
@@ -61,7 +66,7 @@ export default function AudioButton({ wordText, phraseText }) {
       try {
         await Speech.stop();
       } catch (error) {
-        setSpeechError(`No se pudo detener el audio: ${error.message}`);
+        setSpeechError(`No se pudo detener el audio. ${getSpeechErrorMessage(error)}`);
       }
       return;
     }
@@ -83,7 +88,7 @@ export default function AudioButton({ wordText, phraseText }) {
       }
     } catch (error) {
       setIsSpeaking(false);
-      setSpeechError(`No se pudo iniciar el audio: ${error.message}`);
+      setSpeechError(`No se pudo iniciar el audio. ${getSpeechErrorMessage(error)}`);
     }
   };
 
