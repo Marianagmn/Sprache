@@ -10,6 +10,7 @@ import { calculateNextReview, getDueWords } from '../services/spacedRepetitionSe
 import { evaluatePlacement, PLACEMENT_QUESTIONS, skipPlacementAssessment } from '../services/placementAssessmentService.js';
 import { getLearningPath, LEARNING_LEVELS } from '../services/learningPathService.js';
 import { deriveProgress, getWeeklyActivity, recordActivity, resetProgress } from '../services/progressService.js';
+import { getAchievements, getExperience, getWeeklyChallenges } from '../services/achievementService.js';
 
 const referenceDate = new Date(2026, 9, 14, 12, 0, 0);
 
@@ -265,6 +266,60 @@ test('las metas diarias se comprueban con el tiempo real acumulado por día', ()
 
   assert.equal(metrics.goalDaysReached, 1);
   assert.equal(metrics.goalDaysTracked, 2);
+});
+
+test('la experiencia se deriva de las respuestas correctas del historial', () => {
+  const sessions = [
+    { completedAt: referenceDate.toISOString(), correctAnswers: 3 },
+    { completedAt: referenceDate.toISOString(), correctAnswers: 7 },
+  ];
+  const experience = getExperience(sessions);
+
+  assert.equal(getExperience([]).xp, 0);
+  assert.equal(experience.xp, 100);
+  assert.equal(experience.level, 2);
+  assert.equal(experience.progressToNextLevel, 0);
+});
+
+test('los retos semanales usan días activos, aciertos y palabras distintas de esta semana', () => {
+  const sessions = [
+    {
+      completedAt: new Date(2026, 9, 12, 12).toISOString(),
+      correctAnswers: 8,
+      learnedWords: [{ term: 'Haus' }, { term: 'Buch' }],
+    },
+    {
+      completedAt: new Date(2026, 9, 14, 12).toISOString(),
+      correctAnswers: 7,
+      learnedWords: [{ term: 'haus' }, { term: 'Morgen' }, { term: 'Brot' }],
+    },
+    {
+      completedAt: new Date(2026, 9, 11, 12).toISOString(),
+      correctAnswers: 20,
+      learnedWords: [{ term: 'Wasser' }],
+    },
+  ];
+  const challenges = getWeeklyChallenges(sessions, referenceDate);
+
+  assert.deepEqual(challenges.map(({ id, progress, completed }) => ({ id, progress, completed })), [
+    { id: 'practice-days', progress: 2, completed: false },
+    { id: 'correct-answers', progress: 15, completed: true },
+    { id: 'new-words', progress: 4, completed: false },
+  ]);
+});
+
+test('las insignias se obtienen por logros históricos', () => {
+  const sessions = [
+    { completedAt: new Date(2026, 9, 12, 12).toISOString(), correctAnswers: 3, totalQuestions: 3, learnedWords: [{ term: 'Haus' }, { term: 'Buch' }] },
+    { completedAt: new Date(2026, 9, 13, 12).toISOString(), correctAnswers: 2, totalQuestions: 3, learnedWords: [{ term: 'Morgen' }] },
+    { completedAt: new Date(2026, 9, 14, 12).toISOString(), correctAnswers: 1, totalQuestions: 2, learnedWords: [{ term: 'Wasser' }] },
+  ];
+  const badges = getAchievements(sessions);
+
+  assert.equal(badges.find((badge) => badge.id === 'first-session').earned, true);
+  assert.equal(badges.find((badge) => badge.id === 'perfect-session').earned, true);
+  assert.equal(badges.find((badge) => badge.id === 'three-day-streak').earned, true);
+  assert.equal(badges.find((badge) => badge.id === 'ten-sessions').earned, false);
 });
 
 test('el resumen limita aciertos y maneja sesiones sin preguntas', () => {
