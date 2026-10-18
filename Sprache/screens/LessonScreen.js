@@ -14,6 +14,11 @@ import LessonProgress from '../components/learning/LessonProgress';
 import QuestionCard from '../components/learning/QuestionCard';
 import SessionSummary from '../components/learning/SessionSummary';
 import EmptyState from '../components/common/EmptyState';
+import DictationInput from '../components/learning/DictationInput';
+import FillBlanks from '../components/learning/FillBlanks';
+import WordOrder from '../components/learning/WordOrder';
+import WriteResponse from '../components/learning/WriteResponse';
+import ListeningComprehension from '../components/learning/ListeningComprehension';
 import { getExperience, getNewlyUnlockedAchievements } from '../services/achievementService.js';
 import { provideAnswerHapticFeedback } from '../services/hapticFeedback.js';
 import { colors } from '../theme';
@@ -35,6 +40,10 @@ export default function LessonScreen({ navigation, route }) {
   const elapsedActiveMs = useRef(0);
   const activeSinceMs = useRef(Date.now());
 
+  // State for new question types
+  const [textInputValue, setTextInputValue] = useState('');
+  const [orderedWords, setOrderedWords] = useState([]);
+
   React.useEffect(() => {
     const subscription = AppState.addEventListener('change', (nextState) => {
       if (nextState === 'active') {
@@ -54,18 +63,59 @@ export default function LessonScreen({ navigation, route }) {
   }, []);
 
   const question = lesson?.questions?.[questionIndex];
-  const isCorrect = question ? selectedAnswer === question.answer : false;
+  const questionType = question?.type || 'multiple-choice';
+  const isCorrect = (() => {
+    if (!question) return false;
+    switch (questionType) {
+      case 'multiple-choice':
+        return selectedAnswer === question.answer;
+      case 'dictation':
+      case 'fill-blanks':
+      case 'write-response':
+        return textInputValue.trim().toLowerCase() === question.answer.trim().toLowerCase();
+      case 'word-order':
+        return orderedWords.join(' ') === question.answer;
+      case 'listening':
+        return selectedAnswer === question.questions[0].correctAnswer;
+      default:
+        return false;
+    }
+  })();
 
   const handleCheck = () => {
-    if (!selectedAnswer || answered || !question) {
+    if (answered || !question) {
       return;
     }
+
+    // Validate based on question type
+    let isValid = false;
+    switch (questionType) {
+      case 'multiple-choice':
+      case 'listening':
+        isValid = Boolean(selectedAnswer);
+        break;
+      case 'dictation':
+      case 'fill-blanks':
+      case 'write-response':
+        isValid = textInputValue.trim().length > 0;
+        break;
+      case 'word-order':
+        isValid = orderedWords.length > 0;
+        break;
+      default:
+        isValid = Boolean(selectedAnswer);
+    }
+
+    if (!isValid) return;
 
     setAnswered(true);
     void provideAnswerHapticFeedback(isCorrect, Boolean(user.preferences?.hapticsEnabled));
     setSubmittedAnswers((current) => {
       const nextAnswers = [...current];
-      nextAnswers[questionIndex] = selectedAnswer;
+      const answerToSave = questionType === 'word-order' ? orderedWords.join(' ') :
+                          questionType === 'dictation' || questionType === 'fill-blanks' || questionType === 'write-response' ? textInputValue :
+                          selectedAnswer;
+      nextAnswers[questionIndex] = answerToSave;
       return nextAnswers;
     });
   };
@@ -125,6 +175,8 @@ export default function LessonScreen({ navigation, route }) {
     setSelectedAnswer(null);
     setAnswered(false);
     setHintVisible(false);
+    setTextInputValue('');
+    setOrderedWords([]);
   };
 
   if (!lesson || !question) {
@@ -139,6 +191,21 @@ export default function LessonScreen({ navigation, route }) {
       </SafeAreaView>
     );
   }
+
+  // Handlers for new question types
+  const handleWordPress = (word) => {
+    if (answered) return;
+    if (orderedWords.includes(word)) {
+      setOrderedWords(orderedWords.filter((w) => w !== word));
+    } else {
+      setOrderedWords([...orderedWords, word]);
+    }
+  };
+
+  const handleResetWords = () => {
+    if (answered) return;
+    setOrderedWords([]);
+  };
 
   if (finished) {
     return (
@@ -165,25 +232,91 @@ export default function LessonScreen({ navigation, route }) {
           onClose={() => navigation.goBack()}
         />
         <LessonProgress current={questionIndex + 1} total={lesson.questions.length} />
-        <QuestionCard question={question.word} prompt={question.prompt} />
-        <AudioButton
-          wordText={question.audioWord || question.vocabulary?.term || question.word}
-          phraseText={question.audioPhrase}
-        />
-        <View style={styles.options}>
-          {question.options.map((option) => (
-            <AnswerOption
-              key={option}
-              label={option}
-              selected={selectedAnswer === option}
-              correct={answered && option === question.answer}
-              incorrect={answered && selectedAnswer === option && option !== question.answer}
-              disabled={answered}
-              onPress={() => setSelectedAnswer(option)}
-            />
-          ))}
-        </View>
-        {!answered && (
+        <QuestionCard question={question.word || question.prompt} prompt={question.prompt} />
+
+        {/* Audio button for applicable question types */}
+        {(questionType === 'multiple-choice' || questionType === 'dictation' || questionType === 'listening') && (
+          <AudioButton
+            wordText={question.audioWord || question.vocabulary?.term || question.word}
+            phraseText={question.audioPhrase}
+          />
+        )}
+
+        {/* Render different question types */}
+        {questionType === 'multiple-choice' && (
+          <View style={styles.options}>
+            {question.options.map((option) => (
+              <AnswerOption
+                key={option}
+                label={option}
+                selected={selectedAnswer === option}
+                correct={answered && option === question.answer}
+                incorrect={answered && selectedAnswer === option && option !== question.answer}
+                disabled={answered}
+                onPress={() => setSelectedAnswer(option)}
+              />
+            ))}
+          </View>
+        )}
+
+        {questionType === 'dictation' && (
+          <DictationInput
+            value={textInputValue}
+            onChangeText={setTextInputValue}
+            placeholder="Escribe lo que escuchas..."
+            answered={answered}
+            isCorrect={isCorrect}
+            correctAnswer={question.answer}
+          />
+        )}
+
+        {questionType === 'fill-blanks' && (
+          <FillBlanks
+            sentence={question.sentence}
+            blankIndex={question.blankIndex || 0}
+            value={textInputValue}
+            onChangeText={setTextInputValue}
+            answered={answered}
+            isCorrect={isCorrect}
+            correctAnswer={question.answer}
+          />
+        )}
+
+        {questionType === 'word-order' && (
+          <WordOrder
+            words={question.words}
+            orderedWords={orderedWords}
+            onWordPress={handleWordPress}
+            onReset={handleResetWords}
+            answered={answered}
+            isCorrect={isCorrect}
+          />
+        )}
+
+        {questionType === 'write-response' && (
+          <WriteResponse
+            value={textInputValue}
+            onChangeText={setTextInputValue}
+            placeholder={question.placeholder || 'Escribe tu respuesta...'}
+            answered={answered}
+            isCorrect={isCorrect}
+            correctAnswer={question.answer}
+            feedback={question.feedback}
+          />
+        )}
+
+        {questionType === 'listening' && (
+          <ListeningComprehension
+            scenario={question.scenario}
+            questions={question.questions}
+            answered={answered}
+            selectedAnswer={selectedAnswer}
+            onSelectAnswer={setSelectedAnswer}
+            isCorrect={isCorrect}
+          />
+        )}
+
+        {!answered && question.hint && (
           <HintButton
             visible={hintVisible}
             hint={question.hint}
@@ -200,14 +333,14 @@ export default function LessonScreen({ navigation, route }) {
         {answered && (
           <FeedbackMessage
             correct={isCorrect}
-            message={`${isCorrect ? 'La respuesta es correcta.' : `La respuesta correcta es ${question.answer}.`} ${question.explanation || question.hint}`}
+            message={`${isCorrect ? 'La respuesta es correcta.' : `La respuesta correcta es ${question.answer}.`} ${question.explanation || question.hint || ''}`}
           />
         )}
         {!!completionError && <FeedbackMessage correct={false} message={completionError} />}
         <AppButton
           title={answered ? (questionIndex === lesson.questions.length - 1 ? 'Ver resumen' : 'Siguiente') : 'Comprobar'}
           onPress={answered ? handleNext : handleCheck}
-          disabled={!selectedAnswer || isCompleting}
+          disabled={isCompleting}
           loading={isCompleting}
         />
       </ScrollView>
