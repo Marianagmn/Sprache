@@ -603,8 +603,399 @@ export const readingLessons = [
   readingLessonCity, readingLessonCafe, readingLessonStation, readingLessonMarket, readingLessonWeather,
   readingLessonDoctor, readingLessonWeekend, readingLessonApartment, readingLessonConversation,
 ];
+export const grammarLessonNounPlural = {
+  id: 'grammar-noun-plural',
+  title: 'Plural de sustantivos',
+  activityId: 'grammar-noun-plural',
+  durationMinutes: 8,
+  questions: [
+    { id: 'plural-q1', prompt: '¿Cuál es el plural de "der Hund"?', word: 'Hund', options: ['die Hunde', 'der Hunde', 'das Hunde', 'die Hunds'], answer: 'die Hunde', vocabulary: { term: 'der Hund', translation: 'el perro' }, hint: 'Muchos sustantivos masculinos añaden -e.' },
+    { id: 'plural-q2', prompt: '¿Cuál es el plural de "die Katze"?', word: 'Katze', options: ['die Katzen', 'der Katzen', 'die Katze', 'das Katzen'], answer: 'die Katzen', vocabulary: { term: 'die Katze', translation: 'el gato' }, hint: 'Los sustantivos femeninos suelen añadir -n o -en.' },
+    { id: 'plural-q3', prompt: '¿Cuál es el plural de "das Buch"?', word: 'Buch', options: ['die Bücher', 'der Bücher', 'das Bücher', 'die Buch'], answer: 'die Bücher', vocabulary: { term: 'das Buch', translation: 'el libro' }, hint: 'Algunos sustantivos neutros tienen umlaut (ü) en el plural.' },
+  ],
+};
+
+export const grammarLessonSeparableVerbs = {
+  id: 'grammar-separable-verbs',
+  title: 'Verbos separables',
+  activityId: 'grammar-separable-verbs',
+  durationMinutes: 8,
+  questions: [
+    { id: 'separable-q1', prompt: 'Completa: Ich ___ um 8 Uhr auf. (despertarse)', word: 'aufstehen', options: ['stehe', 'steht', 'stehen', 'stand'], answer: 'stehe', vocabulary: { term: 'aufstehen', translation: 'despertarse' }, hint: 'Auf es un prefijo separable que va al final.' },
+    { id: 'separable-q2', prompt: '¿Dónde va el prefijo en "Wir gehen heute ins Kino ___"?', word: 'einkaufen', options: ['einkaufen', 'kaufen ein', 'ein kaufen', 'einkauf'], answer: 'einkaufen', vocabulary: { term: 'einkaufen', translation: 'ir de compras' }, hint: 'En afirmación, el prefijo va al final de la oración.' },
+    { id: 'separable-q3', prompt: 'Completa: Er ___ den Anzug an. (ponerse el traje)', word: 'anziehen', options: ['zieht', 'ziehe', 'ziehen', 'zog'], answer: 'zieht', vocabulary: { term: 'anziehen', translation: 'ponerse (ropa)' }, hint: 'Con er, anziehen se conjuga zieht, y an va al final.' },
+  ],
+};
+
+export const grammarLessonGenitive = {
+  id: 'grammar-genitive',
+  title: 'El genitivo',
+  activityId: 'grammar-genitive',
+  durationMinutes: 8,
+  questions: [
+    { id: 'genitive-q1', prompt: 'Completa: Das ist das Auto ___ Vaters. (del padre)', word: 'Vater', options: ['meines', 'meiner', 'mein', 'meinen'], answer: 'meines', vocabulary: { term: 'der Vater', translation: 'el padre' }, hint: 'El genitivo masculino usa -es.' },
+    { id: 'genitive-q2', prompt: 'Completa: Das ist der Wagen ___ Mutter. (de la madre)', word: 'Mutter', options: ['meiner', 'meines', 'mein', 'meinen'], answer: 'meiner', vocabulary: { term: 'die Mutter', translation: 'la madre' }, hint: 'El genitivo femenino usa -er.' },
+    { id: 'genitive-q3', prompt: '¿Qué significa "Das ist das Haus meiner Eltern"?', word: 'meiner Eltern', options: ['Esta es la casa de mis padres', 'Esta es mi casa', 'Ellos son mis padres', 'Mi casa es grande'], answer: 'Esta es la casa de mis padres', vocabulary: { term: 'meiner Eltern', translation: 'de mis padres' }, hint: 'El genitivo expresa posesión.' },
+  ],
+};
+
+export const grammarLessonImperative = {
+  id: 'grammar-imperative',
+  title: 'El imperativo',
+  activityId: 'grammar-imperative',
+  durationMinutes: 8,
+  questions: [
+    { id: 'imperative-q1', prompt: '¿Cómo se dice "¡Ven aquí!" en alemán (tú)?', word: 'kommen', options: ['Komm her!', 'Komme her!', 'Kommt her!', 'Kommen her!'], answer: 'Komm her!', vocabulary: { term: 'kommen', translation: 'venir' }, hint: 'El imperativo de du usa la raíz del verbo sin -st.' },
+    { id: 'imperative-q2', prompt: '¿Cómo se dice "¡Leed el libro!" (vosotros)?', word: 'lesen', options: ['Lest das Buch!', 'Lies das Buch!', 'Lesen das Buch!', 'Lese das Buch!'], answer: 'Lest das Buch!', vocabulary: { term: 'lesen', translation: 'leer' }, hint: 'El imperativo de ihr usa la conjugación normal de ihr.' },
+    { id: 'imperative-q3', prompt: '¿Cómo se dice "¡Por favor, abra la puerta!" (usted)?', word: 'öffnen', options: ['Öffnen Sie bitte die Tür!', 'Öffne bitte die Tür!', 'Öffnet bitte die Tür!', 'Öffnen bitte die Tür!'], answer: 'Öffnen Sie bitte die Tür!', vocabulary: { term: 'öffnen', translation: 'abrir' }, hint: 'El imperativo formal usa el infinitivo + Sie.' },
+  ],
+};
+
+export const grammarLessonFuture = {
+  id: 'grammar-future',
+  title: 'Futuro con werden',
+  activityId: 'grammar-future',
+  durationMinutes: 8,
+  questions: [
+    { id: 'future-q1', prompt: 'Completa: Ich ___ morgen nach Berlin fahren.', word: 'werden', options: ['werde', 'wirst', 'wird', 'werden'], answer: 'werde', vocabulary: { term: 'werden', translation: 'llegar a ser / auxiliar de futuro' }, hint: 'Con ich, werden se conjuga werde.' },
+    { id: 'future-q2', prompt: '¿Dónde va el infinitivo en "Wir werden Deutsch ___"?', word: 'lernen', options: ['lernen', 'lerne', 'lernst', 'lernt'], answer: 'lernen', vocabulary: { term: 'lernen', translation: 'aprender' }, hint: 'En futuro, el infinitivo va al final de la oración.' },
+    { id: 'future-q3', prompt: '¿Qué significa "Du wirst es schaffen"?', word: 'schaffen', options: ['Lo conseguirás', 'Lo has conseguido', 'Lo conseguiste', 'Quieres hacerlo'], answer: 'Lo conseguirás', vocabulary: { term: 'schaffen', translation: 'conseguir / lograr' }, hint: 'Werden + infinitivo expresa futuro.' },
+  ],
+};
+
+export const grammarLessonSubjunctive = {
+  id: 'grammar-subjunctive',
+  title: 'Konjunktiv II (condicional)',
+  activityId: 'grammar-subjunctive',
+  durationMinutes: 8,
+  questions: [
+    { id: 'subjunctive-q1', prompt: 'Completa: Ich ___ gern nach Deutschland reisen. (me gustaría viajar)', word: 'würde', options: ['würde', 'wollte', 'könnte', 'sollte'], answer: 'würde', vocabulary: { term: 'würde', translation: 'gustaría (forma condicional)' }, hint: 'Würde + infinitivo expresa deseo o condición.' },
+    { id: 'subjunctive-q2', prompt: '¿Qué significa "Ich könnte das machen"?', word: 'könnte', options: ['Podría hacerlo', 'Puedo hacerlo', 'Podré hacerlo', 'Pude hacerlo'], answer: 'Podría hacerlo', vocabulary: { term: 'können', translation: 'poder' }, hint: 'Könnte es la forma de subjuntivo de können.' },
+    { id: 'subjunctive-q3', prompt: 'Completa: Wenn ich Zeit ___, käme ich mit. (si tuviera tiempo)', word: 'hätte', options: ['hätte', 'habe', 'hatte', 'hättest'], answer: 'hätte', vocabulary: { term: 'haben', translation: 'tener' }, hint: 'En condiciones hipotéticas se usa Konjunktiv II.' },
+  ],
+};
+
+// New lesson types with different question formats
+export const dictationLessonBasics = {
+  id: 'dictation-basics',
+  title: 'Dictado: Frases básicas',
+  activityId: 'dictation-basics',
+  durationMinutes: 6,
+  questions: [
+    {
+      id: 'dictation-q1',
+      type: 'dictation',
+      prompt: 'Escucha y escribe la frase',
+      word: 'Guten Morgen',
+      audioWord: 'Guten Morgen',
+      audioPhrase: 'Guten Morgen. Wie geht es dir?',
+      answer: 'Guten Morgen',
+      vocabulary: { term: 'Guten Morgen', translation: 'buenos días' },
+      hint: 'Es el saludo de la mañana.',
+    },
+    {
+      id: 'dictation-q2',
+      type: 'dictation',
+      prompt: 'Escucha y escribe la frase',
+      word: 'Ich heiße',
+      audioWord: 'heiße',
+      audioPhrase: 'Ich heiße Anna.',
+      answer: 'Ich heiße',
+      vocabulary: { term: 'heißen', translation: 'llamarse' },
+      hint: 'El verbo para decir tu nombre.',
+    },
+    {
+      id: 'dictation-q3',
+      type: 'dictation',
+      prompt: 'Escucha y escribe la frase',
+      word: 'Auf Wiedersehen',
+      audioWord: 'Auf Wiedersehen',
+      audioPhrase: 'Auf Wiedersehen! Bis bald.',
+      answer: 'Auf Wiedersehen',
+      vocabulary: { term: 'Auf Wiedersehen', translation: 'adiós' },
+      hint: 'Es una despedida formal.',
+    },
+  ],
+};
+
+export const fillBlanksLesson = {
+  id: 'fill-blanks-basics',
+  title: 'Completa los huecos',
+  activityId: 'fill-blanks-basics',
+  durationMinutes: 6,
+  questions: [
+    {
+      id: 'fill-q1',
+      type: 'fill-blanks',
+      prompt: 'Completa la frase con el artículo correcto',
+      word: '___ Buch ist interessant.',
+      sentence: '___ Buch ist interessant.',
+      blankIndex: 0,
+      answer: 'Das',
+      vocabulary: { term: 'das Buch', translation: 'el libro' },
+      hint: 'Buch es un sustantivo neutro.',
+    },
+    {
+      id: 'fill-q2',
+      type: 'fill-blanks',
+      prompt: 'Completa la frase con el verbo correcto',
+      word: 'Ich ___ Deutsch.',
+      sentence: 'Ich ___ Deutsch.',
+      blankIndex: 0,
+      answer: 'spreche',
+      vocabulary: { term: 'sprechen', translation: 'hablar' },
+      hint: 'Con ich, sprechen se conjuga spreche.',
+    },
+    {
+      id: 'fill-q3',
+      type: 'fill-blanks',
+      prompt: 'Completa la frase con la preposición correcta',
+      word: 'Ich gehe ___ die Schule.',
+      sentence: 'Ich gehe ___ die Schule.',
+      blankIndex: 0,
+      answer: 'zur',
+      vocabulary: { term: 'zur Schule', translation: 'a la escuela' },
+      hint: 'Zu + der = zur.',
+    },
+  ],
+};
+
+export const wordOrderLesson = {
+  id: 'word-order-basics',
+  title: 'Orden de palabras',
+  activityId: 'word-order-basics',
+  durationMinutes: 6,
+  questions: [
+    {
+      id: 'wordorder-q1',
+      type: 'word-order',
+      prompt: 'Ordena las palabras para formar la frase',
+      word: 'Ich gehe heute ins Kino',
+      words: ['Ich', 'gehe', 'heute', 'ins', 'Kino'],
+      answer: 'Ich gehe heute ins Kino',
+      vocabulary: { term: 'ins Kino gehen', translation: 'ir al cine' },
+      hint: 'El verbo va en segunda posición.',
+    },
+    {
+      id: 'wordorder-q2',
+      type: 'word-order',
+      prompt: 'Ordena las palabras para formar la frase',
+      word: 'Wir trinken Kaffee',
+      words: ['Wir', 'trinken', 'Kaffee'],
+      answer: 'Wir trinken Kaffee',
+      vocabulary: { term: 'Kaffee trinken', translation: 'beber café' },
+      hint: 'Sujeto + verbo + objeto.',
+    },
+    {
+      id: 'wordorder-q3',
+      type: 'word-order',
+      prompt: 'Ordena las palabras para formar la frase',
+      word: 'Er liest ein Buch',
+      words: ['Er', 'liest', 'ein', 'Buch'],
+      answer: 'Er liest ein Buch',
+      vocabulary: { term: 'ein Buch lesen', translation: 'leer un libro' },
+      hint: 'El sujeto va primero.',
+    },
+  ],
+};
+
+export const writeResponseLesson = {
+  id: 'write-response-basics',
+  title: 'Escribe tu respuesta',
+  activityId: 'write-response-basics',
+  durationMinutes: 8,
+  questions: [
+    {
+      id: 'write-q1',
+      type: 'write-response',
+      prompt: '¿Cómo te llamas? Escribe tu respuesta en alemán.',
+      word: 'Wie heißt du?',
+      placeholder: 'Ich heiße...',
+      answer: 'Ich heiße',
+      vocabulary: { term: 'heißen', translation: 'llamarse' },
+      hint: 'Usa "Ich heiße" seguido de tu nombre.',
+      feedback: 'Puedes responder: Ich heiße [tu nombre] o Mein Name ist [tu nombre].',
+    },
+    {
+      id: 'write-q2',
+      type: 'write-response',
+      prompt: '¿De dónde eres? Escribe tu respuesta en alemán.',
+      word: 'Woher kommst du?',
+      placeholder: 'Ich komme aus...',
+      answer: 'Ich komme aus',
+      vocabulary: { term: 'kommen aus', translation: 'ser de (origen)' },
+      hint: 'Usa "Ich komme aus" seguido de tu país o ciudad.',
+      feedback: 'La estructura es: Ich komme aus [país/ciudad].',
+    },
+    {
+      id: 'write-q3',
+      type: 'write-response',
+      prompt: '¿Cómo estás? Escribe tu respuesta en alemán.',
+      word: 'Wie geht es dir?',
+      placeholder: 'Mir geht es...',
+      answer: 'Mir geht es',
+      vocabulary: { term: 'Wie geht es dir?', translation: '¿Cómo estás?' },
+      hint: 'Puedes decir "Mir geht es gut" (estoy bien) o "Mir geht es nicht so gut" (no estoy muy bien).',
+      feedback: 'Respuestas comunes: Mir geht es gut / Mir geht es nicht so gut / Es geht mir gut.',
+    },
+  ],
+};
+
+export const listeningLesson = {
+  id: 'listening-basics',
+  title: 'Comprensión auditiva',
+  activityId: 'listening-basics',
+  durationMinutes: 8,
+  questions: [
+    {
+      id: 'listening-q1',
+      type: 'listening',
+      prompt: 'Escucha el audio y responde',
+      word: '¿Qué dice la persona?',
+      audioWord: 'heißen',
+      audioPhrase: 'Ich heiße Thomas. Und du?',
+      scenario: 'Alguien se presenta en una conversación informal.',
+      questions: [
+        {
+          text: '¿Cómo se llama la persona?',
+          options: ['Thomas', 'Peter', 'Hans', 'Klaus'],
+          correctAnswer: 'Thomas',
+        },
+      ],
+      vocabulary: { term: 'heißen', translation: 'llamarse' },
+      hint: 'Escucha el nombre al principio de la frase.',
+    },
+    {
+      id: 'listening-q2',
+      type: 'listening',
+      prompt: 'Escucha el audio y responde',
+      word: '¿Qué pregunta?',
+      audioWord: 'kommen',
+      audioPhrase: 'Ich komme aus Spanien. Woher kommst du?',
+      scenario: 'Dos personas hablan sobre su origen.',
+      questions: [
+        {
+          text: '¿De dónde es la primera persona?',
+          options: ['De España', 'De Alemania', 'De Francia', 'De Italia'],
+          correctAnswer: 'De España',
+        },
+      ],
+      vocabulary: { term: 'kommen aus', translation: 'ser de' },
+      hint: 'La persona dice "Ich komme aus Spanien".',
+    },
+    {
+      id: 'listening-q3',
+      type: 'listening',
+      prompt: 'Escucha el audio y responde',
+      word: '¿Qué pide?',
+      audioWord: 'Haben Sie',
+      audioPhrase: 'Haben Sie einen Tisch für zwei Personen?',
+      scenario: 'Alguien entra en un restaurante.',
+      questions: [
+        {
+          text: '¿Qué pide la persona?',
+          options: ['Una mesa para dos', 'Una cuenta', 'El menú', 'Agua'],
+          correctAnswer: 'Una mesa para dos',
+        },
+      ],
+      vocabulary: { term: 'der Tisch', translation: 'la mesa' },
+      hint: 'Escucha "einen Tisch für zwei Personen".',
+    },
+  ],
+};
+
+// B1 Level Lessons
+export const storyLessonB1 = {
+  id: 'story-b1-weekend',
+  title: 'Cuento B1: Un fin de semana especial',
+  activityId: 'story-b1-weekend',
+  durationMinutes: 10,
+  questions: [
+    {
+      id: 'story-b1-q1',
+      type: 'multiple-choice',
+      prompt: 'En el cuento, ¿qué hace Anna el sábado por la mañana?',
+      word: 'sábado',
+      options: ['Va al mercado', 'Estudia en casa', 'Trabaja', 'Duerme'],
+      answer: 'Va al mercado',
+      vocabulary: { term: 'der Markt', translation: 'el mercado' },
+      hint: 'Lee el primer párrafo del cuento.',
+    },
+    {
+      id: 'story-b1-q2',
+      type: 'multiple-choice',
+      prompt: '¿Con quién encuentra Anna un café antiguo?',
+      word: 'café',
+      options: ['Con su amiga Lisa', 'Con su hermano', 'Con su madre', 'Sola'],
+      answer: 'Con su amiga Lisa',
+      vocabulary: { term: 'die Freundin', translation: 'la amiga' },
+      hint: 'Lee la parte del café en el cuento.',
+    },
+    {
+      id: 'story-b1-q3',
+      type: 'write-response',
+      prompt: 'Escribe en alemán qué le gusta hacer a Anna los domingos.',
+      word: 'domingo',
+      placeholder: 'Am Sonntag...',
+      answer: 'Am Sonntag',
+      vocabulary: { term: 'der Sonntag', translation: 'el domingo' },
+      hint: 'El texto menciona actividades relajantes.',
+      feedback: 'El texto dice que a Anna le gusta leer y pasear los domingos.',
+    },
+  ],
+};
+
+// B2 Level Lessons
+export const storyLessonB2 = {
+  id: 'story-b2-career',
+  title: 'Cuento B2: Un cambio de carrera',
+  activityId: 'story-b2-career',
+  durationMinutes: 12,
+  questions: [
+    {
+      id: 'story-b2-q1',
+      type: 'multiple-choice',
+      prompt: '¿Por qué decide Thomas cambiar de trabajo?',
+      word: 'cambiar',
+      options: ['Quiere más tiempo libre', 'Gana poco dinero', 'No le gusta su jefe', 'Se muda de ciudad'],
+      answer: 'Quiere más tiempo libre',
+      vocabulary: { term: 'der Jobwechsel', translation: 'el cambio de trabajo' },
+      hint: 'El texto habla sobre el equilibrio entre trabajo y vida personal.',
+    },
+    {
+      id: 'story-b2-q2',
+      type: 'fill-blanks',
+      prompt: 'Completa: Thomas möchte ___ arbeiten.',
+      sentence: 'Thomas möchte ___ arbeiten.',
+      blankIndex: 0,
+      answer: 'teilzeit',
+      vocabulary: { term: 'Teilzeit', translation: 'tiempo parcial' },
+      hint: 'Es lo opuesto a Vollzeit (tiempo completo).',
+    },
+    {
+      id: 'story-b2-q3',
+      type: 'write-response',
+      prompt: 'Escribe en alemán cuál es el nuevo trabajo de Thomas.',
+      word: 'nuevo trabajo',
+      placeholder: 'Sein neuer Job ist...',
+      answer: 'Sein neuer Job ist',
+      vocabulary: { term: 'der neue Job', translation: 'el nuevo trabajo' },
+      hint: 'El texto menciona que trabaja como consultor independiente.',
+      feedback: 'Thomas ahora trabaja como freiberuflicher Berater (consultor independiente).',
+    },
+  ],
+};
+
 export const grammarLessons = [
   grammarLessonArticles, grammarLessonWordOrder, grammarLessonPresent, grammarLessonNegation,
   grammarLessonAccusative, grammarLessonModalVerbs, grammarLessonDative, grammarLessonPerfect,
+  grammarLessonNounPlural, grammarLessonSeparableVerbs, grammarLessonGenitive,
+  grammarLessonImperative, grammarLessonFuture, grammarLessonSubjunctive,
 ];
-export const lessons = [...vocabularyLessons, ...readingLessons, ...grammarLessons];
+export const practiceLessons = [
+  dictationLessonBasics, fillBlanksLesson, wordOrderLesson, writeResponseLesson, listeningLesson,
+];
+export const storyLessons = [
+  storyLessonB1, storyLessonB2,
+];
+export const lessons = [...vocabularyLessons, ...readingLessons, ...grammarLessons, ...practiceLessons, ...storyLessons];
