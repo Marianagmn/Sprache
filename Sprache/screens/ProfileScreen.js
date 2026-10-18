@@ -9,6 +9,7 @@ import GoalCard from '../components/profile/GoalCard';
 import ProfileStats from '../components/profile/ProfileStats';
 import SettingsSection from '../components/profile/SettingsSection';
 import SettingsRow from '../components/profile/SettingsRow';
+import SettingsSwitchRow from '../components/profile/SettingsSwitchRow';
 import { colors, radii, spacing, typography } from '../theme';
 
 export default function ProfileScreen({ navigation }) {
@@ -42,6 +43,10 @@ export default function ProfileScreen({ navigation }) {
     await editProfile({ dailyGoal });
   };
 
+  const handleHapticsChange = async (hapticsEnabled) => {
+    await editProfile({ preferences: { hapticsEnabled } });
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scroll}>
@@ -61,6 +66,17 @@ export default function ProfileScreen({ navigation }) {
             { iconName: 'school', color: colors.gold, value: `${user.learnedWords}`, label: 'Palabras' },
           ]}
         />
+
+        {Platform.OS !== 'web' && (
+          <SettingsSection title="Experiencia">
+            <SettingsSwitchRow
+              title="Respuesta háptica"
+              description="Vibración breve al comprobar respuestas. Puedes desactivarla cuando quieras."
+              value={Boolean(user.preferences?.hapticsEnabled)}
+              onValueChange={handleHapticsChange}
+            />
+          </SettingsSection>
+        )}
 
         <SettingsSection title="Ajustes de la cuenta">
           <SettingsRow iconName="person-outline" title="Editar nombre" onPress={() => { setName(user.name); setIsEditing(true); }} />

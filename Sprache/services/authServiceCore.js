@@ -89,6 +89,7 @@ export function createAuthService({ storage, crypto, userDefaults = initialUser,
       wordProgress: {},
       preferences: {
         notificationsEnabled: false,
+        hapticsEnabled: false,
       },
     };
     const account = {

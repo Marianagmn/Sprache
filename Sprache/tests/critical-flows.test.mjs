@@ -3,6 +3,7 @@ import test from 'node:test';
 import { createAuthService } from '../services/authServiceCore.js';
 import { buildLessonCompletion } from '../services/lessonProgressService.js';
 import { getLessonByActivityId } from '../services/lessonService.js';
+import { updateProfile } from '../services/profileService.js';
 import { recordActivity } from '../services/progressService.js';
 
 function createMemoryStorage() {
@@ -48,6 +49,7 @@ test('crear perfil valida los datos y restaura la sesión tras reiniciar el serv
   assert.equal(user.email, 'ana@example.com');
   assert.equal(user.level, 'Nivel A1');
   assert.equal(user.dailyGoal, 15);
+  assert.equal(user.preferences.hapticsEnabled, false);
   await assert.rejects(
     app.register({ name: 'Otra Ana', email: 'ana@example.com', password: 'lernen123' }),
     /Ya hay una cuenta/,
@@ -59,6 +61,14 @@ test('crear perfil valida los datos y restaura la sesión tras reiniciar el serv
   assert.equal(restoredUser.email, user.email);
   assert.equal(restoredUser.name, user.name);
   assert.equal(restoredUser.totalSessions, 0);
+
+  await restartedApp.updateStoredUser((currentUser) => updateProfile(currentUser, {
+    preferences: { hapticsEnabled: true },
+  }));
+  const nextRestart = createTestAuthService(storage, crypto);
+  const userWithHapticsEnabled = await nextRestart.restoreSession();
+  assert.equal(userWithHapticsEnabled.preferences.hapticsEnabled, true);
+  assert.equal(userWithHapticsEnabled.preferences.notificationsEnabled, false);
 });
 
 test('completar lección sin red guarda progreso local; logout y login conservan el progreso', async () => {

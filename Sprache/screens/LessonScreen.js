@@ -15,6 +15,7 @@ import QuestionCard from '../components/learning/QuestionCard';
 import SessionSummary from '../components/learning/SessionSummary';
 import EmptyState from '../components/common/EmptyState';
 import { getExperience, getNewlyUnlockedAchievements } from '../services/achievementService.js';
+import { provideAnswerHapticFeedback } from '../services/hapticFeedback.js';
 import { colors } from '../theme';
 
 export default function LessonScreen({ navigation, route }) {
@@ -61,6 +62,7 @@ export default function LessonScreen({ navigation, route }) {
     }
 
     setAnswered(true);
+    void provideAnswerHapticFeedback(isCorrect, Boolean(user.preferences?.hapticsEnabled));
     setSubmittedAnswers((current) => {
       const nextAnswers = [...current];
       nextAnswers[questionIndex] = selectedAnswer;
