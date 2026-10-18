@@ -1,5 +1,6 @@
 import React from 'react';
-import { SafeAreaView, StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import { DefaultTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -34,10 +35,10 @@ function RootNavigation() {
 
   if (isLoading) {
     return (
-      <SafeAreaView style={styles.loading}>
+      <View style={styles.loading}>
         <StatusBar style="dark" backgroundColor={colors.background} />
         <Loading message="Cargando tu cuenta local..." />
-      </SafeAreaView>
+      </View>
     );
   }
 
@@ -68,9 +69,11 @@ function RootNavigation() {
 
 export default function App() {
   return (
-    <AppProvider>
-      <RootNavigation />
-    </AppProvider>
+    <SafeAreaProvider>
+      <AppProvider>
+        <RootNavigation />
+      </AppProvider>
+    </SafeAreaProvider>
   );
 }
 

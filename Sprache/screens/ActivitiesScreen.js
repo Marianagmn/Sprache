@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { StyleSheet, SafeAreaView, ScrollView } from 'react-native';
+import { StyleSheet, ScrollView } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useApp } from '../context/AppContext';
 import ActivityList from '../components/activities/ActivityList';
 import ScreenHeader from '../components/common/ScreenHeader';

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Alert, KeyboardAvoidingView, Modal, Platform, Text, TextInput, StyleSheet, SafeAreaView, ScrollView, View } from 'react-native';
+import { Alert, KeyboardAvoidingView, Modal, Platform, Text, TextInput, StyleSheet, ScrollView, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useApp } from '../context/AppContext';
 import AppButton from '../components/common/AppButton';
 import ProfileHeader from '../components/profile/ProfileHeader';

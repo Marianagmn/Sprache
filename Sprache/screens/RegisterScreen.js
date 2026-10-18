@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
-import { Keyboard, KeyboardAvoidingView, Platform, View, Text, StyleSheet, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
+import { Keyboard, KeyboardAvoidingView, Platform, View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import AppButton from '../components/common/AppButton';
 import AppInput from '../components/common/AppInput';
@@ -121,7 +122,6 @@ export default function RegisterScreen({ navigation }) {
         motivation,
         dailyGoal: Number.parseInt(time, 10),
       });
-      navigation.replace('MainApp');
     } catch (registerError) {
       setError(registerError.message);
     } finally {

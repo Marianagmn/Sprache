@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
-import { AppState, SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
+import { AppState, ScrollView, StyleSheet, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useApp } from '../context/AppContext';
 import { getLessonByActivityId } from '../services/lessonService';
 import { buildLessonCompletion } from '../services/lessonProgressService';
