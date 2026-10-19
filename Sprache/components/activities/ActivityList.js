@@ -14,7 +14,7 @@ export default function ActivityList({ onActivityPress, levelCode = 'Todos' }) {
         groups[level][topic] = [...(groups[level][topic] || []), activity];
         return groups;
     }, {});
-    const levelLabels = { A1: 'A1 · Inicial', A2: 'A2 · Elemental' };
+    const levelLabels = { A1: 'A1 · Inicial', A2: 'A2 · Elemental', B1: 'B1 · Intermedio', B2: 'B2 · Intermedio Alto' };
 
     return (
         <View style={styles.container}>
@@ -40,6 +40,8 @@ export default function ActivityList({ onActivityPress, levelCode = 'Todos' }) {
                                     description={activity.description}
                                     time={activity.time}
                                     iconName={activity.iconName}
+                                    levelCode={activity.levelCode}
+                                    category={activity.category}
                                     onPress={() => onActivityPress?.(activity)}
                                 />
                             ))}

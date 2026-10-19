@@ -7,6 +7,8 @@ export default function ActivityFilter({ activeFilter = 'Todos', onChange }) {
     { value: 'Todos', label: 'Todos los niveles' },
     { value: 'A1', label: 'A1 · Inicial' },
     { value: 'A2', label: 'A2 · Elemental' },
+    { value: 'B1', label: 'B1 · Intermedio' },
+    { value: 'B2', label: 'B2 · Intermedio Alto' },
   ];
 
   return (
