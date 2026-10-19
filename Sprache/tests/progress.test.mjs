@@ -1,10 +1,15 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { activities } from '../data/Activities.js';
-import { lessons, vocabularyLesson } from '../data/lessons.js';
+import { lessons, listeningLesson, vocabularyLesson } from '../data/lessons.js';
 import { getActivities, filterActivities, filterActivitiesByLevel, getRecommendedActivity } from '../services/activityService.js';
-import { getLessonByActivityId } from '../services/lessonService.js';
-import { buildLessonCompletion, calculateSessionSummary } from '../services/lessonProgressService.js';
+import { getFailedWordsReviewLesson, getLessonByActivityId } from '../services/lessonService.js';
+import {
+  buildLessonCompletion,
+  calculateSessionSummary,
+  isQuestionAnswerCorrect,
+  updateFailedWords,
+} from '../services/lessonProgressService.js';
 import { getSpacedReviewLesson } from '../services/lessonService.js';
 import { calculateNextReview, getDueWords } from '../services/spacedRepetitionService.js';
 import { evaluatePlacement, PLACEMENT_QUESTIONS, skipPlacementAssessment } from '../services/placementAssessmentService.js';
@@ -159,6 +164,35 @@ test('completar una lección registra duración real, aciertos, vocabulario y pr
   assert.equal(updatedUser.correctAnswers, 2);
   assert.equal(updatedUser.accuracy, 67);
   assert.equal(updatedUser.streak, 1);
+});
+
+test('las respuestas correctas se validan igual en las lecciones y al guardar la sesión', () => {
+  const answers = listeningLesson.questions.map((question) => question.questions[0].correctAnswer);
+  const completion = buildLessonCompletion(listeningLesson, answers);
+
+  assert.ok(listeningLesson.questions.every((question, index) => (
+    isQuestionAnswerCorrect(question, answers[index])
+  )));
+  assert.equal(completion.correctAnswers, listeningLesson.questions.length);
+  assert.ok(completion.wordResults.every((result) => result.correct));
+  assert.equal(isQuestionAnswerCorrect({ type: 'write-response', answer: 'Ich lerne Deutsch' }, ' ich lerne deutsch '), true);
+});
+
+test('las palabras falladas se guardan para repasar y se retiran al responderlas correctamente', () => {
+  const question = vocabularyLesson.questions[1];
+  const savedFailures = updateFailedWords({}, question, false, referenceDate);
+  const reviewLesson = getFailedWordsReviewLesson(savedFailures);
+
+  assert.equal(Object.keys(savedFailures).length, 1);
+  assert.equal(savedFailures.buch.term, 'Buch');
+  assert.equal(savedFailures.buch.lastFailedAt, referenceDate.toISOString());
+  assert.equal(reviewLesson.activityId, 'failed-words-review');
+  assert.equal(reviewLesson.questions[0].vocabulary.term, 'Buch');
+  assert.equal(reviewLesson.questions[0].id.startsWith('failed-review-'), true);
+
+  const corrected = updateFailedWords(savedFailures, question, true, referenceDate);
+  assert.deepEqual(corrected, {});
+  assert.equal(getFailedWordsReviewLesson(corrected), null);
 });
 
 test('repetir una palabra acumula intentos y actualiza su última fecha', () => {

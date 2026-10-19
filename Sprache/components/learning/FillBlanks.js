@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { colors, radii, spacing, typography } from '../../theme';
 
-export default function FillBlanks({ sentence, blankIndex, value, onChangeText, answered, isCorrect, correctAnswer }) {
+export default function FillBlanks({ sentence, blankIndex, value, onChangeText, answered, isCorrect }) {
   const parts = sentence.split('___');
   const blankBorderColor = answered ? (isCorrect ? colors.success : colors.red) : colors.gold;
   const blankBackgroundColor = answered ? (isCorrect ? colors.successSoft : colors.redSoft) : colors.goldSoft;
@@ -30,9 +30,6 @@ export default function FillBlanks({ sentence, blankIndex, value, onChangeText, 
           </React.Fragment>
         ))}
       </View>
-      {answered && !isCorrect && (
-        <Text style={styles.correctAnswer}>Respuesta correcta: {correctAnswer}</Text>
-      )}
     </View>
   );
 }
@@ -53,5 +50,4 @@ const styles = StyleSheet.create({
     color: colors.black,
     textAlign: 'center',
   },
-  correctAnswer: { color: colors.success, fontSize: typography.small, fontWeight: typography.semibold, marginTop: spacing.sm },
 });

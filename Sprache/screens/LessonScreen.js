@@ -3,7 +3,7 @@ import { AppState, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useApp } from '../context/AppContext';
 import { getLessonByActivityId } from '../services/lessonService';
-import { buildLessonCompletion } from '../services/lessonProgressService';
+import { buildLessonCompletion, isQuestionAnswerCorrect } from '../services/lessonProgressService';
 import AppButton from '../components/common/AppButton';
 import AnswerOption from '../components/learning/AnswerOption';
 import AudioButton from '../components/learning/AudioButton';
@@ -24,7 +24,7 @@ import { provideAnswerHapticFeedback } from '../services/hapticFeedback.js';
 import { colors } from '../theme';
 
 export default function LessonScreen({ navigation, route }) {
-  const { user, completeActivity, saveLessonProgress } = useApp();
+  const { user, completeActivity, saveLessonProgress, saveWordAttempt } = useApp();
   const lesson = route.params?.reviewLesson || getLessonByActivityId(route.params?.activityId);
   const resumedProgress = route.params?.resumeProgress?.activityId === lesson?.activityId
     ? route.params.resumeProgress
@@ -44,6 +44,7 @@ export default function LessonScreen({ navigation, route }) {
   const [isCompleting, setIsCompleting] = useState(false);
   const [completionError, setCompletionError] = useState('');
   const [progressSaveError, setProgressSaveError] = useState('');
+  const [wordSaveError, setWordSaveError] = useState('');
   const completionRecorded = useRef(false);
   const elapsedActiveMs = useRef(resumedProgress?.elapsedActiveMs || 0);
   const activeSinceMs = useRef(Date.now());
@@ -120,25 +121,12 @@ export default function LessonScreen({ navigation, route }) {
     isCompleting,
     saveLessonProgress,
   ]);
-  const isCorrect = (() => {
-    if (!question) return false;
-    switch (questionType) {
-      case 'multiple-choice':
-        return selectedAnswer === question.answer;
-      case 'dictation':
-      case 'fill-blanks':
-      case 'write-response':
-        return textInputValue.trim().toLowerCase() === question.answer.trim().toLowerCase();
-      case 'word-order':
-        return orderedWords.join(' ') === question.answer;
-      case 'listening':
-        return selectedAnswer === question.questions[0].correctAnswer;
-      default:
-        return false;
-    }
-  })();
+  const answerToSave = questionType === 'word-order' ? orderedWords.join(' ')
+    : ['dictation', 'fill-blanks', 'write-response'].includes(questionType) ? textInputValue
+      : selectedAnswer;
+  const isCorrect = isQuestionAnswerCorrect(question, answerToSave);
 
-  const handleCheck = () => {
+  const handleCheck = async () => {
     if (answered || !question) {
       return;
     }
@@ -166,11 +154,18 @@ export default function LessonScreen({ navigation, route }) {
 
     setAnswered(true);
     void provideAnswerHapticFeedback(isCorrect, Boolean(user.preferences?.hapticsEnabled));
+    const word = question.vocabulary?.term || question.word;
+    if (typeof word === 'string' && word.trim()) {
+      setWordSaveError('');
+      try {
+        await saveWordAttempt(question, isCorrect);
+      } catch (error) {
+        console.error('No se pudo guardar la palabra para repasar.', error);
+        setWordSaveError('No pudimos guardar esta palabra para repasar. Comprueba tu conexión e inténtalo de nuevo.');
+      }
+    }
     setSubmittedAnswers((current) => {
       const nextAnswers = [...current];
-      const answerToSave = questionType === 'word-order' ? orderedWords.join(' ') :
-                          questionType === 'dictation' || questionType === 'fill-blanks' || questionType === 'write-response' ? textInputValue :
-                          selectedAnswer;
       nextAnswers[questionIndex] = answerToSave;
       return nextAnswers;
     });
@@ -307,7 +302,7 @@ export default function LessonScreen({ navigation, route }) {
                 key={option}
                 label={option}
                 selected={selectedAnswer === option}
-                correct={answered && option === question.answer}
+                correct={answered && isCorrect && option === question.answer}
                 incorrect={answered && selectedAnswer === option && option !== question.answer}
                 disabled={answered}
                 onPress={() => setSelectedAnswer(option)}
@@ -323,7 +318,6 @@ export default function LessonScreen({ navigation, route }) {
             placeholder="Escribe lo que escuchas..."
             answered={answered}
             isCorrect={isCorrect}
-            correctAnswer={question.answer}
           />
         )}
 
@@ -335,7 +329,6 @@ export default function LessonScreen({ navigation, route }) {
             onChangeText={setTextInputValue}
             answered={answered}
             isCorrect={isCorrect}
-            correctAnswer={question.answer}
           />
         )}
 
@@ -357,8 +350,6 @@ export default function LessonScreen({ navigation, route }) {
             placeholder={question.placeholder || 'Escribe tu respuesta...'}
             answered={answered}
             isCorrect={isCorrect}
-            correctAnswer={question.answer}
-            feedback={question.feedback}
           />
         )}
 
@@ -390,11 +381,14 @@ export default function LessonScreen({ navigation, route }) {
         {answered && (
           <FeedbackMessage
             correct={isCorrect}
-            message={`${isCorrect ? 'La respuesta es correcta.' : `La respuesta correcta es ${question.answer}.`} ${question.explanation || question.hint || ''}`}
+            message={isCorrect
+              ? question.explanation || 'Tu respuesta coincide con lo que pide la consigna.'
+              : 'Esa respuesta no es correcta. Podrás volver a practicar esta palabra desde “Repasar palabras”.'}
           />
         )}
         {!!completionError && <FeedbackMessage correct={false} message={completionError} />}
         {!!progressSaveError && <FeedbackMessage correct={false} message={progressSaveError} />}
+        {!!wordSaveError && <FeedbackMessage correct={false} message={wordSaveError} />}
         <AppButton
           title={answered ? (questionIndex === lesson.questions.length - 1 ? 'Ver resumen' : 'Siguiente') : 'Comprobar'}
           onPress={answered ? handleNext : handleCheck}

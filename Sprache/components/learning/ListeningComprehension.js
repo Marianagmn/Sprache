@@ -26,7 +26,7 @@ export default function ListeningComprehension({ scenario, questions, answered, 
                 style={[
                   styles.option,
                   isSelected && styles.selectedOption,
-                  answered && isCorrectOption && styles.correctOption,
+                  answered && isCorrect && isCorrectOption && styles.correctOption,
                   isWrongSelection && styles.incorrectOption,
                 ]}
                 onPress={() => !answered && onSelectAnswer(option)}
@@ -34,12 +34,12 @@ export default function ListeningComprehension({ scenario, questions, answered, 
               >
                 <Text style={[
                   styles.optionText,
-                  (isSelected || (answered && isCorrectOption)) && styles.selectedText,
+                  (isSelected || (answered && isCorrect && isCorrectOption)) && styles.selectedText,
                   isWrongSelection && styles.incorrectText,
                 ]}>
                   {option}
                 </Text>
-                {answered && isCorrectOption && (
+                {answered && isCorrect && isCorrectOption && (
                   <Ionicons name="checkmark-circle" size={20} color={colors.success} />
                 )}
                 {isWrongSelection && (

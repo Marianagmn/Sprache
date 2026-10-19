@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { colors, radii, spacing, typography } from '../../theme';
 
-export default function DictationInput({ value, onChangeText, placeholder, answered, isCorrect, correctAnswer }) {
+export default function DictationInput({ value, onChangeText, placeholder, answered, isCorrect }) {
   const borderColor = answered ? (isCorrect ? colors.success : colors.red) : colors.border;
   const backgroundColor = answered ? (isCorrect ? colors.successSoft : colors.redSoft) : colors.surface;
 
@@ -21,9 +21,6 @@ export default function DictationInput({ value, onChangeText, placeholder, answe
         autoCorrect={false}
         accessibilityLabel="Campo de texto para dictado"
       />
-      {answered && !isCorrect && (
-        <Text style={styles.correctAnswer}>Respuesta correcta: {correctAnswer}</Text>
-      )}
     </View>
   );
 }
@@ -41,5 +38,4 @@ const styles = StyleSheet.create({
     color: colors.black,
     textAlignVertical: 'top',
   },
-  correctAnswer: { color: colors.success, fontSize: typography.small, fontWeight: typography.semibold, marginTop: spacing.sm },
 });

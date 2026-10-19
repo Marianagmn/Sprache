@@ -79,12 +79,22 @@ test('crear perfil valida los datos y restaura la sesión tras reiniciar el serv
   await restartedApp.updateStoredUser((currentUser) => ({
     ...currentUser,
     activeLessonProgress: lessonDraft,
+    failedWords: {
+      buch: {
+        term: 'Buch',
+        translation: 'libro',
+        question: { id: 'vocab-q2', answer: 'Libro' },
+        mistakes: 1,
+        lastFailedAt: '2026-10-18T12:00:00.000Z',
+      },
+    },
   }));
   const nextRestart = createTestAuthService(storage, crypto);
   const userWithHapticsEnabled = await nextRestart.restoreSession();
   assert.equal(userWithHapticsEnabled.preferences.hapticsEnabled, true);
   assert.equal(userWithHapticsEnabled.preferences.notificationsEnabled, false);
   assert.deepEqual(userWithHapticsEnabled.activeLessonProgress, lessonDraft);
+  assert.equal(userWithHapticsEnabled.failedWords.buch.term, 'Buch');
 });
 
 test('completar lección sin red guarda progreso local; logout y login conservan el progreso', async () => {

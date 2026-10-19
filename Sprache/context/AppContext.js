@@ -2,6 +2,7 @@ import React, { createContext, useCallback, useContext, useEffect, useMemo, useR
 import { login, logout, register, restoreSession, updateStoredUser } from '../services/authService';
 import { updateProfile } from '../services/profileService';
 import { recordActivity, resetProgress } from '../services/progressService';
+import { updateFailedWords } from '../services/lessonProgressService';
 
 const AppContext = createContext(null);
 
@@ -58,6 +59,15 @@ export function AppProvider({ children }) {
     return updatedUser;
   }, [persistUserUpdate]);
 
+  const saveWordAttempt = useCallback(async (question, correct) => {
+    const updatedUser = await persistUserUpdate((currentUser) => ({
+      ...currentUser,
+      failedWords: updateFailedWords(currentUser.failedWords, question, correct),
+    }));
+    setUser(updatedUser);
+    return updatedUser;
+  }, [persistUserUpdate]);
+
   const registerUser = async (credentials) => {
     const registeredUser = await register(credentials);
     setUser(registeredUser);
@@ -91,13 +101,14 @@ export function AppProvider({ children }) {
     user,
     isLoading,
     saveLessonProgress,
+    saveWordAttempt,
     completeActivity,
     registerUser,
     loginUser,
     editProfile,
     resetUserProgress,
     logoutUser,
-  }), [user, isLoading, saveLessonProgress]);
+  }), [user, isLoading, saveLessonProgress, saveWordAttempt]);
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 }
@@ -111,4 +122,3 @@ export function useApp() {
 
   return context;
 }
-

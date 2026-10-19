@@ -176,6 +176,7 @@ export function resetProgress(user) {
     ...user,
     sessions: [],
     wordProgress: {},
+    failedWords: {},
     activeLessonProgress: null,
     todaySeconds: 0,
     todayMinutes: 0,

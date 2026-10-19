@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { colors, radii, spacing, typography } from '../../theme';
 
-export default function WriteResponse({ value, onChangeText, placeholder, answered, isCorrect, correctAnswer, feedback }) {
+export default function WriteResponse({ value, onChangeText, placeholder, answered, isCorrect }) {
   const borderColor = answered ? (isCorrect ? colors.success : colors.red) : colors.border;
   const backgroundColor = answered ? (isCorrect ? colors.successSoft : colors.redSoft) : colors.surface;
 
@@ -21,12 +21,6 @@ export default function WriteResponse({ value, onChangeText, placeholder, answer
         autoCorrect={true}
         accessibilityLabel="Campo de texto para respuesta escrita"
       />
-      {answered && !isCorrect && correctAnswer && (
-        <Text style={styles.correctAnswer}>Respuesta sugerida: {correctAnswer}</Text>
-      )}
-      {answered && feedback && (
-        <Text style={styles.feedback}>{feedback}</Text>
-      )}
     </View>
   );
 }
@@ -44,6 +38,4 @@ const styles = StyleSheet.create({
     color: colors.black,
     textAlignVertical: 'top',
   },
-  correctAnswer: { color: colors.success, fontSize: typography.small, fontWeight: typography.semibold, marginTop: spacing.sm },
-  feedback: { color: colors.muted, fontSize: typography.small, marginTop: spacing.sm, fontStyle: 'italic' },
 });

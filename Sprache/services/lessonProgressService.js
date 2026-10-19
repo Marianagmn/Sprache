@@ -11,6 +11,54 @@ export function calculateSessionSummary(correctAnswers, totalQuestions) {
   };
 }
 
+export function isQuestionAnswerCorrect(question, submittedAnswer) {
+  if (!question || typeof submittedAnswer !== 'string') {
+    return false;
+  }
+
+  const expectedAnswer = question.type === 'listening'
+    ? question.questions?.[0]?.correctAnswer
+    : question.answer;
+
+  if (typeof expectedAnswer !== 'string') {
+    return false;
+  }
+
+  if (['dictation', 'fill-blanks', 'write-response'].includes(question.type)) {
+    return submittedAnswer.trim().toLocaleLowerCase()
+      === expectedAnswer.trim().toLocaleLowerCase();
+  }
+
+  return submittedAnswer === expectedAnswer;
+}
+
+export function updateFailedWords(failedWords = {}, question, correct, now = new Date()) {
+  const term = question?.vocabulary?.term || question?.word;
+  if (typeof term !== 'string' || !term.trim()) {
+    return failedWords;
+  }
+
+  const normalizedTerm = term.trim();
+  const key = normalizedTerm.toLocaleLowerCase();
+  const nextFailedWords = { ...failedWords };
+
+  if (correct) {
+    delete nextFailedWords[key];
+    return nextFailedWords;
+  }
+
+  const previous = nextFailedWords[key] || {};
+  nextFailedWords[key] = {
+    term: normalizedTerm,
+    translation: question.vocabulary?.translation || previous.translation || '',
+    question: { ...question },
+    mistakes: (previous.mistakes || 0) + 1,
+    lastFailedAt: now.toISOString(),
+  };
+
+  return nextFailedWords;
+}
+
 export function buildLessonCompletion(
   lesson,
   submittedAnswers,
@@ -22,12 +70,12 @@ export function buildLessonCompletion(
   const answers = Array.isArray(submittedAnswers) ? submittedAnswers : [];
   const usedHints = Array.isArray(hintUsage) ? hintUsage : [];
   const correctAnswers = questions.reduce(
-    (total, question, index) => total + (answers[index] === question.answer ? 1 : 0),
+    (total, question, index) => total + (isQuestionAnswerCorrect(question, answers[index]) ? 1 : 0),
     0,
   );
   const summary = calculateSessionSummary(correctAnswers, questions.length);
   const learnedWords = questions.reduce((words, question, index) => {
-    if (answers[index] === question.answer && question.vocabulary?.term) {
+    if (isQuestionAnswerCorrect(question, answers[index]) && question.vocabulary?.term) {
       words.push(question.vocabulary);
     }
     return words;
@@ -38,7 +86,7 @@ export function buildLessonCompletion(
       results.push({
         term: term.trim(),
         translation: question.vocabulary?.translation || '',
-        correct: answers[index] === question.answer,
+        correct: isQuestionAnswerCorrect(question, answers[index]),
         hintUsed: Boolean(usedHints[index]),
       });
     }

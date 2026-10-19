@@ -7,7 +7,7 @@ import StreakBadge from '../components/home/StreakBadge';
 import DailyGoalCard from '../components/home/DailyGoalCard';
 import RecommendationCard from '../components/home/RecommendationCard';
 import { getRecommendedActivity } from '../services/activityService';
-import { getLessonByActivityId, getSpacedReviewLesson } from '../services/lessonService';
+import { getFailedWordsReviewLesson, getLessonByActivityId, getSpacedReviewLesson } from '../services/lessonService';
 import { getLearningPath } from '../services/learningPathService';
 import { colors, spacing, typography } from '../theme';
 
@@ -15,10 +15,13 @@ export default function HomeScreen({ navigation }) {
   const { user } = useApp();
   const recommendation = getRecommendedActivity(user.sessions);
   const reviewLesson = getSpacedReviewLesson(user.wordProgress || {});
+  const failedWordsLesson = getFailedWordsReviewLesson(user.failedWords || {});
   const activeLessonProgress = user.activeLessonProgress;
   const activeLesson = activeLessonProgress?.activityId === 'spaced-review'
     ? reviewLesson
-    : getLessonByActivityId(activeLessonProgress?.activityId);
+    : activeLessonProgress?.activityId === 'failed-words-review'
+      ? failedWordsLesson
+      : getLessonByActivityId(activeLessonProgress?.activityId);
   const hasInProgressLesson = Boolean(activeLessonProgress && activeLesson);
   const hasReview = Boolean(reviewLesson);
   const learningPath = getLearningPath(user.sessions, user.placementAssessment);
@@ -56,11 +59,33 @@ export default function HomeScreen({ navigation }) {
           time={hasInProgressLesson ? 'Retomar' : hasReview ? `${reviewLesson.questions.length} palabras` : hasPathLesson ? nextPathLesson.time : recommendation.time}
           iconName={hasInProgressLesson ? 'play' : hasReview ? 'refresh' : hasPathLesson ? 'school-outline' : recommendation.iconName}
           onPress={() => navigation.navigate('Lesson', hasInProgressLesson
-            ? { activityId: activeLessonProgress.activityId, resumeProgress: activeLessonProgress }
+            ? {
+              activityId: activeLessonProgress.activityId,
+              resumeProgress: activeLessonProgress,
+              ...(activeLessonProgress.activityId === 'failed-words-review' ? { reviewLesson: activeLesson } : {}),
+            }
             : hasReview
               ? { activityId: reviewLesson.activityId, reviewLesson }
               : { activityId: hasPathLesson ? nextPathLesson.id : recommendation.id })}
         />
+
+        <Text style={styles.sectionTitle} accessibilityRole="header">Repasar palabras</Text>
+        {failedWordsLesson ? (
+          <RecommendationCard
+            title="Practica tus errores"
+            description={`Tienes ${failedWordsLesson.questions.length} ${failedWordsLesson.questions.length === 1 ? 'palabra' : 'palabras'} para reforzar.`}
+            time={`${failedWordsLesson.questions.length} palabras`}
+            iconName="refresh"
+            onPress={() => navigation.navigate('Lesson', {
+              activityId: failedWordsLesson.activityId,
+              reviewLesson: failedWordsLesson,
+            })}
+          />
+        ) : (
+          <Text style={styles.emptyReview}>
+            Aquí aparecerán las palabras que quieras volver a practicar.
+          </Text>
+        )}
 
       </ScrollView>
     </SafeAreaView>
@@ -71,4 +96,5 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.background },
   scroll: { padding: 20 },
   sectionTitle: { fontSize: typography.subtitle, fontWeight: typography.semibold, color: colors.black, marginBottom: spacing.lg },
+  emptyReview: { color: colors.muted, fontSize: typography.small, marginBottom: spacing.xl },
 });

@@ -43,9 +43,6 @@ export default function WordOrder({ words, orderedWords, onWordPress, onReset, a
           <Text style={styles.resetText}>Reiniciar</Text>
         </TouchableOpacity>
       )}
-      {answered && !isCorrect && (
-        <Text style={styles.hint}>El orden correcto es diferente</Text>
-      )}
     </View>
   );
 }
@@ -84,5 +81,4 @@ const styles = StyleSheet.create({
   wordText: { color: colors.black, fontSize: 15, fontWeight: typography.semibold, marginRight: spacing.xs },
   resetButton: { alignSelf: 'flex-start', marginBottom: spacing.sm },
   resetText: { color: colors.redText, fontSize: typography.small, fontWeight: typography.semibold },
-  hint: { color: colors.muted, fontSize: typography.small, fontStyle: 'italic' },
 });

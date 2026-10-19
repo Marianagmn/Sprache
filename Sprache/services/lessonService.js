@@ -39,3 +39,26 @@ export function getSpacedReviewLesson(wordProgress, now = new Date(), limit = 5)
     questions: reviewQuestions,
   };
 }
+
+export function getFailedWordsReviewLesson(failedWords, limit = 10) {
+  const reviewQuestions = Object.entries(failedWords || {})
+    .sort(([, first], [, second]) => (
+      new Date(first.lastFailedAt || 0).getTime() - new Date(second.lastFailedAt || 0).getTime()
+    ))
+    .slice(0, Math.max(0, limit))
+    .flatMap(([key, failedWord], index) => (
+      failedWord?.question
+        ? [{ ...failedWord.question, id: `failed-review-${index}-${key}` }]
+        : []
+    ));
+
+  if (!reviewQuestions.length) return null;
+
+  return {
+    id: 'failed-words-review',
+    title: 'Repasar palabras',
+    activityId: 'failed-words-review',
+    durationMinutes: Math.max(1, Math.ceil(reviewQuestions.length * 0.5)),
+    questions: reviewQuestions,
+  };
+}
