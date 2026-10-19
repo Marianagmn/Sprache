@@ -15,9 +15,19 @@ export default function ProgressScreen({ navigation }) {
   const { user } = useApp();
   const weeklyActivity = getWeeklyActivity(user.sessions);
   const learningProgress = user.learningProgress || {};
-  const completedReadings = readingLessons.filter((lesson) => learningProgress.readings?.[lesson.id]?.completed).length;
+  const completedReadings = readingLessons.filter((lesson) => (
+    learningProgress.readings?.[lesson.id]?.completed
+    || (learningProgress.readings?.[lesson.id]?.correctQuestionIds || []).length === lesson.questions.length
+  )).length;
   const completedTheoryLessons = theoryModules.reduce(
-    (total, module) => total + (learningProgress.theory?.[module.id]?.completedLessonIds || []).length,
+    (total, module) => {
+      const moduleProgress = learningProgress.theory?.[module.id] || {};
+      const completedIds = new Set(moduleProgress.completedLessonIds || []);
+      const correctIds = new Set(moduleProgress.correctExerciseIds || []);
+      return total + module.lessons.filter((lesson) => (
+        completedIds.has(lesson.id) || lesson.exercises.every((exercise) => correctIds.has(exercise.id))
+      )).length;
+    },
     0,
   );
   const playedPronunciations = Object.values(learningProgress.pronunciation || {}).reduce(

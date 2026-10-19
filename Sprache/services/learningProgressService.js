@@ -3,14 +3,32 @@ export function updateLearningProgress(current = {}, section, key, value) {
     throw new Error('La sección y el progreso de aprendizaje deben ser válidos.');
   }
 
+  const previous = current[section]?.[key] || {};
+  const nextValue = { ...previous };
+  Object.entries(value).forEach(([property, next]) => {
+    if (property === 'playCountIncrement') {
+      if (Number.isFinite(next) && next > 0) {
+        nextValue.playCount = (previous.playCount || 0) + next;
+      }
+      return;
+    }
+    if (next === undefined) return;
+    if (Array.isArray(next) && Array.isArray(previous[property])) {
+      nextValue[property] = [...new Set([...previous[property], ...next])];
+      return;
+    }
+    if (property === 'completed' && previous.completed === true) {
+      nextValue.completed = true;
+      return;
+    }
+    nextValue[property] = next;
+  });
+
   return {
     ...current,
     [section]: {
       ...(current[section] || {}),
-      [key]: {
-        ...(current[section]?.[key] || {}),
-        ...value,
-      },
+      [key]: nextValue,
     },
   };
 }

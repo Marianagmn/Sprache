@@ -84,17 +84,25 @@ test('el progreso de lecturas y teoría se fusiona por identificador', () => {
     correctQuestionIds: ['a1-q1'],
   });
   const updated = updateLearningProgress(progress, 'readings', 'reading-a1-first-day', {
+    correctQuestionIds: ['a1-q2'],
     completed: true,
   });
   const theory = updateLearningProgress({}, 'theory', 'theory-foundations', {
     completedLessonIds: ['alphabet-pronunciation'],
   });
+  const firstPlayback = updateLearningProgress({}, 'pronunciation', 'lesson-word-Hallo', {
+    playCountIncrement: 1,
+  });
+  const repeatedPlayback = updateLearningProgress(firstPlayback, 'pronunciation', 'lesson-word-Hallo', {
+    playCountIncrement: 1,
+  });
 
   assert.deepEqual(updated.readings['reading-a1-first-day'], {
-    correctQuestionIds: ['a1-q1'],
+    correctQuestionIds: ['a1-q1', 'a1-q2'],
     completed: true,
   });
   assert.equal(getCompletedTheoryLessonCount(theory.theory), 1);
+  assert.equal(repeatedPlayback.pronunciation['lesson-word-Hallo'].playCount, 2);
   assert.throws(() => updateLearningProgress({}, 'unknown', 'item', { completed: true }), /válidos/);
 });
 

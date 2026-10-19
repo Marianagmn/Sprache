@@ -19,6 +19,7 @@ export default function ReadingScreen() {
   const lesson = readingLessons.find((item) => item.level === level);
   const progress = user.learningProgress?.readings?.[lesson.id] || {};
   const correctQuestionIds = progress.correctQuestionIds || [];
+  const readingComplete = progress.completed || correctQuestionIds.length === lesson.questions.length;
   const readingQuestions = lesson.questions.map((question, index) => ({
     ...question,
     vocabulary: {
@@ -44,7 +45,7 @@ export default function ReadingScreen() {
         const updatedQuestionIds = [...new Set([...correctQuestionIds, question.id])];
         await saveLearningProgress('readings', lesson.id, {
           correctQuestionIds: updatedQuestionIds,
-          completed: updatedQuestionIds.length === lesson.questions.length,
+          completed: updatedQuestionIds.length === lesson.questions.length ? true : undefined,
         });
       }
     } catch (error) {
@@ -54,9 +55,8 @@ export default function ReadingScreen() {
   };
 
   const markAudioPlayed = (key) => {
-    const playCount = user.learningProgress?.pronunciation?.[key]?.playCount || 0;
     void saveLearningProgress('pronunciation', key, {
-      playCount: playCount + 1,
+      playCountIncrement: 1,
       lastPlayedAt: new Date().toISOString(),
     }).catch((error) => {
       console.error('No se pudo guardar el progreso de pronunciación.', error);
@@ -139,7 +139,7 @@ export default function ReadingScreen() {
             </View>
           );
         })}
-        {progress.completed && <Text style={styles.complete}>¡Lectura completada! Tu progreso quedó guardado.</Text>}
+        {readingComplete && <Text style={styles.complete}>¡Lectura completada! Tu progreso quedó guardado.</Text>}
         {!!saveError && <Text style={styles.error} accessibilityRole="alert">{saveError}</Text>}
       </ScrollView>
     </SafeAreaView>

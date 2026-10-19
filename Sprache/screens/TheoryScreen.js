@@ -10,7 +10,10 @@ import { colors, radii, spacing, typography } from '../theme';
 
 function isModuleComplete(module, progress = {}) {
   const completed = new Set(progress.completedLessonIds || []);
-  return module.lessons.every((lesson) => completed.has(lesson.id));
+  const correctExercises = new Set(progress.correctExerciseIds || []);
+  return module.lessons.every((lesson) => (
+    completed.has(lesson.id) || lesson.exercises.every((exercise) => correctExercises.has(exercise.id))
+  ));
 }
 
 function createReviewQuestion(exercise) {
@@ -41,11 +44,12 @@ export default function TheoryScreen() {
     .every((module) => isModuleComplete(module, learning[module.id]));
   const moduleUnlocked = moduleIndex === 0 || allPreviousModulesComplete;
   const completedLessons = moduleProgress.completedLessonIds || [];
+  const lessonComplete = completedLessons.includes(lesson.id)
+    || lesson.exercises.every((exercise) => correctExerciseIds.includes(exercise.id));
 
   const markAudioPlayed = (id) => {
-    const playCount = user.learningProgress?.pronunciation?.[id]?.playCount || 0;
     void saveLearningProgress('pronunciation', id, {
-      playCount: playCount + 1,
+      playCountIncrement: 1,
       lastPlayedAt: new Date().toISOString(),
     }).catch((error) => {
       console.error('No se pudo guardar el progreso de pronunciación.', error);
@@ -105,7 +109,7 @@ export default function TheoryScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
-        <ScreenHeader title="Aprende la teoría del alemán" subtitle="Los módulos se desbloquean progresivamente al completar las lecciones anteriores." />
+        <ScreenHeader title="Aprende la teoría del alemán" subtitle="Los módulos se desbloquean progresivamente. Los botones de audio requieren una voz alemana (Alemania) instalada." />
         <View style={styles.moduleList}>
           {theoryModules.map((module, index) => {
             const unlocked = index === 0 || theoryModules
@@ -148,7 +152,7 @@ export default function TheoryScreen() {
                   accessibilityState={{ selected: lessonIndex === index }}
                 >
                   <Text style={[styles.chipTitle, lessonIndex === index && styles.selectedText]}>{item.title}</Text>
-                  <Text style={styles.chipState}>{completedLessons.includes(item.id) ? 'Completada' : 'En progreso'}</Text>
+                  <Text style={styles.chipState}>{completedLessons.includes(item.id) || item.exercises.every((exercise) => correctExerciseIds.includes(exercise.id)) ? 'Completada' : 'En progreso'}</Text>
                 </TouchableOpacity>
               ))}
             </View>
@@ -159,7 +163,7 @@ export default function TheoryScreen() {
               <Text style={styles.subheading}>Reglas básicas</Text>
               {lesson.rules.map((rule) => <Text key={rule} style={styles.bullet}>• {rule}</Text>)}
               <Text style={styles.subheading}>Ejemplos en alemán</Text>
-              {lesson.examples.map((example) => (
+              {lesson.examples.map((example, index) => (
                 <View key={example.german} style={styles.example}>
                   <View style={styles.exampleLine}>
                     <Text style={styles.german}>{example.german}</Text>
@@ -167,7 +171,7 @@ export default function TheoryScreen() {
                       text={example.german}
                       compact
                       label={`Escuchar ${example.german}`}
-                      onPlaybackStart={() => markAudioPlayed(`${lesson.id}-example-${example.german}`)}
+                      onPlaybackStart={() => markAudioPlayed(`${lesson.id}-example-${index}`)}
                     />
                   </View>
                   <Text style={styles.body}>{example.spanish}</Text>
@@ -222,7 +226,7 @@ export default function TheoryScreen() {
                 </View>
               );
             })}
-            {completedLessons.includes(lesson.id) && <Text style={styles.complete}>¡Lección completada! Tu progreso quedó guardado.</Text>}
+            {lessonComplete && <Text style={styles.complete}>¡Lección completada! Tu progreso quedó guardado.</Text>}
           </>
         )}
         {!!saveError && <Text style={styles.error} accessibilityRole="alert">{saveError}</Text>}

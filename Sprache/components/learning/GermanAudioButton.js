@@ -101,6 +101,7 @@ export default function GermanAudioButton({ text, label = 'Escuchar', compact = 
   if (!voiceLoaded) return null;
 
   if (!voice) {
+    if (compact) return null;
     return (
       <Text style={styles.unavailable} accessibilityRole="text">
         {error || 'Instala o activa una voz alemana (Alemania) para escuchar la pronunciación.'}

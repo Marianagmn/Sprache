@@ -26,9 +26,8 @@ export default function PronunciationScreen() {
   ];
 
   const markPlayed = (id) => {
-    const playCount = user.learningProgress?.pronunciation?.[id]?.playCount || 0;
     void saveLearningProgress('pronunciation', id, {
-      playCount: playCount + 1,
+      playCountIncrement: 1,
       lastPlayedAt: new Date().toISOString(),
     }).catch((error) => {
       console.error('No se pudo guardar el progreso de pronunciación.', error);

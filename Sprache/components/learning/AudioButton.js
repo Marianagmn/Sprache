@@ -4,6 +4,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import * as Speech from 'expo-speech';
 import { colors, radii, spacing, typography } from '../../theme';
 import { getGermanVoice } from '../../services/germanVoiceService';
+import { useApp } from '../../context/AppContext';
 
 const SPEEDS = [
   { label: 'Lenta', rate: 0.75 },
@@ -18,6 +19,7 @@ function getSpeechErrorMessage(error) {
 }
 
 export default function AudioButton({ wordText, phraseText }) {
+  const { saveLearningProgress } = useApp();
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [selectedText, setSelectedText] = useState('word');
   const [speed, setSpeed] = useState(1);
@@ -59,7 +61,16 @@ export default function AudioButton({ wordText, phraseText }) {
       language: 'de-DE',
       voice: germanVoice.identifier,
       rate,
-      onStart: () => setIsSpeaking(true),
+      onStart: () => {
+        setIsSpeaking(true);
+        void saveLearningProgress('pronunciation', `lesson-${selectedText}-${phrase}`, {
+          playCountIncrement: 1,
+          lastPlayedAt: new Date().toISOString(),
+        }).catch((error) => {
+          console.error('No se pudo guardar el progreso de pronunciación.', error);
+          setSpeechError('No se pudo guardar el progreso de pronunciación.');
+        });
+      },
       onDone: () => {
         if (sequenceId.current !== currentSequence) return;
         if (remaining > 1) {
