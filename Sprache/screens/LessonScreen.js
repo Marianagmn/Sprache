@@ -3,7 +3,11 @@ import { AppState, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useApp } from '../context/AppContext';
 import { getLessonByActivityId } from '../services/lessonService';
-import { buildLessonCompletion, isQuestionAnswerCorrect } from '../services/lessonProgressService';
+import {
+  buildLessonCompletion,
+  getCorrectAnswerFeedback,
+  isQuestionAnswerCorrect,
+} from '../services/lessonProgressService';
 import AppButton from '../components/common/AppButton';
 import AnswerOption from '../components/learning/AnswerOption';
 import AudioButton from '../components/learning/AudioButton';
@@ -36,6 +40,9 @@ export default function LessonScreen({ navigation, route }) {
   ));
   const [selectedAnswer, setSelectedAnswer] = useState(resumedProgress?.selectedAnswer ?? null);
   const [answered, setAnswered] = useState(Boolean(resumedProgress?.answered));
+  const [answerFeedbackCorrect, setAnswerFeedbackCorrect] = useState(
+    resumedProgress?.answerFeedbackCorrect ?? (resumedProgress?.answered ? true : null),
+  );
   const [submittedAnswers, setSubmittedAnswers] = useState(() => resumedProgress?.submittedAnswers || []);
   const [hintUsage, setHintUsage] = useState(() => resumedProgress?.hintUsage || []);
   const [sessionSummary, setSessionSummary] = useState(null);
@@ -62,6 +69,7 @@ export default function LessonScreen({ navigation, route }) {
     questionIndex,
     selectedAnswer,
     answered,
+    answerFeedbackCorrect,
     submittedAnswers,
     hintUsage,
     textInputValue,
@@ -114,6 +122,7 @@ export default function LessonScreen({ navigation, route }) {
     questionIndex,
     selectedAnswer,
     answered,
+    answerFeedbackCorrect,
     submittedAnswers,
     hintUsage,
     textInputValue,
@@ -153,7 +162,8 @@ export default function LessonScreen({ navigation, route }) {
 
     if (!isValid) return;
 
-    setAnswered(true);
+    setAnswered(isCorrect);
+    setAnswerFeedbackCorrect(isCorrect);
     void provideAnswerHapticFeedback(isCorrect, Boolean(user.preferences?.hapticsEnabled));
     const word = question.vocabulary?.term || question.word;
     if (typeof word === 'string' && word.trim()) {
@@ -226,6 +236,7 @@ export default function LessonScreen({ navigation, route }) {
     setQuestionIndex((current) => current + 1);
     setSelectedAnswer(null);
     setAnswered(false);
+    setAnswerFeedbackCorrect(null);
     setHintVisible(false);
     setTextInputValue('');
     setOrderedWords([]);
@@ -248,6 +259,7 @@ export default function LessonScreen({ navigation, route }) {
   // Handlers for new question types
   const handleWordPress = (word) => {
     if (answered) return;
+    setAnswerFeedbackCorrect(null);
     if (orderedWords.includes(word)) {
       setOrderedWords(orderedWords.filter((w) => w !== word));
     } else {
@@ -257,7 +269,18 @@ export default function LessonScreen({ navigation, route }) {
 
   const handleResetWords = () => {
     if (answered) return;
+    setAnswerFeedbackCorrect(null);
     setOrderedWords([]);
+  };
+
+  const handleSelectAnswer = (answer) => {
+    setSelectedAnswer(answer);
+    setAnswerFeedbackCorrect(null);
+  };
+
+  const handleTextInputChange = (value) => {
+    setTextInputValue(value);
+    setAnswerFeedbackCorrect(null);
   };
 
   if (finished) {
@@ -304,9 +327,9 @@ export default function LessonScreen({ navigation, route }) {
                 label={option}
                 selected={selectedAnswer === option}
                 correct={answered && isCorrect && option === question.answer}
-                incorrect={answered && selectedAnswer === option && option !== question.answer}
+                incorrect={answerFeedbackCorrect === false && selectedAnswer === option}
                 disabled={answered}
-                onPress={() => setSelectedAnswer(option)}
+                onPress={() => handleSelectAnswer(option)}
               />
             ))}
           </View>
@@ -315,7 +338,7 @@ export default function LessonScreen({ navigation, route }) {
         {questionType === 'dictation' && (
           <DictationInput
             value={textInputValue}
-            onChangeText={setTextInputValue}
+            onChangeText={handleTextInputChange}
             placeholder="Escribe lo que escuchas..."
             answered={answered}
             isCorrect={isCorrect}
@@ -327,7 +350,7 @@ export default function LessonScreen({ navigation, route }) {
             sentence={question.sentence}
             blankIndex={question.blankIndex || 0}
             value={textInputValue}
-            onChangeText={setTextInputValue}
+            onChangeText={handleTextInputChange}
             answered={answered}
             isCorrect={isCorrect}
           />
@@ -347,7 +370,7 @@ export default function LessonScreen({ navigation, route }) {
         {questionType === 'write-response' && (
           <WriteResponse
             value={textInputValue}
-            onChangeText={setTextInputValue}
+            onChangeText={handleTextInputChange}
             placeholder={question.placeholder || 'Escribe tu respuesta...'}
             answered={answered}
             isCorrect={isCorrect}
@@ -360,8 +383,9 @@ export default function LessonScreen({ navigation, route }) {
             questions={question.questions}
             answered={answered}
             selectedAnswer={selectedAnswer}
-            onSelectAnswer={setSelectedAnswer}
+            onSelectAnswer={handleSelectAnswer}
             isCorrect={isCorrect}
+            answerFeedbackCorrect={answerFeedbackCorrect}
           />
         )}
 
@@ -379,12 +403,12 @@ export default function LessonScreen({ navigation, route }) {
             }}
           />
         )}
-        {answered && (
+        {answerFeedbackCorrect !== null && (
           <FeedbackMessage
-            correct={isCorrect}
-            message={isCorrect
-              ? question.explanation || 'Tu respuesta coincide con lo que pide la consigna.'
-              : 'Esa respuesta no es correcta. Podrás volver a practicar esta palabra desde “Repasar palabras”.'}
+            correct={answerFeedbackCorrect}
+            message={answerFeedbackCorrect
+              ? getCorrectAnswerFeedback(question)
+              : '¡Casi! Inténtalo de nuevo. Si necesitas ayuda, puedes solicitar una pista.'}
           />
         )}
         {!!completionError && <FeedbackMessage correct={false} message={completionError} />}

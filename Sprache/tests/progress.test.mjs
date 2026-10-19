@@ -7,6 +7,7 @@ import { getFailedWordsReviewLesson, getLessonByActivityId } from '../services/l
 import {
   buildLessonCompletion,
   calculateSessionSummary,
+  getCorrectAnswerFeedback,
   isQuestionAnswerCorrect,
   updateFailedWords,
 } from '../services/lessonProgressService.js';
@@ -176,6 +177,29 @@ test('las respuestas correctas se validan igual en las lecciones y al guardar la
   assert.equal(completion.correctAnswers, listeningLesson.questions.length);
   assert.ok(completion.wordResults.every((result) => result.correct));
   assert.equal(isQuestionAnswerCorrect({ type: 'write-response', answer: 'Ich lerne Deutsch' }, ' ich lerne deutsch '), true);
+});
+
+test('cada ejercicio explica el significado de su respuesta dentro del contexto y sin mostrar la pista', () => {
+  const questions = lessons.flatMap((lesson) => lesson.questions);
+  const feedback = questions.map((question) => getCorrectAnswerFeedback(question));
+
+  assert.equal(feedback.length, 240);
+  assert.ok(feedback.every((message, index) => (
+    message.startsWith('¡Correcto!')
+    && !message.includes(questions[index].hint)
+    && message.length > 45
+  )));
+  assert.equal(new Set(feedback).size, feedback.length);
+
+  const vocabularyFeedback = getCorrectAnswerFeedback(vocabularyLesson.questions[0]);
+  assert.match(vocabularyFeedback, /Haus/);
+  assert.match(vocabularyFeedback, /casa/);
+  assert.match(vocabularyFeedback, /¿Cómo se dice/);
+
+  const listeningFeedback = getCorrectAnswerFeedback(listeningLesson.questions[0]);
+  assert.match(listeningFeedback, /Thomas/);
+  assert.match(listeningFeedback, /heißen/);
+  assert.match(listeningFeedback, /¿Cómo se llama la persona/);
 });
 
 test('las palabras falladas se guardan para repasar y se retiran al responderlas correctamente', () => {

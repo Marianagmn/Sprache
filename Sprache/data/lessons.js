@@ -1430,6 +1430,7 @@ export const writeResponseLesson = {
       vocabulary: { term: 'heißen', translation: 'llamarse' },
       hint: 'Usa "Ich heiße" seguido de tu nombre.',
       feedback: 'Puedes responder: Ich heiße [tu nombre] o Mein Name ist [tu nombre].',
+      explanation: '«Ich heiße» significa «me llamo»; heißen es el verbo alemán para decir tu nombre.',
     },
     {
       id: 'write-q2',
@@ -1441,6 +1442,7 @@ export const writeResponseLesson = {
       vocabulary: { term: 'kommen aus', translation: 'ser de (origen)' },
       hint: 'Usa "Ich komme aus" seguido de tu país o ciudad.',
       feedback: 'La estructura es: Ich komme aus [país/ciudad].',
+      explanation: '«Ich komme aus» significa «soy de» y se usa para presentar el país o la ciudad de origen.',
     },
     {
       id: 'write-q3',
@@ -1452,6 +1454,7 @@ export const writeResponseLesson = {
       vocabulary: { term: 'Wie geht es dir?', translation: '¿Cómo estás?' },
       hint: 'Puedes decir "Mir geht es gut" (estoy bien) o "Mir geht es nicht so gut" (no estoy muy bien).',
       feedback: 'Respuestas comunes: Mir geht es gut / Mir geht es nicht so gut / Es geht mir gut.',
+      explanation: '«Mir geht es» inicia una respuesta sobre cómo te sientes; después puedes añadir, por ejemplo, «gut» (bien).',
     },
   ],
 };
@@ -1472,6 +1475,7 @@ export const writeResponseLessonA2 = {
       vocabulary: { term: 'die Routine', translation: 'la rutina' },
       hint: 'Usa verbos como aufstehen, frühstücken, gehen.',
       feedback: 'Ejemplo: Am Morgen stehe ich um 7 Uhr auf, frühstücke und gehe zur Arbeit.',
+      explanation: '«Am Morgen» significa «por la mañana» y sitúa en ese momento las acciones de tu rutina.',
     },
     {
       id: 'write-a2-q2',
@@ -1483,6 +1487,7 @@ export const writeResponseLessonA2 = {
       vocabulary: { term: 'die Freizeit', translation: 'el tiempo libre' },
       hint: 'Usa "Ich spiele gern" o "Ich lese gern".',
       feedback: 'Ejemplo: In meiner Freizeit lese ich gern und treibe Sport.',
+      explanation: '«In meiner Freizeit» significa «en mi tiempo libre» e introduce las actividades que disfrutas fuera de tus obligaciones.',
     },
     {
       id: 'write-a2-q3',
@@ -1494,6 +1499,7 @@ export const writeResponseLessonA2 = {
       vocabulary: { term: 'die Familie', translation: 'la familia' },
       hint: 'Usa vocabulario como Vater, Mutter, Bruder, Schwester.',
       feedback: 'Ejemplo: Meine Familie besteht aus meinem Vater, meiner Mutter und meinem Bruder.',
+      explanation: '«Meine Familie» significa «mi familia» y presenta a las personas sobre las que pide escribir la consigna.',
     },
   ],
 };
@@ -1514,6 +1520,7 @@ export const writeResponseLessonB1 = {
       vocabulary: { term: 'die Reise', translation: 'el viaje' },
       hint: 'Usa Perfekt: bin gefahren, habe gesehen, habe gemacht.',
       feedback: 'Ejemplo: Letztes Jahr bin ich nach Spanien gefahren. Ich habe dort viel gesehen.',
+      explanation: '«Letztes Jahr» significa «el año pasado» y sitúa el viaje en el pasado, como requiere la consigna.',
     },
     {
       id: 'write-b1-q2',
@@ -1525,6 +1532,7 @@ export const writeResponseLessonB1 = {
       vocabulary: { term: 'der Beruf', translation: 'el trabajo' },
       hint: 'Usa vocabulario profesional: Büro, Kollegen, Kunden.',
       feedback: 'Ejemplo: Ich arbeite als Bürokraft in einem großen Unternehmen.',
+      explanation: '«Ich arbeite» significa «trabajo» y permite comenzar a describir tu empleo o actividad profesional.',
     },
     {
       id: 'write-b1-q3',
@@ -1536,6 +1544,7 @@ export const writeResponseLessonB1 = {
       vocabulary: { term: 'die Pläne', translation: 'los planes' },
       hint: 'Usa futuro con werden: werde ich, werden wir.',
       feedback: 'Ejemplo: Im Jahr 2025 werde ich Deutsch lernen und nach Deutschland reisen.',
+      explanation: '«Im Jahr» significa «en el año» y sirve para situar en el tiempo los planes que harás en el futuro.',
     },
   ],
 };
@@ -1556,6 +1565,7 @@ export const writeResponseLessonB2 = {
       vocabulary: { term: 'die Meinung', translation: 'la opinión' },
       hint: 'Usa conectores: meiner Meinung nach, außerdem, jedoch.',
       feedback: 'Ejemplo: Ich denke, dass Sprachenlernen wichtig ist, weil es neue Möglichkeiten eröffnet.',
+      explanation: '«Ich denke» significa «pienso» y es una forma natural de introducir tu opinión sobre el aprendizaje de idiomas.',
     },
     {
       id: 'write-b2-q2',
@@ -1567,6 +1577,7 @@ export const writeResponseLessonB2 = {
       vocabulary: { term: 'das Thema', translation: 'el tema' },
       hint: 'Usa vocabulario abstracto: die Gesellschaft, die Umwelt, die Bildung.',
       feedback: 'Ejemplo: Ein wichtiges Thema ist der Umweltschutz, weil wir die Natur schützen müssen.',
+      explanation: '«Ein wichtiges Thema» significa «un tema importante» y presenta la cuestión social que desarrollarás.',
     },
     {
       id: 'write-b2-q3',
@@ -1578,6 +1589,7 @@ export const writeResponseLessonB2 = {
       vocabulary: { term: 'die Erfahrung', translation: 'la experiencia' },
       hint: 'Usa narración en pasado con reflexiones.',
       feedback: 'Ejemplo: Eine Erfahrung, die mein Leben verändert hat, war mein Auslandsjahr.',
+      explanation: '«Eine Erfahrung» significa «una experiencia» y da inicio al relato personal que solicita la consigna.',
     },
   ],
 };
@@ -1910,6 +1922,7 @@ export const storyLessonA2 = {
       vocabulary: { term: 'der Sonntag', translation: 'el domingo' },
       hint: 'El texto describe actividades relajantes.',
       feedback: 'El narrador lee un libro y descansa el domingo.',
+      explanation: '«Am Sonntag» significa «el domingo» y sitúa en ese día las acciones del narrador que pide contar la consigna.',
     },
   ],
 };
@@ -1950,6 +1963,7 @@ export const storyLessonB1 = {
       vocabulary: { term: 'der Sonntag', translation: 'el domingo' },
       hint: 'El texto menciona actividades relajantes.',
       feedback: 'El texto dice que a Anna le gusta leer y pasear los domingos.',
+      explanation: '«Am Sonntag» significa «el domingo»; esa expresión ubica en ese día las actividades que le gustan a Anna.',
     },
   ],
 };
@@ -1990,6 +2004,7 @@ export const storyLessonB2_1 = {
       vocabulary: { term: 'der neue Job', translation: 'el nuevo trabajo' },
       hint: 'El texto menciona que trabaja como consultor independiente.',
       feedback: 'Thomas ahora trabaja como freiberuflicher Berater (consultor independiente).',
+      explanation: '«Sein neuer Job ist» significa «su nuevo trabajo es» y presenta la profesión actual de Thomas.',
     },
   ],
 };
@@ -2030,6 +2045,7 @@ export const storyLessonB2_2 = {
       vocabulary: { term: 'die Reise', translation: 'el viaje' },
       hint: 'El texto describe aspectos culturales.',
       feedback: 'A la protagonista le gustó la cultura y la comida japonesa.',
+      explanation: '«Am besten» significa «lo que más» y sirve para destacar qué fue lo que más disfrutó la protagonista del viaje.',
     },
   ],
 };

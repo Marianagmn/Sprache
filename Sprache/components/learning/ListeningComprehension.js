@@ -3,7 +3,15 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, radii, spacing, typography } from '../../theme';
 
-export default function ListeningComprehension({ scenario, questions, answered, selectedAnswer, onSelectAnswer, isCorrect }) {
+export default function ListeningComprehension({
+  scenario,
+  questions,
+  answered,
+  selectedAnswer,
+  onSelectAnswer,
+  isCorrect,
+  answerFeedbackCorrect,
+}) {
   return (
     <View style={styles.container}>
       <View style={styles.scenarioCard}>
@@ -18,7 +26,7 @@ export default function ListeningComprehension({ scenario, questions, answered, 
           {question.options.map((option) => {
             const isSelected = selectedAnswer === option;
             const isCorrectOption = option === question.correctAnswer;
-            const isWrongSelection = answered && isSelected && !isCorrectOption;
+            const isWrongSelection = answerFeedbackCorrect === false && isSelected;
 
             return (
               <TouchableOpacity
