@@ -59,6 +59,7 @@ import {
   storyLessonB1,
   storyLessonB2_1,
   storyLessonB2_2,
+  challengeLessons,
   vocabularyLessonNumbers,
   vocabularyLessonColors,
   vocabularyLessonAnimals,
@@ -722,6 +723,14 @@ export const activities = [
     iconName: 'book-open-outline',
     category: 'Lectura',
   },
+  ...challengeLessons.map((lesson) => ({
+    id: lesson.activityId,
+    title: lesson.title,
+    description: `Practica vocabulario, comprensión y gramática con actividades interactivas de nivel ${lesson.levelCode}.`,
+    time: `${lesson.durationMinutes} min`,
+    iconName: 'game-controller-outline',
+    category: 'Práctica',
+  })),
 ];
 
 const activityTopics = {
@@ -805,6 +814,10 @@ const activityTopics = {
   'vocabulary-emotions': ['A1', 'Emociones'],
   'vocabulary-food-drinks': ['A1', 'Comida'],
   'vocabulary-furniture': ['A1', 'Muebles'],
+  'challenge-a1-city': ['A1', 'Retos interactivos'],
+  'challenge-a2-weekend': ['A2', 'Retos interactivos'],
+  'challenge-b1-travel': ['B1', 'Retos interactivos'],
+  'challenge-b2-work': ['B2', 'Retos interactivos'],
 };
 
 for (const activity of activities) {

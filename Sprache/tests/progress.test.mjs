@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { activities } from '../data/Activities.js';
-import { lessons, listeningLesson, vocabularyLesson } from '../data/lessons.js';
+import { challengeLessons, lessons, listeningLesson, vocabularyLesson } from '../data/lessons.js';
 import { getActivities, filterActivities, filterActivitiesByLevel, getRecommendedActivity } from '../services/activityService.js';
 import { getFailedWordsReviewLesson, getLessonByActivityId } from '../services/lessonService.js';
 import {
@@ -75,8 +75,11 @@ test('las lecciones están completas, agrupadas por nivel y tema, y accesibles d
       && question.hint;
   })));
   assert.ok(activities.every((activity) => activity.levelCode && activity.topic));
-  assert.equal(LEARNING_LEVELS[0].activityIds.length, 7);
-  assert.equal(LEARNING_LEVELS[1].activityIds.length, 22);
+  assert.equal(LEARNING_LEVELS.length, 4);
+  assert.equal(LEARNING_LEVELS[0].activityIds.length, 8);
+  assert.equal(LEARNING_LEVELS[1].activityIds.length, 23);
+  assert.ok(LEARNING_LEVELS.every((level) => level.activityIds.some((id) => id.startsWith('challenge-'))));
+  assert.ok(challengeLessons.every((lesson) => new Set(lesson.questions.map((question) => question.type || 'multiple-choice')).size >= 3));
   assert.ok(getLessonByActivityId('vocabulary-greetings'));
   assert.ok(getLessonByActivityId('vocabulary-study'));
   assert.ok(getLessonByActivityId('reading-conversation'));
@@ -183,7 +186,7 @@ test('cada ejercicio explica el significado de su respuesta dentro del contexto 
   const questions = lessons.flatMap((lesson) => lesson.questions);
   const feedback = questions.map((question) => getCorrectAnswerFeedback(question));
 
-  assert.equal(feedback.length, 240);
+  assert.equal(feedback.length, questions.length);
   assert.ok(feedback.every((message, index) => (
     message.startsWith('¡Correcto!')
     && !message.includes(questions[index].hint)
@@ -318,6 +321,14 @@ test('la ruta desbloquea lecciones en orden y respeta el nivel recomendado', () 
   assert.equal(advancedPath.levels[0].status, 'review');
   assert.equal(unlockedA2Path.nextLesson.id, LEARNING_LEVELS[1].activityIds[0]);
   assert.equal(unlockedA2Path.levels[1].status, 'available');
+  const b1Path = getLearningPath([], { recommendedLevel: 'B1' });
+  const completedB1Sessions = LEARNING_LEVELS[2].activityIds.map((activityId) => ({ activityId }));
+  const unlockedB2Path = getLearningPath(completedB1Sessions, { recommendedLevel: 'B1' });
+  assert.equal(b1Path.nextLesson.levelCode, 'B1');
+  assert.equal(b1Path.levels[1].status, 'review');
+  assert.equal(b1Path.levels[3].status, 'locked');
+  assert.equal(unlockedB2Path.nextLesson.id, LEARNING_LEVELS[3].activityIds[0]);
+  assert.equal(unlockedB2Path.levels[3].status, 'available');
 });
 
 test('la ruta agrupa IDs únicos que existen en el catálogo', () => {

@@ -8,6 +8,7 @@ export const LEARNING_LEVELS = [
     activityIds: [
       'vocabulary', 'vocabulary-greetings', 'vocabulary-food', 'vocabulary-study',
       'grammar-articles', 'vocabulary-daily', 'reading-city',
+      'challenge-a1-city',
     ],
   },
   {
@@ -22,6 +23,26 @@ export const LEARNING_LEVELS = [
       'reading-doctor', 'reading-weekend', 'reading-apartment',
       'reading-conversation',
       'grammar-modal-verbs', 'grammar-dative', 'grammar-perfect',
+      'challenge-a2-weekend',
+    ],
+  },
+  {
+    code: 'B1',
+    title: 'Comunicación independiente',
+    description: 'Cuenta experiencias, comprende información y comunica ideas con más detalle.',
+    activityIds: [
+      'grammar-genitive', 'grammar-subjunctive', 'story-b1-weekend', 'dictation-b1',
+      'fill-blanks-b1', 'word-order-b1', 'write-response-b1', 'listening-b1',
+      'challenge-b1-travel',
+    ],
+  },
+  {
+    code: 'B2',
+    title: 'Expresión avanzada',
+    description: 'Argumenta, interpreta matices y expresa ideas complejas con precisión.',
+    activityIds: [
+      'story-b2-career', 'dictation-b2', 'fill-blanks-b2', 'word-order-b2',
+      'write-response-b2', 'listening-b2', 'story-b2-travel', 'challenge-b2-work',
     ],
   },
 ];
