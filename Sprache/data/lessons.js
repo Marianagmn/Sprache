@@ -594,10 +594,256 @@ export const grammarLessonPerfect = {
   ],
 };
 
+// Additional A1 Vocabulary Lessons
+export const vocabularyLessonNumbers = {
+  id: 'vocabulary-numbers',
+  title: 'Números 1-20',
+  activityId: 'vocabulary-numbers',
+  durationMinutes: 6,
+  questions: [
+    { id: 'numbers-q1', prompt: '¿Cómo se dice "cinco" en alemán?', word: 'cinco', options: ['fünf', 'vier', 'sechs', 'drei'], answer: 'fünf', vocabulary: { term: 'fünf', translation: 'cinco' }, hint: 'Es el número 5.' },
+    { id: 'numbers-q2', prompt: '¿Qué significa "zehn"?', word: 'zehn', options: ['Diez', 'Ocho', 'Doce', 'Nueve'], answer: 'Diez', vocabulary: { term: 'zehn', translation: 'diez' }, hint: 'Es el número 10.' },
+    { id: 'numbers-q3', prompt: '¿Cómo se dice "veinte" en alemán?', word: 'veinte', options: ['zwanzig', 'fünfzehn', 'dreißig', 'vierzig'], answer: 'zwanzig', vocabulary: { term: 'zwanzig', translation: 'veinte' }, hint: 'Termina en -zig.' },
+  ],
+};
+
+export const vocabularyLessonColors = {
+  id: 'vocabulary-colors',
+  title: 'Colores',
+  activityId: 'vocabulary-colors',
+  durationMinutes: 5,
+  questions: [
+    { id: 'colors-q1', prompt: '¿Cómo se dice "rojo" en alemán?', word: 'rojo', options: ['rot', 'blau', 'grün', 'gelb'], answer: 'rot', vocabulary: { term: 'rot', translation: 'rojo' }, hint: 'El color de la sangre.' },
+    { id: 'colors-q2', prompt: '¿Qué significa "blau"?', word: 'blau', options: ['Azul', 'Negro', 'Blanco', 'Gris'], answer: 'Azul', vocabulary: { term: 'blau', translation: 'azul' }, hint: 'El color del cielo.' },
+    { id: 'colors-q3', prompt: '¿Cómo se dice "negro" en alemán?', word: 'negro', options: ['schwarz', 'weiß', 'grau', 'braun'], answer: 'schwarz', vocabulary: { term: 'schwarz', translation: 'negro' }, hint: 'El color de la noche.' },
+  ],
+};
+
+export const vocabularyLessonAnimals = {
+  id: 'vocabulary-animals',
+  title: 'Animales',
+  activityId: 'vocabulary-animals',
+  durationMinutes: 5,
+  questions: [
+    { id: 'animals-q1', prompt: '¿Cómo se dice "perro" en alemán?', word: 'perro', options: ['Hund', 'Katze', 'Vogel', 'Fisch'], answer: 'Hund', vocabulary: { term: 'der Hund', translation: 'el perro' }, hint: 'Es el animal doméstico más común.' },
+    { id: 'animals-q2', prompt: '¿Qué significa "die Katze"?', word: 'die Katze', options: ['El gato', 'El perro', 'El pájaro', 'El pez'], answer: 'El gato', vocabulary: { term: 'die Katze', translation: 'el gato' }, hint: 'Maulla y se trepa.' },
+    { id: 'animals-q3', prompt: '¿Cómo se dice "pájaro" en alemán?', word: 'pájaro', options: ['Vogel', 'Tier', 'Hund', 'Katze'], answer: 'Vogel', vocabulary: { term: 'der Vogel', translation: 'el pájaro' }, hint: 'Vuela en el cielo.' },
+  ],
+};
+
+export const vocabularyLessonBody = {
+  id: 'vocabulary-body',
+  title: 'El cuerpo humano',
+  activityId: 'vocabulary-body',
+  durationMinutes: 5,
+  questions: [
+    { id: 'body-q1', prompt: '¿Cómo se dice "mano" en alemán?', word: 'mano', options: ['Hand', 'Fuß', 'Arm', 'Bein'], answer: 'Hand', vocabulary: { term: 'die Hand', translation: 'la mano' }, hint: 'Tienes dos al final de los brazos.' },
+    { id: 'body-q2', prompt: '¿Qué significa "das Auge"?', word: 'das Auge', options: ['El ojo', 'La nariz', 'La boca', 'La oreja'], answer: 'El ojo', vocabulary: { term: 'das Auge', translation: 'el ojo' }, hint: 'Sirve para ver.' },
+    { id: 'body-q3', prompt: '¿Cómo se dice "pie" en alemán?', word: 'pie', options: ['Fuß', 'Hand', 'Arm', 'Kopf'], answer: 'Fuß', vocabulary: { term: 'der Fuß', translation: 'el pie' }, hint: 'Está al final de la pierna.' },
+  ],
+};
+
+export const vocabularyLessonWeather = {
+  id: 'vocabulary-weather',
+  title: 'El tiempo atmosférico',
+  activityId: 'vocabulary-weather',
+  durationMinutes: 5,
+  questions: [
+    { id: 'weather-q1', prompt: '¿Cómo se dice "sol" en alemán?', word: 'sol', options: ['Sonne', 'Mond', 'Stern', 'Wolke'], answer: 'Sonne', vocabulary: { term: 'die Sonne', translation: 'el sol' }, hint: 'Brilla durante el día.' },
+    { id: 'weather-q2', prompt: '¿Qué significa "der Regen"?', word: 'der Regen', options: ['La lluvia', 'La nieve', 'El viento', 'El granizo'], answer: 'La lluvia', vocabulary: { term: 'der Regen', translation: 'la lluvia' }, hint: 'Cae del cielo cuando hay nubes.' },
+    { id: 'weather-q3', prompt: '¿Cómo se dice "nieve" en alemán?', word: 'nieve', options: ['Schnee', 'Regen', 'Wind', 'Sonne'], answer: 'Schnee', vocabulary: { term: 'der Schnee', translation: 'la nieve' }, hint: 'Es blanca y fría.' },
+  ],
+};
+
+export const vocabularyLessonClothes = {
+  id: 'vocabulary-clothes',
+  title: 'Ropa',
+  activityId: 'vocabulary-clothes',
+  durationMinutes: 5,
+  questions: [
+    { id: 'clothes-q1', prompt: '¿Cómo se dice "camisa" en alemán?', word: 'camisa', options: ['Hemd', 'Hose', 'Jacke', 'Schuhe'], answer: 'Hemd', vocabulary: { term: 'das Hemd', translation: 'la camisa' }, hint: 'Se lleva en la parte superior.' },
+    { id: 'clothes-q2', prompt: '¿Qué significa "die Hose"?', word: 'die Hose', options: ['El pantalón', 'La camisa', 'La chaqueta', 'Los zapatos'], answer: 'El pantalón', vocabulary: { term: 'die Hose', translation: 'el pantalón' }, hint: 'Se lleva en las piernas.' },
+    { id: 'clothes-q3', prompt: '¿Cómo se dice "zapatos" en alemán?', word: 'zapatos', options: ['Schuhe', 'Hemd', 'Hose', 'Jacke'], answer: 'Schuhe', vocabulary: { term: 'die Schuhe', translation: 'los zapatos' }, hint: 'Se llevan en los pies.' },
+  ],
+};
+
+export const vocabularyLessonTime = {
+  id: 'vocabulary-time',
+  title: 'El tiempo y las horas',
+  activityId: 'vocabulary-time',
+  durationMinutes: 5,
+  questions: [
+    { id: 'time-q1', prompt: '¿Cómo se dice "hora" en alemán?', word: 'hora', options: ['Stunde', 'Minute', 'Tag', 'Woche'], answer: 'Stunde', vocabulary: { term: 'die Stunde', translation: 'la hora' }, hint: 'Hay 24 en un día.' },
+    { id: 'time-q2', prompt: '¿Qué significa "heute"?', word: 'heute', options: ['Hoy', 'Mañana', 'Ayer', 'La semana que viene'], answer: 'Hoy', vocabulary: { term: 'heute', translation: 'hoy' }, hint: 'Es el día actual.' },
+    { id: 'time-q3', prompt: '¿Cómo se dice "mañana" en alemán?', word: 'mañana', options: ['morgen', 'heute', 'gestern', 'übermorgen'], answer: 'morgen', vocabulary: { term: 'morgen', translation: 'mañana' }, hint: 'El día después de hoy.' },
+  ],
+};
+
+export const vocabularyLessonDirections = {
+  id: 'vocabulary-directions',
+  title: 'Direcciones y lugares',
+  activityId: 'vocabulary-directions',
+  durationMinutes: 5,
+  questions: [
+    { id: 'directions-q1', prompt: '¿Cómo se dice "izquierda" en alemán?', word: 'izquierda', options: ['links', 'rechts', 'oben', 'unten'], answer: 'links', vocabulary: { term: 'links', translation: 'izquierda' }, hint: 'Lo opuesto a derecha.' },
+    { id: 'directions-q2', prompt: '¿Qué significa "rechts"?', word: 'rechts', options: ['Derecha', 'Izquierda', 'Arriba', 'Abajo'], answer: 'Derecha', vocabulary: { term: 'rechts', translation: 'derecha' }, hint: 'Lo opuesto a izquierda.' },
+    { id: 'directions-q3', prompt: '¿Cómo se dice "aquí" en alemán?', word: 'aquí', options: ['hier', 'dort', 'da', 'wo'], answer: 'hier', vocabulary: { term: 'hier', translation: 'aquí' }, hint: 'En este lugar.' },
+  ],
+};
+
+export const vocabularyLessonVerbsBasic = {
+  id: 'vocabulary-verbs-basic',
+  title: 'Verbos básicos',
+  activityId: 'vocabulary-verbs-basic',
+  durationMinutes: 6,
+  questions: [
+    { id: 'verbs-q1', prompt: '¿Cómo se dice "tener" en alemán?', word: 'tener', options: ['haben', 'sein', 'werden', 'können'], answer: 'haben', vocabulary: { term: 'haben', translation: 'tener' }, hint: 'Para poseer algo.' },
+    { id: 'verbs-q2', prompt: '¿Qué significa "sein"?', word: 'sein', options: ['Ser/estar', 'Tener', 'Hacer', 'Ir'], answer: 'Ser/estar', vocabulary: { term: 'sein', translation: 'ser/estar' }, hint: 'El verbo "to be" en alemán.' },
+    { id: 'verbs-q3', prompt: '¿Cómo se dice "hacer" en alemán?', word: 'hacer', options: ['machen', 'haben', 'sein', 'gehen'], answer: 'machen', vocabulary: { term: 'machen', translation: 'hacer' }, hint: 'Para realizar una acción.' },
+  ],
+};
+
+export const vocabularyLessonPrepositions = {
+  id: 'vocabulary-prepositions',
+  title: 'Preposiciones básicas',
+  activityId: 'vocabulary-prepositions',
+  durationMinutes: 5,
+  questions: [
+    { id: 'prep-q1', prompt: '¿Cómo se dice "en" en alemán?', word: 'en', options: ['in', 'auf', 'bei', 'zu'], answer: 'in', vocabulary: { term: 'in', translation: 'en' }, hint: 'Para estar dentro de algo.' },
+    { id: 'prep-q2', prompt: '¿Qué significa "mit"?', word: 'mit', options: ['Con', 'Sin', 'Para', 'De'], answer: 'Con', vocabulary: { term: 'mit', translation: 'con' }, hint: 'Para acompañamiento.' },
+    { id: 'prep-q3', prompt: '¿Cómo se dice "para" en alemán?', word: 'para', options: ['für', 'mit', 'von', 'zu'], answer: 'für', vocabulary: { term: 'für', translation: 'para' }, hint: 'Para destinatario o propósito.' },
+  ],
+};
+
+export const vocabularyLessonQuestions = {
+  id: 'vocabulary-questions',
+  title: 'Palabras interrogativas',
+  activityId: 'vocabulary-questions',
+  durationMinutes: 5,
+  questions: [
+    { id: 'questions-q1', prompt: '¿Cómo se dice "qué" en alemán?', word: 'qué', options: ['was', 'wer', 'wo', 'wann'], answer: 'was', vocabulary: { term: 'was', translation: 'qué' }, hint: 'Para preguntar sobre cosas.' },
+    { id: 'questions-q2', prompt: '¿Qué significa "wer"?', word: 'wer', options: ['Quién', 'Qué', 'Dónde', 'Cuándo'], answer: 'Quién', vocabulary: { term: 'wer', translation: 'quién' }, hint: 'Para preguntar sobre personas.' },
+    { id: 'questions-q3', prompt: '¿Cómo se dice "dónde" en alemán?', word: 'dónde', options: ['wo', 'was', 'wer', 'wann'], answer: 'wo', vocabulary: { term: 'wo', translation: 'dónde' }, hint: 'Para preguntar sobre lugar.' },
+  ],
+};
+
+export const vocabularyLessonAdjectives = {
+  id: 'vocabulary-adjectives',
+  title: 'Adjetivos básicos',
+  activityId: 'vocabulary-adjectives',
+  durationMinutes: 5,
+  questions: [
+    { id: 'adj-q1', prompt: '¿Cómo se dice "grande" en alemán?', word: 'grande', options: ['groß', 'klein', 'gut', 'schlecht'], answer: 'groß', vocabulary: { term: 'groß', translation: 'grande' }, hint: 'Lo opuesto de pequeño.' },
+    { id: 'adj-q2', prompt: '¿Qué significa "klein"?', word: 'klein', options: ['Pequeño', 'Grande', 'Bueno', 'Malo'], answer: 'Pequeño', vocabulary: { term: 'klein', translation: 'pequeño' }, hint: 'Lo opuesto de grande.' },
+    { id: 'adj-q3', prompt: '¿Cómo se dice "bueno" en alemán?', word: 'bueno', options: ['gut', 'schlecht', 'groß', 'klein'], answer: 'gut', vocabulary: { term: 'gut', translation: 'bueno' }, hint: 'Lo opuesto de malo.' },
+  ],
+};
+
+export const vocabularyLessonProfessions = {
+  id: 'vocabulary-professions',
+  title: 'Profesiones',
+  activityId: 'vocabulary-professions',
+  durationMinutes: 5,
+  questions: [
+    { id: 'prof-q1', prompt: '¿Cómo se dice "médico" en alemán?', word: 'médico', options: ['Arzt', 'Lehrer', 'Koch', 'Polizist'], answer: 'Arzt', vocabulary: { term: 'der Arzt', translation: 'el médico' }, hint: 'Trabaja en un hospital.' },
+    { id: 'prof-q2', prompt: '¿Qué significa "der Lehrer"?', word: 'der Lehrer', options: ['El profesor', 'El médico', 'El cocinero', 'El policía'], answer: 'El profesor', vocabulary: { term: 'der Lehrer', translation: 'el profesor' }, hint: 'Enseña en una escuela.' },
+    { id: 'prof-q3', prompt: '¿Cómo se dice "cocinero" en alemán?', word: 'cocinero', options: ['Koch', 'Arzt', 'Lehrer', 'Polizist'], answer: 'Koch', vocabulary: { term: 'der Koch', translation: 'el cocinero' }, hint: 'Trabaja en una cocina.' },
+  ],
+};
+
+export const vocabularyLessonSchool = {
+  id: 'vocabulary-school',
+  title: 'La escuela',
+  activityId: 'vocabulary-school',
+  durationMinutes: 5,
+  questions: [
+    { id: 'school-q1', prompt: '¿Cómo se dice "escuela" en alemán?', word: 'escuela', options: ['Schule', 'Universität', 'Bibliothek', 'Klasse'], answer: 'Schule', vocabulary: { term: 'die Schule', translation: 'la escuela' }, hint: 'Donde estudian los niños.' },
+    { id: 'school-q2', prompt: '¿Qué significa "der Schüler"?', word: 'der Schüler', options: ['El estudiante', 'El profesor', 'La clase', 'El examen'], answer: 'El estudiante', vocabulary: { term: 'der Schüler', translation: 'el estudiante' }, hint: 'Alguien que aprende.' },
+    { id: 'school-q3', prompt: '¿Cómo se dice "examen" en alemán?', word: 'examen', options: ['Prüfung', 'Klasse', 'Schule', 'Buch'], answer: 'Prüfung', vocabulary: { term: 'die Prüfung', translation: 'el examen' }, hint: 'Se hace para evaluar conocimientos.' },
+  ],
+};
+
+export const vocabularyLessonNature = {
+  id: 'vocabulary-nature',
+  title: 'La naturaleza',
+  activityId: 'vocabulary-nature',
+  durationMinutes: 5,
+  questions: [
+    { id: 'nature-q1', prompt: '¿Cómo se dice "árbol" en alemán?', word: 'árbol', options: ['Baum', 'Blume', 'Gras', 'Wald'], answer: 'Baum', vocabulary: { term: 'der Baum', translation: 'el árbol' }, hint: 'Es grande y tiene hojas.' },
+    { id: 'nature-q2', prompt: '¿Qué significa "die Blume"?', word: 'die Blume', options: ['La flor', 'El árbol', 'El bosque', 'El río'], answer: 'La flor', vocabulary: { term: 'die Blume', translation: 'la flor' }, hint: 'Es colorida y huele bien.' },
+    { id: 'nature-q3', prompt: '¿Cómo se dice "río" en alemán?', word: 'río', options: ['Fluss', 'See', 'Meer', 'Berg'], answer: 'Fluss', vocabulary: { term: 'der Fluss', translation: 'el río' }, hint: 'Agua que fluye.' },
+  ],
+};
+
+export const vocabularyLessonTransport = {
+  id: 'vocabulary-transport',
+  title: 'Transporte',
+  activityId: 'vocabulary-transport',
+  durationMinutes: 5,
+  questions: [
+    { id: 'transport-q1', prompt: '¿Cómo se dice "coche" en alemán?', word: 'coche', options: ['Auto', 'Bus', 'Fahrrad', 'Flugzeug'], answer: 'Auto', vocabulary: { term: 'das Auto', translation: 'el coche' }, hint: 'Vehículo personal con 4 ruedas.' },
+    { id: 'transport-q2', prompt: '¿Qué significa "das Fahrrad"?', word: 'das Fahrrad', options: ['La bicicleta', 'El coche', 'El autobús', 'El avión'], answer: 'La bicicleta', vocabulary: { term: 'das Fahrrad', translation: 'la bicicleta' }, hint: 'Tiene dos ruedas y pedales.' },
+    { id: 'transport-q3', prompt: '¿Cómo se dice "avión" en alemán?', word: 'avión', options: ['Flugzeug', 'Auto', 'Bus', 'Schiff'], answer: 'Flugzeug', vocabulary: { term: 'das Flugzeug', translation: 'el avión' }, hint: 'Vuela en el cielo.' },
+  ],
+};
+
+export const vocabularyLessonTechnology = {
+  id: 'vocabulary-technology',
+  title: 'Tecnología',
+  activityId: 'vocabulary-technology',
+  durationMinutes: 5,
+  questions: [
+    { id: 'tech-q1', prompt: '¿Cómo se dice "teléfono" en alemán?', word: 'teléfono', options: ['Telefon', 'Computer', 'Internet', 'Tablet'], answer: 'Telefon', vocabulary: { term: 'das Telefon', translation: 'el teléfono' }, hint: 'Para llamar a alguien.' },
+    { id: 'tech-q2', prompt: '¿Qué significa "der Computer"?', word: 'der Computer', options: ['El ordenador', 'El teléfono', 'La televisión', 'La radio'], answer: 'El ordenador', vocabulary: { term: 'der Computer', translation: 'el ordenador' }, hint: 'Se usa para trabajar y navegar.' },
+    { id: 'tech-q3', prompt: '¿Cómo se dice "internet" en alemán?', word: 'internet', options: ['Internet', 'Telefon', 'Computer', 'Fernseher'], answer: 'Internet', vocabulary: { term: 'das Internet', translation: 'el internet' }, hint: 'Red mundial de comunicación.' },
+  ],
+};
+
+export const vocabularyLessonEmotions = {
+  id: 'vocabulary-emotions',
+  title: 'Emociones',
+  activityId: 'vocabulary-emotions',
+  durationMinutes: 5,
+  questions: [
+    { id: 'emotions-q1', prompt: '¿Cómo se dice "feliz" en alemán?', word: 'feliz', options: ['glücklich', 'traurig', 'wütend', 'müde'], answer: 'glücklich', vocabulary: { term: 'glücklich', translation: 'feliz' }, hint: 'Sentimiento positivo.' },
+    { id: 'emotions-q2', prompt: '¿Qué significa "traurig"?', word: 'traurig', options: ['Triste', 'Feliz', 'Enojado', 'Cansado'], answer: 'Triste', vocabulary: { term: 'traurig', translation: 'triste' }, hint: 'Sentimiento negativo.' },
+    { id: 'emotions-q3', prompt: '¿Cómo se dice "cansado" en alemán?', word: 'cansado', options: ['müde', 'glücklich', 'traurig', 'wütend'], answer: 'müde', vocabulary: { term: 'müde', translation: 'cansado' }, hint: 'Cuando necesitas dormir.' },
+  ],
+};
+
+export const vocabularyLessonFoodDrinks = {
+  id: 'vocabulary-food-drinks',
+  title: 'Comida y bebida extendido',
+  activityId: 'vocabulary-food-drinks',
+  durationMinutes: 6,
+  questions: [
+    { id: 'food-drinks-q1', prompt: '¿Cómo se dice "pan" en alemán?', word: 'pan', options: ['Brot', 'Käse', 'Wurst', 'Butter'], answer: 'Brot', vocabulary: { term: 'das Brot', translation: 'el pan' }, hint: 'Se hornea con harina.' },
+    { id: 'food-drinks-q2', prompt: '¿Qué significa "der Käse"?', word: 'der Käse', options: ['El queso', 'El pan', 'La carne', 'El pescado'], answer: 'El queso', vocabulary: { term: 'der Käse', translation: 'el queso' }, hint: 'Derivado de la leche.' },
+    { id: 'food-drinks-q3', prompt: '¿Cómo se dice "carne" en alemán?', word: 'carne', options: ['Fleisch', 'Brot', 'Käse', 'Gemüse'], answer: 'Fleisch', vocabulary: { term: 'das Fleisch', translation: 'la carne' }, hint: 'Proteína animal.' },
+  ],
+};
+
+export const vocabularyLessonFurniture = {
+  id: 'vocabulary-furniture',
+  title: 'Muebles',
+  activityId: 'vocabulary-furniture',
+  durationMinutes: 5,
+  questions: [
+    { id: 'furniture-q1', prompt: '¿Cómo se dice "silla" en alemán?', word: 'silla', options: ['Stuhl', 'Tisch', 'Bett', 'Sofa'], answer: 'Stuhl', vocabulary: { term: 'der Stuhl', translation: 'la silla' }, hint: 'Para sentarse.' },
+    { id: 'furniture-q2', prompt: '¿Qué significa "das Bett"?', word: 'das Bett', options: ['La cama', 'La silla', 'La mesa', 'El sofá'], answer: 'La cama', vocabulary: { term: 'das Bett', translation: 'la cama' }, hint: 'Para dormir.' },
+    { id: 'furniture-q3', prompt: '¿Cómo se dice "sofá" en alemán?', word: 'sofá', options: ['Sofa', 'Stuhl', 'Tisch', 'Bett'], answer: 'Sofa', vocabulary: { term: 'das Sofa', translation: 'el sofá' }, hint: 'Mueble para el salón.' },
+  ],
+};
+
 export const vocabularyLessons = [
   vocabularyLesson, vocabularyLessonDaily, vocabularyLessonFood, vocabularyLessonTravel,
   vocabularyLessonFamily, vocabularyLessonShopping, vocabularyLessonHome, vocabularyLessonHealth,
   vocabularyLessonHobbies, vocabularyLessonWork, vocabularyLessonGreetings, vocabularyLessonStudy,
+  vocabularyLessonNumbers, vocabularyLessonColors, vocabularyLessonAnimals, vocabularyLessonBody,
+  vocabularyLessonWeather, vocabularyLessonClothes, vocabularyLessonTime, vocabularyLessonDirections,
+  vocabularyLessonVerbsBasic, vocabularyLessonPrepositions, vocabularyLessonQuestions, vocabularyLessonAdjectives,
+  vocabularyLessonProfessions, vocabularyLessonSchool, vocabularyLessonNature, vocabularyLessonTransport,
+  vocabularyLessonTechnology, vocabularyLessonEmotions, vocabularyLessonFoodDrinks, vocabularyLessonFurniture,
 ];
 export const readingLessons = [
   readingLessonCity, readingLessonCafe, readingLessonStation, readingLessonMarket, readingLessonWeather,
