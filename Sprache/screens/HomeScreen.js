@@ -7,7 +7,7 @@ import StreakBadge from '../components/home/StreakBadge';
 import DailyGoalCard from '../components/home/DailyGoalCard';
 import RecommendationCard from '../components/home/RecommendationCard';
 import { getRecommendedActivity } from '../services/activityService';
-import { getSpacedReviewLesson } from '../services/lessonService';
+import { getLessonByActivityId, getSpacedReviewLesson } from '../services/lessonService';
 import { getLearningPath } from '../services/learningPathService';
 import { colors, spacing, typography } from '../theme';
 
@@ -15,6 +15,11 @@ export default function HomeScreen({ navigation }) {
   const { user } = useApp();
   const recommendation = getRecommendedActivity(user.sessions);
   const reviewLesson = getSpacedReviewLesson(user.wordProgress || {});
+  const activeLessonProgress = user.activeLessonProgress;
+  const activeLesson = activeLessonProgress?.activityId === 'spaced-review'
+    ? reviewLesson
+    : getLessonByActivityId(activeLessonProgress?.activityId);
+  const hasInProgressLesson = Boolean(activeLessonProgress && activeLesson);
   const hasReview = Boolean(reviewLesson);
   const learningPath = getLearningPath(user.sessions, user.placementAssessment);
   const nextPathLesson = learningPath.nextLesson;
@@ -31,20 +36,30 @@ export default function HomeScreen({ navigation }) {
         <DailyGoalCard completedSeconds={user.todaySeconds || 0} goal={user.dailyGoal} unit="min" />
 
         <Text style={styles.sectionTitle} accessibilityRole="header">
-          {hasReview ? 'Tu repaso pendiente' : hasPathLesson ? `Continúa tu ruta · ${nextPathLesson.levelCode}` : 'Tu siguiente práctica'}
+          {hasInProgressLesson
+            ? 'Retoma tu lección'
+            : hasReview
+              ? 'Tu repaso pendiente'
+              : hasPathLesson
+                ? `Continúa tu ruta · ${nextPathLesson.levelCode}`
+                : 'Tu siguiente práctica'}
         </Text>
         <RecommendationCard
-          title={hasReview ? 'Repasar palabras' : hasPathLesson ? nextPathLesson.title : recommendation.title}
-          description={hasReview
-            ? `Repasa estas palabras: llevas más tiempo sin practicarlas. ${reviewLesson.questions.length} ${reviewLesson.questions.length === 1 ? 'palabra está' : 'palabras están'} lista${reviewLesson.questions.length === 1 ? '' : 's'} para repasar.`
-            : hasPathLesson
-              ? `Es el siguiente paso de tu ruta de nivel ${nextPathLesson.levelCode}. ${nextPathLesson.time}`
-              : recommendation.description}
-          time={hasReview ? `${reviewLesson.questions.length} palabras` : hasPathLesson ? nextPathLesson.time : recommendation.time}
-          iconName={hasReview ? 'refresh' : hasPathLesson ? 'school-outline' : recommendation.iconName}
-          onPress={() => navigation.navigate('Lesson', hasReview
-            ? { activityId: reviewLesson.activityId, reviewLesson }
-            : { activityId: hasPathLesson ? nextPathLesson.id : recommendation.id })}
+          title={hasInProgressLesson ? activeLesson.title : hasReview ? 'Repasar palabras' : hasPathLesson ? nextPathLesson.title : recommendation.title}
+          description={hasInProgressLesson
+            ? `Vas por la pregunta ${activeLessonProgress.questionIndex + 1} de ${activeLesson.questions.length}.`
+            : hasReview
+              ? `Tienes ${reviewLesson.questions.length} ${reviewLesson.questions.length === 1 ? 'palabra lista' : 'palabras listas'} para repasar.`
+              : hasPathLesson
+                ? `Es el siguiente paso de tu ruta de nivel ${nextPathLesson.levelCode}. ${nextPathLesson.time}`
+                : recommendation.description}
+          time={hasInProgressLesson ? 'Retomar →' : hasReview ? `${reviewLesson.questions.length} palabras` : hasPathLesson ? nextPathLesson.time : recommendation.time}
+          iconName={hasInProgressLesson ? 'play' : hasReview ? 'refresh' : hasPathLesson ? 'school-outline' : recommendation.iconName}
+          onPress={() => navigation.navigate('Lesson', hasInProgressLesson
+            ? { activityId: activeLessonProgress.activityId, resumeProgress: activeLessonProgress }
+            : hasReview
+              ? { activityId: reviewLesson.activityId, reviewLesson }
+              : { activityId: hasPathLesson ? nextPathLesson.id : recommendation.id })}
         />
 
       </ScrollView>

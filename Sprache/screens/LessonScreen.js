@@ -24,25 +24,48 @@ import { provideAnswerHapticFeedback } from '../services/hapticFeedback.js';
 import { colors } from '../theme';
 
 export default function LessonScreen({ navigation, route }) {
-  const { user, completeActivity } = useApp();
+  const { user, completeActivity, saveLessonProgress } = useApp();
   const lesson = route.params?.reviewLesson || getLessonByActivityId(route.params?.activityId);
-  const [questionIndex, setQuestionIndex] = useState(0);
-  const [selectedAnswer, setSelectedAnswer] = useState(null);
-  const [answered, setAnswered] = useState(false);
-  const [submittedAnswers, setSubmittedAnswers] = useState([]);
-  const [hintUsage, setHintUsage] = useState([]);
+  const resumedProgress = route.params?.resumeProgress?.activityId === lesson?.activityId
+    ? route.params.resumeProgress
+    : null;
+  const [questionIndex, setQuestionIndex] = useState(() => (
+    Number.isInteger(resumedProgress?.questionIndex)
+      ? Math.min(Math.max(0, resumedProgress.questionIndex), Math.max(0, (lesson?.questions?.length || 1) - 1))
+      : 0
+  ));
+  const [selectedAnswer, setSelectedAnswer] = useState(resumedProgress?.selectedAnswer ?? null);
+  const [answered, setAnswered] = useState(Boolean(resumedProgress?.answered));
+  const [submittedAnswers, setSubmittedAnswers] = useState(() => resumedProgress?.submittedAnswers || []);
+  const [hintUsage, setHintUsage] = useState(() => resumedProgress?.hintUsage || []);
   const [sessionSummary, setSessionSummary] = useState(null);
   const [hintVisible, setHintVisible] = useState(false);
   const [finished, setFinished] = useState(false);
   const [isCompleting, setIsCompleting] = useState(false);
   const [completionError, setCompletionError] = useState('');
+  const [progressSaveError, setProgressSaveError] = useState('');
   const completionRecorded = useRef(false);
-  const elapsedActiveMs = useRef(0);
+  const elapsedActiveMs = useRef(resumedProgress?.elapsedActiveMs || 0);
   const activeSinceMs = useRef(Date.now());
 
   // State for new question types
-  const [textInputValue, setTextInputValue] = useState('');
-  const [orderedWords, setOrderedWords] = useState([]);
+  const [textInputValue, setTextInputValue] = useState(resumedProgress?.textInputValue || '');
+  const [orderedWords, setOrderedWords] = useState(() => resumedProgress?.orderedWords || []);
+  const lessonProgressRef = useRef(null);
+  const currentElapsedMs = elapsedActiveMs.current + (
+    activeSinceMs.current === null ? 0 : Math.max(0, Date.now() - activeSinceMs.current)
+  );
+  lessonProgressRef.current = {
+    activityId: lesson?.activityId,
+    questionIndex,
+    selectedAnswer,
+    answered,
+    submittedAnswers,
+    hintUsage,
+    textInputValue,
+    orderedWords,
+    elapsedActiveMs: currentElapsedMs,
+  };
 
   React.useEffect(() => {
     const subscription = AppState.addEventListener('change', (nextState) => {
@@ -56,14 +79,47 @@ export default function LessonScreen({ navigation, route }) {
       if (activeSinceMs.current !== null) {
         elapsedActiveMs.current += Math.max(0, Date.now() - activeSinceMs.current);
         activeSinceMs.current = null;
+        if (lessonProgressRef.current?.activityId) {
+          void saveLessonProgress({
+            ...lessonProgressRef.current,
+            elapsedActiveMs: elapsedActiveMs.current,
+          }).catch((error) => {
+            console.error('No se pudo guardar la lección antes de salir de la app.', error);
+          });
+        }
       }
     });
 
     return () => subscription.remove();
-  }, []);
+  }, [saveLessonProgress]);
 
   const question = lesson?.questions?.[questionIndex];
   const questionType = question?.type || 'multiple-choice';
+
+  React.useEffect(() => {
+    if (!lesson?.activityId || finished || isCompleting) {
+      return;
+    }
+
+    void saveLessonProgress(lessonProgressRef.current).then(() => {
+      setProgressSaveError('');
+    }).catch((error) => {
+      console.error('No se pudo guardar el avance de la lección.', error);
+      setProgressSaveError('No pudimos guardar tu avance. Mantén esta pantalla abierta e inténtalo de nuevo.');
+    });
+  }, [
+    lesson?.activityId,
+    questionIndex,
+    selectedAnswer,
+    answered,
+    submittedAnswers,
+    hintUsage,
+    textInputValue,
+    orderedWords,
+    finished,
+    isCompleting,
+    saveLessonProgress,
+  ]);
   const isCorrect = (() => {
     if (!question) return false;
     switch (questionType) {
@@ -177,6 +233,7 @@ export default function LessonScreen({ navigation, route }) {
     setHintVisible(false);
     setTextInputValue('');
     setOrderedWords([]);
+    setProgressSaveError('');
   };
 
   if (!lesson || !question) {
@@ -337,6 +394,7 @@ export default function LessonScreen({ navigation, route }) {
           />
         )}
         {!!completionError && <FeedbackMessage correct={false} message={completionError} />}
+        {!!progressSaveError && <FeedbackMessage correct={false} message={progressSaveError} />}
         <AppButton
           title={answered ? (questionIndex === lesson.questions.length - 1 ? 'Ver resumen' : 'Siguiente') : 'Comprobar'}
           onPress={answered ? handleNext : handleCheck}

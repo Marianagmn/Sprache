@@ -65,10 +65,26 @@ test('crear perfil valida los datos y restaura la sesión tras reiniciar el serv
   await restartedApp.updateStoredUser((currentUser) => updateProfile(currentUser, {
     preferences: { hapticsEnabled: true },
   }));
+  const lessonDraft = {
+    activityId: 'vocabulary-greetings',
+    questionIndex: 1,
+    selectedAnswer: 'Guten Tag',
+    answered: false,
+    submittedAnswers: ['Hallo'],
+    hintUsage: [],
+    textInputValue: '',
+    orderedWords: [],
+    elapsedActiveMs: 42000,
+  };
+  await restartedApp.updateStoredUser((currentUser) => ({
+    ...currentUser,
+    activeLessonProgress: lessonDraft,
+  }));
   const nextRestart = createTestAuthService(storage, crypto);
   const userWithHapticsEnabled = await nextRestart.restoreSession();
   assert.equal(userWithHapticsEnabled.preferences.hapticsEnabled, true);
   assert.equal(userWithHapticsEnabled.preferences.notificationsEnabled, false);
+  assert.deepEqual(userWithHapticsEnabled.activeLessonProgress, lessonDraft);
 });
 
 test('completar lección sin red guarda progreso local; logout y login conservan el progreso', async () => {
@@ -82,6 +98,10 @@ test('completar lección sin red guarda progreso local; logout y login conservan
 
   try {
     await app.register({ name: 'Lena', email: 'lena@example.com', password: 'deutsch123' });
+    await app.updateStoredUser((user) => ({
+      ...user,
+      activeLessonProgress: { activityId: 'vocabulary-greetings', questionIndex: 1 },
+    }));
     const lesson = getLessonByActivityId('vocabulary-greetings');
     assert.ok(lesson, 'la lección debe estar disponible desde el catálogo local');
 
@@ -100,6 +120,7 @@ test('completar lección sin red guarda progreso local; logout y login conservan
     assert.equal(completedUser.totalQuestions, lesson.questions.length);
     assert.equal(completedUser.correctAnswers, lesson.questions.length);
     assert.equal(completedUser.studiedSeconds, 95);
+    assert.equal(completedUser.activeLessonProgress, null);
     assert.ok(completedUser.learnedWords > 0);
 
     const restartedApp = createTestAuthService(storage, crypto);

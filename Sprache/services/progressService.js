@@ -161,7 +161,12 @@ export function recordActivity(user, session, now = new Date()) {
       ...schedule,
     };
   });
-  const updatedUser = { ...user, sessions: [...sessions, newSession], wordProgress };
+  const updatedUser = {
+    ...user,
+    sessions: [...sessions, newSession],
+    wordProgress,
+    activeLessonProgress: null,
+  };
 
   return { ...updatedUser, ...deriveProgress(updatedUser, completedAt) };
 }
@@ -171,6 +176,7 @@ export function resetProgress(user) {
     ...user,
     sessions: [],
     wordProgress: {},
+    activeLessonProgress: null,
     todaySeconds: 0,
     todayMinutes: 0,
     studiedSeconds: 0,
@@ -185,4 +191,3 @@ export function resetProgress(user) {
     streak: 0,
   };
 }
-

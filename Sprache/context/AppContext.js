@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { login, logout, register, restoreSession, updateStoredUser } from '../services/authService';
 import { updateProfile } from '../services/profileService';
 import { recordActivity, resetProgress } from '../services/progressService';
@@ -8,6 +8,15 @@ const AppContext = createContext(null);
 export function AppProvider({ children }) {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const userUpdateQueue = useRef(Promise.resolve());
+
+  const persistUserUpdate = useCallback((update) => {
+    const operation = userUpdateQueue.current.then(() => updateStoredUser(update));
+    userUpdateQueue.current = operation.catch((error) => {
+      console.error('No se pudo guardar el progreso local.', error);
+    });
+    return operation;
+  }, []);
 
   useEffect(() => {
     let isMounted = true;
@@ -35,10 +44,19 @@ export function AppProvider({ children }) {
   }, []);
 
   const completeActivity = async (session) => {
-    const updatedUser = await updateStoredUser((currentUser) => recordActivity(currentUser, session));
+    const updatedUser = await persistUserUpdate((currentUser) => recordActivity(currentUser, session));
     setUser(updatedUser);
     return updatedUser;
   };
+
+  const saveLessonProgress = useCallback(async (progress) => {
+    const updatedUser = await persistUserUpdate((currentUser) => ({
+      ...currentUser,
+      activeLessonProgress: progress,
+    }));
+    setUser(updatedUser);
+    return updatedUser;
+  }, [persistUserUpdate]);
 
   const registerUser = async (credentials) => {
     const registeredUser = await register(credentials);
@@ -53,13 +71,13 @@ export function AppProvider({ children }) {
   };
 
   const editProfile = async (changes) => {
-    const updatedUser = await updateStoredUser((currentUser) => updateProfile(currentUser, changes));
+    const updatedUser = await persistUserUpdate((currentUser) => updateProfile(currentUser, changes));
     setUser(updatedUser);
     return updatedUser;
   };
 
   const resetUserProgress = async () => {
-    const updatedUser = await updateStoredUser(resetProgress);
+    const updatedUser = await persistUserUpdate(resetProgress);
     setUser(updatedUser);
     return updatedUser;
   };
@@ -72,13 +90,14 @@ export function AppProvider({ children }) {
   const value = useMemo(() => ({
     user,
     isLoading,
+    saveLessonProgress,
     completeActivity,
     registerUser,
     loginUser,
     editProfile,
     resetUserProgress,
     logoutUser,
-  }), [user, isLoading]);
+  }), [user, isLoading, saveLessonProgress]);
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 }
@@ -92,5 +111,4 @@ export function useApp() {
 
   return context;
 }
-
 

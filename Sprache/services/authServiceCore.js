@@ -40,6 +40,11 @@ export function createAuthService({ storage, crypto, userDefaults = initialUser,
         ))
         : [],
       wordProgress: storedUser.wordProgress && typeof storedUser.wordProgress === 'object' ? storedUser.wordProgress : {},
+      activeLessonProgress: storedUser.activeLessonProgress
+        && typeof storedUser.activeLessonProgress === 'object'
+        && !Array.isArray(storedUser.activeLessonProgress)
+        ? storedUser.activeLessonProgress
+        : null,
       preferences: {
         ...userDefaults.preferences,
         ...storedUser.preferences,

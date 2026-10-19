@@ -18,5 +18,6 @@ export const initialUser = {
   goalDaysTracked: 0,
   sessions: [],
   wordProgress: {},
+  activeLessonProgress: null,
   preferences: { notificationsEnabled: false, hapticsEnabled: false },
 };
