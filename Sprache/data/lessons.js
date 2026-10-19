@@ -718,6 +718,132 @@ export const dictationLessonBasics = {
   ],
 };
 
+export const dictationLessonA2 = {
+  id: 'dictation-a2',
+  title: 'Dictado: Rutina diaria',
+  activityId: 'dictation-a2',
+  durationMinutes: 7,
+  questions: [
+    {
+      id: 'dictation-a2-q1',
+      type: 'dictation',
+      prompt: 'Escucha y escribe la frase',
+      word: 'Ich stehe um 7 Uhr auf',
+      audioWord: 'aufstehen',
+      audioPhrase: 'Ich stehe jeden Tag um 7 Uhr auf.',
+      answer: 'Ich stehe um 7 Uhr auf',
+      vocabulary: { term: 'aufstehen', translation: 'levantarse' },
+      hint: 'Habla de despertarse a una hora específica.',
+    },
+    {
+      id: 'dictation-a2-q2',
+      type: 'dictation',
+      prompt: 'Escucha y escribe la frase',
+      word: 'Ich trinke Kaffee',
+      audioWord: 'trinken',
+      audioPhrase: 'Zum Frühstück trinke ich Kaffee.',
+      answer: 'Ich trinke Kaffee',
+      vocabulary: { term: 'trinken', translation: 'beber' },
+      hint: 'Es sobre tomar café.',
+    },
+    {
+      id: 'dictation-a2-q3',
+      type: 'dictation',
+      prompt: 'Escucha y escribe la frase',
+      word: 'Ich gehe zur Arbeit',
+      audioWord: 'gehen',
+      audioPhrase: 'Um 8 Uhr gehe ich zur Arbeit.',
+      answer: 'Ich gehe zur Arbeit',
+      vocabulary: { term: 'zur Arbeit gehen', translation: 'ir al trabajo' },
+      hint: 'Habla de ir a trabajar.',
+    },
+  ],
+};
+
+export const dictationLessonB1 = {
+  id: 'dictation-b1',
+  title: 'Dictado: Experiencias pasadas',
+  activityId: 'dictation-b1',
+  durationMinutes: 8,
+  questions: [
+    {
+      id: 'dictation-b1-q1',
+      type: 'dictation',
+      prompt: 'Escucha y escribe la frase',
+      word: 'Ich habe gestern einen Film gesehen',
+      audioWord: 'gesehen',
+      audioPhrase: 'Ich habe gestern Abend einen interessanten Film gesehen.',
+      answer: 'Ich habe gestern einen Film gesehen',
+      vocabulary: { term: 'sehen', translation: 'ver' },
+      hint: 'Usa el Perfekt para hablar del pasado.',
+    },
+    {
+      id: 'dictation-b1-q2',
+      type: 'dictation',
+      prompt: 'Escucha y escribe la frase',
+      word: 'Wir sind nach Berlin gefahren',
+      audioWord: 'fahren',
+      audioPhrase: 'Letztes Wochenende sind wir nach Berlin gefahren.',
+      answer: 'Wir sind nach Berlin gefahren',
+      vocabulary: { term: 'fahren', translation: 'viajar/ir' },
+      hint: 'Verbos de movimiento usan sein en Perfekt.',
+    },
+    {
+      id: 'dictation-b1-q3',
+      type: 'dictation',
+      prompt: 'Escucha y escribe la frase',
+      word: 'Sie hat Deutsch gelernt',
+      audioWord: 'lernen',
+      audioPhrase: 'Sie hat drei Jahre lang Deutsch gelernt.',
+      answer: 'Sie hat Deutsch gelernt',
+      vocabulary: { term: 'lernen', translation: 'aprender' },
+      hint: 'Habla de estudiar un idioma.',
+    },
+  ],
+};
+
+export const dictationLessonB2 = {
+  id: 'dictation-b2',
+  title: 'Dictado: Opiniones complejas',
+  activityId: 'dictation-b2',
+  durationMinutes: 10,
+  questions: [
+    {
+      id: 'dictation-b2-q1',
+      type: 'dictation',
+      prompt: 'Escucha y escribe la frase',
+      word: 'Ich würde gern mehr Zeit haben',
+      audioWord: 'würde',
+      audioPhrase: 'Ich würde gern mehr Zeit für meine Hobbys haben.',
+      answer: 'Ich würde gern mehr Zeit haben',
+      vocabulary: { term: 'würde gern', translation: 'me gustaría' },
+      hint: 'Usa Konjunktiv II para expresar deseo.',
+    },
+    {
+      id: 'dictation-b2-q2',
+      type: 'dictation',
+      prompt: 'Escucha y escribe la frase',
+      word: 'Es wäre besser wenn',
+      audioWord: 'wäre',
+      audioPhrase: 'Es wäre besser, wenn wir früher aufstehen würden.',
+      answer: 'Es wäre besser wenn',
+      vocabulary: { term: 'besser', translation: 'mejor' },
+      hint: 'Estructura condicional con würde.',
+    },
+    {
+      id: 'dictation-b2-q3',
+      type: 'dictation',
+      prompt: 'Escucha y escribe la frase',
+      word: 'Hätte ich mehr Geld',
+      audioWord: 'hätte',
+      audioPhrase: 'Hätte ich mehr Geld, würde ich reisen.',
+      answer: 'Hätte ich mehr Geld',
+      vocabulary: { term: 'das Geld', translation: 'el dinero' },
+      hint: 'Condición hipotética al inicio de la frase.',
+    },
+  ],
+};
+
 export const fillBlanksLesson = {
   id: 'fill-blanks-basics',
   title: 'Completa los huecos',
@@ -756,6 +882,132 @@ export const fillBlanksLesson = {
       answer: 'zur',
       vocabulary: { term: 'zur Schule', translation: 'a la escuela' },
       hint: 'Zu + der = zur.',
+    },
+  ],
+};
+
+export const fillBlanksLessonA2 = {
+  id: 'fill-blanks-a2',
+  title: 'Completa: Casos y preposiciones',
+  activityId: 'fill-blanks-a2',
+  durationMinutes: 7,
+  questions: [
+    {
+      id: 'fill-a2-q1',
+      type: 'fill-blanks',
+      prompt: 'Completa con el artículo correcto en acusativo',
+      word: 'Ich sehe ___ Mann.',
+      sentence: 'Ich sehe ___ Mann.',
+      blankIndex: 0,
+      answer: 'den',
+      vocabulary: { term: 'den Mann', translation: 'al hombre' },
+      hint: 'El acusativo masculino de der es den.',
+    },
+    {
+      id: 'fill-a2-q2',
+      type: 'fill-blanks',
+      prompt: 'Completa con el verbo modal correcto',
+      word: 'Wir ___ heute kommen.',
+      sentence: 'Wir ___ heute kommen.',
+      blankIndex: 0,
+      answer: 'können',
+      vocabulary: { term: 'können', translation: 'poder' },
+      hint: 'Expresa posibilidad.',
+    },
+    {
+      id: 'fill-a2-q3',
+      type: 'fill-blanks',
+      prompt: 'Completa con la negación correcta',
+      word: 'Ich habe ___ Zeit.',
+      sentence: 'Ich habe ___ Zeit.',
+      blankIndex: 0,
+      answer: 'keine',
+      vocabulary: { term: 'keine Zeit', translation: 'ningún tiempo' },
+      hint: 'Zeit es femenino, usa keine.',
+    },
+  ],
+};
+
+export const fillBlanksLessonB1 = {
+  id: 'fill-blanks-b1',
+  title: 'Completa: Perfekt y Futuro',
+  activityId: 'fill-blanks-b1',
+  durationMinutes: 8,
+  questions: [
+    {
+      id: 'fill-b1-q1',
+      type: 'fill-blanks',
+      prompt: 'Completa con el auxiliar correcto',
+      word: 'Ich ___ gestern gegessen.',
+      sentence: 'Ich ___ gestern gegessen.',
+      blankIndex: 0,
+      answer: 'habe',
+      vocabulary: { term: 'essen', translation: 'comer' },
+      hint: 'Essen usa haben en Perfekt.',
+    },
+    {
+      id: 'fill-b1-q2',
+      type: 'fill-blanks',
+      prompt: 'Completa con el auxiliar correcto',
+      word: 'Wir ___ nach Hause gegangen.',
+      sentence: 'Wir ___ nach Hause gegangen.',
+      blankIndex: 0,
+      answer: 'sind',
+      vocabulary: { term: 'gehen', translation: 'ir' },
+      hint: 'Gehen usa sein en Perfekt.',
+    },
+    {
+      id: 'fill-b1-q3',
+      type: 'fill-blanks',
+      prompt: 'Completa con werden',
+      word: 'Ich ___ morgen nach Berlin fahren.',
+      sentence: 'Ich ___ morgen nach Berlin fahren.',
+      blankIndex: 0,
+      answer: 'werde',
+      vocabulary: { term: 'werden', translation: 'llegar a ser' },
+      hint: 'Werden se conjuga con ich como werde.',
+    },
+  ],
+};
+
+export const fillBlanksLessonB2 = {
+  id: 'fill-blanks-b2',
+  title: 'Completa: Konjunktiv II',
+  activityId: 'fill-blanks-b2',
+  durationMinutes: 8,
+  questions: [
+    {
+      id: 'fill-b2-q1',
+      type: 'fill-blanks',
+      prompt: 'Completa con la forma condicional',
+      word: 'Ich ___ gern mehr Zeit haben.',
+      sentence: 'Ich ___ gern mehr Zeit haben.',
+      blankIndex: 0,
+      answer: 'würde',
+      vocabulary: { term: 'würde', translation: 'gustaría' },
+      hint: 'Usa würde + infinitivo.',
+    },
+    {
+      id: 'fill-b2-q2',
+      type: 'fill-blanks',
+      prompt: 'Completa con Konjunktiv II',
+      word: 'Wenn ich Geld ___, würde ich reisen.',
+      sentence: 'Wenn ich Geld ___, würde ich reisen.',
+      blankIndex: 0,
+      answer: 'hätte',
+      vocabulary: { term: 'haben', translation: 'tener' },
+      hint: 'Hätte es Konjunktiv II de haben.',
+    },
+    {
+      id: 'fill-b2-q3',
+      type: 'fill-blanks',
+      prompt: 'Completa con podría',
+      word: 'Das ___ ich machen.',
+      sentence: 'Das ___ ich machen.',
+      blankIndex: 0,
+      answer: 'könnte',
+      vocabulary: { term: 'können', translation: 'poder' },
+      hint: 'Könnte es forma condicional de können.',
     },
   ],
 };
@@ -799,6 +1051,123 @@ export const wordOrderLesson = {
   ],
 };
 
+export const wordOrderLessonA2 = {
+  id: 'word-order-a2',
+  title: 'Orden: Tiempo y lugar',
+  activityId: 'word-order-a2',
+  durationMinutes: 7,
+  questions: [
+    {
+      id: 'wordorder-a2-q1',
+      type: 'word-order',
+      prompt: 'Ordena las palabras (tiempo, modo, lugar)',
+      word: 'Ich fahre morgen mit dem Zug nach Berlin',
+      words: ['Ich', 'fahre', 'morgen', 'mit', 'dem', 'Zug', 'nach', 'Berlin'],
+      answer: 'Ich fahre morgen mit dem Zug nach Berlin',
+      vocabulary: { term: 'mit dem Zug fahren', translation: 'ir en tren' },
+      hint: 'Orden: tiempo - modo - lugar.',
+    },
+    {
+      id: 'wordorder-a2-q2',
+      type: 'word-order',
+      prompt: 'Ordena las palabras con verbo modal',
+      word: 'Wir müssen heute lernen',
+      words: ['Wir', 'müssen', 'heute', 'lernen'],
+      answer: 'Wir müssen heute lernen',
+      vocabulary: { term: 'müssen', translation: 'tener que' },
+      hint: 'El verbo modal va en segunda posición.',
+    },
+    {
+      id: 'wordorder-a2-q3',
+      type: 'word-order',
+      prompt: 'Ordena las palabras con verbo separable',
+      word: 'Er steht um 7 Uhr auf',
+      words: ['Er', 'steht', 'um', '7', 'Uhr', 'auf'],
+      answer: 'Er steht um 7 Uhr auf',
+      vocabulary: { term: 'aufstehen', translation: 'levantarse' },
+      hint: 'El prefijo va al final.',
+    },
+  ],
+};
+
+export const wordOrderLessonB1 = {
+  id: 'word-order-b1',
+  title: 'Orden: Perfekt y subordinadas',
+  activityId: 'word-order-b1',
+  durationMinutes: 8,
+  questions: [
+    {
+      id: 'wordorder-b1-q1',
+      type: 'word-order',
+      prompt: 'Ordena las palabras en Perfekt',
+      word: 'Ich habe gestern einen Film gesehen',
+      words: ['Ich', 'habe', 'gestern', 'einen', 'Film', 'gesehen'],
+      answer: 'Ich habe gestern einen Film gesehen',
+      vocabulary: { term: 'gesehen', translation: 'visto' },
+      hint: 'El participio va al final.',
+    },
+    {
+      id: 'wordorder-b1-q2',
+      type: 'word-order',
+      prompt: 'Ordena las palabras con weil',
+      word: 'Ich komme nicht weil ich krank bin',
+      words: ['Ich', 'komme', 'nicht', 'weil', 'ich', 'krank', 'bin'],
+      answer: 'Ich komme nicht weil ich krank bin',
+      vocabulary: { term: 'weil', translation: 'porque' },
+      hint: 'Con weil, el verbo va al final.',
+    },
+    {
+      id: 'wordorder-b1-q3',
+      type: 'word-order',
+      prompt: 'Ordena las palabras con dass',
+      word: 'Ich denke dass es regnet',
+      words: ['Ich', 'denke', 'dass', 'es', 'regnet'],
+      answer: 'Ich denke dass es regnet',
+      vocabulary: { term: 'dass', translation: 'que' },
+      hint: 'Con dass, el verbo va al final.',
+    },
+  ],
+};
+
+export const wordOrderLessonB2 = {
+  id: 'word-order-b2',
+  title: 'Orden: Condicionales complejas',
+  activityId: 'word-order-b2',
+  durationMinutes: 8,
+  questions: [
+    {
+      id: 'wordorder-b2-q1',
+      type: 'word-order',
+      prompt: 'Ordena las palabras en condicional',
+      word: 'Wenn ich Zeit hätte würde ich kommen',
+      words: ['Wenn', 'ich', 'Zeit', 'hätte', 'würde', 'ich', 'kommen'],
+      answer: 'Wenn ich Zeit hätte würde ich kommen',
+      vocabulary: { term: 'hätte', translation: 'tuviera' },
+      hint: 'Usa Konjunktiv II en la condición.',
+    },
+    {
+      id: 'wordorder-b2-q2',
+      type: 'word-order',
+      prompt: 'Ordena las palabras con futuro',
+      word: 'Ich werde nächstes Jahr nach Deutschland reisen',
+      words: ['Ich', 'werde', 'nächstes', 'Jahr', 'nach', 'Deutschland', 'reisen'],
+      answer: 'Ich werde nächstes Jahr nach Deutschland reisen',
+      vocabulary: { term: 'werden', translation: 'auxiliar futuro' },
+      hint: 'Werden + infinitivo al final.',
+    },
+    {
+      id: 'wordorder-b2-q3',
+      type: 'word-order',
+      prompt: 'Ordena las palabras con dos oraciones',
+      word: 'Er sagt dass er morgen kommt',
+      words: ['Er', 'sagt', 'dass', 'er', 'morgen', 'kommt'],
+      answer: 'Er sagt dass er morgen kommt',
+      vocabulary: { term: 'sagen', translation: 'decir' },
+      hint: 'Discurso indirecto con dass.',
+    },
+  ],
+};
+
 export const writeResponseLesson = {
   id: 'write-response-basics',
   title: 'Escribe tu respuesta',
@@ -837,6 +1206,132 @@ export const writeResponseLesson = {
       vocabulary: { term: 'Wie geht es dir?', translation: '¿Cómo estás?' },
       hint: 'Puedes decir "Mir geht es gut" (estoy bien) o "Mir geht es nicht so gut" (no estoy muy bien).',
       feedback: 'Respuestas comunes: Mir geht es gut / Mir geht es nicht so gut / Es geht mir gut.',
+    },
+  ],
+};
+
+export const writeResponseLessonA2 = {
+  id: 'write-response-a2',
+  title: 'Escribe: Rutina y preferencias',
+  activityId: 'write-response-a2',
+  durationMinutes: 8,
+  questions: [
+    {
+      id: 'write-a2-q1',
+      type: 'write-response',
+      prompt: 'Describe tu rutina matutina en alemán.',
+      word: 'Mi rutina matutina',
+      placeholder: 'Am Morgen stehe ich...',
+      answer: 'Am Morgen',
+      vocabulary: { term: 'die Routine', translation: 'la rutina' },
+      hint: 'Usa verbos como aufstehen, frühstücken, gehen.',
+      feedback: 'Ejemplo: Am Morgen stehe ich um 7 Uhr auf, frühstücke und gehe zur Arbeit.',
+    },
+    {
+      id: 'write-a2-q2',
+      type: 'write-response',
+      prompt: '¿Qué te gusta hacer en tu tiempo libre?',
+      word: 'Tiempo libre',
+      placeholder: 'In meiner Freizeit...',
+      answer: 'In meiner Freizeit',
+      vocabulary: { term: 'die Freizeit', translation: 'el tiempo libre' },
+      hint: 'Usa "Ich spiele gern" o "Ich lese gern".',
+      feedback: 'Ejemplo: In meiner Freizeit lese ich gern und treibe Sport.',
+    },
+    {
+      id: 'write-a2-q3',
+      type: 'write-response',
+      prompt: 'Escribe sobre tu familia.',
+      word: 'Mi familia',
+      placeholder: 'Meine Familie besteht aus...',
+      answer: 'Meine Familie',
+      vocabulary: { term: 'die Familie', translation: 'la familia' },
+      hint: 'Usa vocabulario como Vater, Mutter, Bruder, Schwester.',
+      feedback: 'Ejemplo: Meine Familie besteht aus meinem Vater, meiner Mutter und meinem Bruder.',
+    },
+  ],
+};
+
+export const writeResponseLessonB1 = {
+  id: 'write-response-b1',
+  title: 'Escribe: Experiencias pasadas',
+  activityId: 'write-response-b1',
+  durationMinutes: 10,
+  questions: [
+    {
+      id: 'write-b1-q1',
+      type: 'write-response',
+      prompt: 'Escribe sobre tu último viaje usando el Perfekt.',
+      word: 'Mi último viaje',
+      placeholder: 'Letztes Jahr bin ich...',
+      answer: 'Letztes Jahr',
+      vocabulary: { term: 'die Reise', translation: 'el viaje' },
+      hint: 'Usa Perfekt: bin gefahren, habe gesehen, habe gemacht.',
+      feedback: 'Ejemplo: Letztes Jahr bin ich nach Spanien gefahren. Ich habe dort viel gesehen.',
+    },
+    {
+      id: 'write-b1-q2',
+      type: 'write-response',
+      prompt: 'Describe tu trabajo o estudios.',
+      word: 'Mi trabajo',
+      placeholder: 'Ich arbeite als...',
+      answer: 'Ich arbeite',
+      vocabulary: { term: 'der Beruf', translation: 'el trabajo' },
+      hint: 'Usa vocabulario profesional: Büro, Kollegen, Kunden.',
+      feedback: 'Ejemplo: Ich arbeite als Bürokraft in einem großen Unternehmen.',
+    },
+    {
+      id: 'write-b1-q3',
+      type: 'write-response',
+      prompt: 'Escribe sobre tus planes para el futuro.',
+      word: 'Mis planes',
+      placeholder: 'Im Jahr 2025 werde ich...',
+      answer: 'Im Jahr',
+      vocabulary: { term: 'die Pläne', translation: 'los planes' },
+      hint: 'Usa futuro con werden: werde ich, werden wir.',
+      feedback: 'Ejemplo: Im Jahr 2025 werde ich Deutsch lernen und nach Deutschland reisen.',
+    },
+  ],
+};
+
+export const writeResponseLessonB2 = {
+  id: 'write-response-b2',
+  title: 'Escribe: Opiniones y argumentos',
+  activityId: 'write-response-b2',
+  durationMinutes: 12,
+  questions: [
+    {
+      id: 'write-b2-q1',
+      type: 'write-response',
+      prompt: '¿Qué opinas sobre el aprendizaje de idiomas?',
+      word: 'Aprender idiomas',
+      placeholder: 'Ich denke, dass Sprachenlernen...',
+      answer: 'Ich denke',
+      vocabulary: { term: 'die Meinung', translation: 'la opinión' },
+      hint: 'Usa conectores: meiner Meinung nach, außerdem, jedoch.',
+      feedback: 'Ejemplo: Ich denke, dass Sprachenlernen wichtig ist, weil es neue Möglichkeiten eröffnet.',
+    },
+    {
+      id: 'write-b2-q2',
+      type: 'write-response',
+      prompt: 'Escribe sobre un tema social importante.',
+      word: 'Tema social',
+      placeholder: 'Ein wichtiges Thema ist...',
+      answer: 'Ein wichtiges Thema',
+      vocabulary: { term: 'das Thema', translation: 'el tema' },
+      hint: 'Usa vocabulario abstracto: die Gesellschaft, die Umwelt, die Bildung.',
+      feedback: 'Ejemplo: Ein wichtiges Thema ist der Umweltschutz, weil wir die Natur schützen müssen.',
+    },
+    {
+      id: 'write-b2-q3',
+      type: 'write-response',
+      prompt: 'Describe una experiencia que te cambió la vida.',
+      word: 'Experiencia',
+      placeholder: 'Eine Erfahrung, die mein Leben verändert hat...',
+      answer: 'Eine Erfahrung',
+      vocabulary: { term: 'die Erfahrung', translation: 'la experiencia' },
+      hint: 'Usa narración en pasado con reflexiones.',
+      feedback: 'Ejemplo: Eine Erfahrung, die mein Leben verändert hat, war mein Auslandsjahr.',
     },
   ],
 };
@@ -904,7 +1399,275 @@ export const listeningLesson = {
   ],
 };
 
-// B1 Level Lessons
+export const listeningLessonA2 = {
+  id: 'listening-a2',
+  title: 'Escucha: Conversaciones cotidianas',
+  activityId: 'listening-a2',
+  durationMinutes: 10,
+  questions: [
+    {
+      id: 'listening-a2-q1',
+      type: 'listening',
+      prompt: 'Escucha el audio y responde',
+      word: '¿Qué hace la persona?',
+      audioWord: 'arbeiten',
+      audioPhrase: 'Ich arbeite von Montag bis Freitag in einem Büro.',
+      scenario: 'Alguien describe su trabajo.',
+      questions: [
+        {
+          text: '¿Cuándo trabaja la persona?',
+          options: ['De lunes a viernes', 'Solo los fines de semana', 'Solo los martes', 'Nunca'],
+          correctAnswer: 'De lunes a viernes',
+        },
+      ],
+      vocabulary: { term: 'arbeiten', translation: 'trabajar' },
+      hint: 'Escucha "von Montag bis Freitag".',
+    },
+    {
+      id: 'listening-a2-q2',
+      type: 'listening',
+      prompt: 'Escucha el audio y responde',
+      word: '¿Qué compra?',
+      audioWord: 'kaufen',
+      audioPhrase: 'Ich möchte ein Brötchen und eine Tasse Kaffee kaufen.',
+      scenario: 'Alguien en una panadería.',
+      questions: [
+        {
+          text: '¿Qué quiere comprar la persona?',
+          options: ['Un panecillo y café', 'Solo agua', 'Un pastel', 'Una pizza'],
+          correctAnswer: 'Un panecillo y café',
+        },
+      ],
+      vocabulary: { term: 'das Brötchen', translation: 'el panecillo' },
+      hint: 'Escucha "Brötchen und Kaffee".',
+    },
+    {
+      id: 'listening-a2-q3',
+      type: 'listening',
+      prompt: 'Escucha el audio y responde',
+      word: '¿A dónde va?',
+      audioWord: 'fahren',
+      audioPhrase: 'Wir fahren heute nachmittag zum See.',
+      scenario: 'Dos personas planean una salida.',
+      questions: [
+        {
+          text: '¿Adónde van?',
+          options: ['Al lago', 'A la montaña', 'A la playa', 'A la ciudad'],
+          correctAnswer: 'Al lago',
+        },
+      ],
+      vocabulary: { term: 'der See', translation: 'el lago' },
+      hint: 'Escucha "zum See".',
+    },
+  ],
+};
+
+export const listeningLessonB1 = {
+  id: 'listening-b1',
+  title: 'Escucha: Narraciones y descripciones',
+  activityId: 'listening-b1',
+  durationMinutes: 12,
+  questions: [
+    {
+      id: 'listening-b1-q1',
+      type: 'listening',
+      prompt: 'Escucha el audio y responde',
+      word: '¿Qué pasó?',
+      audioWord: 'passieren',
+      audioPhrase: 'Gestern ist mir etwas Unangenehmes passiert. Ich habe meine Tasche verloren.',
+      scenario: 'Alguien cuenta un incidente.',
+      questions: [
+        {
+          text: '¿Qué perdió la persona?',
+          options: ['Su bolso', 'Su cartera', 'Su teléfono', 'Sus llaves'],
+          correctAnswer: 'Su bolso',
+        },
+      ],
+      vocabulary: { term: 'verlieren', translation: 'perder' },
+      hint: 'Escucha "meine Tasche verloren".',
+    },
+    {
+      id: 'listening-b1-q2',
+      type: 'listening',
+      prompt: 'Escucha el audio y responde',
+      word: '¿Qué describe?',
+      audioWord: 'beschreiben',
+      audioPhrase: 'Das Hotel ist sehr schön gelegen. Es hat einen großen Garten und ist nah am Strand.',
+      scenario: 'Descripción de un hotel.',
+      questions: [
+        {
+          text: '¿Qué tiene el hotel?',
+          options: ['Un jardín grande', 'Una piscina', 'Un gimnasio', 'Un restaurante'],
+          correctAnswer: 'Un jardín grande',
+        },
+      ],
+      vocabulary: { term: 'der Garten', translation: 'el jardín' },
+      hint: 'Escucha "einen großen Garten".',
+    },
+    {
+      id: 'listening-b1-q3',
+      type: 'listening',
+      prompt: 'Escucha el audio y responde',
+      word: '¿Qué opinión?',
+      audioWord: 'meinen',
+      audioPhrase: 'Ich finde, dass das neue Gesetz gut ist, weil es die Umwelt schützt.',
+      scenario: 'Opinión sobre una ley.',
+      questions: [
+        {
+          text: '¿Por qué le parece bien la ley?',
+          options: ['Porque protege el ambiente', 'Porque es barata', 'Porque es nueva', 'No le parece bien'],
+          correctAnswer: 'Porque protege el ambiente',
+        },
+      ],
+      vocabulary: { term: 'die Umwelt', translation: 'el ambiente' },
+      hint: 'Escucha "weil es die Umwelt schützt".',
+    },
+  ],
+};
+
+export const listeningLessonB2 = {
+  id: 'listening-b2',
+  title: 'Escucha: Argumentos y debates',
+  activityId: 'listening-b2',
+  durationMinutes: 15,
+  questions: [
+    {
+      id: 'listening-b2-q1',
+      type: 'listening',
+      prompt: 'Escucha el audio y responde',
+      word: '¿Qué argumento?',
+      audioWord: 'argumentieren',
+      audioPhrase: 'Ich bin der Meinung, dass Home-Office viele Vorteile hat. Man spart Zeit und ist flexibler.',
+      scenario: 'Debate sobre teletrabajo.',
+      questions: [
+        {
+          text: '¿Qué ventaja menciona?',
+          options: ['Ahorra tiempo y es más flexible', 'Gana más dinero', 'Trabaja menos', 'Tiene mejor jefe'],
+          correctAnswer: 'Ahorra tiempo y es más flexible',
+        },
+      ],
+      vocabulary: { term: 'das Home-Office', translation: 'teletrabajo' },
+      hint: 'Escucha "spart Zeit und ist flexibler".',
+    },
+    {
+      id: 'listening-b2-q2',
+      type: 'listening',
+      prompt: 'Escucha el audio y responde',
+      word: '¿Qué problema?',
+      audioWord: 'das Problem',
+      audioPhrase: 'Das Hauptproblem ist der Klimawandel. Wir müssen dringend etwas tun.',
+      scenario: 'Discusión sobre cambio climático.',
+      questions: [
+        {
+          text: '¿Cuál es el problema principal según el hablante?',
+          options: ['El cambio climático', 'La contaminación', 'El tráfico', 'La economía'],
+          correctAnswer: 'El cambio climático',
+        },
+      ],
+      vocabulary: { term: 'der Klimawandel', translation: 'el cambio climático' },
+      hint: 'Escucha "Hauptproblem ist der Klimawandel".',
+    },
+    {
+      id: 'listening-b2-q3',
+      type: 'listening',
+      prompt: 'Escucha el audio y responde',
+      word: '¿Qué solución?',
+      audioWord: 'die Lösung',
+      audioPhrase: 'Eine Lösung wäre, mehr öffentliche Verkehrsmittel zu nutzen und weniger Auto zu fahren.',
+      scenario: 'Propuesta de solución.',
+      questions: [
+        {
+          text: '¿Qué solución propone?',
+          options: ['Usar más transporte público', 'Comprar más coches', 'Construir más carreteras', 'No hacer nada'],
+          correctAnswer: 'Usar más transporte público',
+        },
+      ],
+      vocabulary: { term: 'die Verkehrsmittel', translation: 'los medios de transporte' },
+      hint: 'Escucha "mehr öffentliche Verkehrsmittel".',
+    },
+  ],
+};
+
+// Story Lessons by Level
+export const storyLessonA1 = {
+  id: 'story-a1-family',
+  title: 'Cuento A1: Mi familia',
+  activityId: 'story-a1-family',
+  durationMinutes: 8,
+  questions: [
+    {
+      id: 'story-a1-q1',
+      type: 'multiple-choice',
+      prompt: '¿Cuántas personas hay en la familia del cuento?',
+      word: 'familia',
+      options: ['Cuatro', 'Dos', 'Tres', 'Cinco'],
+      answer: 'Cuatro',
+      vocabulary: { term: 'die Familie', translation: 'la familia' },
+      hint: 'Cuenta los miembros mencionados.',
+    },
+    {
+      id: 'story-a1-q2',
+      type: 'multiple-choice',
+      prompt: '¿Cómo se llama el hermano?',
+      word: 'hermano',
+      options: ['Max', 'Tom', 'Lukas', 'Felix'],
+      answer: 'Max',
+      vocabulary: { term: 'der Bruder', translation: 'el hermano' },
+      hint: 'Lee el nombre del hermano.',
+    },
+    {
+      id: 'story-a1-q3',
+      type: 'fill-blanks',
+      prompt: 'Completa: Meine Mutter heißt ___.',
+      sentence: 'Meine Mutter heißt ___.',
+      blankIndex: 0,
+      answer: 'Anna',
+      vocabulary: { term: 'die Mutter', translation: 'la madre' },
+      hint: 'El nombre está en el texto.',
+    },
+  ],
+};
+
+export const storyLessonA2 = {
+  id: 'story-a2-weekend',
+  title: 'Cuento A2: Mi fin de semana',
+  activityId: 'story-a2-weekend',
+  durationMinutes: 10,
+  questions: [
+    {
+      id: 'story-a2-q1',
+      type: 'multiple-choice',
+      prompt: '¿Qué hace el narrador el sábado?',
+      word: 'sábado',
+      options: ['Va al parque', 'Estudia', 'Trabaja', 'Duerme'],
+      answer: 'Va al parque',
+      vocabulary: { term: 'der Park', translation: 'el parque' },
+      hint: 'Lee el primer párrafo.',
+    },
+    {
+      id: 'story-a2-q2',
+      type: 'word-order',
+      prompt: 'Ordena: Am Sonntag lese ich ein Buch',
+      word: 'Am Sonntag lese ich ein Buch',
+      words: ['Am', 'Sonntag', 'lese', 'ich', 'ein', 'Buch'],
+      answer: 'Am Sonntag lese ich ein Buch',
+      vocabulary: { term: 'lesen', translation: 'leer' },
+      hint: 'El orden es tiempo - sujeto - verbo - objeto.',
+    },
+    {
+      id: 'story-a2-q3',
+      type: 'write-response',
+      prompt: 'Escribe qué hace el narrador el domingo.',
+      word: 'domingo',
+      placeholder: 'Am Sonntag...',
+      answer: 'Am Sonntag',
+      vocabulary: { term: 'der Sonntag', translation: 'el domingo' },
+      hint: 'El texto describe actividades relajantes.',
+      feedback: 'El narrador lee un libro y descansa el domingo.',
+    },
+  ],
+};
+
 export const storyLessonB1 = {
   id: 'story-b1-weekend',
   title: 'Cuento B1: Un fin de semana especial',
@@ -945,8 +1708,7 @@ export const storyLessonB1 = {
   ],
 };
 
-// B2 Level Lessons
-export const storyLessonB2 = {
+export const storyLessonB2_1 = {
   id: 'story-b2-career',
   title: 'Cuento B2: Un cambio de carrera',
   activityId: 'story-b2-career',
@@ -986,6 +1748,46 @@ export const storyLessonB2 = {
   ],
 };
 
+export const storyLessonB2_2 = {
+  id: 'story-b2-travel',
+  title: 'Cuento B2: Un viaje inolvidable',
+  activityId: 'story-b2-travel',
+  durationMinutes: 12,
+  questions: [
+    {
+      id: 'story-b2-travel-q1',
+      type: 'multiple-choice',
+      prompt: '¿A qué país viaja la protagonista?',
+      word: 'país',
+      options: ['A Japón', 'A Italia', 'A Francia', 'A España'],
+      answer: 'A Japón',
+      vocabulary: { term: 'das Land', translation: 'el país' },
+      hint: 'El texto menciona un país asiático.',
+    },
+    {
+      id: 'story-b2-travel-q2',
+      type: 'word-order',
+      prompt: 'Ordena: Ich habe mich sehr gut gefühlt',
+      word: 'Ich habe mich sehr gut gefühlt',
+      words: ['Ich', 'habe', 'mich', 'sehr', 'gut', 'gefühlt'],
+      answer: 'Ich habe mich sehr gut gefühlt',
+      vocabulary: { term: 'sich fühlen', translation: 'sentirse' },
+      hint: 'Perfekt de un verbo reflexivo.',
+    },
+    {
+      id: 'story-b2-travel-q3',
+      type: 'write-response',
+      prompt: 'Escribe qué le gustó más del viaje.',
+      word: 'viaje',
+      placeholder: 'Am besten hat mir...',
+      answer: 'Am besten',
+      vocabulary: { term: 'die Reise', translation: 'el viaje' },
+      hint: 'El texto describe aspectos culturales.',
+      feedback: 'A la protagonista le gustó la cultura y la comida japonesa.',
+    },
+  ],
+};
+
 export const grammarLessons = [
   grammarLessonArticles, grammarLessonWordOrder, grammarLessonPresent, grammarLessonNegation,
   grammarLessonAccusative, grammarLessonModalVerbs, grammarLessonDative, grammarLessonPerfect,
@@ -993,9 +1795,13 @@ export const grammarLessons = [
   grammarLessonImperative, grammarLessonFuture, grammarLessonSubjunctive,
 ];
 export const practiceLessons = [
-  dictationLessonBasics, fillBlanksLesson, wordOrderLesson, writeResponseLesson, listeningLesson,
+  dictationLessonBasics, dictationLessonA2, dictationLessonB1, dictationLessonB2,
+  fillBlanksLesson, fillBlanksLessonA2, fillBlanksLessonB1, fillBlanksLessonB2,
+  wordOrderLesson, wordOrderLessonA2, wordOrderLessonB1, wordOrderLessonB2,
+  writeResponseLesson, writeResponseLessonA2, writeResponseLessonB1, writeResponseLessonB2,
+  listeningLesson, listeningLessonA2, listeningLessonB1, listeningLessonB2,
 ];
 export const storyLessons = [
-  storyLessonB1, storyLessonB2,
+  storyLessonA1, storyLessonA2, storyLessonB1, storyLessonB2_1, storyLessonB2_2,
 ];
 export const lessons = [...vocabularyLessons, ...readingLessons, ...grammarLessons, ...practiceLessons, ...storyLessons];
