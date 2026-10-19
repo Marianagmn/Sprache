@@ -58,6 +58,7 @@ export default function LessonScreen({ navigation, route }) {
   );
   lessonProgressRef.current = {
     activityId: lesson?.activityId,
+    ...(lesson?.activityId === 'failed-words-review' ? { reviewLesson: lesson } : {}),
     questionIndex,
     selectedAnswer,
     answered,

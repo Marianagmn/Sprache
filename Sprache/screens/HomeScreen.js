@@ -20,7 +20,7 @@ export default function HomeScreen({ navigation }) {
   const activeLesson = activeLessonProgress?.activityId === 'spaced-review'
     ? reviewLesson
     : activeLessonProgress?.activityId === 'failed-words-review'
-      ? failedWordsLesson
+      ? activeLessonProgress.reviewLesson || failedWordsLesson
       : getLessonByActivityId(activeLessonProgress?.activityId);
   const hasInProgressLesson = Boolean(activeLessonProgress && activeLesson);
   const hasReview = Boolean(reviewLesson);

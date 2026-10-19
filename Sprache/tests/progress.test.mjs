@@ -460,6 +460,7 @@ test('reiniciar progreso conserva perfil/meta y borra las sesiones', () => {
   const user = {
     ...emptyUser,
     activeLessonProgress: { activityId: 'vocabulary', questionIndex: 1 },
+    failedWords: { buch: { term: 'Buch' } },
     name: 'Mariana',
     sessions: [{ completedAt: referenceDate.toISOString(), durationSeconds: 300, learnedWords: [] }],
     wordProgress: { haus: { correctAnswers: 2 } },
@@ -474,6 +475,7 @@ test('reiniciar progreso conserva perfil/meta y borra las sesiones', () => {
   assert.equal(reset.dailyGoal, 10);
   assert.deepEqual(reset.sessions, []);
   assert.deepEqual(reset.wordProgress, {});
+  assert.deepEqual(reset.failedWords, {});
   assert.equal(reset.activeLessonProgress, null);
   assert.equal(reset.studiedSeconds, 0);
   assert.equal(reset.todaySeconds, 0);
