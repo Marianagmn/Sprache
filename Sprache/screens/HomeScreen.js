@@ -47,13 +47,13 @@ export default function HomeScreen({ navigation }) {
         <RecommendationCard
           title={hasInProgressLesson ? activeLesson.title : hasReview ? 'Repasar palabras' : hasPathLesson ? nextPathLesson.title : recommendation.title}
           description={hasInProgressLesson
-            ? `Vas por la pregunta ${activeLessonProgress.questionIndex + 1} de ${activeLesson.questions.length}.`
+            ? `Vas por la pregunta ${activeLessonProgress.questionIndex + 1} de ${activeLesson.questions.length}`
             : hasReview
               ? `Tienes ${reviewLesson.questions.length} ${reviewLesson.questions.length === 1 ? 'palabra lista' : 'palabras listas'} para repasar.`
               : hasPathLesson
                 ? `Es el siguiente paso de tu ruta de nivel ${nextPathLesson.levelCode}. ${nextPathLesson.time}`
                 : recommendation.description}
-          time={hasInProgressLesson ? 'Retomar →' : hasReview ? `${reviewLesson.questions.length} palabras` : hasPathLesson ? nextPathLesson.time : recommendation.time}
+          time={hasInProgressLesson ? 'Retomar' : hasReview ? `${reviewLesson.questions.length} palabras` : hasPathLesson ? nextPathLesson.time : recommendation.time}
           iconName={hasInProgressLesson ? 'play' : hasReview ? 'refresh' : hasPathLesson ? 'school-outline' : recommendation.iconName}
           onPress={() => navigation.navigate('Lesson', hasInProgressLesson
             ? { activityId: activeLessonProgress.activityId, resumeProgress: activeLessonProgress }

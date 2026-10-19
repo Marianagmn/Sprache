@@ -425,6 +425,7 @@ test('el resumen limita aciertos y maneja sesiones sin preguntas', () => {
 test('reiniciar progreso conserva perfil/meta y borra las sesiones', () => {
   const user = {
     ...emptyUser,
+    activeLessonProgress: { activityId: 'vocabulary', questionIndex: 1 },
     name: 'Mariana',
     sessions: [{ completedAt: referenceDate.toISOString(), durationSeconds: 300, learnedWords: [] }],
     wordProgress: { haus: { correctAnswers: 2 } },
@@ -439,6 +440,7 @@ test('reiniciar progreso conserva perfil/meta y borra las sesiones', () => {
   assert.equal(reset.dailyGoal, 10);
   assert.deepEqual(reset.sessions, []);
   assert.deepEqual(reset.wordProgress, {});
+  assert.equal(reset.activeLessonProgress, null);
   assert.equal(reset.studiedSeconds, 0);
   assert.equal(reset.todaySeconds, 0);
   assert.equal(reset.totalSessions, 0);
