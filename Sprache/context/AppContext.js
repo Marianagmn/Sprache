@@ -3,6 +3,7 @@ import { login, logout, register, restoreSession, updateStoredUser } from '../se
 import { updateProfile } from '../services/profileService';
 import { recordActivity, resetProgress } from '../services/progressService';
 import { updateFailedWords } from '../services/lessonProgressService';
+import { updateLearningProgress } from '../services/learningProgressService';
 
 const AppContext = createContext(null);
 
@@ -68,6 +69,15 @@ export function AppProvider({ children }) {
     return updatedUser;
   }, [persistUserUpdate]);
 
+  const saveLearningProgress = useCallback(async (section, key, progress) => {
+    const updatedUser = await persistUserUpdate((currentUser) => ({
+      ...currentUser,
+      learningProgress: updateLearningProgress(currentUser.learningProgress, section, key, progress),
+    }));
+    setUser(updatedUser);
+    return updatedUser;
+  }, [persistUserUpdate]);
+
   const registerUser = async (credentials) => {
     const registeredUser = await register(credentials);
     setUser(registeredUser);
@@ -102,13 +112,14 @@ export function AppProvider({ children }) {
     isLoading,
     saveLessonProgress,
     saveWordAttempt,
+    saveLearningProgress,
     completeActivity,
     registerUser,
     loginUser,
     editProfile,
     resetUserProgress,
     logoutUser,
-  }), [user, isLoading, saveLessonProgress, saveWordAttempt]);
+  }), [user, isLoading, saveLessonProgress, saveWordAttempt, saveLearningProgress]);
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 }

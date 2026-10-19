@@ -19,6 +19,7 @@ export const initialUser = {
   sessions: [],
   wordProgress: {},
   failedWords: {},
+  learningProgress: { readings: {}, theory: {}, pronunciation: {} },
   activeLessonProgress: null,
   preferences: { notificationsEnabled: false, hapticsEnabled: false },
 };

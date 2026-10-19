@@ -17,6 +17,9 @@ import RegisterScreen from './screens/RegisterScreen';
 import LoginScreen from './screens/LoginScreen';
 import LessonScreen from './screens/LessonScreen';
 import MainTabs from './components/navigation/MainTabs';
+import ReadingScreen from './screens/ReadingScreen';
+import TheoryScreen from './screens/TheoryScreen';
+import PronunciationScreen from './screens/PronunciationScreen';
 
 const Stack = createNativeStackNavigator();
 const navigationTheme = {
@@ -60,6 +63,9 @@ function RootNavigation() {
           <Stack.Group>
             <Stack.Screen name="MainApp" component={MainTabs} />
             <Stack.Screen name="Lesson" component={LessonScreen} />
+            <Stack.Screen name="Lecturas" component={ReadingScreen} />
+            <Stack.Screen name="Teoría" component={TheoryScreen} />
+            <Stack.Screen name="Pronunciación" component={PronunciationScreen} />
           </Stack.Group>
         ) : (
           <Stack.Group>

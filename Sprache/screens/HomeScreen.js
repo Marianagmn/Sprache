@@ -10,6 +10,7 @@ import { getRecommendedActivity } from '../services/activityService';
 import { getFailedWordsReviewLesson, getLessonByActivityId, getSpacedReviewLesson } from '../services/lessonService';
 import { getLearningPath } from '../services/learningPathService';
 import { colors, spacing, typography } from '../theme';
+import AppButton from '../components/common/AppButton';
 
 export default function HomeScreen({ navigation }) {
   const { user } = useApp();
@@ -87,6 +88,16 @@ export default function HomeScreen({ navigation }) {
           </Text>
         )}
 
+        <Text style={styles.sectionTitle} accessibilityRole="header">Aprende alemán</Text>
+        <Text style={styles.learningDescription}>
+          Avanza de A1 a B2 con lecturas, gramática y práctica de pronunciación.
+        </Text>
+        <View style={styles.learningActions}>
+          <AppButton title="Lecturas" onPress={() => navigation.navigate('Lecturas')} />
+          <AppButton title="Teoría del alemán" onPress={() => navigation.navigate('Teoría')} />
+          <AppButton title="Pronunciación" onPress={() => navigation.navigate('Pronunciación')} />
+        </View>
+
       </ScrollView>
     </SafeAreaView>
   );
@@ -97,4 +108,6 @@ const styles = StyleSheet.create({
   scroll: { padding: 20 },
   sectionTitle: { fontSize: typography.subtitle, fontWeight: typography.semibold, color: colors.black, marginBottom: spacing.lg },
   emptyReview: { color: colors.muted, fontSize: typography.small, marginBottom: spacing.xl },
+  learningDescription: { color: colors.muted, fontSize: typography.small, lineHeight: 21, marginBottom: spacing.md },
+  learningActions: { gap: spacing.sm, marginBottom: spacing.xl },
 });

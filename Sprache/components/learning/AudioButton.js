@@ -22,6 +22,8 @@ export default function AudioButton({ wordText, phraseText }) {
   const [speed, setSpeed] = useState(1);
   const [repetitions, setRepetitions] = useState(1);
   const [speechError, setSpeechError] = useState('');
+  const [germanVoice, setGermanVoice] = useState(null);
+  const [voicesLoaded, setVoicesLoaded] = useState(false);
   const sequenceId = useRef(0);
   const hasPhrase = Boolean(phraseText && phraseText !== wordText);
   const text = selectedText === 'phrase' && hasPhrase ? phraseText : wordText;
@@ -33,9 +35,32 @@ export default function AudioButton({ wordText, phraseText }) {
     });
   }, []);
 
+  useEffect(() => {
+    let active = true;
+    Speech.getAvailableVoicesAsync()
+      .then((voices) => {
+        if (active) {
+          setGermanVoice(voices.find((voice) => (
+            voice.language?.replace('_', '-').toLowerCase() === 'de-de'
+          )) || null);
+        }
+      })
+      .catch((error) => {
+        console.error('No se pudieron consultar las voces alemanas disponibles.', error);
+        if (active) setSpeechError('No se pudo comprobar si hay una voz alemana estándar disponible.');
+      })
+      .finally(() => {
+        if (active) setVoicesLoaded(true);
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
+
   const speakRepeatedly = (remaining, currentSequence, phrase, rate) => {
     Speech.speak(phrase, {
       language: 'de-DE',
+      voice: germanVoice.identifier,
       rate,
       onStart: () => setIsSpeaking(true),
       onDone: () => {
@@ -71,8 +96,10 @@ export default function AudioButton({ wordText, phraseText }) {
       return;
     }
 
-    if (!text) {
-      setSpeechError('Esta palabra todavía no tiene texto para pronunciar.');
+    if (!text || !germanVoice) {
+      setSpeechError(!text
+        ? 'Esta palabra todavía no tiene texto para pronunciar.'
+        : 'Instala o activa una voz alemana (Alemania) para escuchar la pronunciación.');
       return;
     }
 
@@ -94,6 +121,11 @@ export default function AudioButton({ wordText, phraseText }) {
 
   return (
     <View style={styles.container}>
+      {voicesLoaded && !germanVoice && (
+        <Text style={styles.error}>Instala o activa una voz alemana (Alemania) para escuchar la pronunciación.</Text>
+      )}
+      {(!voicesLoaded || germanVoice) && (
+        <>
       {hasPhrase && (
         <View style={styles.row}>
           {[
@@ -169,6 +201,8 @@ export default function AudioButton({ wordText, phraseText }) {
         </View>
       </View>
       {!!speechError && <Text style={styles.error} accessibilityRole="alert">{speechError}</Text>}
+        </>
+      )}
     </View>
   );
 }
