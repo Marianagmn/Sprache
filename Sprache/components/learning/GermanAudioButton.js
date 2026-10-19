@@ -3,23 +3,21 @@ import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import * as Speech from 'expo-speech';
 import { colors, radii, spacing, typography } from '../../theme';
+import { getGermanVoice } from '../../services/germanVoiceService';
 
-function getGermanVoice(voices) {
-  return voices.find((voice) => voice.language?.replace('_', '-').toLowerCase() === 'de-de') || null;
-}
-
-export default function GermanAudioButton({ text, label = 'Escuchar', compact = false }) {
+export default function GermanAudioButton({ text, label = 'Escuchar', compact = false, onPlaybackStart }) {
   const [voice, setVoice] = useState(null);
   const [voiceLoaded, setVoiceLoaded] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [error, setError] = useState('');
   const playbackId = useRef(0);
+  const speakingRef = useRef(false);
 
   useEffect(() => {
     let active = true;
-    Speech.getAvailableVoicesAsync()
-      .then((voices) => {
-        if (active) setVoice(getGermanVoice(voices));
+    getGermanVoice()
+      .then((germanVoice) => {
+        if (active) setVoice(germanVoice);
       })
       .catch((speechError) => {
         console.error('No se pudieron consultar las voces alemanas disponibles.', speechError);
@@ -32,9 +30,11 @@ export default function GermanAudioButton({ text, label = 'Escuchar', compact = 
     return () => {
       active = false;
       playbackId.current += 1;
-      Speech.stop().catch((speechError) => {
-        console.error('No se pudo detener la pronunciación al cerrar el audio.', speechError);
-      });
+      if (speakingRef.current) {
+        Speech.stop().catch((speechError) => {
+          console.error('No se pudo detener la pronunciación al cerrar el audio.', speechError);
+        });
+      }
     };
   }, []);
 
@@ -42,6 +42,7 @@ export default function GermanAudioButton({ text, label = 'Escuchar', compact = 
     if (isSpeaking) {
       playbackId.current += 1;
       setIsSpeaking(false);
+      speakingRef.current = false;
       try {
         await Speech.stop();
       } catch (speechError) {
@@ -60,19 +61,30 @@ export default function GermanAudioButton({ text, label = 'Escuchar', compact = 
       await Speech.stop();
       if (playbackId.current !== currentPlaybackId) return;
       setIsSpeaking(true);
+      speakingRef.current = true;
       Speech.speak(text, {
         language: 'de-DE',
         voice: voice.identifier,
         rate: 0.9,
+        onStart: () => {
+          if (playbackId.current === currentPlaybackId) onPlaybackStart?.();
+        },
         onDone: () => {
-          if (playbackId.current === currentPlaybackId) setIsSpeaking(false);
+          if (playbackId.current === currentPlaybackId) {
+            setIsSpeaking(false);
+            speakingRef.current = false;
+          }
         },
         onStopped: () => {
-          if (playbackId.current === currentPlaybackId) setIsSpeaking(false);
+          if (playbackId.current === currentPlaybackId) {
+            setIsSpeaking(false);
+            speakingRef.current = false;
+          }
         },
         onError: (speechError) => {
           if (playbackId.current === currentPlaybackId) {
             setIsSpeaking(false);
+            speakingRef.current = false;
             console.error('No se pudo reproducir la pronunciación alemana.', speechError);
             setError('No se pudo reproducir el audio en este dispositivo.');
           }
@@ -81,6 +93,7 @@ export default function GermanAudioButton({ text, label = 'Escuchar', compact = 
     } catch (speechError) {
       console.error('No se pudo iniciar la pronunciación alemana.', speechError);
       setIsSpeaking(false);
+      speakingRef.current = false;
       setError('No se pudo iniciar el audio en este dispositivo.');
     }
   };

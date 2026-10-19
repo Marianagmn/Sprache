@@ -3,6 +3,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import * as Speech from 'expo-speech';
 import { colors, radii, spacing, typography } from '../../theme';
+import { getGermanVoice } from '../../services/germanVoiceService';
 
 const SPEEDS = [
   { label: 'Lenta', rate: 0.75 },
@@ -37,13 +38,9 @@ export default function AudioButton({ wordText, phraseText }) {
 
   useEffect(() => {
     let active = true;
-    Speech.getAvailableVoicesAsync()
-      .then((voices) => {
-        if (active) {
-          setGermanVoice(voices.find((voice) => (
-            voice.language?.replace('_', '-').toLowerCase() === 'de-de'
-          )) || null);
-        }
+    getGermanVoice()
+      .then((voice) => {
+        if (active) setGermanVoice(voice);
       })
       .catch((error) => {
         console.error('No se pudieron consultar las voces alemanas disponibles.', error);

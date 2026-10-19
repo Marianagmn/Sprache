@@ -79,6 +79,11 @@ test('crear perfil valida los datos y restaura la sesión tras reiniciar el serv
   await restartedApp.updateStoredUser((currentUser) => ({
     ...currentUser,
     activeLessonProgress: lessonDraft,
+    learningProgress: {
+      readings: { 'reading-a1-first-day': { completed: true } },
+      theory: { 'theory-foundations': { completedLessonIds: ['alphabet-pronunciation'] } },
+      pronunciation: { 'reading-a1-first-day-text': { playCount: 2 } },
+    },
     failedWords: {
       buch: {
         term: 'Buch',
@@ -94,6 +99,9 @@ test('crear perfil valida los datos y restaura la sesión tras reiniciar el serv
   assert.equal(userWithHapticsEnabled.preferences.hapticsEnabled, true);
   assert.equal(userWithHapticsEnabled.preferences.notificationsEnabled, false);
   assert.deepEqual(userWithHapticsEnabled.activeLessonProgress, lessonDraft);
+  assert.equal(userWithHapticsEnabled.learningProgress.readings['reading-a1-first-day'].completed, true);
+  assert.deepEqual(userWithHapticsEnabled.learningProgress.theory['theory-foundations'].completedLessonIds, ['alphabet-pronunciation']);
+  assert.equal(userWithHapticsEnabled.learningProgress.pronunciation['reading-a1-first-day-text'].playCount, 2);
   assert.equal(userWithHapticsEnabled.failedWords.buch.term, 'Buch');
 });
 

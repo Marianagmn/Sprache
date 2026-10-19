@@ -7,11 +7,23 @@ import WeeklyActivity from '../components/progress/WeeklyActivity';
 import LearningPath from '../components/progress/LearningPath';
 import BrandLogo from '../components/common/BrandLogo';
 import { getWeeklyActivity } from '../services/progressService';
+import { readingLessons } from '../data/readingLessons';
+import { theoryModules } from '../data/theoryModules';
 import { colors, spacing, typography } from '../theme';
 
 export default function ProgressScreen({ navigation }) {
   const { user } = useApp();
   const weeklyActivity = getWeeklyActivity(user.sessions);
+  const learningProgress = user.learningProgress || {};
+  const completedReadings = readingLessons.filter((lesson) => learningProgress.readings?.[lesson.id]?.completed).length;
+  const completedTheoryLessons = theoryModules.reduce(
+    (total, module) => total + (learningProgress.theory?.[module.id]?.completedLessonIds || []).length,
+    0,
+  );
+  const playedPronunciations = Object.values(learningProgress.pronunciation || {}).reduce(
+    (total, recording) => total + (recording.playCount || 0),
+    0,
+  );
 
   return (
     <SafeAreaView style={styles.container}>
@@ -27,6 +39,13 @@ export default function ProgressScreen({ navigation }) {
           learnedWords={user.learnedWords || 0}
           totalSessions={user.totalSessions || 0}
         />
+
+        <Text style={styles.sectionTitle} accessibilityRole="header">Lecturas y teoría</Text>
+        <View style={styles.learningCard}>
+          <Text style={styles.learningStat}>Lecturas completadas: {completedReadings}/{readingLessons.length}</Text>
+          <Text style={styles.learningStat}>Lecciones teóricas completadas: {completedTheoryLessons}/{theoryModules.reduce((count, module) => count + module.lessons.length, 0)}</Text>
+          <Text style={styles.learningStat}>Audios reproducidos: {playedPronunciations}</Text>
+        </View>
 
         <Text style={styles.sectionTitle} accessibilityRole="header">Actividad de esta semana</Text>
         {user.sessions.length ? (
@@ -55,4 +74,6 @@ const styles = StyleSheet.create({
   sectionTitle: { fontSize: typography.subtitle, fontWeight: typography.semibold, color: colors.black, marginBottom: spacing.sm },
   helperText: { color: colors.muted, fontSize: typography.small, lineHeight: 21, marginBottom: spacing.md },
   emptyState: { color: colors.muted, fontSize: typography.small, lineHeight: 21, marginBottom: spacing.xl },
+  learningCard: { padding: spacing.lg, backgroundColor: colors.surface, borderWidth: 1, borderColor: colors.border, borderRadius: 16, marginBottom: spacing.xl },
+  learningStat: { color: colors.text, fontSize: typography.small, lineHeight: 24 },
 });

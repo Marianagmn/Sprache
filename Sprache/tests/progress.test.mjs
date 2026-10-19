@@ -18,6 +18,9 @@ import { getLearningPath, LEARNING_LEVELS } from '../services/learningPathServic
 import { deriveProgress, getWeeklyActivity, recordActivity, resetProgress } from '../services/progressService.js';
 import { getAchievements, getExperience, getNewlyUnlockedAchievements, getWeeklyChallenges } from '../services/achievementService.js';
 import { colors } from '../theme.js';
+import { readingLessons } from '../data/readingLessons.js';
+import { theoryModules } from '../data/theoryModules.js';
+import { getCompletedTheoryLessonCount, updateLearningProgress } from '../services/learningProgressService.js';
 
 const referenceDate = new Date(2026, 9, 14, 12, 0, 0);
 
@@ -57,6 +60,42 @@ test('el catálogo tiene IDs únicos y cada actividad apunta a una lección', ()
   assert.equal(new Set(ids).size, ids.length);
   assert.ok(listedActivities.every((activity) => getLessonByActivityId(activity.id)));
   assert.equal(getRecommendedActivity([]).id, vocabularyLesson.activityId);
+});
+
+test('las lecturas y los módulos teóricos están completos y distribuidos de A1 a B2', () => {
+  assert.deepEqual(readingLessons.map((reading) => reading.level), ['A1', 'A2', 'B1', 'B2']);
+  assert.ok(readingLessons.every((reading) => (
+    reading.text && reading.translation && reading.vocabulary.length > 0
+      && reading.questions.length > 0
+      && reading.questions.every((question) => question.options.includes(question.answer) && question.explanation)
+  )));
+  assert.deepEqual(theoryModules.map((module) => module.level), ['A1', 'A1', 'A2', 'A2', 'B1', 'B1', 'B2', 'B2']);
+  assert.ok(theoryModules.every((module) => module.lessons.length > 0 && module.lessons.every((lesson) => (
+    lesson.explanation && lesson.rules.length > 0 && lesson.examples.length > 0
+      && lesson.exercises.length > 0
+      && lesson.exercises.every((exercise) => (
+        exercise.options.includes(exercise.answer) && exercise.explanation && exercise.term
+      ))
+  ))));
+});
+
+test('el progreso de lecturas y teoría se fusiona por identificador', () => {
+  const progress = updateLearningProgress({}, 'readings', 'reading-a1-first-day', {
+    correctQuestionIds: ['a1-q1'],
+  });
+  const updated = updateLearningProgress(progress, 'readings', 'reading-a1-first-day', {
+    completed: true,
+  });
+  const theory = updateLearningProgress({}, 'theory', 'theory-foundations', {
+    completedLessonIds: ['alphabet-pronunciation'],
+  });
+
+  assert.deepEqual(updated.readings['reading-a1-first-day'], {
+    correctQuestionIds: ['a1-q1'],
+    completed: true,
+  });
+  assert.equal(getCompletedTheoryLessonCount(theory.theory), 1);
+  assert.throws(() => updateLearningProgress({}, 'unknown', 'item', { completed: true }), /válidos/);
 });
 
 test('las lecciones están completas, agrupadas por nivel y tema, y accesibles desde la ruta', () => {
@@ -496,6 +535,11 @@ test('reiniciar progreso conserva perfil/meta y borra las sesiones', () => {
     ...emptyUser,
     activeLessonProgress: { activityId: 'vocabulary', questionIndex: 1 },
     failedWords: { buch: { term: 'Buch' } },
+    learningProgress: {
+      readings: { 'reading-a1-first-day': { completed: true } },
+      theory: { 'theory-foundations': { completedLessonIds: ['alphabet-pronunciation'] } },
+      pronunciation: { 'alphabet-pronunciation-example-1': { playCount: 3 } },
+    },
     name: 'Mariana',
     sessions: [{ completedAt: referenceDate.toISOString(), durationSeconds: 300, learnedWords: [] }],
     wordProgress: { haus: { correctAnswers: 2 } },
@@ -511,6 +555,7 @@ test('reiniciar progreso conserva perfil/meta y borra las sesiones', () => {
   assert.deepEqual(reset.sessions, []);
   assert.deepEqual(reset.wordProgress, {});
   assert.deepEqual(reset.failedWords, {});
+  assert.deepEqual(reset.learningProgress, { readings: {}, theory: {}, pronunciation: {} });
   assert.equal(reset.activeLessonProgress, null);
   assert.equal(reset.studiedSeconds, 0);
   assert.equal(reset.todaySeconds, 0);
