@@ -7,6 +7,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
 import { AppProvider } from './context/AppContext';
 import { useApp } from './context/AppContext';
+import { MotionPreferencesProvider, useReduceMotion } from './context/MotionPreferencesContext';
 import Loading from './components/common/Loading';
 import { colors } from './theme';
 
@@ -32,6 +33,7 @@ const navigationTheme = {
 
 function RootNavigation() {
   const { user, isLoading } = useApp();
+  const reduceMotion = useReduceMotion();
 
   if (isLoading) {
     return (
@@ -48,7 +50,11 @@ function RootNavigation() {
       <Stack.Navigator
         key={user ? 'authenticated' : 'guest'}
         initialRouteName={user ? 'MainApp' : 'Start'}
-        screenOptions={{ headerShown: false }}
+        screenOptions={{
+          headerShown: false,
+          animation: reduceMotion ? 'none' : 'fade',
+          animationDuration: 180,
+        }}
       >
         {user ? (
           <Stack.Group>
@@ -70,9 +76,11 @@ function RootNavigation() {
 export default function App() {
   return (
     <SafeAreaProvider>
-      <AppProvider>
-        <RootNavigation />
-      </AppProvider>
+      <MotionPreferencesProvider>
+        <AppProvider>
+          <RootNavigation />
+        </AppProvider>
+      </MotionPreferencesProvider>
     </SafeAreaProvider>
   );
 }

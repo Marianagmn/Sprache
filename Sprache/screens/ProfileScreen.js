@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Alert, KeyboardAvoidingView, Modal, Platform, Text, TextInput, StyleSheet, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useApp } from '../context/AppContext';
+import { useReduceMotion } from '../context/MotionPreferencesContext';
 import AppButton from '../components/common/AppButton';
 import ProfileHeader from '../components/profile/ProfileHeader';
 import BrandLogo from '../components/common/BrandLogo';
@@ -14,6 +15,7 @@ import { colors, radii, spacing, typography } from '../theme';
 
 export default function ProfileScreen({ navigation }) {
   const { user, editProfile, logoutUser, resetUserProgress } = useApp();
+  const reduceMotion = useReduceMotion();
   const [isEditing, setIsEditing] = useState(false);
   const [name, setName] = useState(user.name);
   const studiedTime = user.studiedSeconds >= 60
@@ -85,7 +87,12 @@ export default function ProfileScreen({ navigation }) {
         </SettingsSection>
       </ScrollView>
 
-      <Modal visible={isEditing} transparent animationType="fade" onRequestClose={() => setIsEditing(false)}>
+      <Modal
+        visible={isEditing}
+        transparent
+        animationType={reduceMotion ? 'none' : 'fade'}
+        onRequestClose={() => setIsEditing(false)}
+      >
         <KeyboardAvoidingView style={styles.modalBackdrop} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
           <ScrollView contentContainerStyle={styles.modalScroll} keyboardShouldPersistTaps="handled">
           <View style={styles.modalCard}>
