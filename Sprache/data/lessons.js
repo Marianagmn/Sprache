@@ -900,6 +900,23 @@ export const readingLessons = [
   readingLessonCity, readingLessonCafe, readingLessonStation, readingLessonMarket, readingLessonWeather,
   readingLessonDoctor, readingLessonWeekend, readingLessonApartment, readingLessonConversation,
   readingLessonRestaurant, readingLessonLibrary,
+  // B1 Reading Lessons (27 lessons)
+  readingLessonB1Bank, readingLessonB1Job, readingLessonB1Email, readingLessonB1Airport, readingLessonB1Meeting,
+  readingLessonB1Hotel, readingLessonB1Sports, readingLessonB1Interview, readingLessonB1Culture, readingLessonB1Technology,
+  readingLessonB1Health, readingLessonB1Travel, readingLessonB1Education, readingLessonB1Music, readingLessonB1Environment,
+  readingLessonB1Food, readingLessonB1Housing, readingLessonB1Shopping, readingLessonB1Communication, readingLessonB1News,
+  readingLessonB1History, readingLessonB1Art, readingLessonB1Social, readingLessonB1Volunteer, readingLessonB1Festival,
+  readingLessonB1Politics, readingLessonB1Media, readingLessonB1Weather, readingLessonB1Economy, readingLessonB1Sports2,
+  readingLessonB1Literature, readingLessonB1Science,
+  // B2 Reading Lessons (28 lessons)
+  readingLessonB2CareerAdvancement, readingLessonB2BusinessNegotiation, readingLessonB2AcademicWriting, readingLessonB2ScientificResearch,
+  readingLessonB2PoliticalDebate, readingLessonB2CulturalAnalysis, readingLessonB2EconomicTrends, readingLessonB2GlobalIssues,
+  readingLessonB2EnvironmentalPolicy, readingLessonB2MedicalEthics, readingLessonB2LegalSystem, readingLessonB2FinancialPlanning,
+  readingLessonB2InternationalRelations, readingLessonB2Philosophy, readingLessonB2AdvancedTechnology, readingLessonB2SustainableDevelopment,
+  readingLessonB2SocialJustice, readingLessonB2MediaLiteracy, readingLessonB2Psychology, readingLessonB2Sociology,
+  readingLessonB2Anthropology, readingLessonB2Linguistics, readingLessonB2ModernArt, readingLessonB2ContemporaryLiterature,
+  readingLessonB2Entrepreneurship, readingLessonB2Innovation, readingLessonB2CorporateCulture, readingLessonB2DigitalPrivacy,
+  readingLessonB2AIEthics,
 ];
 export const grammarLessonNounPlural = {
   id: 'grammar-noun-plural',
@@ -2136,6 +2153,740 @@ export const storyLessonB2_2 = {
       feedback: 'A la protagonista le gustó la cultura y la comida japonesa.',
       explanation: '«Am besten» significa «lo que más» y sirve para destacar qué fue lo que más disfrutó la protagonista del viaje.',
     },
+  ],
+};
+
+// B1 Reading Lessons (27 lessons)
+export const readingLessonB1Bank = {
+  id: 'reading-b1-bank',
+  title: 'Lectura B1: El banco',
+  activityId: 'reading-b1-bank',
+  durationMinutes: 7,
+  questions: [
+    { id: 'bank-b1-q1', prompt: '¿Qué documento necesitas para abrir una cuenta bancaria?', word: 'documento', options: ['El pasaporte', 'La tarjeta de crédito', 'El recibo de luz', 'El carnet de conducir'], answer: 'El pasaporte', vocabulary: { term: 'der Ausweis', translation: 'el documento de identidad' }, hint: 'Es el documento oficial que identifica tu persona.' },
+    { id: 'bank-b1-q2', prompt: '¿Qué significa "das Girokonto"?', word: 'Girokonto', options: ['La cuenta corriente', 'La cuenta de ahorros', 'El cajero automático', 'El préstamo'], answer: 'La cuenta corriente', vocabulary: { term: 'das Girokonto', translation: 'la cuenta corriente' }, hint: 'Es la cuenta que usas para tus transacciones diarias.' },
+    { id: 'bank-b1-q3', prompt: '¿Cómo se dice "transferir dinero" en alemán?', word: 'transferir', options: ['Geld überweisen', 'Geld abheben', 'Geld einzahlen', 'Geld sparen'], answer: 'Geld überweisen', vocabulary: { term: 'Geld überweisen', translation: 'transferir dinero' }, hint: 'Überweisen significa enviar o transferir.' },
+  ],
+};
+
+export const readingLessonB1Job = {
+  id: 'reading-b1-job',
+  title: 'Lectura B1: El trabajo',
+  activityId: 'reading-b1-job',
+  durationMinutes: 7,
+  questions: [
+    { id: 'job-b1-q1', prompt: '¿Qué pregunta el empleador en una entrevista?', word: 'entrevista', options: ['¿Cuál es tu experiencia?', '¿Cuántos hermanos tienes?', '¿Dónde vives?', '¿Qué comida te gusta?'], answer: '¿Cuál es tu experiencia?', vocabulary: { term: 'die Erfahrung', translation: 'la experiencia' }, hint: 'Es relevante para el puesto de trabajo.' },
+    { id: 'job-b1-q2', prompt: '¿Qué significa "der Arbeitsvertrag"?', word: 'Arbeitsvertrag', options: ['El contrato de trabajo', 'El horario laboral', 'El salario', 'Las vacaciones'], answer: 'El contrato de trabajo', vocabulary: { term: 'der Arbeitsvertrag', translation: 'el contrato de trabajo' }, hint: 'Es el documento legal que firmas al empezar.' },
+    { id: 'job-b1-q3', prompt: '¿Cómo se dice "salario" en alemán?', word: 'salario', options: ['das Gehalt', 'die Arbeit', 'die Firma', 'der Chef'], answer: 'das Gehalt', vocabulary: { term: 'das Gehalt', translation: 'el salario' }, hint: 'Es el dinero que recibes por tu trabajo.' },
+  ],
+};
+
+export const readingLessonB1Email = {
+  id: 'reading-b1-email',
+  title: 'Lectura B1: El correo electrónico',
+  activityId: 'reading-b1-email',
+  durationMinutes: 7,
+  questions: [
+    { id: 'email-b1-q1', prompt: '¿Cómo empiezas un correo formal en alemán?', word: 'formal', options: ['Sehr geehrte Damen und Herren', 'Hola amigos', 'Qué tal', 'Buenos días'], answer: 'Sehr geehrte Damen und Herren', vocabulary: { term: 'Sehr geehrte', translation: 'Estimado/a' }, hint: 'Es una fórmula de cortesía estándar.' },
+    { id: 'email-b1-q2', prompt: '¿Qué significa "die Anhang"?', word: 'Anhang', options: ['El adjunto', 'El asunto', 'El remitente', 'El destinatario'], answer: 'El adjunto', vocabulary: { term: 'der Anhang', translation: 'el adjunto' }, hint: 'Es el archivo que envías con el correo.' },
+    { id: 'email-b1-q3', prompt: '¿Cómo se dice "asunto" en un correo?', word: 'asunto', options: ['der Betreff', 'die Nachricht', 'der Absender', 'der Empfänger'], answer: 'der Betreff', vocabulary: { term: 'der Betreff', translation: 'el asunto' }, hint: 'Es la línea que describe el contenido del correo.' },
+  ],
+};
+
+export const readingLessonB1Airport = {
+  id: 'reading-b1-airport',
+  title: 'Lectura B1: El aeropuerto',
+  activityId: 'reading-b1-airport',
+  durationMinutes: 7,
+  questions: [
+    { id: 'airport-b1-q1', prompt: '¿Qué necesitas presentar en el control de seguridad?', word: 'control', options: ['El pasaporte y el billete', 'Solo el pasaporte', 'Solo el billete', 'Nada'], answer: 'El pasaporte y el billete', vocabulary: { term: 'der Ausweis', translation: 'el documento de identidad' }, hint: 'Son los documentos esenciales para viajar.' },
+    { id: 'airport-b1-q2', prompt: '¿Qué significa "der Gepäckwagen"?', word: 'Gepäckwagen', options: ['El carrito de equipaje', 'La cinta de equipaje', 'El mostrador de facturación', 'La puerta de embarque'], answer: 'El carrito de equipaje', vocabulary: { term: 'der Gepäckwagen', translation: 'el carrito de equipaje' }, hint: 'Es lo que usas para transportar tus maletas.' },
+    { id: 'airport-b1-q3', prompt: '¿Cómo se dice "embarcar" en alemán?', word: 'embarcar', options: ['einsteigen', 'aussteigen', 'warten', 'fliegen'], answer: 'einsteigen', vocabulary: { term: 'einsteigen', translation: 'embarcar / subir' }, hint: 'Es la acción de entrar al avión.' },
+  ],
+};
+
+export const readingLessonB1Meeting = {
+  id: 'reading-b1-meeting',
+  title: 'Lectura B1: La reunión',
+  activityId: 'reading-b1-meeting',
+  durationMinutes: 7,
+  questions: [
+    { id: 'meeting-b1-q1', prompt: '¿Qué documento se distribuye antes de una reunión?', word: 'documento', options: ['La agenda', 'El contrato', 'La factura', 'El currículum'], answer: 'La agenda', vocabulary: { term: 'die Tagesordnung', translation: 'la agenda' }, hint: 'Contiene los temas a tratar.' },
+    { id: 'meeting-b1-q2', prompt: '¿Qué significa "der Protokoll"?', word: 'Protokoll', options: ['El acta de la reunión', 'El presidente', 'El proyector', 'El horario'], answer: 'El acta de la reunión', vocabulary: { term: 'das Protokoll', translation: 'el acta' }, hint: 'Es el registro escrito de lo que se discutió.' },
+    { id: 'meeting-b1-q3', prompt: '¿Cómo se dice "presentar una idea" en alemán?', word: 'presentar', options: ['eine Idee vorstellen', 'eine Idee schreiben', 'eine Idee hören', 'eine Idee essen'], answer: 'eine Idee vorstellen', vocabulary: { term: 'vorstellen', translation: 'presentar / introducir' }, hint: 'Vorstellen significa presentar o introducir algo.' },
+  ],
+};
+
+export const readingLessonB1Hotel = {
+  id: 'reading-b1-hotel',
+  title: 'Lectura B1: El hotel',
+  activityId: 'reading-b1-hotel',
+  durationMinutes: 7,
+  questions: [
+    { id: 'hotel-b1-q1', prompt: '¿Qué presentas al hacer el check-in?', word: 'check-in', options: ['El pasaporte', 'El billete de avión', 'El mapa', 'La guía turística'], answer: 'El pasaporte', vocabulary: { term: 'der Ausweis', translation: 'el documento de identidad' }, hint: 'Es necesario para registrarse.' },
+    { id: 'hotel-b1-q2', prompt: '¿Qué significa "die Rezeption"?', word: 'Rezeption', options: ['La recepción', 'La habitación', 'El ascensor', 'El restaurante'], answer: 'La recepción', vocabulary: { term: 'die Rezeption', translation: 'la recepción' }, hint: 'Es el lugar donde te registras en el hotel.' },
+    { id: 'hotel-b1-q3', prompt: '¿Cómo se dice "llave de la habitación" en alemán?', word: 'llave', options: ['der Zimmerschlüssel', 'das Hotelzimmer', 'der Gast', 'die Reservierung'], answer: 'der Zimmerschlüssel', vocabulary: { term: 'der Zimmerschlüssel', translation: 'la llave de la habitación' }, hint: 'Zimmer significa habitación y Schlüssel significa llave.' },
+  ],
+};
+
+export const readingLessonB1Sports = {
+  id: 'reading-b1-sports',
+  title: 'Lectura B1: Los deportes',
+  activityId: 'reading-b1-sports',
+  durationMinutes: 7,
+  questions: [
+    { id: 'sports-b1-q1', prompt: '¿Qué deporte se practica en un estadio?', word: 'estadio', options: ['El fútbol', 'La natación', 'El tenis', 'La gimnasia'], answer: 'El fútbol', vocabulary: { term: 'das Fußballstadion', translation: 'el estadio de fútbol' }, hint: 'Es el deporte más popular en los estadios.' },
+    { id: 'sports-b1-q2', prompt: '¿Qué significa "das Fitnessstudio"?', word: 'Fitnessstudio', options: ['El gimnasio', 'La piscina', 'La pista de tenis', 'El campo de golf'], answer: 'El gimnasio', vocabulary: { term: 'das Fitnessstudio', translation: 'el gimnasio' }, hint: 'Es el lugar donde vas a hacer ejercicio.' },
+    { id: 'sports-b1-q3', prompt: '¿Cómo se dice "entrenador" en alemán?', word: 'entrenador', options: ['der Trainer', 'der Spieler', 'der Schiedsrichter', 'der Fan'], answer: 'der Trainer', vocabulary: { term: 'der Trainer', translation: 'el entrenador' }, hint: 'Es la persona que dirige al equipo.' },
+  ],
+};
+
+export const readingLessonB1Interview = {
+  id: 'reading-b1-interview',
+  title: 'Lectura B1: La entrevista de trabajo',
+  activityId: 'reading-b1-interview',
+  durationMinutes: 7,
+  questions: [
+    { id: 'interview-b1-q1', prompt: '¿Qué pregunta el entrevistador sobre tus habilidades?', word: 'habilidades', options: ['¿Qué sabes hacer?', '¿Dónde vives?', '¿Cuántos años tienes?', '¿Qué comida te gusta?'], answer: '¿Qué sabes hacer?', vocabulary: { term: 'die Fähigkeiten', translation: 'las habilidades' }, hint: 'Se refiere a lo que puedes hacer bien.' },
+    { id: 'interview-b1-q2', prompt: '¿Qué significa "die Stärken"?', word: 'Stärken', options: ['Las fortalezas', 'Las debilidades', 'El salario', 'El horario'], answer: 'Las fortalezas', vocabulary: { term: 'die Stärken', translation: 'las fortalezas' }, hint: 'Son tus puntos fuertes.' },
+    { id: 'interview-b1-q3', prompt: '¿Cómo se dice "debilidades" en alemán?', word: 'debilidades', options: ['die Schwächen', 'die Stärken', 'die Fähigkeiten', 'die Erfahrungen'], answer: 'die Schwächen', vocabulary: { term: 'die Schwächen', translation: 'las debilidades' }, hint: 'Son tus puntos a mejorar.' },
+  ],
+};
+
+export const readingLessonB1Culture = {
+  id: 'reading-b1-culture',
+  title: 'Lectura B1: La cultura',
+  activityId: 'reading-b1-culture',
+  durationMinutes: 7,
+  questions: [
+    { id: 'culture-b1-q1', prompt: '¿Qué es un museo?', word: 'museo', options: ['Un lugar con exposiciones de arte', 'Un restaurante', 'Una tienda', 'Un parque'], answer: 'Un lugar con exposiciones de arte', vocabulary: { term: 'das Museum', translation: 'el museo' }, hint: 'Es un lugar cultural donde se exhiben obras.' },
+    { id: 'culture-b1-q2', prompt: '¿Qué significa "die Tradition"?', word: 'Tradition', options: ['La tradición', 'La modernidad', 'La tecnología', 'La moda'], answer: 'La tradición', vocabulary: { term: 'die Tradition', translation: 'la tradición' }, hint: 'Son costumbres que se transmiten de generación en generación.' },
+    { id: 'culture-b1-q3', prompt: '¿Cómo se dice "festival" en alemán?', word: 'festival', options: ['das Fest', 'die Party', 'das Konzert', 'die Ausstellung'], answer: 'das Fest', vocabulary: { term: 'das Fest', translation: 'el festival' }, hint: 'Es una celebración especial.' },
+  ],
+};
+
+export const readingLessonB1Technology = {
+  id: 'reading-b1-technology',
+  title: 'Lectura B1: La tecnología',
+  activityId: 'reading-b1-technology',
+  durationMinutes: 7,
+  questions: [
+    { id: 'technology-b1-q1', prompt: '¿Qué dispositivo usas para navegar por internet?', word: 'dispositivo', options: ['El ordenador', 'El televisor', 'La radio', 'El reloj'], answer: 'El ordenador', vocabulary: { term: 'der Computer', translation: 'el ordenador' }, hint: 'Es el dispositivo principal para internet.' },
+    { id: 'technology-b1-q2', prompt: '¿Qué significa "das Smartphone"?', word: 'Smartphone', options: ['El teléfono inteligente', 'El ordenador portátil', 'La tableta', 'El reloj inteligente'], answer: 'El teléfono inteligente', vocabulary: { term: 'das Smartphone', translation: 'el teléfono inteligente' }, hint: 'Es un teléfono con funciones avanzadas.' },
+    { id: 'technology-b1-q3', prompt: '¿Cómo se dice "aplicación" en alemán?', word: 'aplicación', options: ['die App', 'das Programm', 'die Software', 'das Internet'], answer: 'die App', vocabulary: { term: 'die App', translation: 'la aplicación' }, hint: 'Es un programa para el móvil.' },
+  ],
+};
+
+export const readingLessonB1Health = {
+  id: 'reading-b1-health',
+  title: 'Lectura B1: La salud',
+  activityId: 'reading-b1-health',
+  durationMinutes: 7,
+  questions: [
+    { id: 'health-b1-q1', prompt: '¿Qué profesional te receta medicamentos?', word: 'profesional', options: ['El médico', 'El farmacéutico', 'El enfermero', 'El psicólogo'], answer: 'El médico', vocabulary: { term: 'der Arzt', translation: 'el médico' }, hint: 'Es quien te examina y receta.' },
+    { id: 'health-b1-q2', prompt: '¿Qué significa "die Versicherung"?', word: 'Versicherung', options: ['El seguro', 'El hospital', 'La medicina', 'La receta'], answer: 'El seguro', vocabulary: { term: 'die Versicherung', translation: 'el seguro' }, hint: 'Es lo que cubre los gastos médicos.' },
+    { id: 'health-b1-q3', prompt: '¿Cómo se dice "receta médica" en alemán?', word: 'receta', options: ['das Rezept', 'die Tablette', 'die Krankheit', 'die Gesundheit'], answer: 'das Rezept', vocabulary: { term: 'das Rezept', translation: 'la receta médica' }, hint: 'Es el documento que necesitas para comprar medicamentos.' },
+  ],
+};
+
+export const readingLessonB1Travel = {
+  id: 'reading-b1-travel',
+  title: 'Lectura B1: Los viajes',
+  activityId: 'reading-b1-travel',
+  durationMinutes: 7,
+  questions: [
+    { id: 'travel-b1-q1', prompt: '¿Qué documento necesitas para viajar al extranjero?', word: 'documento', options: ['El pasaporte', 'El carnet de conducir', 'La tarjeta de crédito', 'El billete de tren'], answer: 'El pasaporte', vocabulary: { term: 'der Reisepass', translation: 'el pasaporte' }, hint: 'Es el documento oficial para viajar internacionalmente.' },
+    { id: 'travel-b1-q2', prompt: '¿Qué significa "der Reiseführer"?', word: 'Reiseführer', options: ['La guía turística', 'El mapa', 'El billete', 'El hotel'], answer: 'La guía turística', vocabulary: { term: 'der Reiseführer', translation: 'la guía turística' }, hint: 'Es un libro con información sobre el destino.' },
+    { id: 'travel-b1-q3', prompt: '¿Cómo se dice "reservar" en alemán?', word: 'reservar', options: ['reservieren', 'buchen', 'kaufen', 'suchen'], answer: 'reservieren', vocabulary: { term: 'reservieren', translation: 'reservar' }, hint: 'Es garantizar un lugar con antelación.' },
+  ],
+};
+
+export const readingLessonB1Education = {
+  id: 'reading-b1-education',
+  title: 'Lectura B1: La educación',
+  activityId: 'reading-b1-education',
+  durationMinutes: 7,
+  questions: [
+    { id: 'education-b1-q1', prompt: '¿Qué institución otorga títulos universitarios?', word: 'institución', options: ['La universidad', 'La escuela primaria', 'El instituto', 'La biblioteca'], answer: 'La universidad', vocabulary: { term: 'die Universität', translation: 'la universidad' }, hint: 'Es donde estudias después del instituto.' },
+    { id: 'education-b1-q2', prompt: '¿Qué significa "das Studium"?', word: 'Studium', options: ['Los estudios universitarios', 'La escuela primaria', 'El instituto', 'El examen'], answer: 'Los estudios universitarios', vocabulary: { term: 'das Studium', translation: 'los estudios universitarios' }, hint: 'Es la educación superior.' },
+    { id: 'education-b1-q3', prompt: '¿Cómo se dice "título" en alemán?', word: 'título', options: ['der Abschluss', 'die Note', 'die Prüfung', 'das Fach'], answer: 'der Abschluss', vocabulary: { term: 'der Abschluss', translation: 'el título' }, hint: 'Es lo que obtienes al terminar tus estudios.' },
+  ],
+};
+
+export const readingLessonB1Music = {
+  id: 'reading-b1-music',
+  title: 'Lectura B1: La música',
+  activityId: 'reading-b1-music',
+  durationMinutes: 7,
+  questions: [
+    { id: 'music-b1-q1', prompt: '¿Qué instrumento tocas con las manos?', word: 'instrumento', options: ['El piano', 'La guitarra', 'El violín', 'La flauta'], answer: 'El piano', vocabulary: { term: 'das Klavier', translation: 'el piano' }, hint: 'Es un instrumento de teclado.' },
+    { id: 'music-b1-q2', prompt: '¿Qué significa "das Konzert"?', word: 'Konzert', options: ['El concierto', 'El festival', 'La canción', 'El disco'], answer: 'El concierto', vocabulary: { term: 'das Konzert', translation: 'el concierto' }, hint: 'Es una presentación musical en vivo.' },
+    { id: 'music-b1-q3', prompt: '¿Cómo se dice "cantante" en alemán?', word: 'cantante', options: ['der Sänger', 'der Musiker', 'der Komponist', 'der Dirigent'], answer: 'der Sänger', vocabulary: { term: 'der Sänger', translation: 'el cantante' }, hint: 'Es quien canta en una canción.' },
+  ],
+};
+
+export const readingLessonB1Environment = {
+  id: 'reading-b1-environment',
+  title: 'Lectura B1: El medio ambiente',
+  activityId: 'reading-b1-environment',
+  durationMinutes: 7,
+  questions: [
+    { id: 'environment-b1-q1', prompt: '¿Qué ayuda a reducir la contaminación?', word: 'contaminación', options: ['Reciclar', 'Usar más plástico', 'Conducir más', 'Tirar basura'], answer: 'Reciclar', vocabulary: { term: 'recyceln', translation: 'reciclar' }, hint: 'Es una acción ecológica.' },
+    { id: 'environment-b1-q2', prompt: '¿Qué significa "der Klimawandel"?', word: 'Klimawandel', options: ['El cambio climático', 'La contaminación', 'El reciclaje', 'La energía'], answer: 'El cambio climático', vocabulary: { term: 'der Klimawandel', translation: 'el cambio climático' }, hint: 'Es el cambio del clima global.' },
+    { id: 'environment-b1-q3', prompt: '¿Cómo se dice "energía renovable" en alemán?', word: 'energía', options: ['erneuerbare Energie', 'fossile Energie', 'nukleare Energie', 'solare Energie'], answer: 'erneuerbare Energie', vocabulary: { term: 'erneuerbare Energie', translation: 'energía renovable' }, hint: 'Es energía que no se agota.' },
+  ],
+};
+
+export const readingLessonB1Food = {
+  id: 'reading-b1-food',
+  title: 'Lectura B1: La comida',
+  activityId: 'reading-b1-food',
+  durationMinutes: 7,
+  questions: [
+    { id: 'food-b1-q1', prompt: '¿Qué bebida es típica en Alemania?', word: 'bebida', options: ['La cerveza', 'El vino', 'El té', 'El café'], answer: 'La cerveza', vocabulary: { term: 'das Bier', translation: 'la cerveza' }, hint: 'Es una bebida muy popular en Alemania.' },
+    { id: 'food-b1-q2', prompt: '¿Qué significa "das Frühstück"?', word: 'Frühstück', options: ['El desayuno', 'El almuerzo', 'La cena', 'El snack'], answer: 'El desayuno', vocabulary: { term: 'das Frühstück', translation: 'el desayuno' }, hint: 'Es la primera comida del día.' },
+    { id: 'food-b1-q3', prompt: '¿Cómo se dice "receta" en alemán?', word: 'receta', options: ['das Rezept', 'das Gericht', 'die Zutat', 'der Koch'], answer: 'das Rezept', vocabulary: { term: 'das Rezept', translation: 'la receta' }, hint: 'Es el conjunto de instrucciones para cocinar.' },
+  ],
+};
+
+export const readingLessonB1Housing = {
+  id: 'reading-b1-housing',
+  title: 'Lectura B1: La vivienda',
+  activityId: 'reading-b1-housing',
+  durationMinutes: 7,
+  questions: [
+    { id: 'housing-b1-q1', prompt: '¿Qué documento necesitas para alquilar un piso?', word: 'documento', options: ['El contrato de alquiler', 'El pasaporte', 'El billete', 'La carta'], answer: 'El contrato de alquiler', vocabulary: { term: 'der Mietvertrag', translation: 'el contrato de alquiler' }, hint: 'Es el acuerdo legal con el propietario.' },
+    { id: 'housing-b1-q2', prompt: '¿Qué significa "die Kaution"?', word: 'Kaution', options: ['La fianza', 'El alquiler', 'La hipoteca', 'La compra'], answer: 'La fianza', vocabulary: { term: 'die Kaution', translation: 'la fianza' }, hint: 'Es un depósito de seguridad.' },
+    { id: 'housing-b1-q3', prompt: '¿Cómo se dice "propietario" en alemán?', word: 'propietario', options: ['der Vermieter', 'der Mieter', 'der Nachbar', 'der Hausmeister'], answer: 'der Vermieter', vocabulary: { term: 'der Vermieter', translation: 'el propietario' }, hint: 'Es quien alquila la vivienda.' },
+  ],
+};
+
+export const readingLessonB1Shopping = {
+  id: 'reading-b1-shopping',
+  title: 'Lectura B1: Las compras',
+  activityId: 'reading-b1-shopping',
+  durationMinutes: 7,
+  questions: [
+    { id: 'shopping-b1-q1', prompt: '¿Qué puedes devolver si no te gusta?', word: 'devolver', options: ['Un producto comprado', 'El dinero', 'La tienda', 'El carrito'], answer: 'Un producto comprado', vocabulary: { term: 'zurückgeben', translation: 'devolver' }, hint: 'Es la acción de retornar algo.' },
+    { id: 'shopping-b1-q2', prompt: '¿Qué significa "der Rabatt"?', word: 'Rabatt', options: ['El descuento', 'El precio', 'El impuesto', 'El cambio'], answer: 'El descuento', vocabulary: { term: 'der Rabatt', translation: 'el descuento' }, hint: 'Es una reducción del precio.' },
+    { id: 'shopping-b1-q3', prompt: '¿Cómo se dice "ticket de compra" en alemán?', word: 'ticket', options: ['der Kassenzettel', 'der Preis', 'die Ware', 'das Geschäft'], answer: 'der Kassenzettel', vocabulary: { term: 'der Kassenzettel', translation: 'el ticket de compra' }, hint: 'Es el recibo que te dan al pagar.' },
+  ],
+};
+
+export const readingLessonB1Communication = {
+  id: 'reading-b1-communication',
+  title: 'Lectura B1: La comunicación',
+  activityId: 'reading-b1-communication',
+  durationMinutes: 7,
+  questions: [
+    { id: 'communication-b1-q1', prompt: '¿Qué medio de comunicación es más rápido?', word: 'rápido', options: ['El correo electrónico', 'La carta postal', 'El telegrama', 'El fax'], answer: 'El correo electrónico', vocabulary: { term: 'die E-Mail', translation: 'el correo electrónico' }, hint: 'Llega en segundos.' },
+    { id: 'communication-b1-q2', prompt: '¿Qué significa "das Gespräch"?', word: 'Gespräch', options: ['La conversación', 'El mensaje', 'La carta', 'El silencio'], answer: 'La conversación', vocabulary: { term: 'das Gespräch', translation: 'la conversación' }, hint: 'Es el intercambio verbal entre personas.' },
+    { id: 'communication-b1-q3', prompt: '¿Cómo se dice "mensaje de texto" en alemán?', word: 'mensaje', options: ['die SMS', 'der Anruf', 'das Gespräch', 'der Brief'], answer: 'die SMS', vocabulary: { term: 'die SMS', translation: 'el mensaje de texto' }, hint: 'Es un mensaje corto por teléfono.' },
+  ],
+};
+
+export const readingLessonB1News = {
+  id: 'reading-b1-news',
+  title: 'Lectura B1: Las noticias',
+  activityId: 'reading-b1-news',
+  durationMinutes: 7,
+  questions: [
+    { id: 'news-b1-q1', prompt: '¿Qué medio presenta noticias diarias?', word: 'medio', options: ['El periódico', 'La revista mensual', 'El libro', 'La novela'], answer: 'El periódico', vocabulary: { term: 'die Zeitung', translation: 'el periódico' }, hint: 'Se publica cada día.' },
+    { id: 'news-b1-q2', prompt: '¿Qué significa "die Schlagzeile"?', word: 'Schlagzeile', options: ['El titular', 'El artículo', 'La foto', 'El anuncio'], answer: 'El titular', vocabulary: { term: 'die Schlagzeile', translation: 'el titular' }, hint: 'Es el título principal de una noticia.' },
+    { id: 'news-b1-q3', prompt: '¿Cómo se dice "reportero" en alemán?', word: 'reportero', options: ['der Reporter', 'der Journalist', 'der Redakteur', 'der Leser'], answer: 'der Reporter', vocabulary: { term: 'der Reporter', translation: 'el reportero' }, hint: 'Es quien reporta las noticias.' },
+  ],
+};
+
+export const readingLessonB1History = {
+  id: 'reading-b1-history',
+  title: 'Lectura B1: La historia',
+  activityId: 'reading-b1-history',
+  durationMinutes: 7,
+  questions: [
+    { id: 'history-b1-q1', prompt: '¿Qué lugar conserva objetos históricos?', word: 'lugar', options: ['El museo', 'La escuela', 'El hospital', 'El supermercado'], answer: 'El museo', vocabulary: { term: 'das Museum', translation: 'el museo' }, hint: 'Es donde se exhiben objetos del pasado.' },
+    { id: 'history-b1-q2', prompt: '¿Qué significa "das Ereignis"?', word: 'Ereignis', options: ['El acontecimiento', 'La persona', 'El lugar', 'La fecha'], answer: 'El acontecimiento', vocabulary: { term: 'das Ereignis', translation: 'el acontecimiento' }, hint: 'Es algo importante que sucedió.' },
+    { id: 'history-b1-q3', prompt: '¿Cómo se dice "siglo" en alemán?', word: 'siglo', options: ['das Jahrhundert', 'das Jahr', 'die Zeit', 'die Epoche'], answer: 'das Jahrhundert', vocabulary: { term: 'das Jahrhundert', translation: 'el siglo' }, hint: 'Es un periodo de 100 años.' },
+  ],
+};
+
+export const readingLessonB1Art = {
+  id: 'reading-b1-art',
+  title: 'Lectura B1: El arte',
+  activityId: 'reading-b1-art',
+  durationMinutes: 7,
+  questions: [
+    { id: 'art-b1-q1', prompt: '¿Qué material usa un pintor?', word: 'material', options: ['La pintura', 'El mármol', 'El barro', 'La madera'], answer: 'La pintura', vocabulary: { term: 'die Farbe', translation: 'la pintura' }, hint: 'Es lo que usa para crear cuadros.' },
+    { id: 'art-b1-q2', prompt: '¿Qué significa "die Ausstellung"?', word: 'Ausstellung', options: ['La exposición', 'El museo', 'La galería', 'El estudio'], answer: 'La exposición', vocabulary: { term: 'die Ausstellung', translation: 'la exposición' }, hint: 'Es donde se muestran obras de arte.' },
+    { id: 'art-b1-q3', prompt: '¿Cómo se dice "escultura" en alemán?', word: 'escultura', options: ['die Skulptur', 'das Gemälde', 'die Zeichnung', 'das Foto'], answer: 'die Skulptur', vocabulary: { term: 'die Skulptur', translation: 'la escultura' }, hint: 'Es una obra tridimensional.' },
+  ],
+};
+
+export const readingLessonB1Social = {
+  id: 'reading-b1-social',
+  title: 'Lectura B1: Lo social',
+  activityId: 'reading-b1-social',
+  durationMinutes: 7,
+  questions: [
+    { id: 'social-b1-q1', prompt: '¿Qué red social es muy popular?', word: 'red', options: ['Facebook', 'El correo', 'El teléfono', 'La carta'], answer: 'Facebook', vocabulary: { term: 'das soziale Netzwerk', translation: 'la red social' }, hint: 'Es una plataforma para conectar personas.' },
+    { id: 'social-b1-q2', prompt: '¿Qué significa "die Gemeinschaft"?', word: 'Gemeinschaft', options: ['La comunidad', 'La familia', 'El amigo', 'El vecino'], answer: 'La comunidad', vocabulary: { term: 'die Gemeinschaft', translation: 'la comunidad' }, hint: 'Es un grupo de personas con intereses comunes.' },
+    { id: 'social-b1-q3', prompt: '¿Cómo se dice "amigo" en alemán?', word: 'amigo', options: ['der Freund', 'der Kollege', 'der Nachbar', 'der Bekannte'], answer: 'der Freund', vocabulary: { term: 'der Freund', translation: 'el amigo' }, hint: 'Es alguien con quien tienes una relación cercana.' },
+  ],
+};
+
+export const readingLessonB1Volunteer = {
+  id: 'reading-b1-volunteer',
+  title: 'Lectura B1: El voluntariado',
+  activityId: 'reading-b1-volunteer',
+  durationMinutes: 7,
+  questions: [
+    { id: 'volunteer-b1-q1', prompt: '¿Qué hace un voluntario?', word: 'voluntario', options: ['Ayuda sin cobrar', 'Trabaja por dinero', 'Descansa en casa', 'Viaja por placer'], answer: 'Ayuda sin cobrar', vocabulary: { term: 'der Freiwillige', translation: 'el voluntario' }, hint: 'Es trabajo altruista.' },
+    { id: 'volunteer-b1-q2', prompt: '¿Qué significa "die Organisation"?', word: 'Organisation', options: ['La organización', 'El voluntario', 'El proyecto', 'El dinero'], answer: 'La organización', vocabulary: { term: 'die Organisation', translation: 'la organización' }, hint: 'Es la entidad que coordina actividades.' },
+    { id: 'volunteer-b1-q3', prompt: '¿Cómo se dice "ayudar" en alemán?', word: 'ayudar', options: ['helfen', 'arbeiten', 'spielen', 'essen'], answer: 'helfen', vocabulary: { term: 'helfen', translation: 'ayudar' }, hint: 'Es dar apoyo a alguien.' },
+  ],
+};
+
+export const readingLessonB1Festival = {
+  id: 'reading-b1-festival',
+  title: 'Lectura B1: El festival',
+  activityId: 'reading-b1-festival',
+  durationMinutes: 7,
+  questions: [
+    { id: 'festival-b1-q1', prompt: '¿Qué sucede en un festival de música?', word: 'festival', options: ['Conciertos en vivo', 'Exposiciones de arte', 'Conferencias', 'Compras'], answer: 'Conciertos en vivo', vocabulary: { term: 'das Musikfestival', translation: 'el festival de música' }, hint: 'Es un evento musical.' },
+    { id: 'festival-b1-q2', prompt: '¿Qué significa "die Bühne"?', word: 'Bühne', options: ['El escenario', 'El público', 'La entrada', 'El camerino'], answer: 'El escenario', vocabulary: { term: 'die Bühne', translation: 'el escenario' }, hint: 'Es donde se presentan los artistas.' },
+    { id: 'festival-b1-q3', prompt: '¿Cómo se dice "entradas" en alemán?', word: 'entradas', options: ['die Tickets', 'das Programm', 'der Künstler', 'das Publikum'], answer: 'die Tickets', vocabulary: { term: 'die Tickets', translation: 'las entradas' }, hint: 'Es lo que necesitas para entrar.' },
+  ],
+};
+
+export const readingLessonB1Politics = {
+  id: 'reading-b1-politics',
+  title: 'Lectura B1: La política',
+  activityId: 'reading-b1-politics',
+  durationMinutes: 7,
+  questions: [
+    { id: 'politics-b1-q1', prompt: '¿Qué documento describe las leyes de un país?', word: 'documento', options: ['La constitución', 'El periódico', 'El libro', 'La revista'], answer: 'La constitución', vocabulary: { term: 'die Verfassung', translation: 'la constitución' }, hint: 'Es la ley fundamental.' },
+    { id: 'politics-b1-q2', prompt: '¿Qué significa "die Wahl"?', word: 'Wahl', options: ['La elección', 'El gobierno', 'El partido', 'El político'], answer: 'La elección', vocabulary: { term: 'die Wahl', translation: 'la elección' }, hint: 'Es el proceso para elegir representantes.' },
+    { id: 'politics-b1-q3', prompt: '¿Cómo se dice "votar" en alemán?', word: 'votar', options: ['wählen', 'regieren', 'entscheiden', 'diskutieren'], answer: 'wählen', vocabulary: { term: 'wählen', translation: 'votar' }, hint: 'Es ejercer tu derecho electoral.' },
+  ],
+};
+
+export const readingLessonB1Media = {
+  id: 'reading-b1-media',
+  title: 'Lectura B1: Los medios de comunicación',
+  activityId: 'reading-b1-media',
+  durationMinutes: 7,
+  questions: [
+    { id: 'media-b1-q1', prompt: '¿Qué medio de comunicación usa imágenes y sonido?', word: 'medio', options: ['La televisión', 'La radio', 'El periódico', 'La revista'], answer: 'La televisión', vocabulary: { term: 'das Fernsehen', translation: 'la televisión' }, hint: 'Combina video y audio.' },
+    { id: 'media-b1-q2', prompt: '¿Qué significa "der Journalismus"?', word: 'Journalismus', options: ['El periodismo', 'La televisión', 'La radio', 'El cine'], answer: 'El periodismo', vocabulary: { term: 'der Journalismus', translation: 'el periodismo' }, hint: 'Es la profesión de informar.' },
+    { id: 'media-b1-q3', prompt: '¿Cómo se dice "publicidad" en alemán?', word: 'publicidad', options: ['die Werbung', 'die Nachricht', 'die Sendung', 'der Bericht'], answer: 'die Werbung', vocabulary: { term: 'die Werbung', translation: 'la publicidad' }, hint: 'Son anuncios para promover productos.' },
+  ],
+};
+
+export const readingLessonB1Weather = {
+  id: 'reading-b1-weather',
+  title: 'Lectura B1: El tiempo atmosférico',
+  activityId: 'reading-b1-weather',
+  durationMinutes: 7,
+  questions: [
+    { id: 'weather-b1-q1', prompt: '¿Qué instrumento mide la temperatura?', word: 'instrumento', options: ['El termómetro', 'El barómetro', 'El reloj', 'La brújula'], answer: 'El termómetro', vocabulary: { term: 'das Thermometer', translation: 'el termómetro' }, hint: 'Mide cuánto calor hace.' },
+    { id: 'weather-b1-q2', prompt: '¿Qué significa "die Vorhersage"?', word: 'Vorhersage', options: ['La predicción', 'La temperatura', 'El viento', 'La lluvia'], answer: 'La predicción', vocabulary: { term: 'die Wettervorhersage', translation: 'la predicción del tiempo' }, hint: 'Es el pronóstico del tiempo.' },
+    { id: 'weather-b1-q3', prompt: '¿Cómo se dice "tormenta" en alemán?', word: 'tormenta', options: ['das Gewitter', 'der Regen', 'der Schnee', 'der Wind'], answer: 'das Gewitter', vocabulary: { term: 'das Gewitter', translation: 'la tormenta' }, hint: 'Es una tormenta con rayos.' },
+  ],
+};
+
+export const readingLessonB1Economy = {
+  id: 'reading-b1-economy',
+  title: 'Lectura B1: La economía',
+  activityId: 'reading-b1-economy',
+  durationMinutes: 7,
+  questions: [
+    { id: 'economy-b1-q1', prompt: '¿Qué indica que la economía va bien?', word: 'economía', options: ['El crecimiento', 'La recesión', 'La inflación', 'El desempleo'], answer: 'El crecimiento', vocabulary: { term: 'das Wachstum', translation: 'el crecimiento' }, hint: 'Es el aumento de la actividad económica.' },
+    { id: 'economy-b1-q2', prompt: '¿Qué significa "die Inflation"?', word: 'Inflation', options: ['La inflación', 'El crecimiento', 'El salario', 'El ahorro'], answer: 'La inflación', vocabulary: { term: 'die Inflation', translation: 'la inflación' }, hint: 'Es el aumento general de precios.' },
+    { id: 'economy-b1-q3', prompt: '¿Cómo se dice "dinero" en alemán?', word: 'dinero', options: ['das Geld', 'die Wirtschaft', 'der Preis', 'der Markt'], answer: 'das Geld', vocabulary: { term: 'das Geld', translation: 'el dinero' }, hint: 'Es el medio de intercambio.' },
+  ],
+};
+
+export const readingLessonB1Sports2 = {
+  id: 'reading-b1-sports2',
+  title: 'Lectura B1: Deportes de equipo',
+  activityId: 'reading-b1-sports2',
+  durationMinutes: 7,
+  questions: [
+    { id: 'sports2-b1-q1', prompt: '¿Qué deporte se juega con una pelota y canastas?', word: 'deporte', options: ['El baloncesto', 'El fútbol', 'El tenis', 'La natación'], answer: 'El baloncesto', vocabulary: { term: 'der Basketball', translation: 'el baloncesto' }, hint: 'Se encesta en un aro.' },
+    { id: 'sports2-b1-q2', prompt: '¿Qué significa "der Schiedsrichter"?', word: 'Schiedsrichter', options: ['El árbitro', 'El jugador', 'El entrenador', 'El público'], answer: 'El árbitro', vocabulary: { term: 'der Schiedsrichter', translation: 'el árbitro' }, hint: 'Es quien hace cumplir las reglas.' },
+    { id: 'sports2-b1-q3', prompt: '¿Cómo se dice "campeonato" en alemán?', word: 'campeonato', options: ['die Meisterschaft', 'das Spiel', 'das Training', 'der Sport'], answer: 'die Meisterschaft', vocabulary: { term: 'die Meisterschaft', translation: 'el campeonato' }, hint: 'Es una competición importante.' },
+  ],
+};
+
+export const readingLessonB1Literature = {
+  id: 'reading-b1-literature',
+  title: 'Lectura B1: La literatura',
+  activityId: 'reading-b1-literature',
+  durationMinutes: 7,
+  questions: [
+    { id: 'literature-b1-q1', prompt: '¿Qué escribe un autor?', word: 'autor', options: ['Libros', 'Películas', 'Canciones', 'Programas'], answer: 'Libros', vocabulary: { term: 'der Autor', translation: 'el autor' }, hint: 'Crea obras escritas.' },
+    { id: 'literature-b1-q2', prompt: '¿Qué significa "der Roman"?', word: 'Roman', options: ['La novela', 'El cuento', 'El poema', 'El ensayo'], answer: 'La novela', vocabulary: { term: 'der Roman', translation: 'la novela' }, hint: 'Es una narración larga.' },
+    { id: 'literature-b1-q3', prompt: '¿Cómo se dice "biblioteca" en alemán?', word: 'biblioteca', options: ['die Bibliothek', 'das Buch', 'der Autor', 'der Leser'], answer: 'die Bibliothek', vocabulary: { term: 'die Bibliothek', translation: 'la biblioteca' }, hint: 'Es el lugar con muchos libros.' },
+  ],
+};
+
+export const readingLessonB1Science = {
+  id: 'reading-b1-science',
+  title: 'Lectura B1: La ciencia',
+  activityId: 'reading-b1-science',
+  durationMinutes: 7,
+  questions: [
+    { id: 'science-b1-q1', prompt: '¿Qué estudia un biólogo?', word: 'biólogo', options: ['Los seres vivos', 'Las estrellas', 'Los números', 'Las rocas'], answer: 'Los seres vivos', vocabulary: { term: 'der Biologe', translation: 'el biólogo' }, hint: 'Estudia la vida.' },
+    { id: 'science-b1-q2', prompt: '¿Qué significa "das Experiment"?', word: 'Experiment', options: ['El experimento', 'La teoría', 'La observación', 'La conclusión'], answer: 'El experimento', vocabulary: { term: 'das Experiment', translation: 'el experimento' }, hint: 'Es una prueba para verificar algo.' },
+    { id: 'science-b1-q3', prompt: '¿Cómo se dice "descubrimiento" en alemán?', word: 'descubrimiento', options: ['die Entdeckung', 'die Theorie', 'die Wissenschaft', 'die Forschung'], answer: 'die Entdeckung', vocabulary: { term: 'die Entdeckung', translation: 'el descubrimiento' }, hint: 'Es encontrar algo nuevo.' },
+  ],
+};
+
+// B2 Reading Lessons (28 lessons)
+export const readingLessonB2CareerAdvancement = {
+  id: 'reading-b2-career-advancement',
+  title: 'Lectura B2: Avance profesional',
+  activityId: 'reading-b2-career-advancement',
+  durationMinutes: 7,
+  questions: [
+    { id: 'career-advancement-b2-q1', prompt: '¿Qué habilidad es importante para el avance profesional?', word: 'habilidad', options: ['El liderazgo', 'La pereza', 'El silencio', 'La ignorancia'], answer: 'El liderazgo', vocabulary: { term: 'die Führungskompetenz', translation: 'la competencia de liderazgo' }, hint: 'Es la capacidad de dirigir equipos.' },
+    { id: 'career-advancement-b2-q2', prompt: '¿Qué significa "die Beförderung"?', word: 'Beförderung', options: ['El ascenso', 'El despido', 'El contrato', 'El salario'], answer: 'El ascenso', vocabulary: { term: 'die Beförderung', translation: 'el ascenso' }, hint: 'Es subir de nivel en el trabajo.' },
+    { id: 'career-advancement-b2-q3', prompt: '¿Cómo se dice "desarrollo profesional" en alemán?', word: 'desarrollo', options: ['die berufliche Weiterentwicklung', 'der Urlaub', 'die Krankheit', 'die Rente'], answer: 'die berufliche Weiterentwicklung', vocabulary: { term: 'die berufliche Weiterentwicklung', translation: 'el desarrollo profesional' }, hint: 'Es el progreso en tu carrera.' },
+  ],
+};
+
+export const readingLessonB2BusinessNegotiation = {
+  id: 'reading-b2-business-negotiation',
+  title: 'Lectura B2: Negociación empresarial',
+  activityId: 'reading-b2-business-negotiation',
+  durationMinutes: 7,
+  questions: [
+    { id: 'business-negotiation-b2-q1', prompt: '¿Qué es esencial en una negociación?', word: 'negociación', options: ['El compromiso', 'La imposición', 'El silencio', 'La ignorancia'], answer: 'El compromiso', vocabulary: { term: 'der Kompromiss', translation: 'el compromiso' }, hint: 'Es ceder algo para llegar a un acuerdo.' },
+    { id: 'business-negotiation-b2-q2', prompt: '¿Qué significa "das Angebot"?', word: 'Angebot', options: ['La oferta', 'La demanda', 'El contrato', 'El precio'], answer: 'La oferta', vocabulary: { term: 'das Angebot', translation: 'la oferta' }, hint: 'Es lo que propones en una negociación.' },
+    { id: 'business-negotiation-b2-q3', prompt: '¿Cómo se dice "acuerdo" en alemán?', word: 'acuerdo', options: ['die Vereinbarung', 'der Streit', 'die Diskussion', 'das Problem'], answer: 'die Vereinbarung', vocabulary: { term: 'die Vereinbarung', translation: 'el acuerdo' }, hint: 'Es el resultado de una negociación exitosa.' },
+  ],
+};
+
+export const readingLessonB2AcademicWriting = {
+  id: 'reading-b2-academic-writing',
+  title: 'Lectura B2: Escritura académica',
+  activityId: 'reading-b2-academic-writing',
+  durationMinutes: 7,
+  questions: [
+    { id: 'academic-writing-b2-q1', prompt: '¿Qué es fundamental en un texto académico?', word: 'fundamental', options: ['La estructura clara', 'La opinión personal', 'El lenguaje informal', 'Las emociones'], answer: 'La estructura clara', vocabulary: { term: 'die klare Struktur', translation: 'la estructura clara' }, hint: 'Organiza las ideas de forma lógica.' },
+    { id: 'academic-writing-b2-q2', prompt: '¿Qué significa "die Quelle"?', word: 'Quelle', options: ['La fuente', 'El título', 'El autor', 'El editor'], answer: 'La fuente', vocabulary: { term: 'die Quelle', translation: 'la fuente' }, hint: 'Es el origen de la información.' },
+    { id: 'academic-writing-b2-q3', prompt: '¿Cómo se dice "bibliografía" en alemán?', word: 'bibliografía', options: ['das Literaturverzeichnis', 'der Inhalt', 'der Titel', 'die Einleitung'], answer: 'das Literaturverzeichnis', vocabulary: { term: 'das Literaturverzeichnis', translation: 'la bibliografía' }, hint: 'Es la lista de fuentes consultadas.' },
+  ],
+};
+
+export const readingLessonB2ScientificResearch = {
+  id: 'reading-b2-scientific-research',
+  title: 'Lectura B2: Investigación científica',
+  activityId: 'reading-b2-scientific-research',
+  durationMinutes: 7,
+  questions: [
+    { id: 'scientific-research-b2-q1', prompt: '¿Qué es el primer paso de la investigación?', word: 'paso', options: ['La hipótesis', 'La conclusión', 'La publicación', 'El premio'], answer: 'La hipótesis', vocabulary: { term: 'die Hypothese', translation: 'la hipótesis' }, hint: 'Es una suposición que se va a probar.' },
+    { id: 'scientific-research-b2-q2', prompt: '¿Qué significa "die Methode"?', word: 'Methode', options: ['El método', 'El resultado', 'La teoría', 'La opinión'], answer: 'El método', vocabulary: { term: 'die Methode', translation: 'el método' }, hint: 'Es el procedimiento de investigación.' },
+    { id: 'scientific-research-b2-q3', prompt: '¿Cómo se dice "resultado" en alemán?', word: 'resultado', options: ['das Ergebnis', 'die Methode', 'die Frage', 'die Antwort'], answer: 'das Ergebnis', vocabulary: { term: 'das Ergebnis', translation: 'el resultado' }, hint: 'Es lo que obtienes al final.' },
+  ],
+};
+
+export const readingLessonB2PoliticalDebate = {
+  id: 'reading-b2-political-debate',
+  title: 'Lectura B2: Debate político',
+  activityId: 'reading-b2-political-debate',
+  durationMinutes: 7,
+  questions: [
+    { id: 'political-debate-b2-q1', prompt: '¿Qué es importante en un debate político?', word: 'importante', options: ['Los argumentos sólidos', 'El volumen de voz', 'La duración', 'La apariencia'], answer: 'Los argumentos sólidos', vocabulary: { term: 'das stichhaltige Argument', translation: 'el argumento sólido' }, hint: 'Son razones bien fundamentadas.' },
+    { id: 'political-debate-b2-q2', prompt: '¿Qué significa "die Position"?', word: 'Position', options: ['La postura', 'El partido', 'El voto', 'La ley'], answer: 'La postura', vocabulary: { term: 'die Position', translation: 'la postura' }, hint: 'Es el punto de vista sobre un tema.' },
+    { id: 'political-debate-b2-q3', prompt: '¿Cómo se dice "contrargumento" en alemán?', word: 'contrargumento', options: ['das Gegenargument', 'die Zustimmung', 'die Frage', 'die Antwort'], answer: 'das Gegenargument', vocabulary: { term: 'das Gegenargument', translation: 'el contrargumento' }, hint: 'Es un argumento que se opone a otro.' },
+  ],
+};
+
+export const readingLessonB2CulturalAnalysis = {
+  id: 'reading-b2-cultural-analysis',
+  title: 'Lectura B2: Análisis cultural',
+  activityId: 'reading-b2-cultural-analysis',
+  durationMinutes: 7,
+  questions: [
+    { id: 'cultural-analysis-b2-q1', prompt: '¿Qué estudia el análisis cultural?', word: 'estudia', options: ['Las costumbres y valores', 'Las matemáticas', 'La física', 'La química'], answer: 'Las costumbres y valores', vocabulary: { term: 'die Sitten und Werte', translation: 'las costumbres y valores' }, hint: 'Son aspectos de una sociedad.' },
+    { id: 'cultural-analysis-b2-q2', prompt: '¿Qué significa "die Perspektive"?', word: 'Perspektive', options: ['La perspectiva', 'La cultura', 'La historia', 'La lengua'], answer: 'La perspectiva', vocabulary: { term: 'die Perspektive', translation: 'la perspectiva' }, hint: 'Es el punto de vista desde el que se analiza.' },
+    { id: 'cultural-analysis-b2-q3', prompt: '¿Cómo se dice "identidad cultural" en alemán?', word: 'identidad', options: ['die kulturelle Identität', 'la historia', 'la lengua', 'la religión'], answer: 'die kulturelle Identität', vocabulary: { term: 'die kulturelle Identität', translation: 'la identidad cultural' }, hint: 'Es el sentido de pertenencia a una cultura.' },
+  ],
+};
+
+export const readingLessonB2EconomicTrends = {
+  id: 'reading-b2-economic-trends',
+  title: 'Lectura B2: Tendencias económicas',
+  activityId: 'reading-b2-economic-trends',
+  durationMinutes: 7,
+  questions: [
+    { id: 'economic-trends-b2-q1', prompt: '¿Qué indica una tendencia alcista?', word: 'tendencia', options: ['El aumento de precios', 'La disminución de precios', 'La estabilidad', 'El colapso'], answer: 'El aumento de precios', vocabulary: { term: 'der Aufwärtstrend', translation: 'la tendencia alcista' }, hint: 'Es cuando los valores suben.' },
+    { id: 'economic-trends-b2-q2', prompt: '¿Qué significa "der Markt"?', word: 'Markt', options: ['El mercado', 'El dinero', 'El banco', 'La empresa'], answer: 'El mercado', vocabulary: { term: 'der Markt', translation: 'el mercado' }, hint: 'Es donde se compran y venden bienes.' },
+    { id: 'economic-trends-b2-q3', prompt: '¿Cómo se dice "tendencia" en alemán?', word: 'tendencia', options: ['der Trend', 'die Statistik', 'die Zahl', 'der Preis'], answer: 'der Trend', vocabulary: { term: 'der Trend', translation: 'la tendencia' }, hint: 'Es la dirección general de algo.' },
+  ],
+};
+
+export const readingLessonB2GlobalIssues = {
+  id: 'reading-b2-global-issues',
+  title: 'Lectura B2: Problemas globales',
+  activityId: 'reading-b2-global-issues',
+  durationMinutes: 7,
+  questions: [
+    { id: 'global-issues-b2-q1', prompt: '¿Qué es un problema global?', word: 'global', options: ['Afecta a todo el mundo', 'Afecta solo a un país', 'Es personal', 'Es temporal'], answer: 'Afecta a todo el mundo', vocabulary: { term: 'global', translation: 'global' }, hint: 'Es de alcance mundial.' },
+    { id: 'global-issues-b2-q2', prompt: '¿Qué significa "die Zusammenarbeit"?', word: 'Zusammenarbeit', options: ['La cooperación', 'El conflicto', 'La soledad', 'La competencia'], answer: 'La cooperación', vocabulary: { term: 'die Zusammenarbeit', translation: 'la cooperación' }, hint: 'Es trabajar juntos para resolver problemas.' },
+    { id: 'global-issues-b2-q3', prompt: '¿Cómo se dice "sostenibilidad" en alemán?', word: 'sostenibilidad', options: ['die Nachhaltigkeit', 'la contaminación', 'el desperdicio', 'el consumo'], answer: 'die Nachhaltigkeit', vocabulary: { term: 'die Nachhaltigkeit', translation: 'la sostenibilidad' }, hint: 'Es usar recursos sin agotarlos.' },
+  ],
+};
+
+export const readingLessonB2EnvironmentalPolicy = {
+  id: 'reading-b2-environmental-policy',
+  title: 'Lectura B2: Política ambiental',
+  activityId: 'reading-b2-environmental-policy',
+  durationMinutes: 7,
+  questions: [
+    { id: 'environmental-policy-b2-q1', prompt: '¿Qué objetivo tiene la política ambiental?', word: 'objetivo', options: ['Proteger el medio ambiente', 'Aumentar la contaminación', 'Reducir la producción', 'Eliminar la naturaleza'], answer: 'Proteger el medio ambiente', vocabulary: { term: 'der Umweltschutz', translation: 'la protección ambiental' }, hint: 'Es conservar la naturaleza.' },
+    { id: 'environmental-policy-b2-q2', prompt: '¿Qué significa "die Emission"?', word: 'Emission', options: ['La emisión', 'La absorción', 'La conservación', 'La producción'], answer: 'La emisión', vocabulary: { term: 'die Emission', translation: 'la emisión' }, hint: 'Es la liberación de sustancias al ambiente.' },
+    { id: 'environmental-policy-b2-q3', prompt: '¿Cómo se dice "energía limpia" en alemán?', word: 'energía', options: ['saubere Energie', 'fossile Energie', 'verschmutzte Energie', 'teure Energie'], answer: 'saubere Energie', vocabulary: { term: 'saubere Energie', translation: 'energía limpia' }, hint: 'Es energía que no contamina.' },
+  ],
+};
+
+export const readingLessonB2MedicalEthics = {
+  id: 'reading-b2-medical-ethics',
+  title: 'Lectura B2: Ética médica',
+  activityId: 'reading-b2-medical-ethics',
+  durationMinutes: 7,
+  questions: [
+    { id: 'medical-ethics-b2-q1', prompt: '¿Qué principio es fundamental en ética médica?', word: 'principio', options: ['El consentimiento informado', 'La imposición', 'El secreto absoluto', 'La ignorancia'], answer: 'El consentimiento informado', vocabulary: { term: 'die informierte Zustimmung', translation: 'el consentimiento informado' }, hint: 'El paciente debe conocer y aceptar el tratamiento.' },
+    { id: 'medical-ethics-b2-q2', prompt: '¿Qué significa "die Vertraulichkeit"?', word: 'Vertraulichkeit', options: ['La confidencialidad', 'La publicidad', 'La transparencia', 'La mentira'], answer: 'La confidencialidad', vocabulary: { term: 'die Vertraulichkeit', translation: 'la confidencialidad' }, hint: 'Es mantener la información en secreto.' },
+    { id: 'medical-ethics-b2-q3', prompt: '¿Cómo se dice "bioética" en alemán?', word: 'bioética', options: ['die Bioethik', 'la medicina', 'la biología', 'la ética'], answer: 'die Bioethik', vocabulary: { term: 'die Bioethik', translation: 'la bioética' }, hint: 'Es la ética aplicada a la medicina y biología.' },
+  ],
+};
+
+export const readingLessonB2LegalSystem = {
+  id: 'reading-b2-legal-system',
+  title: 'Lectura B2: El sistema legal',
+  activityId: 'reading-b2-legal-system',
+  durationMinutes: 7,
+  questions: [
+    { id: 'legal-system-b2-q1', prompt: '¿Qué es el derecho civil?', word: 'derecho', options: ['Regula relaciones entre personas', 'Castiga delitos', 'Gestiona impuestos', 'Regula el comercio'], answer: 'Regula relaciones entre personas', vocabulary: { term: 'das Zivilrecht', translation: 'el derecho civil' }, hint: 'Es el derecho privado.' },
+    { id: 'legal-system-b2-q2', prompt: '¿Qué significa "das Urteil"?', word: 'Urteil', options: ['La sentencia', 'La acusación', 'La defensa', 'La ley'], answer: 'La sentencia', vocabulary: { term: 'das Urteil', translation: 'la sentencia' }, hint: 'Es la decisión final del juez.' },
+    { id: 'legal-system-b2-q3', prompt: '¿Cómo se dice "abogado" en alemán?', word: 'abogado', options: ['der Anwalt', 'der Richter', 'der Zeuge', 'der Angeklagte'], answer: 'der Anwalt', vocabulary: { term: 'der Anwalt', translation: 'el abogado' }, hint: 'Es quien representa legalmente a alguien.' },
+  ],
+};
+
+export const readingLessonB2FinancialPlanning = {
+  id: 'reading-b2-financial-planning',
+  title: 'Lectura B2: Planificación financiera',
+  activityId: 'reading-b2-financial-planning',
+  durationMinutes: 7,
+  questions: [
+    { id: 'financial-planning-b2-q1', prompt: '¿Qué es fundamental en la planificación financiera?', word: 'fundamental', options: ['El presupuesto', 'El gasto excesivo', 'La deuda', 'El préstamo'], answer: 'El presupuesto', vocabulary: { term: 'das Budget', translation: 'el presupuesto' }, hint: 'Es el plan de ingresos y gastos.' },
+    { id: 'financial-planning-b2-q2', prompt: '¿Qué significa "die Investition"?', word: 'Investition', options: ['La inversión', 'El gasto', 'El ahorro', 'El préstamo'], answer: 'La inversión', vocabulary: { term: 'die Investition', translation: 'la inversión' }, hint: 'Es poner dinero para obtener retorno.' },
+    { id: 'financial-planning-b2-q3', prompt: '¿Cómo se dice "ahorro" en alemán?', word: 'ahorro', options: ['das Sparen', 'die Investition', 'die Schulden', 'der Kredit'], answer: 'das Sparen', vocabulary: { term: 'das Sparen', translation: 'el ahorro' }, hint: 'Es reservar dinero para el futuro.' },
+  ],
+};
+
+export const readingLessonB2InternationalRelations = {
+  id: 'reading-b2-international-relations',
+  title: 'Lectura B2: Relaciones internacionales',
+  activityId: 'reading-b2-international-relations',
+  durationMinutes: 7,
+  questions: [
+    { id: 'international-relations-b2-q1', prompt: '¿Qué organización promueve la paz mundial?', word: 'organización', options: ['La ONU', 'La OTAN', 'La UE', 'La OMC'], answer: 'La ONU', vocabulary: { term: 'die UNO', translation: 'la ONU' }, hint: 'Es la organización de las naciones unidas.' },
+    { id: 'international-relations-b2-q2', prompt: '¿Qué significa "die Diplomatie"?', word: 'Diplomatie', options: ['La diplomacia', 'La guerra', 'El conflicto', 'El aislamiento'], answer: 'La diplomacia', vocabulary: { term: 'die Diplomatie', translation: 'la diplomacia' }, hint: 'Es el arte de negociar entre países.' },
+    { id: 'international-relations-b2-q3', prompt: '¿Cómo se dice "tratado internacional" en alemán?', word: 'tratado', options: ['der internationale Vertrag', 'la guerra', 'el conflicto', 'la frontera'], answer: 'der internationale Vertrag', vocabulary: { term: 'der internationale Vertrag', translation: 'el tratado internacional' }, hint: 'Es un acuerdo entre países.' },
+  ],
+};
+
+export const readingLessonB2Philosophy = {
+  id: 'reading-b2-philosophy',
+  title: 'Lectura B2: Filosofía',
+  activityId: 'reading-b2-philosophy',
+  durationMinutes: 7,
+  questions: [
+    { id: 'philosophy-b2-q1', prompt: '¿Qué pregunta fundamental hace la filosofía?', word: 'pregunta', options: ['¿Cuál es el sentido de la vida?', '¿Cuánto dinero tengo?', '¿Qué voy a comer?', '¿Dónde está mi coche?'], answer: '¿Cuál es el sentido de la vida?', vocabulary: { term: 'der Sinn des Lebens', translation: 'el sentido de la vida' }, hint: 'Es una pregunta existencial.' },
+    { id: 'philosophy-b2-q2', prompt: '¿Qué significa "die Ethik"?', word: 'Ethik', options: ['La ética', 'La lógica', 'La metafísica', 'La estética'], answer: 'La ética', vocabulary: { term: 'die Ethik', translation: 'la ética' }, hint: 'Es el estudio de la moral.' },
+    { id: 'philosophy-b2-q3', prompt: '¿Cómo se dice "razón" en alemán?', word: 'razón', options: ['die Vernunft', 'la emoción', 'el instinto', 'la fe'], answer: 'die Vernunft', vocabulary: { term: 'die Vernunft', translation: 'la razón' }, hint: 'Es la capacidad de pensar lógicamente.' },
+  ],
+};
+
+export const readingLessonB2AdvancedTechnology = {
+  id: 'reading-b2-advanced-technology',
+  title: 'Lectura B2: Tecnología avanzada',
+  activityId: 'reading-b2-advanced-technology',
+  durationMinutes: 7,
+  questions: [
+    { id: 'advanced-technology-b2-q1', prompt: '¿Qué es la inteligencia artificial?', word: 'inteligencia', options: ['Simulación de inteligencia humana', 'Un robot físico', 'Un programa simple', 'Una calculadora'], answer: 'Simulación de inteligencia humana', vocabulary: { term: 'die künstliche Intelligenz', translation: 'la inteligencia artificial' }, hint: 'Es tecnología que imita el pensamiento humano.' },
+    { id: 'advanced-technology-b2-q2', prompt: '¿Qué significa "die Innovation"?', word: 'Innovation', options: ['La innovación', 'La tradición', 'La obsolescencia', 'La repetición'], answer: 'La innovación', vocabulary: { term: 'die Innovation', translation: 'la innovación' }, hint: 'Es crear algo nuevo y mejor.' },
+    { id: 'advanced-technology-b2-q3', prompt: '¿Cómo se dice "automatización" en alemán?', word: 'automatización', options: ['die Automatisierung', 'la manualidad', 'el error', 'la lentitud'], answer: 'die Automatisierung', vocabulary: { term: 'die Automatisierung', translation: 'la automatización' }, hint: 'Es hacer procesos automáticos.' },
+  ],
+};
+
+export const readingLessonB2SustainableDevelopment = {
+  id: 'reading-b2-sustainable-development',
+  title: 'Lectura B2: Desarrollo sostenible',
+  activityId: 'reading-b2-sustainable-development',
+  durationMinutes: 7,
+  questions: [
+    { id: 'sustainable-development-b2-q1', prompt: '¿Qué busca el desarrollo sostenible?', word: 'desarrollo', options: ['Satisfacer necesidades sin comprometer el futuro', 'Crecer a cualquier costo', 'Explotar recursos', 'Ignorar el medio ambiente'], answer: 'Satisfacer necesidades sin comprometer el futuro', vocabulary: { term: 'nachhaltige Entwicklung', translation: 'desarrollo sostenible' }, hint: 'Es equilibrar presente y futuro.' },
+    { id: 'sustainable-development-b2-q2', prompt: '¿Qué significa "die Ressource"?', word: 'Ressource', options: ['El recurso', 'El desperdicio', 'La contaminación', 'El consumo'], answer: 'El recurso', vocabulary: { term: 'die Ressource', translation: 'el recurso' }, hint: 'Es algo que usamos para producir.' },
+    { id: 'sustainable-development-b2-q3', prompt: '¿Cómo se dice "generación futura" en alemán?', word: 'generación', options: ['die zukünftige Generation', 'la generación actual', 'la generación pasada', 'la familia'], answer: 'die zukünftige Generation', vocabulary: { term: 'die zukünftige Generation', translation: 'la generación futura' }, hint: 'Son las personas que vendrán después.' },
+  ],
+};
+
+export const readingLessonB2SocialJustice = {
+  id: 'reading-b2-social-justice',
+  title: 'Lectura B2: Justicia social',
+  activityId: 'reading-b2-social-justice',
+  durationMinutes: 7,
+  questions: [
+    { id: 'social-justice-b2-q1', prompt: '¿Qué busca la justicia social?', word: 'justicia', options: ['La igualdad de oportunidades', 'La desigualdad', 'La discriminación', 'El privilegio'], answer: 'La igualdad de oportunidades', vocabulary: { term: 'die Chancengleichheit', translation: 'la igualdad de oportunidades' }, hint: 'Es que todos tengan las mismas posibilidades.' },
+    { id: 'social-justice-b2-q2', prompt: '¿Qué significa "die Diskriminierung"?', word: 'Diskriminierung', options: ['La discriminación', 'La igualdad', 'La justicia', 'La inclusión'], answer: 'La discriminación', vocabulary: { term: 'die Diskriminierung', translation: 'la discriminación' }, hint: 'Es tratar injustamente a alguien.' },
+    { id: 'social-justice-b2-q3', prompt: '¿Cómo se dice "derechos humanos" en alemán?', word: 'derechos', options: ['die Menschenrechte', 'los privilegios', 'las obligaciones', 'las leyes'], answer: 'die Menschenrechte', vocabulary: { term: 'die Menschenrechte', translation: 'los derechos humanos' }, hint: 'Son derechos fundamentales de toda persona.' },
+  ],
+};
+
+export const readingLessonB2MediaLiteracy = {
+  id: 'reading-b2-media-literacy',
+  title: 'Lectura B2: Alfabetización mediática',
+  activityId: 'reading-b2-media-literacy',
+  durationMinutes: 7,
+  questions: [
+    { id: 'media-literacy-b2-q1', prompt: '¿Qué habilidad desarrolla la alfabetización mediática?', word: 'habilidad', options: ['Analizar información críticamente', 'Creer todo sin cuestionar', 'Ignorar los medios', 'Consumir pasivamente'], answer: 'Analizar información críticamente', vocabulary: { term: 'kritisch analysieren', translation: 'analizar críticamente' }, hint: 'Es evaluar la información con cuidado.' },
+    { id: 'media-literacy-b2-q2', prompt: '¿Qué significa "die Fake News"?', word: 'Fake News', options: ['Las noticias falsas', 'Las noticias verdaderas', 'La publicidad', 'El entretenimiento'], answer: 'Las noticias falsas', vocabulary: { term: 'die Fake News', translation: 'las noticias falsas' }, hint: 'Es información engañosa presentada como noticia.' },
+    { id: 'media-literacy-b2-q3', prompt: '¿Cómo se dice "fuente confiable" en alemán?', word: 'fuente', options: ['die vertrauenswürdige Quelle', 'la fuente falsa', 'el rumor', 'la opinión'], answer: 'die vertrauenswürdige Quelle', vocabulary: { term: 'die vertrauenswürdige Quelle', translation: 'la fuente confiable' }, hint: 'Es un origen de información fiable.' },
+  ],
+};
+
+export const readingLessonB2Psychology = {
+  id: 'reading-b2-psychology',
+  title: 'Lectura B2: Psicología',
+  activityId: 'reading-b2-psychology',
+  durationMinutes: 7,
+  questions: [
+    { id: 'psychology-b2-q1', prompt: '¿Qué estudia la psicología?', word: 'estudia', options: ['La mente y el comportamiento', 'El cuerpo físico', 'Las estrellas', 'Los números'], answer: 'La mente y el comportamiento', vocabulary: { term: 'die Psychologie', translation: 'la psicología' }, hint: 'Es la ciencia de la mente.' },
+    { id: 'psychology-b2-q2', prompt: '¿Qué significa "die Therapie"?', word: 'Therapie', options: ['La terapia', 'El diagnóstico', 'La enfermedad', 'El medicamento'], answer: 'La terapia', vocabulary: { term: 'die Therapie', translation: 'la terapia' }, hint: 'Es el tratamiento de problemas psicológicos.' },
+    { id: 'psychology-b2-q3', prompt: '¿Cómo se dice "salud mental" en alemán?', word: 'salud', options: ['die psychische Gesundheit', 'la salud física', 'la enfermedad', 'el estrés'], answer: 'die psychische Gesundheit', vocabulary: { term: 'die psychische Gesundheit', translation: 'la salud mental' }, hint: 'Es el bienestar emocional y psicológico.' },
+  ],
+};
+
+export const readingLessonB2Sociology = {
+  id: 'reading-b2-sociology',
+  title: 'Lectura B2: Sociología',
+  activityId: 'reading-b2-sociology',
+  durationMinutes: 7,
+  questions: [
+    { id: 'sociology-b2-q1', prompt: '¿Qué estudia la sociología?', word: 'estudia', options: ['La sociedad y las relaciones sociales', 'La mente individual', 'El cuerpo humano', 'Las estrellas'], answer: 'La sociedad y las relaciones sociales', vocabulary: { term: 'die Soziologie', translation: 'la sociología' }, hint: 'Es el estudio de la sociedad.' },
+    { id: 'sociology-b2-q2', prompt: '¿Qué significa "die Gesellschaft"?', word: 'Gesellschaft', options: ['La sociedad', 'El individuo', 'La familia', 'El grupo'], answer: 'La sociedad', vocabulary: { term: 'die Gesellschaft', translation: 'la sociedad' }, hint: 'Es el conjunto de personas que conviven.' },
+    { id: 'sociology-b2-q3', prompt: '¿Cómo se dice "estructura social" en alemán?', word: 'estructura', options: ['die soziale Struktur', 'la estructura física', 'la estructura mental', 'la estructura económica'], answer: 'die soziale Struktur', vocabulary: { term: 'die soziale Struktur', translation: 'la estructura social' }, hint: 'Es la organización de la sociedad.' },
+  ],
+};
+
+export const readingLessonB2Anthropology = {
+  id: 'reading-b2-anthropology',
+  title: 'Lectura B2: Antropología',
+  activityId: 'reading-b2-anthropology',
+  durationMinutes: 7,
+  questions: [
+    { id: 'anthropology-b2-q1', prompt: '¿Qué estudia la antropología?', word: 'estudia', options: ['Las culturas humanas', 'Los números', 'Las estrellas', 'Las rocas'], answer: 'Las culturas humanas', vocabulary: { term: 'die Anthropologie', translation: 'la antropología' }, hint: 'Es el estudio de las culturas.' },
+    { id: 'anthropology-b2-q2', prompt: '¿Qué significa "die Kultur"?', word: 'Kultur', options: ['La cultura', 'La naturaleza', 'La biología', 'La física'], answer: 'La cultura', vocabulary: { term: 'die Kultur', translation: 'la cultura' }, hint: 'Son las costumbres y valores de un grupo.' },
+    { id: 'anthropology-b2-q3', prompt: '¿Cómo se dice "diversidad cultural" en alemán?', word: 'diversidad', options: ['die kulturelle Vielfalt', 'la uniformidad', 'la homogeneidad', 'la similitud'], answer: 'die kulturelle Vielfalt', vocabulary: { term: 'die kulturelle Vielfalt', translation: 'la diversidad cultural' }, hint: 'Es la variedad de culturas.' },
+  ],
+};
+
+export const readingLessonB2Linguistics = {
+  id: 'reading-b2-linguistics',
+  title: 'Lectura B2: Lingüística',
+  activityId: 'reading-b2-linguistics',
+  durationMinutes: 7,
+  questions: [
+    { id: 'linguistics-b2-q1', prompt: '¿Qué estudia la lingüística?', word: 'estudia', options: ['El lenguaje', 'Las matemáticas', 'La física', 'La química'], answer: 'El lenguaje', vocabulary: { term: 'die Linguistik', translation: 'la lingüística' }, hint: 'Es la ciencia del lenguaje.' },
+    { id: 'linguistics-b2-q2', prompt: '¿Qué significa "die Grammatik"?', word: 'Grammatik', options: ['La gramática', 'El vocabulario', 'La pronunciación', 'La escritura'], answer: 'La gramática', vocabulary: { term: 'die Grammatik', translation: 'la gramática' }, hint: 'Son las reglas del lenguaje.' },
+    { id: 'linguistics-b2-q3', prompt: '¿Cómo se dice "adquisición del lenguaje" en alemán?', word: 'adquisición', options: ['der Spracherwerb', 'la pérdida del lenguaje', 'el silencio', 'la lectura'], answer: 'der Spracherwerb', vocabulary: { term: 'der Spracherwerb', translation: 'la adquisición del lenguaje' }, hint: 'Es aprender a hablar.' },
+  ],
+};
+
+export const readingLessonB2ModernArt = {
+  id: 'reading-b2-modern-art',
+  title: 'Lectura B2: Arte moderno',
+  activityId: 'reading-b2-modern-art',
+  durationMinutes: 7,
+  questions: [
+    { id: 'modern-art-b2-q1', prompt: '¿Qué caracteriza al arte moderno?', word: 'caracteriza', options: ['La innovación y ruptura con tradiciones', 'La copia exacta del pasado', 'El conservadurismo', 'La repetición'], answer: 'La innovación y ruptura con tradiciones', vocabulary: { term: 'die Innovation', translation: 'la innovación' }, hint: 'Es crear formas nuevas.' },
+    { id: 'modern-art-b2-q2', prompt: '¿Qué significa "der Abstraktionismus"?', word: 'Abstraktionismus', options: ['El abstraccionismo', 'El realismo', 'El clasicismo', 'El romanticismo'], answer: 'El abstraccionismo', vocabulary: { term: 'der Abstraktionismus', translation: 'el abstraccionismo' }, hint: 'Es arte que no representa la realidad directamente.' },
+    { id: 'modern-art-b2-q3', prompt: '¿Cómo se dice "movimiento artístico" en alemán?', word: 'movimiento', options: ['die Kunstbewegung', 'el estilo individual', 'la técnica', 'el material'], answer: 'die Kunstbewegung', vocabulary: { term: 'die Kunstbewegung', translation: 'el movimiento artístico' }, hint: 'Es un grupo de artistas con estilo similar.' },
+  ],
+};
+
+export const readingLessonB2ContemporaryLiterature = {
+  id: 'reading-b2-contemporary-literature',
+  title: 'Lectura B2: Literatura contemporánea',
+  activityId: 'reading-b2-contemporary-literature',
+  durationMinutes: 7,
+  questions: [
+    { id: 'contemporary-literature-b2-q1', prompt: '¿Qué caracteriza la literatura contemporánea?', word: 'caracteriza', options: ['Refleja problemas actuales', 'Solo habla del pasado', 'Ignora la realidad', 'Es solo fantasía'], answer: 'Refleja problemas actuales', vocabulary: { term: 'die Gegenwartsliteratur', translation: 'la literatura contemporánea' }, hint: 'Trata temas del tiempo presente.' },
+    { id: 'contemporary-literature-b2-q2', prompt: '¿Qué significa "der Autor"?', word: 'Autor', options: ['El autor', 'El editor', 'El crítico', 'El lector'], answer: 'El autor', vocabulary: { term: 'der Autor', translation: 'el autor' }, hint: 'Es quien escribe la obra.' },
+    { id: 'contemporary-literature-b2-q3', prompt: '¿Cómo se dice "género literario" en alemán?', word: 'género', options: ['die literarische Gattung', 'el título', 'el capítulo', 'la página'], answer: 'die literarische Gattung', vocabulary: { term: 'die literarische Gattung', translation: 'el género literario' }, hint: 'Es el tipo de obra literaria.' },
+  ],
+};
+
+export const readingLessonB2Entrepreneurship = {
+  id: 'reading-b2-entrepreneurship',
+  title: 'Lectura B2: Emprendimiento',
+  activityId: 'reading-b2-entrepreneurship',
+  durationMinutes: 7,
+  questions: [
+    { id: 'entrepreneurship-b2-q1', prompt: '¿Qué hace un emprendedor?', word: 'emprendedor', options: ['Crea nuevos negocios', 'Trabaja para otros', 'Solo estudia', 'No hace nada'], answer: 'Crea nuevos negocios', vocabulary: { term: 'der Unternehmer', translation: 'el emprendedor' }, hint: 'Es quien inicia empresas.' },
+    { id: 'entrepreneurship-b2-q2', prompt: '¿Qué significa "das Start-up"?', word: 'Start-up', options: ['La empresa emergente', 'La empresa tradicional', 'El gobierno', 'La universidad'], answer: 'La empresa emergente', vocabulary: { term: 'das Start-up', translation: 'la empresa emergente' }, hint: 'Es un negocio nuevo y en crecimiento.' },
+    { id: 'entrepreneurship-b2-q3', prompt: '¿Cómo se dice "plan de negocios" en alemán?', word: 'plan', options: ['der Geschäftsplan', 'el presupuesto', 'el contrato', 'la factura'], answer: 'der Geschäftsplan', vocabulary: { term: 'der Geschäftsplan', translation: 'el plan de negocios' }, hint: 'Es el documento que describe tu negocio.' },
+  ],
+};
+
+export const readingLessonB2Innovation = {
+  id: 'reading-b2-innovation',
+  title: 'Lectura B2: Innovación',
+  activityId: 'reading-b2-innovation',
+  durationMinutes: 7,
+  questions: [
+    { id: 'innovation-b2-q1', prompt: '¿Qué es necesario para innovar?', word: 'necesario', options: ['Creatividad y esfuerzo', 'Solo dinero', 'Solo suerte', 'Nada'], answer: 'Creatividad y esfuerzo', vocabulary: { term: 'die Kreativität', translation: 'la creatividad' }, hint: 'Es crear ideas nuevas.' },
+    { id: 'innovation-b2-q2', prompt: '¿Qué significa "die Forschung"?', word: 'Forschung', options: ['La investigación', 'La venta', 'El consumo', 'El descanso'], answer: 'La investigación', vocabulary: { term: 'die Forschung', translation: 'la investigación' }, hint: 'Es buscar nuevos conocimientos.' },
+    { id: 'innovation-b2-q3', prompt: '¿Cómo se dice "desarrollo de producto" en alemán?', word: 'desarrollo', options: ['die Produktentwicklung', 'la venta', 'el marketing', 'el precio'], answer: 'die Produktentwicklung', vocabulary: { term: 'die Produktentwicklung', translation: 'el desarrollo de producto' }, hint: 'Es crear un nuevo producto.' },
+  ],
+};
+
+export const readingLessonB2CorporateCulture = {
+  id: 'reading-b2-corporate-culture',
+  title: 'Lectura B2: Cultura corporativa',
+  activityId: 'reading-b2-corporate-culture',
+  durationMinutes: 7,
+  questions: [
+    { id: 'corporate-culture-b2-q1', prompt: '¿Qué define la cultura corporativa?', word: 'define', options: ['Valores y comportamiento de la empresa', 'Solo el edificio', 'Solo el logo', 'Solo el producto'], answer: 'Valores y comportamiento de la empresa', vocabulary: { term: 'die Unternehmenskultur', translation: 'la cultura corporativa' }, hint: 'Son las creencias compartidas en la empresa.' },
+    { id: 'corporate-culture-b2-q2', prompt: '¿Qué significa "das Teamwork"?', word: 'Teamwork', options: ['El trabajo en equipo', 'El trabajo individual', 'La competencia', 'El aislamiento'], answer: 'El trabajo en equipo', vocabulary: { term: 'die Teamarbeit', translation: 'el trabajo en equipo' }, hint: 'Es colaborar con otros.' },
+    { id: 'corporate-culture-b2-q3', prompt: '¿Cómo se dice "valores corporativos" en alemán?', word: 'valores', options: ['die Unternehmenswerte', 'los productos', 'los clientes', 'los empleados'], answer: 'die Unternehmenswerte', vocabulary: { term: 'die Unternehmenswerte', translation: 'los valores corporativos' }, hint: 'Son los principios que guían la empresa.' },
+  ],
+};
+
+export const readingLessonB2DigitalPrivacy = {
+  id: 'reading-b2-digital-privacy',
+  title: 'Lectura B2: Privacidad digital',
+  activityId: 'reading-b2-digital-privacy',
+  durationMinutes: 7,
+  questions: [
+    { id: 'digital-privacy-b2-q1', prompt: '¿Qué es importante para proteger tu privacidad digital?', word: 'importante', options: ['Contraseñas seguras', 'Contraseñas simples', 'Compartir todo', 'No usar nada'], answer: 'Contraseñas seguras', vocabulary: { term: 'das sichere Passwort', translation: 'la contraseña segura' }, hint: 'Es una clave difícil de adivinar.' },
+    { id: 'digital-privacy-b2-q2', prompt: '¿Qué significa "der Datenschutz"?', word: 'Datenschutz', options: ['La protección de datos', 'El robo de datos', 'La venta de datos', 'El uso de datos'], answer: 'La protección de datos', vocabulary: { term: 'der Datenschutz', translation: 'la protección de datos' }, hint: 'Es safeguarding tu información personal.' },
+    { id: 'digital-privacy-b2-q3', prompt: '¿Cómo se dice "identidad digital" en alemán?', word: 'identidad', options: ['die digitale Identität', 'la identidad física', 'el documento', 'la foto'], answer: 'die digitale Identität', vocabulary: { term: 'die digitale Identität', translation: 'la identidad digital' }, hint: 'Es tu presencia y datos en internet.' },
+  ],
+};
+
+export const readingLessonB2AIEthics = {
+  id: 'reading-b2-ai-ethics',
+  title: 'Lectura B2: Ética de la IA',
+  activityId: 'reading-b2-ai-ethics',
+  durationMinutes: 7,
+  questions: [
+    { id: 'ai-ethics-b2-q1', prompt: '¿Qué es un desafío ético de la IA?', word: 'desafío', options: ['El sesgo en los algoritmos', 'La velocidad', 'El costo', 'El tamaño'], answer: 'El sesgo en los algoritmos', vocabulary: { term: 'der Bias', translation: 'el sesgo' }, hint: 'Es cuando la IA discrimina injustamente.' },
+    { id: 'ai-ethics-b2-q2', prompt: '¿Qué significa "die Verantwortung"?', word: 'Verantwortung', options: ['La responsabilidad', 'La culpa', 'El error', 'El olvido'], answer: 'La responsabilidad', vocabulary: { term: 'die Verantwortung', translation: 'la responsabilidad' }, hint: 'Es quien responde por las consecuencias.' },
+    { id: 'ai-ethics-b2-q3', prompt: '¿Cómo se dice "transparencia" en alemán?', word: 'transparencia', options: ['die Transparenz', 'el secreto', 'la oscuridad', 'la confusión'], answer: 'die Transparenz', vocabulary: { term: 'die Transparenz', translation: 'la transparencia' }, hint: 'Es ser claro y visible en los procesos.' },
   ],
 };
 
