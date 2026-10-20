@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Animated, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Animated, StyleSheet, Text, View } from 'react-native';
 import { MASCOT_ACCESSORIES } from '../../services/mascotRewardsService';
 import MascotAvatar from './MascotAvatar';
 import AppButton from '../common/AppButton';
+import MotionPressable from '../common/MotionPressable';
 import { colors, radii, spacing, typography } from '../../theme';
 
 const SLOT_LABELS = {
@@ -34,8 +35,8 @@ export default function MascotCustomization({
   useEffect(() => {
     if (!newRewards.length || reduceMotion) return;
     Animated.sequence([
-      Animated.spring(scale, { toValue: 1.08, speed: 20, useNativeDriver: true }),
-      Animated.spring(scale, { toValue: 1, speed: 20, useNativeDriver: true }),
+      Animated.spring(scale, { toValue: 1.08, speed: 20, useNativeDriver: false }),
+      Animated.spring(scale, { toValue: 1, speed: 20, useNativeDriver: false }),
     ]).start();
   }, [newRewards.length, reduceMotion, scale]);
 
@@ -106,7 +107,7 @@ export default function MascotCustomization({
           <View key={slot} style={styles.slot}>
             <Text style={styles.slotTitle}>{label}</Text>
             <View style={styles.options}>
-              <TouchableOpacity
+              <MotionPressable
                 onPress={() => updateAccessory(slot, null)}
                 style={[styles.option, selectedId === null && styles.selectedOption]}
                 accessibilityRole="button"
@@ -115,11 +116,11 @@ export default function MascotCustomization({
               >
                 <Text style={styles.optionEmoji}>—</Text>
                 <Text style={styles.optionText}>Ninguno</Text>
-              </TouchableOpacity>
+              </MotionPressable>
               {accessories.map((item) => {
                 const unlocked = unlockedIds.has(item.id);
                 return (
-                  <TouchableOpacity
+                  <MotionPressable
                     key={item.id}
                     onPress={() => unlocked && updateAccessory(slot, item.id)}
                     disabled={!unlocked}
@@ -135,7 +136,7 @@ export default function MascotCustomization({
                     <Text style={styles.milestone}>
                       {unlocked ? 'En tu colección' : `${item.streakDays} ${item.streakDays === 1 ? 'día seguido' : 'días seguidos'}`}
                     </Text>
-                  </TouchableOpacity>
+                  </MotionPressable>
                 );
               })}
             </View>

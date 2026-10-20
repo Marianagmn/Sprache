@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import ProgressBar from '../common/ProgressBar';
-import { colors } from '../../theme';
 
 export default function ActivityProgress({ progress = 0, completed, total }) {
 	const progressPercentage = Math.min(Math.max(progress, 0), 100);
