@@ -1,5 +1,6 @@
 import { initialUser } from '../data/user.js';
 import { deriveProgress } from './progressService.js';
+import { getMascotProgress } from './mascotRewardsService.js';
 
 const ACCOUNTS_KEY = '@sprache/demo/accounts-v1';
 const SESSION_KEY = '@sprache/demo/session-v1';
@@ -39,6 +40,20 @@ export function createAuthService({ storage, crypto, userDefaults = initialUser,
             : { ...(session || {}), durationSeconds: 0, durationSource: 'estimated' }
         ))
         : [],
+      learningDayKeys: Array.isArray(storedUser.learningDayKeys) ? storedUser.learningDayKeys : [],
+      totalLearningDays: Number.isFinite(storedUser.totalLearningDays) ? storedUser.totalLearningDays : 0,
+      longestStreak: Number.isFinite(storedUser.longestStreak) ? storedUser.longestStreak : 0,
+      mascot: {
+        ...(userDefaults.mascot || {}),
+        ...(storedUser.mascot || {}),
+        unlockedAccessoryIds: Array.isArray(storedUser.mascot?.unlockedAccessoryIds)
+          ? storedUser.mascot.unlockedAccessoryIds
+          : [],
+        selectedAccessories: storedUser.mascot?.selectedAccessories || {},
+        newlyUnlockedAccessoryIds: Array.isArray(storedUser.mascot?.newlyUnlockedAccessoryIds)
+          ? storedUser.mascot.newlyUnlockedAccessoryIds
+          : [],
+      },
       wordProgress: storedUser.wordProgress && typeof storedUser.wordProgress === 'object' ? storedUser.wordProgress : {},
       failedWords: storedUser.failedWords
         && typeof storedUser.failedWords === 'object'
@@ -65,7 +80,7 @@ export function createAuthService({ storage, crypto, userDefaults = initialUser,
       },
     };
 
-    return { ...user, ...deriveUserProgress(user) };
+    return { ...user, ...deriveUserProgress(user), ...getMascotProgress(user, user.sessions) };
   }
 
   function toHex(bytes) {

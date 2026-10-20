@@ -4,6 +4,7 @@ import { updateProfile } from '../services/profileService';
 import { recordActivity, resetProgress } from '../services/progressService';
 import { updateFailedWords } from '../services/lessonProgressService';
 import { updateLearningProgress } from '../services/learningProgressService';
+import { selectMascotAccessory } from '../services/mascotRewardsService';
 
 const AppContext = createContext(null);
 
@@ -78,6 +79,24 @@ export function AppProvider({ children }) {
     return updatedUser;
   }, [persistUserUpdate]);
 
+  const saveMascotAccessory = useCallback(async (slot, accessoryId) => {
+    const updatedUser = await persistUserUpdate((currentUser) => ({
+      ...currentUser,
+      mascot: selectMascotAccessory(currentUser.mascot, slot, accessoryId),
+    }));
+    setUser(updatedUser);
+    return updatedUser;
+  }, [persistUserUpdate]);
+
+  const dismissMascotRewardNotice = useCallback(async () => {
+    const updatedUser = await persistUserUpdate((currentUser) => ({
+      ...currentUser,
+      mascot: { ...currentUser.mascot, newlyUnlockedAccessoryIds: [] },
+    }));
+    setUser(updatedUser);
+    return updatedUser;
+  }, [persistUserUpdate]);
+
   const registerUser = async (credentials) => {
     const registeredUser = await register(credentials);
     setUser(registeredUser);
@@ -113,13 +132,15 @@ export function AppProvider({ children }) {
     saveLessonProgress,
     saveWordAttempt,
     saveLearningProgress,
+    saveMascotAccessory,
+    dismissMascotRewardNotice,
     completeActivity,
     registerUser,
     loginUser,
     editProfile,
     resetUserProgress,
     logoutUser,
-  }), [user, isLoading, saveLessonProgress, saveWordAttempt, saveLearningProgress]);
+  }), [user, isLoading, saveLessonProgress, saveWordAttempt, saveLearningProgress, saveMascotAccessory, dismissMascotRewardNotice]);
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 }

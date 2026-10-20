@@ -1,4 +1,5 @@
 import { calculateNextReview } from './spacedRepetitionService.js';
+import { getMascotProgress } from './mascotRewardsService.js';
 
 function toDate(value, fallback = new Date()) {
   const date = value ? new Date(value) : fallback;
@@ -168,7 +169,11 @@ export function recordActivity(user, session, now = new Date()) {
     activeLessonProgress: null,
   };
 
-  return { ...updatedUser, ...deriveProgress(updatedUser, completedAt) };
+  return {
+    ...updatedUser,
+    ...deriveProgress(updatedUser, completedAt),
+    ...getMascotProgress(user, updatedUser.sessions),
+  };
 }
 
 export function resetProgress(user) {
@@ -178,6 +183,14 @@ export function resetProgress(user) {
     wordProgress: {},
     failedWords: {},
     learningProgress: { readings: {}, theory: {}, pronunciation: {} },
+    totalLearningDays: Number.isFinite(user.totalLearningDays) ? user.totalLearningDays : 0,
+    learningDayKeys: Array.isArray(user.learningDayKeys) ? user.learningDayKeys : [],
+    longestStreak: Number.isFinite(user.longestStreak) ? user.longestStreak : 0,
+    mascot: {
+      unlockedAccessoryIds: user.mascot?.unlockedAccessoryIds || [],
+      selectedAccessories: user.mascot?.selectedAccessories || {},
+      newlyUnlockedAccessoryIds: [],
+    },
     activeLessonProgress: null,
     todaySeconds: 0,
     todayMinutes: 0,
