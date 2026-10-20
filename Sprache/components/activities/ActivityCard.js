@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import MotionPressable from '../common/MotionPressable';
 import { colors, elevation, radii, spacing } from '../../theme';
 
 export default function ActivityCard({
@@ -13,10 +14,9 @@ export default function ActivityCard({
     onPress
 }) {
     return (
-        <TouchableOpacity
+        <MotionPressable
             style={styles.card}
             onPress={onPress}
-            activeOpacity={0.7}
             accessibilityRole="button"
             accessibilityLabel={`${title}. ${description}. Duración: ${time}. Nivel: ${levelCode}`}
         >
@@ -40,7 +40,7 @@ export default function ActivityCard({
                 <Text style={styles.timeText}>{time}</Text>
                 <Ionicons name="chevron-forward" size={18} color={colors.muted} />
             </View>
-        </TouchableOpacity>
+        </MotionPressable>
     );
 }
 

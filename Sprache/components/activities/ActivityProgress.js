@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import ProgressBar from '../common/ProgressBar';
 import { colors } from '../../theme';
 
 export default function ActivityProgress({ progress = 0, completed, total }) {
@@ -13,9 +14,7 @@ export default function ActivityProgress({ progress = 0, completed, total }) {
 					<Text style={styles.count}>{completed} / {total}</Text>
 				</View>
 			)}
-			<View style={styles.progressBackground}>
-				<View style={[styles.progressFill, { width: `${progressPercentage}%` }]} />
-			</View>
+			<ProgressBar progress={progressPercentage} accessibilityLabel="Progreso de la actividad" style={styles.progressBackground} />
 		</View>
 	);
 }
@@ -25,6 +24,5 @@ const styles = StyleSheet.create({
 	labelRow: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 8 },
 	label: { fontSize: 14, fontWeight: '600', color: colors.black },
 	count: { fontSize: 14, color: colors.muted },
-	progressBackground: { height: 8, backgroundColor: colors.border, borderRadius: 4, overflow: 'hidden' },
-	progressFill: { height: '100%', backgroundColor: colors.gold, borderRadius: 4 }
+	progressBackground: { height: 8, borderRadius: 4 }
 });

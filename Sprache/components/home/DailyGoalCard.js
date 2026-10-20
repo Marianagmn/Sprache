@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import ProgressBar from '../common/ProgressBar';
 import { colors, radii, spacing, typography } from '../../theme';
 
 export default function DailyGoalCard({ completedSeconds = 0, goal = 10, unit = 'min', encouragement }) {
@@ -20,15 +21,14 @@ export default function DailyGoalCard({ completedSeconds = 0, goal = 10, unit = 
 		<View style={styles.card}>
 			<Text style={styles.title} accessibilityRole="header">Tu objetivo de hoy</Text>
 			<Text style={styles.goal}>{formattedTime} / {goal} {unit}</Text>
-			<View
-				style={styles.progressBackground}
-				accessible
-				accessibilityRole="progressbar"
+			<ProgressBar
+				progress={progress * 100}
+				color={colors.gold}
+				backgroundColor="rgba(255,255,255,0.22)"
 				accessibilityLabel="Progreso de tu objetivo diario"
 				accessibilityValue={{ min: 0, max: goal * 60, now: Math.min(completedSeconds, goal * 60), text: `${Math.round(progress * 100)} por ciento` }}
-			>
-				<View style={[styles.progressFill, { width: `${progress * 100}%` }]} />
-			</View>
+				style={styles.progressBackground}
+			/>
 			<Text style={styles.encouragement}>{message}</Text>
 		</View>
 	);
@@ -38,7 +38,6 @@ const styles = StyleSheet.create({
 	card: { backgroundColor: colors.black, padding: 20, borderRadius: radii.lg, marginBottom: spacing.xl },
 	title: { color: colors.white, fontSize: typography.small, fontWeight: typography.semibold, marginBottom: spacing.sm },
 	goal: { color: colors.gold, fontSize: typography.title, fontWeight: typography.bold, marginBottom: spacing.lg },
-	progressBackground: { height: 8, backgroundColor: 'rgba(255,255,255,0.22)', borderRadius: 4, marginBottom: spacing.md },
-	progressFill: { height: 8, width: '70%', backgroundColor: colors.gold, borderRadius: 4 },
+	progressBackground: { height: 8, borderRadius: 4, marginBottom: spacing.md },
 	encouragement: { color: colors.gold, fontSize: typography.small, fontWeight: typography.semibold }
 });

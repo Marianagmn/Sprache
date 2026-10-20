@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import MotionPressable from '../common/MotionPressable';
 import { colors, elevation, radii, spacing, typography } from '../../theme';
 
 export default function RecommendationCard({
@@ -11,10 +12,9 @@ export default function RecommendationCard({
 	onPress
 }) {
 	return (
-		<TouchableOpacity
+		<MotionPressable
 			style={styles.card}
 			onPress={onPress}
-			activeOpacity={0.7}
 			accessibilityRole="button"
 			accessibilityLabel={`${title}. ${description}. Duración: ${time}`}
 		>
@@ -26,7 +26,7 @@ export default function RecommendationCard({
 				<Text style={styles.description}>{description}</Text>
 			</View>
 			<Text style={styles.time}>{time} →</Text>
-		</TouchableOpacity>
+		</MotionPressable>
 	);
 }
 

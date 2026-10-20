@@ -1,5 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
+import MotionPressable from '../common/MotionPressable';
+import ProgressBar from '../common/ProgressBar';
 import { colors, elevation, radii, typography } from '../../theme';
 
 const goals = [5, 10, 20, 30];
@@ -18,21 +20,18 @@ export default function GoalCard({ dailyGoal = 10, completedSeconds = 0, onGoalC
 			<Text style={styles.label}>{label}</Text>
 			<Text style={styles.value}>{dailyGoal} minutos al día</Text>
 			<Text style={styles.progressText}>{practicedText}</Text>
-			<View
-				style={styles.progressBackground}
-				accessible
-				accessibilityRole="progressbar"
+			<ProgressBar
+				progress={progress * 100}
 				accessibilityLabel="Avance de la meta diaria"
 				accessibilityValue={{ min: 0, max: dailyGoal * 60, now: Math.min(completedSeconds, dailyGoal * 60), text: `${Math.round(progress * 100)} por ciento` }}
-			>
-				<View style={[styles.progressFill, { width: `${progress * 100}%` }]} />
-			</View>
+				style={styles.progressBackground}
+			/>
 			<Text style={styles.remainingText}>
 				{progress >= 1 ? '¡Meta de hoy alcanzada!' : remainingText}
 			</Text>
 			<View style={styles.goalOptions}>
 				{goals.map((goal) => (
-					<TouchableOpacity
+					<MotionPressable
 						key={goal}
 						accessibilityRole="radio"
 						accessibilityLabel={`${goal} minutos al día`}
@@ -41,7 +40,7 @@ export default function GoalCard({ dailyGoal = 10, completedSeconds = 0, onGoalC
 						style={[styles.goalOption, dailyGoal === goal && styles.selectedGoal]}
 					>
 						<Text style={[styles.goalText, dailyGoal === goal && styles.selectedGoalText]}>{goal} min</Text>
-					</TouchableOpacity>
+					</MotionPressable>
 				))}
 			</View>
 			<Text style={styles.badgeText}>Elige el ritmo que te venga bien</Text>
@@ -54,8 +53,7 @@ const styles = StyleSheet.create({
 	label: { fontSize: 14, color: colors.muted, marginBottom: 4 },
 	value: { fontSize: 18, fontWeight: 'bold', color: colors.black, marginBottom: 12, textAlign: 'center' },
 	progressText: { fontSize: 14, color: colors.muted, marginBottom: 8, textAlign: 'center' },
-	progressBackground: { height: 10, backgroundColor: colors.border, borderRadius: 999, overflow: 'hidden' },
-	progressFill: { height: '100%', backgroundColor: colors.gold, borderRadius: 999 },
+	progressBackground: { height: 10, borderRadius: 999 },
 	remainingText: { fontSize: 13, color: colors.muted, marginTop: 8, marginBottom: 16, textAlign: 'center' },
 	goalOptions: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', marginBottom: 12 },
 	goalOption: { minHeight: 44, justifyContent: 'center', borderWidth: 1, borderColor: colors.border, borderRadius: radii.pill, paddingVertical: 7, paddingHorizontal: 14, marginHorizontal: 4, marginBottom: 6 },

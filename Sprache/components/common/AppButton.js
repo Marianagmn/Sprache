@@ -1,5 +1,6 @@
 import React from 'react';
-import { ActivityIndicator, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { ActivityIndicator, StyleSheet, Text } from 'react-native';
+import MotionPressable from './MotionPressable';
 import { colors, radii, spacing, typography } from '../../theme';
 
 export default function AppButton({
@@ -16,7 +17,7 @@ export default function AppButton({
 	const isDisabled = disabled || loading;
 
 	return (
-		<TouchableOpacity
+		<MotionPressable
 			style={[
 				styles.button,
 				variant === 'secondary' && styles.secondaryButton,
@@ -25,7 +26,6 @@ export default function AppButton({
 			]}
 			onPress={onPress}
 			disabled={isDisabled}
-			activeOpacity={0.8}
 			accessibilityRole="button"
 			accessibilityState={{ disabled: isDisabled, busy: loading }}
 			{...props}
@@ -38,7 +38,7 @@ export default function AppButton({
 					{title}
 				</Text>
 			)}
-		</TouchableOpacity>
+		</MotionPressable>
 	);
 }
 
