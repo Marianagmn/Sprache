@@ -870,9 +870,36 @@ export const vocabularyLessons = [
   vocabularyLessonTechnology, vocabularyLessonEmotions, vocabularyLessonFoodDrinks, vocabularyLessonFurniture,
   vocabularyLessonFruits, vocabularyLessonVegetables,
 ];
+
+// Additional A2 Reading Lessons
+export const readingLessonRestaurant = {
+  id: 'reading-restaurant',
+  title: 'Lectura: En el restaurante',
+  activityId: 'reading-restaurant',
+  durationMinutes: 7,
+  questions: [
+    { id: 'restaurant-q1', prompt: '¿Qué pide el cliente primero?', word: 'cliente', options: ['Una bebida', 'Comida', 'La cuenta', 'Postre'], answer: 'Una bebida', vocabulary: { term: 'die Getränke', translation: 'las bebidas' }, hint: 'Lee el primer párrafo.' },
+    { id: 'restaurant-q2', prompt: '¿Qué significa "Ich möchte bezahlen"?', word: 'bezahlen', options: ['Quiero pagar', 'Quiero comer', '¿Dónde está?', 'Es caro'], answer: 'Quiero pagar', vocabulary: { term: 'bezahlen', translation: 'pagar' }, hint: 'Bezahlen significa pagar.' },
+    { id: 'restaurant-q3', prompt: '¿Cómo pide el cliente el postre?', word: 'postre', options: ['Como Nachspeise', 'Como Hauptgericht', 'Como Vorspeise', 'Como Getränk'], answer: 'Como Nachspeise', vocabulary: { term: 'die Nachspeise', translation: 'el postre' }, hint: 'Nachspeise es el postre.' },
+  ],
+};
+
+export const readingLessonLibrary = {
+  id: 'reading-library',
+  title: 'Lectura: En la biblioteca',
+  activityId: 'reading-library',
+  durationMinutes: 7,
+  questions: [
+    { id: 'library-q1', prompt: '¿Qué hace la persona en la biblioteca?', word: 'biblioteca', options: ['Estudia', 'Duerme', 'Come', 'Juega'], answer: 'Estudia', vocabulary: { term: 'die Bibliothek', translation: 'la biblioteca' }, hint: 'Es un lugar para estudiar.' },
+    { id: 'library-q2', prompt: '¿Qué significa "das Buch"?', word: 'Buch', options: ['El libro', 'La mesa', 'La silla', 'La ventana'], answer: 'El libro', vocabulary: { term: 'das Buch', translation: 'el libro' }, hint: 'Buch es un sustantivo neutro.' },
+    { id: 'library-q3', prompt: '¿Cómo se dice "prestar" en alemán?', word: 'prestar', options: ['ausleihen', 'kaufen', 'lesen', 'schreiben'], answer: 'ausleihen', vocabulary: { term: 'ausleihen', translation: 'prestar' }, hint: 'Ausleihen es tomar prestado.' },
+  ],
+};
+
 export const readingLessons = [
   readingLessonCity, readingLessonCafe, readingLessonStation, readingLessonMarket, readingLessonWeather,
   readingLessonDoctor, readingLessonWeekend, readingLessonApartment, readingLessonConversation,
+  readingLessonRestaurant, readingLessonLibrary,
 ];
 export const grammarLessonNounPlural = {
   id: 'grammar-noun-plural',
@@ -943,6 +970,43 @@ export const grammarLessonSubjunctive = {
     { id: 'subjunctive-q1', prompt: 'Completa: Ich ___ gern nach Deutschland reisen. (me gustaría viajar)', word: 'würde', options: ['würde', 'wollte', 'könnte', 'sollte'], answer: 'würde', vocabulary: { term: 'würde', translation: 'gustaría (forma condicional)' }, hint: 'Würde + infinitivo expresa deseo o condición.' },
     { id: 'subjunctive-q2', prompt: '¿Qué significa "Ich könnte das machen"?', word: 'könnte', options: ['Podría hacerlo', 'Puedo hacerlo', 'Podré hacerlo', 'Pude hacerlo'], answer: 'Podría hacerlo', vocabulary: { term: 'können', translation: 'poder' }, hint: 'Könnte es la forma de subjuntivo de können.' },
     { id: 'subjunctive-q3', prompt: 'Completa: Wenn ich Zeit ___, käme ich mit. (si tuviera tiempo)', word: 'hätte', options: ['hätte', 'habe', 'hatte', 'hättest'], answer: 'hätte', vocabulary: { term: 'haben', translation: 'tener' }, hint: 'En condiciones hipotéticas se usa Konjunktiv II.' },
+  ],
+};
+
+// Additional A2 Grammar Lessons
+export const grammarLessonPrepositions = {
+  id: 'grammar-prepositions',
+  title: 'Preposiciones con casos',
+  activityId: 'grammar-prepositions',
+  durationMinutes: 8,
+  questions: [
+    { id: 'prep-grammar-q1', prompt: 'Completa: Ich gehe ___ Kino.', word: 'ins', options: ['ins', 'in das', 'in dem', 'im'], answer: 'ins', vocabulary: { term: 'ins Kino', translation: 'al cine' }, hint: 'In + das = ins (acusativo).' },
+    { id: 'prep-grammar-q2', prompt: 'Completa: Ich bin ___ Schule.', word: 'in der', options: ['in der', 'in das', 'in dem', 'ins'], answer: 'in der', vocabulary: { term: 'in der Schule', translation: 'en la escuela' }, hint: 'In + die = in der (dativo).' },
+    { id: 'prep-grammar-q3', prompt: '¿Qué preposición usa acusativo con movimiento?', word: 'movimiento', options: ['in', 'bei', 'mit', 'von'], answer: 'in', vocabulary: { term: 'in', translation: 'en' }, hint: 'Wechselpräpositionen cambian el caso.' },
+  ],
+};
+
+export const grammarLessonReflexive = {
+  id: 'grammar-reflexive',
+  title: 'Verbos reflexivos',
+  activityId: 'grammar-reflexive',
+  durationMinutes: 8,
+  questions: [
+    { id: 'reflexive-q1', prompt: 'Completa: Ich ___ mich.', word: 'wasche', options: ['wasche', 'waschst', 'wäscht', 'waschen'], answer: 'wasche', vocabulary: { term: 'sich waschen', translation: 'lavarse' }, hint: 'Con ich, el verbo no cambia y mich es acusativo.' },
+    { id: 'reflexive-q2', prompt: 'Completa: Du ___ dich.', word: 'waschst', options: ['waschst', 'wasche', 'wäscht', 'waschen'], answer: 'waschst', vocabulary: { term: 'sich waschen', translation: 'lavarse' }, hint: 'Con du, añade -st y dich es acusativo.' },
+    { id: 'reflexive-q3', prompt: '¿Qué significa "sich freuen"?', word: 'sich freuen', options: ['Alegrarse', 'Triste', 'Enojado', 'Cansado'], answer: 'Alegrarse', vocabulary: { term: 'sich freuen', translation: 'alegrarse' }, hint: 'Sentimiento positivo reflexivo.' },
+  ],
+};
+
+export const grammarLessonRelative = {
+  id: 'grammar-relative',
+  title: 'Pronombres relativos',
+  activityId: 'grammar-relative',
+  durationMinutes: 8,
+  questions: [
+    { id: 'relative-q1', prompt: 'Completa: Das ist das Buch, ___ ich lese.', word: 'das', options: ['das', 'der', 'die', 'den'], answer: 'das', vocabulary: { term: 'das Buch', translation: 'el libro' }, hint: 'Das es neutro, relativo neutro.' },
+    { id: 'relative-q2', prompt: 'Completa: Der Mann, ___ ich kenne, ist nett.', word: 'den', options: ['den', 'der', 'das', 'die'], answer: 'den', vocabulary: { term: 'der Mann', translation: 'el hombre' }, hint: 'Der es masculino, relativo acusativo.' },
+    { id: 'relative-q3', prompt: '¿Qué pronombre relativo usa "die"?', word: 'die', options: ['Femenino plural', 'Masculino', 'Neutro', 'Solo femenino'], answer: 'Femenino plural', vocabulary: { term: 'die', translation: 'la/los (plural)' }, hint: 'Die se usa para femenino y plural.' },
   ],
 };
 
@@ -2312,6 +2376,7 @@ export const grammarLessons = [
   grammarLessonAccusative, grammarLessonModalVerbs, grammarLessonDative, grammarLessonPerfect,
   grammarLessonNounPlural, grammarLessonSeparableVerbs, grammarLessonGenitive,
   grammarLessonImperative, grammarLessonFuture, grammarLessonSubjunctive,
+  grammarLessonPrepositions, grammarLessonReflexive, grammarLessonRelative,
 ];
 export const practiceLessons = [
   dictationLessonBasics, dictationLessonA2, dictationLessonB1, dictationLessonB2,
