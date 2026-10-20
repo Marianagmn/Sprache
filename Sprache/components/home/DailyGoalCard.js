@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import GoalCompletion from '../common/GoalCompletion';
 import ProgressBar from '../common/ProgressBar';
 import { colors, radii, spacing, typography } from '../../theme';
 
@@ -29,7 +30,8 @@ export default function DailyGoalCard({ completedSeconds = 0, goal = 10, unit = 
 				accessibilityValue={{ min: 0, max: goal * 60, now: Math.min(completedSeconds, goal * 60), text: `${Math.round(progress * 100)} por ciento` }}
 				style={styles.progressBackground}
 			/>
-			<Text style={styles.encouragement}>{message}</Text>
+			<GoalCompletion completed={progress >= 1} message={message} color={colors.gold} />
+			{progress < 1 && <Text style={styles.encouragement}>{message}</Text>}
 		</View>
 	);
 }

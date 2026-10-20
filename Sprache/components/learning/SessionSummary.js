@@ -1,16 +1,36 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import { StyleSheet, Text, View } from 'react-native';
+import { Animated, StyleSheet, Text, View } from 'react-native';
 import AppButton from '../common/AppButton';
 import CelebrationNotice from './CelebrationNotice';
 import { calculateSessionSummary } from '../../services/lessonProgressService';
+import { useReduceMotion } from '../../context/MotionPreferencesContext';
 import { colors, radii, spacing, typography } from '../../theme';
 
 export default function SessionSummary({ correctAnswers, totalQuestions, earnedXp, practiceMinutes = 0, celebrations = [], onFinish }) {
   const summary = calculateSessionSummary(correctAnswers, totalQuestions);
+  const reduceMotion = useReduceMotion();
+  const entrance = useRef(new Animated.Value(1)).current;
+
+  useEffect(() => {
+    entrance.stopAnimation();
+    if (reduceMotion) {
+      entrance.setValue(1);
+      return undefined;
+    }
+
+    entrance.setValue(0.97);
+    const animation = Animated.timing(entrance, {
+      toValue: 1,
+      duration: 180,
+      useNativeDriver: false,
+    });
+    animation.start();
+    return () => animation.stop();
+  }, [entrance, reduceMotion]);
 
   return (
-    <View style={styles.container}>
+    <Animated.View style={[styles.container, { opacity: entrance, transform: [{ scale: entrance }] }]}>
       <View style={styles.iconContainer}>
         <Ionicons name="trophy" size={42} color={colors.black} />
       </View>
@@ -31,7 +51,7 @@ export default function SessionSummary({ correctAnswers, totalQuestions, earnedX
         ))}
       </View>
       <AppButton title="Volver a actividades" onPress={onFinish} style={styles.button} />
-    </View>
+    </Animated.View>
   );
 }
 

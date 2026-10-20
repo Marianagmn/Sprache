@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import GoalCompletion from '../common/GoalCompletion';
 import MotionPressable from '../common/MotionPressable';
 import ProgressBar from '../common/ProgressBar';
 import { colors, elevation, radii, typography } from '../../theme';
@@ -26,9 +27,8 @@ export default function GoalCard({ dailyGoal = 10, completedSeconds = 0, onGoalC
 				accessibilityValue={{ min: 0, max: dailyGoal * 60, now: Math.min(completedSeconds, dailyGoal * 60), text: `${Math.round(progress * 100)} por ciento` }}
 				style={styles.progressBackground}
 			/>
-			<Text style={styles.remainingText}>
-				{progress >= 1 ? '¡Meta de hoy alcanzada!' : remainingText}
-			</Text>
+			<GoalCompletion completed={progress >= 1} message="¡Meta de hoy alcanzada!" />
+			{progress < 1 && <Text style={styles.remainingText}>{remainingText}</Text>}
 			<View style={styles.goalOptions}>
 				{goals.map((goal) => (
 					<MotionPressable

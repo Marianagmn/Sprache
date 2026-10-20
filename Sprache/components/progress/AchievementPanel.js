@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import ProgressBar from '../common/ProgressBar';
 import { getAchievements, getExperience, getWeeklyChallenges } from '../../services/achievementService.js';
 import { colors, elevation, radii, spacing, typography } from '../../theme';
 
@@ -24,15 +25,13 @@ export default function AchievementPanel({ sessions = [], compact = false }) {
             <Text style={styles.levelValue}>{experience.level}</Text>
           </View>
         </View>
-        <View
-          style={styles.progressTrack}
-          accessible
-          accessibilityRole="progressbar"
+        <ProgressBar
+          progress={experience.progressToNextLevel}
+          backgroundColor="rgba(255,255,255,0.24)"
           accessibilityLabel="Progreso al siguiente nivel de experiencia"
           accessibilityValue={{ min: 0, max: experience.nextLevelXp, now: experience.progressToNextLevel, text: `${experience.progressToNextLevel} de ${experience.nextLevelXp} XP` }}
-        >
-          <View style={[styles.progressFill, { width: `${experience.progressToNextLevel}%` }]} />
-        </View>
+          style={styles.progressTrack}
+        />
         <Text style={styles.helperText}>
           {experience.nextLevelXp - experience.progressToNextLevel} XP para el siguiente nivel · sumas XP al completar, dedicar tiempo y acertar
         </Text>
@@ -52,15 +51,12 @@ export default function AchievementPanel({ sessions = [], compact = false }) {
                 {challenge.progress}/{challenge.target}{challenge.completed ? ' ✓' : ''}
               </Text>
             </View>
-            <View
-              style={styles.challengeTrack}
-              accessible
-              accessibilityRole="progressbar"
+            <ProgressBar
+              progress={percentage}
               accessibilityLabel={challenge.title}
               accessibilityValue={{ min: 0, max: challenge.target, now: challenge.progress }}
-            >
-              <View style={[styles.challengeFill, { width: `${percentage}%` }]} />
-            </View>
+              style={styles.challengeTrack}
+            />
           </View>
         );
       })}
@@ -99,8 +95,7 @@ const styles = StyleSheet.create({
   levelBadge: { alignItems: 'center', backgroundColor: colors.gold, borderRadius: radii.md, minWidth: 64, paddingHorizontal: spacing.md, paddingVertical: spacing.sm },
   levelLabel: { color: colors.black, fontSize: typography.caption, fontWeight: typography.semibold },
   levelValue: { color: colors.black, fontSize: typography.subtitle, fontWeight: typography.heavy },
-  progressTrack: { height: 8, backgroundColor: 'rgba(255,255,255,0.24)', borderRadius: 999, overflow: 'hidden' },
-  progressFill: { height: '100%', backgroundColor: colors.gold, borderRadius: 999 },
+  progressTrack: { height: 8, borderRadius: 999 },
   helperText: { color: colors.muted, fontSize: typography.caption, lineHeight: 18, marginTop: spacing.sm },
   sectionTitle: { color: colors.black, fontSize: typography.body, fontWeight: typography.bold, marginTop: spacing.sm, marginBottom: spacing.sm },
   challengeCard: { backgroundColor: colors.surface, borderRadius: radii.md, padding: spacing.md, marginBottom: spacing.sm, ...elevation.card },
@@ -109,8 +104,7 @@ const styles = StyleSheet.create({
   challengeTitle: { color: colors.black, fontSize: typography.small, fontWeight: typography.bold },
   challengeDescription: { color: colors.muted, fontSize: typography.caption, marginTop: 2 },
   challengeCount: { color: colors.black, fontSize: typography.small, fontWeight: typography.bold },
-  challengeTrack: { height: 7, backgroundColor: colors.border, borderRadius: 999, overflow: 'hidden' },
-  challengeFill: { height: '100%', backgroundColor: colors.gold, borderRadius: 999 },
+  challengeTrack: { height: 7, borderRadius: 999 },
   badgesGrid: { flexDirection: 'row', flexWrap: 'wrap', marginHorizontal: -4 },
   badgeCard: { flexGrow: 1, flexBasis: '44%', minWidth: 132, alignItems: 'center', backgroundColor: colors.goldSoft, borderRadius: radii.md, padding: spacing.md, margin: 4 },
   badgeLocked: { backgroundColor: colors.surface, borderColor: colors.border, borderWidth: 1 },

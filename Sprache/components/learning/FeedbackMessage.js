@@ -1,12 +1,40 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import { StyleSheet, Text, View } from 'react-native';
+import { Animated, StyleSheet, Text, View } from 'react-native';
+import { useReduceMotion } from '../../context/MotionPreferencesContext';
 import { colors, radii, spacing, typography } from '../../theme';
 
 export default function FeedbackMessage({ correct, message }) {
+  const reduceMotion = useReduceMotion();
+  const entrance = useRef(new Animated.Value(1)).current;
+
+  useEffect(() => {
+    entrance.stopAnimation();
+    if (reduceMotion) {
+      entrance.setValue(1);
+      return undefined;
+    }
+
+    entrance.setValue(0);
+    const animation = Animated.timing(entrance, {
+      toValue: 1,
+      duration: 160,
+      useNativeDriver: false,
+    });
+    animation.start();
+    return () => animation.stop();
+  }, [entrance, reduceMotion]);
+
   return (
-    <View
-      style={[styles.container, correct ? styles.success : styles.error]}
+    <Animated.View
+      style={[
+        styles.container,
+        correct ? styles.success : styles.error,
+        {
+          opacity: entrance,
+          transform: [{ translateY: entrance.interpolate({ inputRange: [0, 1], outputRange: [5, 0] }) }],
+        },
+      ]}
       accessibilityRole="alert"
       accessibilityLiveRegion="polite"
     >
@@ -17,7 +45,7 @@ export default function FeedbackMessage({ correct, message }) {
         </Text>
         <Text style={styles.message}>{message}</Text>
       </View>
-    </View>
+    </Animated.View>
   );
 }
 

@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Animated, StyleSheet, Text, View } from 'react-native';
+import MotionPressable from '../common/MotionPressable';
+import { useReduceMotion } from '../../context/MotionPreferencesContext';
 import { colors, radii, spacing, typography } from '../../theme';
 
 export default function AnswerOption({ label, selected, correct, incorrect, disabled, onPress }) {
+  const reduceMotion = useReduceMotion();
+  const iconScale = useRef(new Animated.Value(1)).current;
   const stateStyle = correct ? styles.correct : incorrect ? styles.incorrect : selected ? styles.selected : null;
   const icon = correct ? 'checkmark-circle' : incorrect ? 'close-circle' : selected ? 'radio-button-on' : 'radio-button-off';
   const iconColor = correct ? colors.success : incorrect ? colors.red : selected ? colors.black : colors.muted;
@@ -12,14 +16,39 @@ export default function AnswerOption({ label, selected, correct, incorrect, disa
     .filter(Boolean)
     .join(', ');
 
+  useEffect(() => {
+    iconScale.stopAnimation();
+    if (!correct && !incorrect) {
+      iconScale.setValue(1);
+      return undefined;
+    }
+
+    if (reduceMotion) {
+      iconScale.setValue(1);
+      return undefined;
+    }
+
+    iconScale.setValue(0.78);
+    const animation = Animated.spring(iconScale, {
+      toValue: 1,
+      speed: 24,
+      bounciness: 3,
+      useNativeDriver: false,
+    });
+    animation.start();
+    return () => animation.stop();
+  }, [correct, iconScale, incorrect, reduceMotion]);
+
   return (
-    <TouchableOpacity style={[styles.option, stateStyle]} onPress={onPress} disabled={disabled} activeOpacity={0.8} accessibilityRole="radio" accessibilityLabel={accessibilityLabel} accessibilityState={{ selected, disabled }}>
+    <MotionPressable style={[styles.option, stateStyle]} onPress={onPress} disabled={disabled} accessibilityRole="radio" accessibilityLabel={accessibilityLabel} accessibilityState={{ selected, disabled }}>
       <Text style={[styles.label, (correct || incorrect) && styles.stateLabel]} accessible={false}>{label}</Text>
       <View style={styles.status}>
-        <Ionicons accessible={false} name={icon} size={23} color={iconColor} />
+        <Animated.View style={{ transform: [{ scale: iconScale }] }}>
+          <Ionicons accessible={false} name={icon} size={23} color={iconColor} />
+        </Animated.View>
         {!!statusLabel && <Text style={[styles.statusLabel, correct ? styles.correctLabel : styles.incorrectLabel]} accessible={false}>{statusLabel}</Text>}
       </View>
-    </TouchableOpacity>
+    </MotionPressable>
   );
 }
 
