@@ -84,6 +84,14 @@ test('crear perfil valida los datos y restaura la sesión tras reiniciar el serv
       theory: { 'theory-foundations': { completedLessonIds: ['alphabet-pronunciation'] } },
       pronunciation: { 'reading-a1-first-day-text': { playCount: 2 } },
     },
+    totalLearningDays: 9,
+    learningDayKeys: ['2026-10-10', '2026-10-11', '2026-10-12'],
+    longestStreak: 3,
+    mascot: {
+      unlockedAccessoryIds: ['scarf', 'glasses'],
+      selectedAccessories: { neck: 'scarf' },
+      newlyUnlockedAccessoryIds: ['glasses'],
+    },
     failedWords: {
       buch: {
         term: 'Buch',
@@ -102,6 +110,10 @@ test('crear perfil valida los datos y restaura la sesión tras reiniciar el serv
   assert.equal(userWithHapticsEnabled.learningProgress.readings['reading-a1-first-day'].completed, true);
   assert.deepEqual(userWithHapticsEnabled.learningProgress.theory['theory-foundations'].completedLessonIds, ['alphabet-pronunciation']);
   assert.equal(userWithHapticsEnabled.learningProgress.pronunciation['reading-a1-first-day-text'].playCount, 2);
+  assert.equal(userWithHapticsEnabled.totalLearningDays, 9);
+  assert.equal(userWithHapticsEnabled.longestStreak, 3);
+  assert.deepEqual(userWithHapticsEnabled.mascot.unlockedAccessoryIds, ['scarf', 'glasses']);
+  assert.deepEqual(userWithHapticsEnabled.mascot.selectedAccessories, { neck: 'scarf' });
   assert.equal(userWithHapticsEnabled.failedWords.buch.term, 'Buch');
 });
 

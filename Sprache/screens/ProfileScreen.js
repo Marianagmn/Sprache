@@ -11,10 +11,18 @@ import ProfileStats from '../components/profile/ProfileStats';
 import SettingsSection from '../components/profile/SettingsSection';
 import SettingsRow from '../components/profile/SettingsRow';
 import SettingsSwitchRow from '../components/profile/SettingsSwitchRow';
+import MascotCustomization from '../components/profile/MascotCustomization';
 import { colors, radii, spacing, typography } from '../theme';
 
 export default function ProfileScreen({ navigation }) {
-  const { user, editProfile, logoutUser, resetUserProgress } = useApp();
+  const {
+    user,
+    editProfile,
+    logoutUser,
+    resetUserProgress,
+    saveMascotAccessory,
+    dismissMascotRewardNotice,
+  } = useApp();
   const reduceMotion = useReduceMotion();
   const [isEditing, setIsEditing] = useState(false);
   const [name, setName] = useState(user.name);
@@ -35,7 +43,7 @@ export default function ProfileScreen({ navigation }) {
   };
 
   const handleResetProgress = () => {
-    Alert.alert('Reiniciar progreso', 'Se borrarán tus sesiones y estadísticas de este dispositivo. Tu perfil y objetivo diario se conservarán.', [
+    Alert.alert('Reiniciar progreso', 'Se borrarán tus sesiones y estadísticas de práctica. Tu perfil, días aprendidos y accesorios de la mascota se conservarán.', [
       { text: 'Cancelar', style: 'cancel' },
       { text: 'Reiniciar', style: 'destructive', onPress: resetUserProgress },
     ]);
@@ -64,9 +72,20 @@ export default function ProfileScreen({ navigation }) {
         <ProfileStats
           stats={[
             { iconName: 'flame', color: colors.red, value: `${user.streak} días`, label: 'Racha' },
+            { iconName: 'calendar', color: colors.gold, value: `${user.totalLearningDays || 0}`, label: 'Días aprendidos' },
             { iconName: 'time', color: colors.black, value: studiedTime, label: 'Tiempo practicado' },
             { iconName: 'school', color: colors.gold, value: `${user.learnedWords}`, label: 'Palabras' },
           ]}
+        />
+
+        <MascotCustomization
+          totalLearningDays={user.totalLearningDays || 0}
+          longestStreak={user.longestStreak || 0}
+          currentStreak={user.streak || 0}
+          mascot={user.mascot}
+          reduceMotion={reduceMotion}
+          onSelectAccessory={saveMascotAccessory}
+          onDismissReward={dismissMascotRewardNotice}
         />
 
         {Platform.OS !== 'web' && (

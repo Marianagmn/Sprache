@@ -34,7 +34,10 @@ export default function HomeScreen({ navigation }) {
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scroll}>
         
         <WelcomeHeader name={user.name} level={user.level} motivation={user.motivation} greeting="Hola">
-          <StreakBadge days={user.streak} />
+          <View style={styles.headerBadges}>
+            <StreakBadge days={user.streak} />
+            <Text style={styles.daysLearned}>{user.totalLearningDays || 0} días aprendidos</Text>
+          </View>
         </WelcomeHeader>
 
         <DailyGoalCard completedSeconds={user.todaySeconds || 0} goal={user.dailyGoal} unit="min" />
@@ -110,4 +113,6 @@ const styles = StyleSheet.create({
   emptyReview: { color: colors.muted, fontSize: typography.small, marginBottom: spacing.xl },
   learningDescription: { color: colors.muted, fontSize: typography.small, lineHeight: 21, marginBottom: spacing.md },
   learningActions: { gap: spacing.sm, marginBottom: spacing.xl },
+  headerBadges: { alignItems: 'flex-end', gap: spacing.xs },
+  daysLearned: { color: colors.muted, fontSize: typography.caption, textAlign: 'right' },
 });

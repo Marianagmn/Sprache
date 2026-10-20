@@ -21,6 +21,7 @@ import { colors } from '../theme.js';
 import { readingLessons } from '../data/readingLessons.js';
 import { theoryModules } from '../data/theoryModules.js';
 import { getCompletedTheoryLessonCount, updateLearningProgress } from '../services/learningProgressService.js';
+import { MASCOT_ACCESSORIES, getMascotProgress, selectMascotAccessory } from '../services/mascotRewardsService.js';
 
 const referenceDate = new Date(2026, 9, 14, 12, 0, 0);
 
@@ -82,6 +83,60 @@ test('las lecturas y los módulos teóricos están completos y distribuidos de A
 test('el progreso de lecturas y teoría se fusiona por identificador', () => {
   const progress = updateLearningProgress({}, 'readings', 'reading-a1-first-day', {
     correctQuestionIds: ['a1-q1'],
+  });
+
+  test('las rachas desbloquean accesorios permanentes y los días aprendidos se acumulan', () => {
+    const sessions = [
+      { completedAt: new Date(2026, 9, 12, 12).toISOString() },
+      { completedAt: new Date(2026, 9, 13, 12).toISOString() },
+    ];
+    const user = { ...emptyUser, sessions };
+    const thirdConsecutiveDay = recordActivity(user, {
+      activityId: 'lesson',
+      completedAt: new Date(2026, 9, 14, 12).toISOString(),
+    });
+
+    assert.equal(thirdConsecutiveDay.streak, 3);
+    assert.equal(thirdConsecutiveDay.totalLearningDays, 3);
+    assert.equal(thirdConsecutiveDay.longestStreak, 3);
+    assert.deepEqual(thirdConsecutiveDay.mascot.unlockedAccessoryIds, ['scarf', 'glasses']);
+    assert.deepEqual(thirdConsecutiveDay.mascot.newlyUnlockedAccessoryIds, ['scarf', 'glasses']);
+
+    const sameDaySession = recordActivity(thirdConsecutiveDay, {
+      activityId: 'another-lesson',
+      completedAt: new Date(2026, 9, 14, 18).toISOString(),
+    });
+    assert.equal(sameDaySession.totalLearningDays, 3);
+    assert.deepEqual(sameDaySession.mascot.newlyUnlockedAccessoryIds, ['scarf', 'glasses']);
+
+    const afterRest = recordActivity(sameDaySession, {
+      activityId: 'lesson-after-rest',
+      completedAt: new Date(2026, 9, 18, 12).toISOString(),
+    });
+    assert.equal(afterRest.streak, 1);
+    assert.equal(afterRest.totalLearningDays, 4);
+    assert.equal(afterRest.longestStreak, 3);
+    assert.deepEqual(afterRest.mascot.unlockedAccessoryIds, ['scarf', 'glasses']);
+    assert.deepEqual(afterRest.mascot.newlyUnlockedAccessoryIds, ['scarf', 'glasses']);
+
+    const migratedProgress = getMascotProgress({
+      totalLearningDays: 8,
+      longestStreak: 7,
+      mascot: { unlockedAccessoryIds: ['scarf', 'glasses'] },
+    }, []);
+    assert.equal(migratedProgress.totalLearningDays, 8);
+    assert.deepEqual(migratedProgress.mascot.unlockedAccessoryIds, ['scarf', 'glasses', 'cap']);
+    assert.equal(MASCOT_ACCESSORIES.length, 6);
+  });
+
+  test('la personalización solo permite elegir accesorios propios de cada categoría', () => {
+    const unlocked = { unlockedAccessoryIds: ['scarf', 'glasses'], selectedAccessories: {} };
+    const selected = selectMascotAccessory(unlocked, 'neck', 'scarf');
+
+    assert.deepEqual(selected.selectedAccessories, { neck: 'scarf' });
+    assert.deepEqual(selectMascotAccessory(selected, 'neck', null).selectedAccessories, { neck: null });
+    assert.throws(() => selectMascotAccessory(unlocked, 'head', 'scarf'), /no corresponde/);
+    assert.throws(() => selectMascotAccessory(unlocked, 'head', 'cap'), /Desbloquea/);
   });
   const updated = updateLearningProgress(progress, 'readings', 'reading-a1-first-day', {
     correctQuestionIds: ['a1-q2'],
@@ -548,6 +603,14 @@ test('reiniciar progreso conserva perfil/meta y borra las sesiones', () => {
       theory: { 'theory-foundations': { completedLessonIds: ['alphabet-pronunciation'] } },
       pronunciation: { 'alphabet-pronunciation-example-1': { playCount: 3 } },
     },
+    totalLearningDays: 7,
+    learningDayKeys: ['2026-10-12', '2026-10-13', '2026-10-14'],
+    longestStreak: 3,
+    mascot: {
+      unlockedAccessoryIds: ['scarf', 'glasses'],
+      selectedAccessories: { neck: 'scarf', eyes: 'glasses' },
+      newlyUnlockedAccessoryIds: ['glasses'],
+    },
     name: 'Mariana',
     sessions: [{ completedAt: referenceDate.toISOString(), durationSeconds: 300, learnedWords: [] }],
     wordProgress: { haus: { correctAnswers: 2 } },
@@ -564,6 +627,10 @@ test('reiniciar progreso conserva perfil/meta y borra las sesiones', () => {
   assert.deepEqual(reset.wordProgress, {});
   assert.deepEqual(reset.failedWords, {});
   assert.deepEqual(reset.learningProgress, { readings: {}, theory: {}, pronunciation: {} });
+  assert.equal(reset.totalLearningDays, 7);
+  assert.equal(reset.longestStreak, 3);
+  assert.deepEqual(reset.mascot.unlockedAccessoryIds, ['scarf', 'glasses']);
+  assert.deepEqual(reset.mascot.selectedAccessories, { neck: 'scarf', eyes: 'glasses' });
   assert.equal(reset.activeLessonProgress, null);
   assert.equal(reset.studiedSeconds, 0);
   assert.equal(reset.todaySeconds, 0);
