@@ -220,7 +220,7 @@ export const vocabularyLessonFood = {
   activityId: 'vocabulary-food',
   durationMinutes: 6,
   questions: [
-    { id: 'food-q1', prompt: '¿Cómo se dice "manzana" en alemán?', word: 'manzana', options: ['Apfel', 'Brot', 'Käse', 'Milch'], answer: 'Apfel', vocabulary: { term: 'der Apfel', translation: 'la manzana' }, hint: 'Es una fruta que suele ser roja o verde.' },
+    { id: 'food-q1', prompt: '¿Cómo se dice "manzana" en alemán?', word: 'manzana', options: ['Apfel', 'Brot', 'Käse', 'Milch'], answer: 'Apfel', explanation: 'En alemán, la fruta «manzana» se llama «Apfel»; «der Apfel» es el sustantivo con su artículo masculino.', vocabulary: { term: 'der Apfel', translation: 'la manzana' }, hint: 'Es una fruta que suele ser roja o verde.' },
     { id: 'food-q2', prompt: '¿Qué significa "Wasser"?', word: 'Wasser', options: ['Agua', 'Leche', 'Café', 'Jugo'], answer: 'Agua', vocabulary: { term: 'das Wasser', translation: 'el agua' }, hint: 'Es una bebida transparente.' },
     { id: 'food-q3', prompt: 'Completa: Ich esse gern ___ (pan).', word: 'pan', options: ['Brot', 'Fisch', 'Tee', 'Reis'], answer: 'Brot', vocabulary: { term: 'das Brot', translation: 'el pan' }, hint: 'Se prepara con harina y se hornea.' },
   ],
@@ -841,7 +841,7 @@ export const vocabularyLessonFruits = {
   activityId: 'vocabulary-fruits',
   durationMinutes: 5,
   questions: [
-    { id: 'fruits-q1', prompt: '¿Cómo se dice "manzana" en alemán?', word: 'manzana', options: ['Apfel', 'Banane', 'Orange', 'Traube'], answer: 'Apfel', vocabulary: { term: 'der Apfel', translation: 'la manzana' }, hint: 'Fruta roja o verde.' },
+    { id: 'fruits-q1', prompt: '¿Cómo se dice "manzana" en alemán?', word: 'manzana', options: ['Apfel', 'Banane', 'Orange', 'Traube'], answer: 'Apfel', explanation: 'Dentro del grupo de frutas, «Apfel» identifica la manzana y se aprende junto al artículo «der».', vocabulary: { term: 'der Apfel', translation: 'la manzana' }, hint: 'Fruta roja o verde.' },
     { id: 'fruits-q2', prompt: '¿Qué significa "die Banane"?', word: 'die Banane', options: ['El plátano', 'La manzana', 'La naranja', 'La uva'], answer: 'El plátano', vocabulary: { term: 'die Banane', translation: 'el plátano' }, hint: 'Fruta amarilla y alargada.' },
     { id: 'fruits-q3', prompt: '¿Cómo se dice "naranja" en alemán?', word: 'naranja', options: ['Orange', 'Apfel', 'Banane', 'Traube'], answer: 'Orange', vocabulary: { term: 'die Orange', translation: 'la naranja' }, hint: 'Fruta naranja.' },
   ],
@@ -896,28 +896,6 @@ export const readingLessonLibrary = {
   ],
 };
 
-export const readingLessons = [
-  readingLessonCity, readingLessonCafe, readingLessonStation, readingLessonMarket, readingLessonWeather,
-  readingLessonDoctor, readingLessonWeekend, readingLessonApartment, readingLessonConversation,
-  readingLessonRestaurant, readingLessonLibrary,
-  // B1 Reading Lessons (27 lessons)
-  readingLessonB1Bank, readingLessonB1Job, readingLessonB1Email, readingLessonB1Airport, readingLessonB1Meeting,
-  readingLessonB1Hotel, readingLessonB1Sports, readingLessonB1Interview, readingLessonB1Culture, readingLessonB1Technology,
-  readingLessonB1Health, readingLessonB1Travel, readingLessonB1Education, readingLessonB1Music, readingLessonB1Environment,
-  readingLessonB1Food, readingLessonB1Housing, readingLessonB1Shopping, readingLessonB1Communication, readingLessonB1News,
-  readingLessonB1History, readingLessonB1Art, readingLessonB1Social, readingLessonB1Volunteer, readingLessonB1Festival,
-  readingLessonB1Politics, readingLessonB1Media, readingLessonB1Weather, readingLessonB1Economy, readingLessonB1Sports2,
-  readingLessonB1Literature, readingLessonB1Science,
-  // B2 Reading Lessons (28 lessons)
-  readingLessonB2CareerAdvancement, readingLessonB2BusinessNegotiation, readingLessonB2AcademicWriting, readingLessonB2ScientificResearch,
-  readingLessonB2PoliticalDebate, readingLessonB2CulturalAnalysis, readingLessonB2EconomicTrends, readingLessonB2GlobalIssues,
-  readingLessonB2EnvironmentalPolicy, readingLessonB2MedicalEthics, readingLessonB2LegalSystem, readingLessonB2FinancialPlanning,
-  readingLessonB2InternationalRelations, readingLessonB2Philosophy, readingLessonB2AdvancedTechnology, readingLessonB2SustainableDevelopment,
-  readingLessonB2SocialJustice, readingLessonB2MediaLiteracy, readingLessonB2Psychology, readingLessonB2Sociology,
-  readingLessonB2Anthropology, readingLessonB2Linguistics, readingLessonB2ModernArt, readingLessonB2ContemporaryLiterature,
-  readingLessonB2Entrepreneurship, readingLessonB2Innovation, readingLessonB2CorporateCulture, readingLessonB2DigitalPrivacy,
-  readingLessonB2AIEthics,
-];
 export const grammarLessonNounPlural = {
   id: 'grammar-noun-plural',
   title: 'Plural de sustantivos',
@@ -3138,5 +3116,27 @@ export const practiceLessons = [
 ];
 export const storyLessons = [
   storyLessonA1, storyLessonA2, storyLessonB1, storyLessonB2_1, storyLessonB2_2,
+];
+export const readingLessons = [
+  readingLessonCity, readingLessonCafe, readingLessonStation, readingLessonMarket, readingLessonWeather,
+  readingLessonDoctor, readingLessonWeekend, readingLessonApartment, readingLessonConversation,
+  readingLessonRestaurant, readingLessonLibrary,
+  // B1 Reading Lessons (27 lessons)
+  readingLessonB1Bank, readingLessonB1Job, readingLessonB1Email, readingLessonB1Airport, readingLessonB1Meeting,
+  readingLessonB1Hotel, readingLessonB1Sports, readingLessonB1Interview, readingLessonB1Culture, readingLessonB1Technology,
+  readingLessonB1Health, readingLessonB1Travel, readingLessonB1Education, readingLessonB1Music, readingLessonB1Environment,
+  readingLessonB1Food, readingLessonB1Housing, readingLessonB1Shopping, readingLessonB1Communication, readingLessonB1News,
+  readingLessonB1History, readingLessonB1Art, readingLessonB1Social, readingLessonB1Volunteer, readingLessonB1Festival,
+  readingLessonB1Politics, readingLessonB1Media, readingLessonB1Weather, readingLessonB1Economy, readingLessonB1Sports2,
+  readingLessonB1Literature, readingLessonB1Science,
+  // B2 Reading Lessons (28 lessons)
+  readingLessonB2CareerAdvancement, readingLessonB2BusinessNegotiation, readingLessonB2AcademicWriting, readingLessonB2ScientificResearch,
+  readingLessonB2PoliticalDebate, readingLessonB2CulturalAnalysis, readingLessonB2EconomicTrends, readingLessonB2GlobalIssues,
+  readingLessonB2EnvironmentalPolicy, readingLessonB2MedicalEthics, readingLessonB2LegalSystem, readingLessonB2FinancialPlanning,
+  readingLessonB2InternationalRelations, readingLessonB2Philosophy, readingLessonB2AdvancedTechnology, readingLessonB2SustainableDevelopment,
+  readingLessonB2SocialJustice, readingLessonB2MediaLiteracy, readingLessonB2Psychology, readingLessonB2Sociology,
+  readingLessonB2Anthropology, readingLessonB2Linguistics, readingLessonB2ModernArt, readingLessonB2ContemporaryLiterature,
+  readingLessonB2Entrepreneurship, readingLessonB2Innovation, readingLessonB2CorporateCulture, readingLessonB2DigitalPrivacy,
+  readingLessonB2AIEthics,
 ];
 export const lessons = [...vocabularyLessons, ...readingLessons, ...grammarLessons, ...practiceLessons, ...storyLessons, ...challengeLessons];

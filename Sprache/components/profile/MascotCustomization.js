@@ -149,7 +149,9 @@ export default function MascotCustomization({
                   >
                     <Text style={styles.optionEmoji}>{unlocked ? item.emoji : '🔒'}</Text>
                     <Text style={styles.optionText}>{item.label}</Text>
-                    <Text style={styles.milestone}>{unlocked ? 'En tu colección' : `${item.streakDays} días seguidos`}</Text>
+                    <Text style={styles.milestone}>
+                      {unlocked ? 'En tu colección' : `${item.streakDays} ${item.streakDays === 1 ? 'día seguido' : 'días seguidos'}`}
+                    </Text>
                   </TouchableOpacity>
                 );
               })}

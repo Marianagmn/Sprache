@@ -84,60 +84,6 @@ test('el progreso de lecturas y teoría se fusiona por identificador', () => {
   const progress = updateLearningProgress({}, 'readings', 'reading-a1-first-day', {
     correctQuestionIds: ['a1-q1'],
   });
-
-  test('las rachas desbloquean accesorios permanentes y los días aprendidos se acumulan', () => {
-    const sessions = [
-      { completedAt: new Date(2026, 9, 12, 12).toISOString() },
-      { completedAt: new Date(2026, 9, 13, 12).toISOString() },
-    ];
-    const user = { ...emptyUser, sessions };
-    const thirdConsecutiveDay = recordActivity(user, {
-      activityId: 'lesson',
-      completedAt: new Date(2026, 9, 14, 12).toISOString(),
-    });
-
-    assert.equal(thirdConsecutiveDay.streak, 3);
-    assert.equal(thirdConsecutiveDay.totalLearningDays, 3);
-    assert.equal(thirdConsecutiveDay.longestStreak, 3);
-    assert.deepEqual(thirdConsecutiveDay.mascot.unlockedAccessoryIds, ['scarf', 'glasses']);
-    assert.deepEqual(thirdConsecutiveDay.mascot.newlyUnlockedAccessoryIds, ['scarf', 'glasses']);
-
-    const sameDaySession = recordActivity(thirdConsecutiveDay, {
-      activityId: 'another-lesson',
-      completedAt: new Date(2026, 9, 14, 18).toISOString(),
-    });
-    assert.equal(sameDaySession.totalLearningDays, 3);
-    assert.deepEqual(sameDaySession.mascot.newlyUnlockedAccessoryIds, ['scarf', 'glasses']);
-
-    const afterRest = recordActivity(sameDaySession, {
-      activityId: 'lesson-after-rest',
-      completedAt: new Date(2026, 9, 18, 12).toISOString(),
-    });
-    assert.equal(afterRest.streak, 1);
-    assert.equal(afterRest.totalLearningDays, 4);
-    assert.equal(afterRest.longestStreak, 3);
-    assert.deepEqual(afterRest.mascot.unlockedAccessoryIds, ['scarf', 'glasses']);
-    assert.deepEqual(afterRest.mascot.newlyUnlockedAccessoryIds, ['scarf', 'glasses']);
-
-    const migratedProgress = getMascotProgress({
-      totalLearningDays: 8,
-      longestStreak: 7,
-      mascot: { unlockedAccessoryIds: ['scarf', 'glasses'] },
-    }, []);
-    assert.equal(migratedProgress.totalLearningDays, 8);
-    assert.deepEqual(migratedProgress.mascot.unlockedAccessoryIds, ['scarf', 'glasses', 'cap']);
-    assert.equal(MASCOT_ACCESSORIES.length, 6);
-  });
-
-  test('la personalización solo permite elegir accesorios propios de cada categoría', () => {
-    const unlocked = { unlockedAccessoryIds: ['scarf', 'glasses'], selectedAccessories: {} };
-    const selected = selectMascotAccessory(unlocked, 'neck', 'scarf');
-
-    assert.deepEqual(selected.selectedAccessories, { neck: 'scarf' });
-    assert.deepEqual(selectMascotAccessory(selected, 'neck', null).selectedAccessories, { neck: null });
-    assert.throws(() => selectMascotAccessory(unlocked, 'head', 'scarf'), /no corresponde/);
-    assert.throws(() => selectMascotAccessory(unlocked, 'head', 'cap'), /Desbloquea/);
-  });
   const updated = updateLearningProgress(progress, 'readings', 'reading-a1-first-day', {
     correctQuestionIds: ['a1-q2'],
     completed: true,
@@ -159,6 +105,60 @@ test('el progreso de lecturas y teoría se fusiona por identificador', () => {
   assert.equal(getCompletedTheoryLessonCount(theory.theory), 1);
   assert.equal(repeatedPlayback.pronunciation['lesson-word-Hallo'].playCount, 2);
   assert.throws(() => updateLearningProgress({}, 'unknown', 'item', { completed: true }), /válidos/);
+});
+
+test('las rachas desbloquean accesorios permanentes y los días aprendidos se acumulan', () => {
+  const sessions = [
+    { completedAt: new Date(2026, 9, 12, 12).toISOString() },
+    { completedAt: new Date(2026, 9, 13, 12).toISOString() },
+  ];
+  const user = { ...emptyUser, sessions };
+  const thirdConsecutiveDay = recordActivity(user, {
+    activityId: 'lesson',
+    completedAt: new Date(2026, 9, 14, 12).toISOString(),
+  });
+
+  assert.equal(thirdConsecutiveDay.streak, 3);
+  assert.equal(thirdConsecutiveDay.totalLearningDays, 3);
+  assert.equal(thirdConsecutiveDay.longestStreak, 3);
+  assert.deepEqual(thirdConsecutiveDay.mascot.unlockedAccessoryIds, ['scarf', 'glasses']);
+  assert.deepEqual(thirdConsecutiveDay.mascot.newlyUnlockedAccessoryIds, ['scarf', 'glasses']);
+
+  const sameDaySession = recordActivity(thirdConsecutiveDay, {
+    activityId: 'another-lesson',
+    completedAt: new Date(2026, 9, 14, 18).toISOString(),
+  });
+  assert.equal(sameDaySession.totalLearningDays, 3);
+  assert.deepEqual(sameDaySession.mascot.newlyUnlockedAccessoryIds, ['scarf', 'glasses']);
+
+  const afterRest = recordActivity(sameDaySession, {
+    activityId: 'lesson-after-rest',
+    completedAt: new Date(2026, 9, 18, 12).toISOString(),
+  });
+  assert.equal(afterRest.streak, 1);
+  assert.equal(afterRest.totalLearningDays, 4);
+  assert.equal(afterRest.longestStreak, 3);
+  assert.deepEqual(afterRest.mascot.unlockedAccessoryIds, ['scarf', 'glasses']);
+  assert.deepEqual(afterRest.mascot.newlyUnlockedAccessoryIds, ['scarf', 'glasses']);
+
+  const migratedProgress = getMascotProgress({
+    totalLearningDays: 8,
+    longestStreak: 7,
+    mascot: { unlockedAccessoryIds: ['scarf', 'glasses'] },
+  }, []);
+  assert.equal(migratedProgress.totalLearningDays, 8);
+  assert.deepEqual(migratedProgress.mascot.unlockedAccessoryIds, ['scarf', 'glasses', 'cap']);
+  assert.equal(MASCOT_ACCESSORIES.length, 6);
+});
+
+test('la personalización solo permite elegir accesorios propios de cada categoría', () => {
+  const unlocked = { unlockedAccessoryIds: ['scarf', 'glasses'], selectedAccessories: {} };
+  const selected = selectMascotAccessory(unlocked, 'neck', 'scarf');
+
+  assert.deepEqual(selected.selectedAccessories, { neck: 'scarf' });
+  assert.deepEqual(selectMascotAccessory(selected, 'neck', null).selectedAccessories, { neck: null });
+  assert.throws(() => selectMascotAccessory(unlocked, 'head', 'scarf'), /no corresponde/);
+  assert.throws(() => selectMascotAccessory(unlocked, 'head', 'cap'), /Desbloquea/);
 });
 
 test('las lecciones están completas, agrupadas por nivel y tema, y accesibles desde la ruta', () => {
