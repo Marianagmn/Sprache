@@ -80,6 +80,8 @@ import {
   vocabularyLessonEmotions,
   vocabularyLessonFoodDrinks,
   vocabularyLessonFurniture,
+  vocabularyLessonFruits,
+  vocabularyLessonVegetables,
 } from './lessons.js';
 
 export const activities = [
@@ -468,6 +470,22 @@ export const activities = [
     category: 'Vocabulario',
   },
   {
+    id: vocabularyLessonFruits.activityId,
+    title: vocabularyLessonFruits.title,
+    description: 'Practica vocabulario de frutas.',
+    time: `${vocabularyLessonFruits.durationMinutes} min`,
+    iconName: 'nutrition-outline',
+    category: 'Vocabulario',
+  },
+  {
+    id: vocabularyLessonVegetables.activityId,
+    title: vocabularyLessonVegetables.title,
+    description: 'Aprende vocabulario de verduras.',
+    time: `${vocabularyLessonVegetables.durationMinutes} min`,
+    iconName: 'leaf-outline',
+    category: 'Vocabulario',
+  },
+  {
     id: readingLessonConversation.activityId,
     title: readingLessonConversation.title,
     description: 'Practica una conversación para conocer a alguien y pedir ayuda.',
@@ -814,6 +832,8 @@ const activityTopics = {
   'vocabulary-emotions': ['A1', 'Emociones'],
   'vocabulary-food-drinks': ['A1', 'Comida'],
   'vocabulary-furniture': ['A1', 'Muebles'],
+  'vocabulary-fruits': ['A1', 'Frutas'],
+  'vocabulary-vegetables': ['A1', 'Verduras'],
   'challenge-a1-city': ['A1', 'Retos interactivos'],
   'challenge-a2-weekend': ['A2', 'Retos interactivos'],
   'challenge-b1-travel': ['B1', 'Retos interactivos'],

@@ -835,6 +835,30 @@ export const vocabularyLessonFurniture = {
   ],
 };
 
+export const vocabularyLessonFruits = {
+  id: 'vocabulary-fruits',
+  title: 'Frutas',
+  activityId: 'vocabulary-fruits',
+  durationMinutes: 5,
+  questions: [
+    { id: 'fruits-q1', prompt: '¿Cómo se dice "manzana" en alemán?', word: 'manzana', options: ['Apfel', 'Banane', 'Orange', 'Traube'], answer: 'Apfel', vocabulary: { term: 'der Apfel', translation: 'la manzana' }, hint: 'Fruta roja o verde.' },
+    { id: 'fruits-q2', prompt: '¿Qué significa "die Banane"?', word: 'die Banane', options: ['El plátano', 'La manzana', 'La naranja', 'La uva'], answer: 'El plátano', vocabulary: { term: 'die Banane', translation: 'el plátano' }, hint: 'Fruta amarilla y alargada.' },
+    { id: 'fruits-q3', prompt: '¿Cómo se dice "naranja" en alemán?', word: 'naranja', options: ['Orange', 'Apfel', 'Banane', 'Traube'], answer: 'Orange', vocabulary: { term: 'die Orange', translation: 'la naranja' }, hint: 'Fruta naranja.' },
+  ],
+};
+
+export const vocabularyLessonVegetables = {
+  id: 'vocabulary-vegetables',
+  title: 'Verduras',
+  activityId: 'vocabulary-vegetables',
+  durationMinutes: 5,
+  questions: [
+    { id: 'vegetables-q1', prompt: '¿Cómo se dice "tomate" en alemán?', word: 'tomate', options: ['Tomate', 'Karotte', 'Kartoffel', 'Salat'], answer: 'Tomate', vocabulary: { term: 'die Tomate', translation: 'el tomate' }, hint: 'Vegetal rojo.' },
+    { id: 'vegetables-q2', prompt: '¿Qué significa "die Karotte"?', word: 'die Karotte', options: ['La zanahoria', 'El tomate', 'La patata', 'La lechuga'], answer: 'La zanahoria', vocabulary: { term: 'die Karotte', translation: 'la zanahoria' }, hint: 'Vegetal naranja.' },
+    { id: 'vegetables-q3', prompt: '¿Cómo se dice "patata" en alemán?', word: 'patata', options: ['Kartoffel', 'Tomate', 'Karotte', 'Salat'], answer: 'Kartoffel', vocabulary: { term: 'die Kartoffel', translation: 'la patata' }, hint: 'Tubérculo muy común.' },
+  ],
+};
+
 export const vocabularyLessons = [
   vocabularyLesson, vocabularyLessonDaily, vocabularyLessonFood, vocabularyLessonTravel,
   vocabularyLessonFamily, vocabularyLessonShopping, vocabularyLessonHome, vocabularyLessonHealth,
@@ -844,6 +868,7 @@ export const vocabularyLessons = [
   vocabularyLessonVerbsBasic, vocabularyLessonPrepositions, vocabularyLessonQuestions, vocabularyLessonAdjectives,
   vocabularyLessonProfessions, vocabularyLessonSchool, vocabularyLessonNature, vocabularyLessonTransport,
   vocabularyLessonTechnology, vocabularyLessonEmotions, vocabularyLessonFoodDrinks, vocabularyLessonFurniture,
+  vocabularyLessonFruits, vocabularyLessonVegetables,
 ];
 export const readingLessons = [
   readingLessonCity, readingLessonCafe, readingLessonStation, readingLessonMarket, readingLessonWeather,
