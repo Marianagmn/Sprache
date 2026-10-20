@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { AppState, ScrollView, StyleSheet, View } from 'react-native';
+import { AppState, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useApp } from '../context/AppContext';
 import { getLessonByActivityId } from '../services/lessonService';
@@ -23,9 +23,10 @@ import FillBlanks from '../components/learning/FillBlanks';
 import WordOrder from '../components/learning/WordOrder';
 import WriteResponse from '../components/learning/WriteResponse';
 import ListeningComprehension from '../components/learning/ListeningComprehension';
+import MascotAvatar from '../components/profile/MascotAvatar';
 import { getExperience, getNewlyUnlockedAchievements } from '../services/achievementService.js';
 import { provideAnswerHapticFeedback } from '../services/hapticFeedback.js';
-import { colors } from '../theme';
+import { colors, radii, spacing, typography } from '../theme';
 
 export default function LessonScreen({ navigation, route }) {
   const { user, completeActivity, saveLessonProgress, saveWordAttempt } = useApp();
@@ -307,6 +308,13 @@ export default function LessonScreen({ navigation, route }) {
           totalQuestions={lesson.questions.length}
           onClose={() => navigation.goBack()}
         />
+        <View style={styles.mascotCompanion}>
+          <MascotAvatar mascot={user.mascot} compact />
+          <View style={styles.companionMessage}>
+            <Text style={styles.companionTitle}>Tu compañero de aprendizaje</Text>
+            <Text style={styles.companionText}>¡Vamos paso a paso! Tú puedes.</Text>
+          </View>
+        </View>
         <LessonProgress current={questionIndex + 1} total={lesson.questions.length} />
         <QuestionCard question={question.word || question.prompt} prompt={question.prompt} />
 
@@ -429,5 +437,9 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.background },
   unavailable: { justifyContent: 'center' },
   content: { padding: 20, paddingBottom: 32 },
+  mascotCompanion: { flexDirection: 'row', alignItems: 'center', backgroundColor: colors.surface, borderRadius: radii.lg, padding: spacing.sm, marginBottom: spacing.md },
+  companionMessage: { flex: 1, marginLeft: spacing.md },
+  companionTitle: { color: colors.black, fontSize: typography.small, fontWeight: typography.bold },
+  companionText: { color: colors.muted, fontSize: typography.caption, marginTop: spacing.xs },
   options: { marginBottom: 4 },
 });

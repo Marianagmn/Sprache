@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Animated, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { MASCOT_ACCESSORIES } from '../../services/mascotRewardsService';
+import MascotAvatar from './MascotAvatar';
 import AppButton from '../common/AppButton';
 import { colors, radii, spacing, typography } from '../../theme';
 
@@ -11,15 +12,6 @@ const SLOT_LABELS = {
   neck: 'Pañuelos',
   back: 'Mochilas',
   charm: 'Otros detalles',
-};
-
-const SLOT_POSITIONS = {
-  head: { top: 1, left: 48 },
-  eyes: { top: 46, left: 43 },
-  shirt: { top: 81, left: 48 },
-  neck: { top: 66, left: 79 },
-  back: { top: 54, left: 4 },
-  charm: { top: 96, left: 99 },
 };
 
 export default function MascotCustomization({
@@ -69,23 +61,14 @@ export default function MascotCustomization({
 
   return (
     <View style={styles.card}>
-      <Text style={styles.title} accessibilityRole="header">Tu osito Sprache</Text>
+      <Text style={styles.title} accessibilityRole="header">Mascota</Text>
       <Text style={styles.description}>
         Cada racha te ayuda a descubrir accesorios. Los que desbloquees se quedan en tu colección; descansar no te los quita.
       </Text>
 
       <View style={styles.mascotStage}>
-        <Animated.View style={[styles.mascot, { transform: [{ scale }] }]}>
-          <Text style={styles.bear} accessibilityLabel="Osito Sprache">🐻</Text>
-          {Object.entries(selected).map(([slot, accessoryId]) => {
-            const item = MASCOT_ACCESSORIES.find((accessory) => accessory.id === accessoryId);
-            if (!item || !unlockedIds.has(item.id)) return null;
-            return (
-              <Text key={slot} style={[styles.accessory, SLOT_POSITIONS[slot]]} accessible={false}>
-                {item.emoji}
-              </Text>
-            );
-          })}
+        <Animated.View style={{ transform: [{ scale }] }}>
+          <MascotAvatar mascot={mascot} />
         </Animated.View>
         <Text style={styles.mascotCaption}>¡Aquí para acompañarte a tu ritmo!</Text>
       </View>
@@ -171,9 +154,6 @@ const styles = StyleSheet.create({
   title: { color: colors.black, fontSize: typography.subtitle, fontWeight: typography.bold, marginBottom: spacing.xs },
   description: { color: colors.muted, fontSize: typography.small, lineHeight: 21 },
   mascotStage: { alignItems: 'center', paddingVertical: spacing.lg },
-  mascot: { width: 144, height: 144, alignItems: 'center', justifyContent: 'center', borderRadius: 72, backgroundColor: colors.goldSoft, position: 'relative' },
-  bear: { fontSize: 88, lineHeight: 108 },
-  accessory: { position: 'absolute', fontSize: 30, zIndex: 1 },
   mascotCaption: { color: colors.muted, fontSize: typography.caption, marginTop: spacing.sm },
   stats: { flexDirection: 'row', justifyContent: 'space-around', paddingVertical: spacing.md, borderTopWidth: 1, borderBottomWidth: 1, borderColor: colors.border },
   stat: { alignItems: 'center', paddingHorizontal: spacing.xs },
