@@ -1,0 +1,40 @@
+{
+  "name": "Mariana",
+  "level": "Nivel Básico",
+  "placementAssessment": null,
+  "motivation": "Viajar",
+  "dailyGoal": 10,
+  "studiedSeconds": 0,
+  "studiedMinutes": 0,
+  "learnedWords": 0,
+  "streak": 0,
+  "longestStreak": 0,
+  "totalLearningDays": 0,
+  "learningDayKeys": [],
+  "mascot": {
+    "unlockedAccessoryIds": [],
+    "selectedAccessories": {},
+    "newlyUnlockedAccessoryIds": []
+  },
+  "todaySeconds": 0,
+  "todayMinutes": 0,
+  "totalSessions": 0,
+  "totalQuestions": 0,
+  "correctAnswers": 0,
+  "accuracy": 0,
+  "goalDaysReached": 0,
+  "goalDaysTracked": 0,
+  "sessions": [],
+  "wordProgress": {},
+  "failedWords": {},
+  "learningProgress": {
+    "readings": {},
+    "theory": {},
+    "pronunciation": {}
+  },
+  "activeLessonProgress": null,
+  "preferences": {
+    "notificationsEnabled": false,
+    "hapticsEnabled": false
+  }
+}

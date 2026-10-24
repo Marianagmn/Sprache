@@ -1,0 +1,1522 @@
+[
+  {
+    "id": "vocabulary",
+    "title": "Vocabulario básico",
+    "description": "Amplía y repasa palabras en alemán.",
+    "time": "5 min",
+    "iconName": "file-tray-stacked",
+    "category": "Vocabulario",
+    "levelCode": "A1",
+    "topic": "Vocabulario básico"
+  },
+  {
+    "id": "vocabulary-daily",
+    "title": "Rutina diaria",
+    "description": "Practica palabras útiles para tu día a día.",
+    "time": "6 min",
+    "iconName": "time-outline",
+    "category": "Vocabulario",
+    "levelCode": "A1",
+    "topic": "Rutina"
+  },
+  {
+    "id": "vocabulary-food",
+    "title": "Comida y bebida",
+    "description": "Aprende palabras habituales para pedir comida y bebida.",
+    "time": "6 min",
+    "iconName": "restaurant-outline",
+    "category": "Vocabulario",
+    "levelCode": "A1",
+    "topic": "Comida"
+  },
+  {
+    "id": "vocabulary-travel",
+    "title": "Viajes y transporte",
+    "description": "Repasa vocabulario para moverte durante un viaje.",
+    "time": "6 min",
+    "iconName": "train-outline",
+    "category": "Vocabulario",
+    "levelCode": "A2",
+    "topic": "Transporte"
+  },
+  {
+    "id": "vocabulary-family",
+    "title": "La familia",
+    "description": "Practica cómo nombrar a los miembros de la familia.",
+    "time": "5 min",
+    "iconName": "people-outline",
+    "category": "Vocabulario",
+    "levelCode": "A2",
+    "topic": "Familia"
+  },
+  {
+    "id": "vocabulary-shopping",
+    "title": "De compras",
+    "description": "Aprende expresiones útiles para comprar.",
+    "time": "6 min",
+    "iconName": "bag-handle-outline",
+    "category": "Vocabulario",
+    "levelCode": "A2",
+    "topic": "Compras"
+  },
+  {
+    "id": "reading-city",
+    "title": "Lectura: La ciudad",
+    "description": "Lee un texto corto sobre la vida en la ciudad.",
+    "time": "7 min",
+    "iconName": "book-outline",
+    "category": "Lectura",
+    "levelCode": "A1",
+    "topic": "Ciudad"
+  },
+  {
+    "id": "reading-cafe",
+    "title": "Lectura: Café y amigos",
+    "description": "Comprende una conversación en un café.",
+    "time": "7 min",
+    "iconName": "chatbox-ellipses-outline",
+    "category": "Lectura",
+    "levelCode": "A2",
+    "topic": "Conversación"
+  },
+  {
+    "id": "reading-station",
+    "title": "Lectura: En la estación",
+    "description": "Comprende indicaciones y expresiones de una estación.",
+    "time": "7 min",
+    "iconName": "train-outline",
+    "category": "Lectura",
+    "levelCode": "A2",
+    "topic": "Transporte"
+  },
+  {
+    "id": "reading-market",
+    "title": "Lectura: En el mercado",
+    "description": "Interpreta preguntas y respuestas en un mercado.",
+    "time": "7 min",
+    "iconName": "basket-outline",
+    "category": "Lectura",
+    "levelCode": "A2",
+    "topic": "Comida"
+  },
+  {
+    "id": "reading-weather",
+    "title": "Lectura: El tiempo",
+    "description": "Practica vocabulario y frases para hablar del tiempo.",
+    "time": "7 min",
+    "iconName": "partly-sunny-outline",
+    "category": "Lectura",
+    "levelCode": "A2",
+    "topic": "Tiempo"
+  },
+  {
+    "id": "grammar-articles",
+    "title": "Artículos y género",
+    "description": "Revisa artículos y género con ejemplos claros.",
+    "time": "8 min",
+    "iconName": "school-outline",
+    "category": "Gramática",
+    "levelCode": "A1",
+    "topic": "Gramática"
+  },
+  {
+    "id": "grammar-word-order",
+    "title": "Orden de palabras",
+    "description": "Practica la estructura correcta de las frases.",
+    "time": "8 min",
+    "iconName": "construct-outline",
+    "category": "Gramática",
+    "levelCode": "A2",
+    "topic": "Gramática"
+  },
+  {
+    "id": "grammar-present",
+    "title": "Verbos en presente",
+    "description": "Practica la conjugación de verbos comunes en presente.",
+    "time": "8 min",
+    "iconName": "school-outline",
+    "category": "Gramática",
+    "levelCode": "A2",
+    "topic": "Gramática"
+  },
+  {
+    "id": "grammar-negation",
+    "title": "Negación con nicht y kein",
+    "description": "Aprende cuándo usar nicht y kein para negar.",
+    "time": "8 min",
+    "iconName": "remove-circle-outline",
+    "category": "Gramática",
+    "levelCode": "A2",
+    "topic": "Gramática"
+  },
+  {
+    "id": "grammar-accusative",
+    "title": "Artículos en acusativo",
+    "description": "Identifica los artículos en acusativo con ejemplos.",
+    "time": "8 min",
+    "iconName": "school-outline",
+    "category": "Gramática",
+    "levelCode": "A2",
+    "topic": "Gramática"
+  },
+  {
+    "id": "vocabulary-home",
+    "title": "La casa y sus habitaciones",
+    "description": "Aprende palabras para describir tu casa y sus habitaciones.",
+    "time": "6 min",
+    "iconName": "home-outline",
+    "category": "Vocabulario",
+    "levelCode": "A2",
+    "topic": "Hogar"
+  },
+  {
+    "id": "vocabulary-health",
+    "title": "Salud y bienestar",
+    "description": "Practica palabras útiles para hablar de salud y bienestar.",
+    "time": "6 min",
+    "iconName": "fitness-outline",
+    "category": "Vocabulario",
+    "levelCode": "A2",
+    "topic": "Salud"
+  },
+  {
+    "id": "vocabulary-hobbies",
+    "title": "Tiempo libre y aficiones",
+    "description": "Habla de tus actividades y aficiones favoritas.",
+    "time": "6 min",
+    "iconName": "football-outline",
+    "category": "Vocabulario",
+    "levelCode": "A2",
+    "topic": "Ocio"
+  },
+  {
+    "id": "vocabulary-work",
+    "title": "En el trabajo",
+    "description": "Amplía el vocabulario para comunicarte en el trabajo.",
+    "time": "6 min",
+    "iconName": "briefcase-outline",
+    "category": "Vocabulario",
+    "levelCode": "A2",
+    "topic": "Trabajo"
+  },
+  {
+    "id": "reading-doctor",
+    "title": "Lectura: En la consulta médica",
+    "description": "Comprende una conversación breve en una consulta médica.",
+    "time": "7 min",
+    "iconName": "medkit-outline",
+    "category": "Lectura",
+    "levelCode": "A2",
+    "topic": "Salud"
+  },
+  {
+    "id": "reading-weekend",
+    "title": "Lectura: Planes para el fin de semana",
+    "description": "Lee sobre planes y actividades para el fin de semana.",
+    "time": "7 min",
+    "iconName": "sunny-outline",
+    "category": "Lectura",
+    "levelCode": "A2",
+    "topic": "Ocio"
+  },
+  {
+    "id": "reading-apartment",
+    "title": "Lectura: Buscar apartamento",
+    "description": "Interpreta información práctica de un anuncio de vivienda.",
+    "time": "7 min",
+    "iconName": "business-outline",
+    "category": "Lectura",
+    "levelCode": "A2",
+    "topic": "Hogar"
+  },
+  {
+    "id": "grammar-modal-verbs",
+    "title": "Verbos modales: können y müssen",
+    "description": "Expresa posibilidades y obligaciones con verbos modales.",
+    "time": "8 min",
+    "iconName": "school-outline",
+    "category": "Gramática",
+    "levelCode": "A2",
+    "topic": "Gramática"
+  },
+  {
+    "id": "grammar-dative",
+    "title": "El dativo en frases cotidianas",
+    "description": "Practica el dativo con frases cotidianas.",
+    "time": "8 min",
+    "iconName": "school-outline",
+    "category": "Gramática",
+    "levelCode": "A2",
+    "topic": "Gramática"
+  },
+  {
+    "id": "grammar-perfect",
+    "title": "Pasado: Perfekt con haben y sein",
+    "description": "Cuenta experiencias pasadas con el Perfekt.",
+    "time": "8 min",
+    "iconName": "time-outline",
+    "category": "Gramática",
+    "levelCode": "A2",
+    "topic": "Gramática"
+  },
+  {
+    "id": "vocabulary-greetings",
+    "title": "Saludos y presentaciones",
+    "description": "Aprende saludos y frases para presentarte.",
+    "time": "5 min",
+    "iconName": "hand-left-outline",
+    "category": "Vocabulario",
+    "levelCode": "A1",
+    "topic": "Saludos"
+  },
+  {
+    "id": "vocabulary-study",
+    "title": "En clase y al estudiar",
+    "description": "Practica palabras útiles para estudiar y participar en clase.",
+    "time": "6 min",
+    "iconName": "pencil-outline",
+    "category": "Vocabulario",
+    "levelCode": "A1",
+    "topic": "Estudio"
+  },
+  {
+    "id": "vocabulary-numbers",
+    "title": "Números 1-20",
+    "description": "Aprende los números del 1 al 20 en alemán.",
+    "time": "6 min",
+    "iconName": "grid-outline",
+    "category": "Vocabulario",
+    "levelCode": "A1",
+    "topic": "Números"
+  },
+  {
+    "id": "vocabulary-colors",
+    "title": "Colores",
+    "description": "Practica los colores básicos en alemán.",
+    "time": "5 min",
+    "iconName": "color-palette-outline",
+    "category": "Vocabulario",
+    "levelCode": "A1",
+    "topic": "Colores"
+  },
+  {
+    "id": "vocabulary-animals",
+    "title": "Animales",
+    "description": "Aprende vocabulario de animales.",
+    "time": "5 min",
+    "iconName": "paw-outline",
+    "category": "Vocabulario",
+    "levelCode": "A1",
+    "topic": "Animales"
+  },
+  {
+    "id": "vocabulary-body",
+    "title": "El cuerpo humano",
+    "description": "Practica las partes del cuerpo humano.",
+    "time": "5 min",
+    "iconName": "person-outline",
+    "category": "Vocabulario",
+    "levelCode": "A1",
+    "topic": "Cuerpo"
+  },
+  {
+    "id": "vocabulary-weather",
+    "title": "El tiempo atmosférico",
+    "description": "Aprende vocabulario del tiempo atmosférico.",
+    "time": "5 min",
+    "iconName": "partly-sunny-outline",
+    "category": "Vocabulario",
+    "levelCode": "A1",
+    "topic": "Tiempo"
+  },
+  {
+    "id": "vocabulary-clothes",
+    "title": "Ropa",
+    "description": "Practica palabras sobre ropa y accesorios.",
+    "time": "5 min",
+    "iconName": "shirt-outline",
+    "category": "Vocabulario",
+    "levelCode": "A1",
+    "topic": "Ropa"
+  },
+  {
+    "id": "vocabulary-time",
+    "title": "El tiempo y las horas",
+    "description": "Aprende sobre el tiempo, horas y días.",
+    "time": "5 min",
+    "iconName": "time-outline",
+    "category": "Vocabulario",
+    "levelCode": "A1",
+    "topic": "Tiempo"
+  },
+  {
+    "id": "vocabulary-directions",
+    "title": "Direcciones y lugares",
+    "description": "Practica direcciones y lugares.",
+    "time": "5 min",
+    "iconName": "compass-outline",
+    "category": "Vocabulario",
+    "levelCode": "A1",
+    "topic": "Direcciones"
+  },
+  {
+    "id": "vocabulary-verbs-basic",
+    "title": "Verbos básicos",
+    "description": "Aprende los verbos más básicos en alemán.",
+    "time": "6 min",
+    "iconName": "flash-outline",
+    "category": "Vocabulario",
+    "levelCode": "A1",
+    "topic": "Verbos"
+  },
+  {
+    "id": "vocabulary-prepositions",
+    "title": "Preposiciones básicas",
+    "description": "Practica preposiciones básicas.",
+    "time": "5 min",
+    "iconName": "navigate-outline",
+    "category": "Vocabulario",
+    "levelCode": "A1",
+    "topic": "Preposiciones"
+  },
+  {
+    "id": "vocabulary-questions",
+    "title": "Palabras interrogativas",
+    "description": "Aprende palabras para hacer preguntas.",
+    "time": "5 min",
+    "iconName": "help-circle-outline",
+    "category": "Vocabulario",
+    "levelCode": "A1",
+    "topic": "Preguntas"
+  },
+  {
+    "id": "vocabulary-adjectives",
+    "title": "Adjetivos básicos",
+    "description": "Practica adjetivos básicos para describir.",
+    "time": "5 min",
+    "iconName": "star-outline",
+    "category": "Vocabulario",
+    "levelCode": "A1",
+    "topic": "Adjetivos"
+  },
+  {
+    "id": "vocabulary-professions",
+    "title": "Profesiones",
+    "description": "Aprende vocabulario de profesiones.",
+    "time": "5 min",
+    "iconName": "briefcase-outline",
+    "category": "Vocabulario",
+    "levelCode": "A1",
+    "topic": "Profesiones"
+  },
+  {
+    "id": "vocabulary-school",
+    "title": "La escuela",
+    "description": "Practica palabras relacionadas con la escuela.",
+    "time": "5 min",
+    "iconName": "school-outline",
+    "category": "Vocabulario",
+    "levelCode": "A1",
+    "topic": "Escuela"
+  },
+  {
+    "id": "vocabulary-nature",
+    "title": "La naturaleza",
+    "description": "Aprende vocabulario de la naturaleza.",
+    "time": "5 min",
+    "iconName": "leaf-outline",
+    "category": "Vocabulario",
+    "levelCode": "A1",
+    "topic": "Naturaleza"
+  },
+  {
+    "id": "vocabulary-transport",
+    "title": "Transporte",
+    "description": "Practica medios de transporte.",
+    "time": "5 min",
+    "iconName": "car-outline",
+    "category": "Vocabulario",
+    "levelCode": "A1",
+    "topic": "Transporte"
+  },
+  {
+    "id": "vocabulary-technology",
+    "title": "Tecnología",
+    "description": "Aprende vocabulario de tecnología.",
+    "time": "5 min",
+    "iconName": "laptop-outline",
+    "category": "Vocabulario",
+    "levelCode": "A1",
+    "topic": "Tecnología"
+  },
+  {
+    "id": "vocabulary-emotions",
+    "title": "Emociones",
+    "description": "Practica vocabulario de emociones.",
+    "time": "5 min",
+    "iconName": "happy-outline",
+    "category": "Vocabulario",
+    "levelCode": "A1",
+    "topic": "Emociones"
+  },
+  {
+    "id": "vocabulary-food-drinks",
+    "title": "Comida y bebida extendido",
+    "description": "Amplía vocabulario de comida y bebida.",
+    "time": "6 min",
+    "iconName": "restaurant-outline",
+    "category": "Vocabulario",
+    "levelCode": "A1",
+    "topic": "Comida"
+  },
+  {
+    "id": "vocabulary-furniture",
+    "title": "Muebles",
+    "description": "Aprende vocabulario de muebles.",
+    "time": "5 min",
+    "iconName": "home-outline",
+    "category": "Vocabulario",
+    "levelCode": "A1",
+    "topic": "Muebles"
+  },
+  {
+    "id": "vocabulary-fruits",
+    "title": "Frutas",
+    "description": "Practica vocabulario de frutas.",
+    "time": "5 min",
+    "iconName": "nutrition-outline",
+    "category": "Vocabulario",
+    "levelCode": "A1",
+    "topic": "Frutas"
+  },
+  {
+    "id": "vocabulary-vegetables",
+    "title": "Verduras",
+    "description": "Aprende vocabulario de verduras.",
+    "time": "5 min",
+    "iconName": "leaf-outline",
+    "category": "Vocabulario",
+    "levelCode": "A1",
+    "topic": "Verduras"
+  },
+  {
+    "id": "reading-conversation",
+    "title": "Conversación: Conocerse",
+    "description": "Practica una conversación para conocer a alguien y pedir ayuda.",
+    "time": "6 min",
+    "iconName": "chatbubble-ellipses-outline",
+    "category": "Lectura",
+    "levelCode": "A2",
+    "topic": "Conversación"
+  },
+  {
+    "id": "reading-restaurant",
+    "title": "Lectura: En el restaurante",
+    "description": "Lee un diálogo en un restaurante.",
+    "time": "7 min",
+    "iconName": "restaurant-outline",
+    "category": "Lectura",
+    "levelCode": "A2",
+    "topic": "Restaurant"
+  },
+  {
+    "id": "reading-library",
+    "title": "Lectura: En la biblioteca",
+    "description": "Lee sobre actividades en la biblioteca.",
+    "time": "7 min",
+    "iconName": "book-outline",
+    "category": "Lectura",
+    "levelCode": "A2",
+    "topic": "Biblioteca"
+  },
+  {
+    "id": "reading-b1-bank",
+    "title": "Lectura B1: El banco",
+    "description": "Lee sobre transacciones bancarias.",
+    "time": "7 min",
+    "iconName": "card-outline",
+    "category": "Lectura",
+    "levelCode": "B1",
+    "topic": "Banco"
+  },
+  {
+    "id": "reading-b1-job",
+    "title": "Lectura B1: El trabajo",
+    "description": "Lee sobre temas laborales.",
+    "time": "7 min",
+    "iconName": "briefcase-outline",
+    "category": "Lectura",
+    "levelCode": "B1",
+    "topic": "Trabajo"
+  },
+  {
+    "id": "reading-b1-email",
+    "title": "Lectura B1: El correo electrónico",
+    "description": "Lee sobre correos electrónicos.",
+    "time": "7 min",
+    "iconName": "mail-outline",
+    "category": "Lectura",
+    "levelCode": "B1",
+    "topic": "Correo"
+  },
+  {
+    "id": "reading-b1-airport",
+    "title": "Lectura B1: El aeropuerto",
+    "description": "Lee sobre viajes en avión.",
+    "time": "7 min",
+    "iconName": "airplane-outline",
+    "category": "Lectura",
+    "levelCode": "B1",
+    "topic": "Aeropuerto"
+  },
+  {
+    "id": "reading-b1-meeting",
+    "title": "Lectura B1: La reunión",
+    "description": "Lee sobre reuniones de trabajo.",
+    "time": "7 min",
+    "iconName": "people-outline",
+    "category": "Lectura",
+    "levelCode": "B1",
+    "topic": "Reunión"
+  },
+  {
+    "id": "reading-b1-hotel",
+    "title": "Lectura B1: El hotel",
+    "description": "Lee sobre estancias en hoteles.",
+    "time": "7 min",
+    "iconName": "bed-outline",
+    "category": "Lectura",
+    "levelCode": "B1",
+    "topic": "Hotel"
+  },
+  {
+    "id": "reading-b1-sports",
+    "title": "Lectura B1: Los deportes",
+    "description": "Lee sobre deportes.",
+    "time": "7 min",
+    "iconName": "football-outline",
+    "category": "Lectura",
+    "levelCode": "B1",
+    "topic": "Deportes"
+  },
+  {
+    "id": "reading-b1-interview",
+    "title": "Lectura B1: La entrevista de trabajo",
+    "description": "Lee sobre entrevistas de trabajo.",
+    "time": "7 min",
+    "iconName": "person-outline",
+    "category": "Lectura",
+    "levelCode": "B1",
+    "topic": "Entrevista"
+  },
+  {
+    "id": "reading-b1-culture",
+    "title": "Lectura B1: La cultura",
+    "description": "Lee sobre cultura.",
+    "time": "7 min",
+    "iconName": "musical-notes-outline",
+    "category": "Lectura",
+    "levelCode": "B1",
+    "topic": "Cultura"
+  },
+  {
+    "id": "reading-b1-technology",
+    "title": "Lectura B1: La tecnología",
+    "description": "Lee sobre tecnología.",
+    "time": "7 min",
+    "iconName": "laptop-outline",
+    "category": "Lectura",
+    "levelCode": "B1",
+    "topic": "Tecnología"
+  },
+  {
+    "id": "reading-b1-health",
+    "title": "Lectura B1: La salud",
+    "description": "Lee sobre salud.",
+    "time": "7 min",
+    "iconName": "medkit-outline",
+    "category": "Lectura",
+    "levelCode": "B1",
+    "topic": "Salud"
+  },
+  {
+    "id": "reading-b1-travel",
+    "title": "Lectura B1: Los viajes",
+    "description": "Lee sobre viajes.",
+    "time": "7 min",
+    "iconName": "airplane-outline",
+    "category": "Lectura",
+    "levelCode": "B1",
+    "topic": "Viajes"
+  },
+  {
+    "id": "reading-b1-education",
+    "title": "Lectura B1: La educación",
+    "description": "Lee sobre educación.",
+    "time": "7 min",
+    "iconName": "school-outline",
+    "category": "Lectura",
+    "levelCode": "B1",
+    "topic": "Educación"
+  },
+  {
+    "id": "reading-b1-music",
+    "title": "Lectura B1: La música",
+    "description": "Lee sobre música.",
+    "time": "7 min",
+    "iconName": "musical-notes-outline",
+    "category": "Lectura",
+    "levelCode": "B1",
+    "topic": "Música"
+  },
+  {
+    "id": "reading-b1-environment",
+    "title": "Lectura B1: El medio ambiente",
+    "description": "Lee sobre medio ambiente.",
+    "time": "7 min",
+    "iconName": "leaf-outline",
+    "category": "Lectura",
+    "levelCode": "B1",
+    "topic": "Medio ambiente"
+  },
+  {
+    "id": "reading-b1-food",
+    "title": "Lectura B1: La comida",
+    "description": "Lee sobre comida.",
+    "time": "7 min",
+    "iconName": "restaurant-outline",
+    "category": "Lectura",
+    "levelCode": "B1",
+    "topic": "Comida"
+  },
+  {
+    "id": "reading-b1-housing",
+    "title": "Lectura B1: La vivienda",
+    "description": "Lee sobre vivienda.",
+    "time": "7 min",
+    "iconName": "home-outline",
+    "category": "Lectura",
+    "levelCode": "B1",
+    "topic": "Vivienda"
+  },
+  {
+    "id": "reading-b1-shopping",
+    "title": "Lectura B1: Las compras",
+    "description": "Lee sobre compras.",
+    "time": "7 min",
+    "iconName": "cart-outline",
+    "category": "Lectura",
+    "levelCode": "B1",
+    "topic": "Compras"
+  },
+  {
+    "id": "reading-b1-communication",
+    "title": "Lectura B1: La comunicación",
+    "description": "Lee sobre comunicación.",
+    "time": "7 min",
+    "iconName": "chatbubble-outline",
+    "category": "Lectura",
+    "levelCode": "B1",
+    "topic": "Comunicación"
+  },
+  {
+    "id": "reading-b1-news",
+    "title": "Lectura B1: Las noticias",
+    "description": "Lee sobre noticias.",
+    "time": "7 min",
+    "iconName": "newspaper-outline",
+    "category": "Lectura",
+    "levelCode": "B1",
+    "topic": "Noticias"
+  },
+  {
+    "id": "reading-b1-history",
+    "title": "Lectura B1: La historia",
+    "description": "Lee sobre historia.",
+    "time": "7 min",
+    "iconName": "book-outline",
+    "category": "Lectura",
+    "levelCode": "B1",
+    "topic": "Historia"
+  },
+  {
+    "id": "reading-b1-art",
+    "title": "Lectura B1: El arte",
+    "description": "Lee sobre arte.",
+    "time": "7 min",
+    "iconName": "color-palette-outline",
+    "category": "Lectura",
+    "levelCode": "B1",
+    "topic": "Arte"
+  },
+  {
+    "id": "reading-b1-social",
+    "title": "Lectura B1: Lo social",
+    "description": "Lee sobre temas sociales.",
+    "time": "7 min",
+    "iconName": "people-outline",
+    "category": "Lectura",
+    "levelCode": "B1",
+    "topic": "Social"
+  },
+  {
+    "id": "reading-b1-volunteer",
+    "title": "Lectura B1: El voluntariado",
+    "description": "Lee sobre voluntariado.",
+    "time": "7 min",
+    "iconName": "heart-outline",
+    "category": "Lectura",
+    "levelCode": "B1",
+    "topic": "Voluntariado"
+  },
+  {
+    "id": "reading-b1-festival",
+    "title": "Lectura B1: El festival",
+    "description": "Lee sobre festivales.",
+    "time": "7 min",
+    "iconName": "musical-notes-outline",
+    "category": "Lectura",
+    "levelCode": "B1",
+    "topic": "Festival"
+  },
+  {
+    "id": "reading-b1-politics",
+    "title": "Lectura B1: La política",
+    "description": "Lee sobre política.",
+    "time": "7 min",
+    "iconName": "document-text-outline",
+    "category": "Lectura",
+    "levelCode": "B1",
+    "topic": "Política"
+  },
+  {
+    "id": "reading-b1-media",
+    "title": "Lectura B1: Los medios de comunicación",
+    "description": "Lee sobre medios de comunicación.",
+    "time": "7 min",
+    "iconName": "tv-outline",
+    "category": "Lectura",
+    "levelCode": "B1",
+    "topic": "Medios"
+  },
+  {
+    "id": "reading-b1-weather",
+    "title": "Lectura B1: El tiempo atmosférico",
+    "description": "Lee sobre el tiempo atmosférico.",
+    "time": "7 min",
+    "iconName": "partly-sunny-outline",
+    "category": "Lectura",
+    "levelCode": "B1",
+    "topic": "Tiempo"
+  },
+  {
+    "id": "reading-b1-economy",
+    "title": "Lectura B1: La economía",
+    "description": "Lee sobre economía.",
+    "time": "7 min",
+    "iconName": "trending-up-outline",
+    "category": "Lectura",
+    "levelCode": "B1",
+    "topic": "Economía"
+  },
+  {
+    "id": "reading-b1-sports2",
+    "title": "Lectura B1: Deportes de equipo",
+    "description": "Lee sobre deportes de equipo.",
+    "time": "7 min",
+    "iconName": "football-outline",
+    "category": "Lectura",
+    "levelCode": "B1",
+    "topic": "Deportes de equipo"
+  },
+  {
+    "id": "reading-b1-literature",
+    "title": "Lectura B1: La literatura",
+    "description": "Lee sobre literatura.",
+    "time": "7 min",
+    "iconName": "book-outline",
+    "category": "Lectura",
+    "levelCode": "B1",
+    "topic": "Literatura"
+  },
+  {
+    "id": "reading-b1-science",
+    "title": "Lectura B1: La ciencia",
+    "description": "Lee sobre ciencia.",
+    "time": "7 min",
+    "iconName": "flask-outline",
+    "category": "Lectura",
+    "levelCode": "B1",
+    "topic": "Ciencia"
+  },
+  {
+    "id": "reading-b2-career-advancement",
+    "title": "Lectura B2: Avance profesional",
+    "description": "Lee sobre avance profesional.",
+    "time": "7 min",
+    "iconName": "trending-up-outline",
+    "category": "Lectura",
+    "levelCode": "B2",
+    "topic": "Avance profesional"
+  },
+  {
+    "id": "reading-b2-business-negotiation",
+    "title": "Lectura B2: Negociación empresarial",
+    "description": "Lee sobre negociación empresarial.",
+    "time": "7 min",
+    "iconName": "briefcase-outline",
+    "category": "Lectura",
+    "levelCode": "B2",
+    "topic": "Negociación"
+  },
+  {
+    "id": "reading-b2-academic-writing",
+    "title": "Lectura B2: Escritura académica",
+    "description": "Lee sobre escritura académica.",
+    "time": "7 min",
+    "iconName": "pencil-outline",
+    "category": "Lectura",
+    "levelCode": "B2",
+    "topic": "Escritura académica"
+  },
+  {
+    "id": "reading-b2-scientific-research",
+    "title": "Lectura B2: Investigación científica",
+    "description": "Lee sobre investigación científica.",
+    "time": "7 min",
+    "iconName": "flask-outline",
+    "category": "Lectura",
+    "levelCode": "B2",
+    "topic": "Investigación"
+  },
+  {
+    "id": "reading-b2-political-debate",
+    "title": "Lectura B2: Debate político",
+    "description": "Lee sobre debates políticos.",
+    "time": "7 min",
+    "iconName": "document-text-outline",
+    "category": "Lectura",
+    "levelCode": "B2",
+    "topic": "Debate político"
+  },
+  {
+    "id": "reading-b2-cultural-analysis",
+    "title": "Lectura B2: Análisis cultural",
+    "description": "Lee sobre análisis cultural.",
+    "time": "7 min",
+    "iconName": "globe-outline",
+    "category": "Lectura",
+    "levelCode": "B2",
+    "topic": "Análisis cultural"
+  },
+  {
+    "id": "reading-b2-economic-trends",
+    "title": "Lectura B2: Tendencias económicas",
+    "description": "Lee sobre tendencias económicas.",
+    "time": "7 min",
+    "iconName": "trending-up-outline",
+    "category": "Lectura",
+    "levelCode": "B2",
+    "topic": "Economía"
+  },
+  {
+    "id": "reading-b2-global-issues",
+    "title": "Lectura B2: Problemas globales",
+    "description": "Lee sobre problemas globales.",
+    "time": "7 min",
+    "iconName": "globe-outline",
+    "category": "Lectura",
+    "levelCode": "B2",
+    "topic": "Problemas globales"
+  },
+  {
+    "id": "reading-b2-environmental-policy",
+    "title": "Lectura B2: Política ambiental",
+    "description": "Lee sobre política ambiental.",
+    "time": "7 min",
+    "iconName": "leaf-outline",
+    "category": "Lectura",
+    "levelCode": "B2",
+    "topic": "Política ambiental"
+  },
+  {
+    "id": "reading-b2-medical-ethics",
+    "title": "Lectura B2: Ética médica",
+    "description": "Lee sobre ética médica.",
+    "time": "7 min",
+    "iconName": "medkit-outline",
+    "category": "Lectura",
+    "levelCode": "B2",
+    "topic": "Ética médica"
+  },
+  {
+    "id": "reading-b2-legal-system",
+    "title": "Lectura B2: El sistema legal",
+    "description": "Lee sobre el sistema legal.",
+    "time": "7 min",
+    "iconName": "document-text-outline",
+    "category": "Lectura",
+    "levelCode": "B2",
+    "topic": "Sistema legal"
+  },
+  {
+    "id": "reading-b2-financial-planning",
+    "title": "Lectura B2: Planificación financiera",
+    "description": "Lee sobre planificación financiera.",
+    "time": "7 min",
+    "iconName": "card-outline",
+    "category": "Lectura",
+    "levelCode": "B2",
+    "topic": "Finanzas"
+  },
+  {
+    "id": "reading-b2-international-relations",
+    "title": "Lectura B2: Relaciones internacionales",
+    "description": "Lee sobre relaciones internacionales.",
+    "time": "7 min",
+    "iconName": "globe-outline",
+    "category": "Lectura",
+    "levelCode": "B2",
+    "topic": "Relaciones internacionales"
+  },
+  {
+    "id": "reading-b2-philosophy",
+    "title": "Lectura B2: Filosofía",
+    "description": "Lee sobre filosofía.",
+    "time": "7 min",
+    "iconName": "book-outline",
+    "category": "Lectura",
+    "levelCode": "B2",
+    "topic": "Filosofía"
+  },
+  {
+    "id": "reading-b2-advanced-technology",
+    "title": "Lectura B2: Tecnología avanzada",
+    "description": "Lee sobre tecnología avanzada.",
+    "time": "7 min",
+    "iconName": "laptop-outline",
+    "category": "Lectura",
+    "levelCode": "B2",
+    "topic": "Tecnología avanzada"
+  },
+  {
+    "id": "reading-b2-sustainable-development",
+    "title": "Lectura B2: Desarrollo sostenible",
+    "description": "Lee sobre desarrollo sostenible.",
+    "time": "7 min",
+    "iconName": "leaf-outline",
+    "category": "Lectura",
+    "levelCode": "B2",
+    "topic": "Desarrollo sostenible"
+  },
+  {
+    "id": "reading-b2-social-justice",
+    "title": "Lectura B2: Justicia social",
+    "description": "Lee sobre justicia social.",
+    "time": "7 min",
+    "iconName": "people-outline",
+    "category": "Lectura",
+    "levelCode": "B2",
+    "topic": "Justicia social"
+  },
+  {
+    "id": "reading-b2-media-literacy",
+    "title": "Lectura B2: Alfabetización mediática",
+    "description": "Lee sobre alfabetización mediática.",
+    "time": "7 min",
+    "iconName": "tv-outline",
+    "category": "Lectura",
+    "levelCode": "B2",
+    "topic": "Alfabetización mediática"
+  },
+  {
+    "id": "reading-b2-psychology",
+    "title": "Lectura B2: Psicología",
+    "description": "Lee sobre psicología.",
+    "time": "7 min",
+    "iconName": "person-outline",
+    "category": "Lectura",
+    "levelCode": "B2",
+    "topic": "Psicología"
+  },
+  {
+    "id": "reading-b2-sociology",
+    "title": "Lectura B2: Sociología",
+    "description": "Lee sobre sociología.",
+    "time": "7 min",
+    "iconName": "people-outline",
+    "category": "Lectura",
+    "levelCode": "B2",
+    "topic": "Sociología"
+  },
+  {
+    "id": "reading-b2-anthropology",
+    "title": "Lectura B2: Antropología",
+    "description": "Lee sobre antropología.",
+    "time": "7 min",
+    "iconName": "globe-outline",
+    "category": "Lectura",
+    "levelCode": "B2",
+    "topic": "Antropología"
+  },
+  {
+    "id": "reading-b2-linguistics",
+    "title": "Lectura B2: Lingüística",
+    "description": "Lee sobre lingüística.",
+    "time": "7 min",
+    "iconName": "book-outline",
+    "category": "Lectura",
+    "levelCode": "B2",
+    "topic": "Lingüística"
+  },
+  {
+    "id": "reading-b2-modern-art",
+    "title": "Lectura B2: Arte moderno",
+    "description": "Lee sobre arte moderno.",
+    "time": "7 min",
+    "iconName": "color-palette-outline",
+    "category": "Lectura",
+    "levelCode": "B2",
+    "topic": "Arte moderno"
+  },
+  {
+    "id": "reading-b2-contemporary-literature",
+    "title": "Lectura B2: Literatura contemporánea",
+    "description": "Lee sobre literatura contemporánea.",
+    "time": "7 min",
+    "iconName": "book-outline",
+    "category": "Lectura",
+    "levelCode": "B2",
+    "topic": "Literatura contemporánea"
+  },
+  {
+    "id": "reading-b2-entrepreneurship",
+    "title": "Lectura B2: Emprendimiento",
+    "description": "Lee sobre emprendimiento.",
+    "time": "7 min",
+    "iconName": "briefcase-outline",
+    "category": "Lectura",
+    "levelCode": "B2",
+    "topic": "Emprendimiento"
+  },
+  {
+    "id": "reading-b2-innovation",
+    "title": "Lectura B2: Innovación",
+    "description": "Lee sobre innovación.",
+    "time": "7 min",
+    "iconName": "bulb-outline",
+    "category": "Lectura",
+    "levelCode": "B2",
+    "topic": "Innovación"
+  },
+  {
+    "id": "reading-b2-corporate-culture",
+    "title": "Lectura B2: Cultura corporativa",
+    "description": "Lee sobre cultura corporativa.",
+    "time": "7 min",
+    "iconName": "business-outline",
+    "category": "Lectura",
+    "levelCode": "B2",
+    "topic": "Cultura corporativa"
+  },
+  {
+    "id": "reading-b2-digital-privacy",
+    "title": "Lectura B2: Privacidad digital",
+    "description": "Lee sobre privacidad digital.",
+    "time": "7 min",
+    "iconName": "lock-closed-outline",
+    "category": "Lectura",
+    "levelCode": "B2",
+    "topic": "Privacidad digital"
+  },
+  {
+    "id": "reading-b2-ai-ethics",
+    "title": "Lectura B2: Ética de la IA",
+    "description": "Lee sobre ética de la IA.",
+    "time": "7 min",
+    "iconName": "hardware-chip-outline",
+    "category": "Lectura",
+    "levelCode": "B2",
+    "topic": "Ética de la IA"
+  },
+  {
+    "id": "grammar-noun-plural",
+    "title": "Plural de sustantivos",
+    "description": "Aprende a formar el plural de sustantivos alemanes.",
+    "time": "8 min",
+    "iconName": "school-outline",
+    "category": "Gramática",
+    "levelCode": "A2",
+    "topic": "Gramática"
+  },
+  {
+    "id": "grammar-separable-verbs",
+    "title": "Verbos separables",
+    "description": "Practica verbos con prefijos separables.",
+    "time": "8 min",
+    "iconName": "school-outline",
+    "category": "Gramática",
+    "levelCode": "A2",
+    "topic": "Gramática"
+  },
+  {
+    "id": "grammar-genitive",
+    "title": "El genitivo",
+    "description": "Usa el genitivo para expresar posesión.",
+    "time": "8 min",
+    "iconName": "school-outline",
+    "category": "Gramática",
+    "levelCode": "B1",
+    "topic": "Gramática"
+  },
+  {
+    "id": "grammar-imperative",
+    "title": "El imperativo",
+    "description": "Aprende a dar órdenes y hacer peticiones.",
+    "time": "8 min",
+    "iconName": "school-outline",
+    "category": "Gramática",
+    "levelCode": "A2",
+    "topic": "Gramática"
+  },
+  {
+    "id": "grammar-future",
+    "title": "Futuro con werden",
+    "description": "Expresa acciones futuras con werden.",
+    "time": "8 min",
+    "iconName": "school-outline",
+    "category": "Gramática",
+    "levelCode": "A2",
+    "topic": "Gramática"
+  },
+  {
+    "id": "grammar-subjunctive",
+    "title": "Konjunktiv II (condicional)",
+    "description": "Expresa deseos y condiciones hipotéticas.",
+    "time": "8 min",
+    "iconName": "school-outline",
+    "category": "Gramática",
+    "levelCode": "B1",
+    "topic": "Gramática"
+  },
+  {
+    "id": "grammar-prepositions",
+    "title": "Preposiciones con casos",
+    "description": "Practica preposiciones con casos.",
+    "time": "8 min",
+    "iconName": "school-outline",
+    "category": "Gramática",
+    "levelCode": "A2",
+    "topic": "Gramática"
+  },
+  {
+    "id": "grammar-reflexive",
+    "title": "Verbos reflexivos",
+    "description": "Aprende verbos reflexivos básicos.",
+    "time": "8 min",
+    "iconName": "school-outline",
+    "category": "Gramática",
+    "levelCode": "A2",
+    "topic": "Gramática"
+  },
+  {
+    "id": "grammar-relative",
+    "title": "Pronombres relativos",
+    "description": "Practica pronombres relativos.",
+    "time": "8 min",
+    "iconName": "school-outline",
+    "category": "Gramática",
+    "levelCode": "A2",
+    "topic": "Gramática"
+  },
+  {
+    "id": "dictation-basics",
+    "title": "Dictado: Frases básicas",
+    "description": "Escucha y escribe frases en alemán.",
+    "time": "6 min",
+    "iconName": "mic-outline",
+    "category": "Escucha",
+    "levelCode": "A1",
+    "topic": "Dictado"
+  },
+  {
+    "id": "fill-blanks-basics",
+    "title": "Completa los huecos",
+    "description": "Completa frases con la palabra correcta.",
+    "time": "6 min",
+    "iconName": "create-outline",
+    "category": "Escritura",
+    "levelCode": "A1",
+    "topic": "Completar"
+  },
+  {
+    "id": "word-order-basics",
+    "title": "Orden de palabras",
+    "description": "Ordena palabras para formar frases correctas.",
+    "time": "6 min",
+    "iconName": "swap-horizontal-outline",
+    "category": "Gramática",
+    "levelCode": "A1",
+    "topic": "Orden"
+  },
+  {
+    "id": "write-response-basics",
+    "title": "Escribe tu respuesta",
+    "description": "Escribe tus propias respuestas en alemán.",
+    "time": "8 min",
+    "iconName": "pencil-outline",
+    "category": "Escritura",
+    "levelCode": "A1",
+    "topic": "Escritura"
+  },
+  {
+    "id": "listening-basics",
+    "title": "Comprensión auditiva",
+    "description": "Escucha escenarios y responde preguntas.",
+    "time": "8 min",
+    "iconName": "headset-outline",
+    "category": "Escucha",
+    "levelCode": "A1",
+    "topic": "Escucha"
+  },
+  {
+    "id": "story-b1-weekend",
+    "title": "Cuento B1: Un fin de semana especial",
+    "description": "Lee un cuento de nivel B1 y responde preguntas.",
+    "time": "10 min",
+    "iconName": "book-open-outline",
+    "category": "Lectura",
+    "levelCode": "B1",
+    "topic": "Cuento"
+  },
+  {
+    "id": "story-b2-career",
+    "title": "Cuento B2: Un cambio de carrera",
+    "description": "Lee un cuento de nivel B2 sobre temas de vida.",
+    "time": "12 min",
+    "iconName": "book-open-outline",
+    "category": "Lectura",
+    "levelCode": "B2",
+    "topic": "Cuento"
+  },
+  {
+    "id": "dictation-a2",
+    "title": "Dictado: Rutina diaria",
+    "description": "Escucha y escribe frases sobre rutina diaria.",
+    "time": "7 min",
+    "iconName": "mic-outline",
+    "category": "Escucha",
+    "levelCode": "A2",
+    "topic": "Dictado"
+  },
+  {
+    "id": "dictation-b1",
+    "title": "Dictado: Experiencias pasadas",
+    "description": "Escucha y escribe frases en pasado.",
+    "time": "8 min",
+    "iconName": "mic-outline",
+    "category": "Escucha",
+    "levelCode": "B1",
+    "topic": "Dictado"
+  },
+  {
+    "id": "dictation-b2",
+    "title": "Dictado: Opiniones complejas",
+    "description": "Escucha y escribe opiniones complejas.",
+    "time": "10 min",
+    "iconName": "mic-outline",
+    "category": "Escucha",
+    "levelCode": "B2",
+    "topic": "Dictado"
+  },
+  {
+    "id": "fill-blanks-a2",
+    "title": "Completa: Casos y preposiciones",
+    "description": "Completa frases con casos y preposiciones.",
+    "time": "7 min",
+    "iconName": "create-outline",
+    "category": "Escritura",
+    "levelCode": "A2",
+    "topic": "Completar"
+  },
+  {
+    "id": "fill-blanks-b1",
+    "title": "Completa: Perfekt y Futuro",
+    "description": "Completa frases con Perfekt y futuro.",
+    "time": "8 min",
+    "iconName": "create-outline",
+    "category": "Escritura",
+    "levelCode": "B1",
+    "topic": "Completar"
+  },
+  {
+    "id": "fill-blanks-b2",
+    "title": "Completa: Konjunktiv II",
+    "description": "Completa frases con Konjunktiv II.",
+    "time": "8 min",
+    "iconName": "create-outline",
+    "category": "Escritura",
+    "levelCode": "B2",
+    "topic": "Completar"
+  },
+  {
+    "id": "word-order-a2",
+    "title": "Orden: Tiempo y lugar",
+    "description": "Ordena palabras con tiempo y lugar.",
+    "time": "7 min",
+    "iconName": "swap-horizontal-outline",
+    "category": "Gramática",
+    "levelCode": "A2",
+    "topic": "Orden"
+  },
+  {
+    "id": "word-order-b1",
+    "title": "Orden: Perfekt y subordinadas",
+    "description": "Ordena palabras en Perfekt y subordinadas.",
+    "time": "8 min",
+    "iconName": "swap-horizontal-outline",
+    "category": "Gramática",
+    "levelCode": "B1",
+    "topic": "Orden"
+  },
+  {
+    "id": "word-order-b2",
+    "title": "Orden: Condicionales complejas",
+    "description": "Ordena palabras en condicionales complejas.",
+    "time": "8 min",
+    "iconName": "swap-horizontal-outline",
+    "category": "Gramática",
+    "levelCode": "B2",
+    "topic": "Orden"
+  },
+  {
+    "id": "write-response-a2",
+    "title": "Escribe: Rutina y preferencias",
+    "description": "Escribe sobre rutina y preferencias.",
+    "time": "8 min",
+    "iconName": "pencil-outline",
+    "category": "Escritura",
+    "levelCode": "A2",
+    "topic": "Escritura"
+  },
+  {
+    "id": "write-response-b1",
+    "title": "Escribe: Experiencias pasadas",
+    "description": "Escribe sobre experiencias pasadas.",
+    "time": "10 min",
+    "iconName": "pencil-outline",
+    "category": "Escritura",
+    "levelCode": "B1",
+    "topic": "Escritura"
+  },
+  {
+    "id": "write-response-b2",
+    "title": "Escribe: Opiniones y argumentos",
+    "description": "Escribe opiniones y argumentos.",
+    "time": "12 min",
+    "iconName": "pencil-outline",
+    "category": "Escritura",
+    "levelCode": "B2",
+    "topic": "Escritura"
+  },
+  {
+    "id": "listening-a2",
+    "title": "Escucha: Conversaciones cotidianas",
+    "description": "Escucha conversaciones cotidianas.",
+    "time": "10 min",
+    "iconName": "headset-outline",
+    "category": "Escucha",
+    "levelCode": "A2",
+    "topic": "Escucha"
+  },
+  {
+    "id": "listening-b1",
+    "title": "Escucha: Narraciones y descripciones",
+    "description": "Escucha narraciones y descripciones.",
+    "time": "12 min",
+    "iconName": "headset-outline",
+    "category": "Escucha",
+    "levelCode": "B1",
+    "topic": "Escucha"
+  },
+  {
+    "id": "listening-b2",
+    "title": "Escucha: Argumentos y debates",
+    "description": "Escucha argumentos y debates.",
+    "time": "15 min",
+    "iconName": "headset-outline",
+    "category": "Escucha",
+    "levelCode": "B2",
+    "topic": "Escucha"
+  },
+  {
+    "id": "story-a1-family",
+    "title": "Cuento A1: Mi familia",
+    "description": "Lee un cuento sencillo de nivel A1.",
+    "time": "8 min",
+    "iconName": "book-open-outline",
+    "category": "Lectura",
+    "levelCode": "A1",
+    "topic": "Cuento"
+  },
+  {
+    "id": "story-a2-weekend",
+    "title": "Cuento A2: Mi fin de semana",
+    "description": "Lee un cuento de nivel A2 sobre rutinas.",
+    "time": "10 min",
+    "iconName": "book-open-outline",
+    "category": "Lectura",
+    "levelCode": "A2",
+    "topic": "Cuento"
+  },
+  {
+    "id": "story-b2-travel",
+    "title": "Cuento B2: Un viaje inolvidable",
+    "description": "Lee un cuento de nivel B2 sobre viajes.",
+    "time": "12 min",
+    "iconName": "book-open-outline",
+    "category": "Lectura",
+    "levelCode": "B2",
+    "topic": "Cuento"
+  },
+  {
+    "id": "challenge-a1-city",
+    "title": "Reto dinámico: Un día en la ciudad",
+    "description": "Practica vocabulario, comprensión y gramática con actividades interactivas de nivel A1.",
+    "time": "7 min",
+    "iconName": "game-controller-outline",
+    "category": "Práctica",
+    "levelCode": "A1",
+    "topic": "Retos interactivos"
+  },
+  {
+    "id": "challenge-a2-weekend",
+    "title": "Reto dinámico: Planear el fin de semana",
+    "description": "Practica vocabulario, comprensión y gramática con actividades interactivas de nivel A2.",
+    "time": "8 min",
+    "iconName": "game-controller-outline",
+    "category": "Práctica",
+    "levelCode": "A2",
+    "topic": "Retos interactivos"
+  },
+  {
+    "id": "challenge-b1-travel",
+    "title": "Reto dinámico: Resolver un viaje",
+    "description": "Practica vocabulario, comprensión y gramática con actividades interactivas de nivel B1.",
+    "time": "9 min",
+    "iconName": "game-controller-outline",
+    "category": "Práctica",
+    "levelCode": "B1",
+    "topic": "Retos interactivos"
+  },
+  {
+    "id": "challenge-b2-work",
+    "title": "Reto dinámico: Comunicar ideas en el trabajo",
+    "description": "Practica vocabulario, comprensión y gramática con actividades interactivas de nivel B2.",
+    "time": "10 min",
+    "iconName": "game-controller-outline",
+    "category": "Práctica",
+    "levelCode": "B2",
+    "topic": "Retos interactivos"
+  }
+]

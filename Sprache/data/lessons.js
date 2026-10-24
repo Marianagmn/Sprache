@@ -3,6 +3,22 @@ export const vocabularyLesson = {
   title: 'Vocabulario básico',
   activityId: 'vocabulary',
   durationMinutes: 5,
+  level: 'A1',
+  objective: 'Al terminar esta lección podrás reconocer y usar 10 palabras básicas en alemán para saludar, despedirte y nombrar objetos comunes.',
+  explanation: {
+    vocabulary: [
+      { term: 'Hallo', translation: 'Hola', example: 'Hallo, wie geht es dir?' },
+      { term: 'Guten Morgen', translation: 'Buenos días', example: 'Guten Morgen, Anna!' },
+      { term: 'Guten Tag', translation: 'Buenas tardes', example: 'Guten Tag, Herr Müller.' },
+      { term: 'Guten Abend', translation: 'Buenas noches', example: 'Guten Abend und gute Nacht.' },
+      { term: 'Auf Wiedersehen', translation: 'Adiós', example: 'Auf Wiedersehen, bis morgen!' },
+      { term: 'Tschüss', translation: 'Chao (informal)', example: 'Tschüss, wir sehen uns.' },
+      { term: 'das Haus', translation: 'la casa', example: 'Das ist mein Haus.' },
+      { term: 'das Buch', translation: 'el libro', example: 'Ich lese ein Buch.' },
+      { term: 'der Stuhl', translation: 'la silla', example: 'Bitte, setz dich auf den Stuhl.' },
+      { term: 'das Wasser', translation: 'el agua', example: 'Ich möchte Wasser, bitte.' },
+    ],
+  },
   questions: [
     {
       id: 'vocab-q1',
@@ -39,6 +55,16 @@ export const vocabularyLessonDaily = {
   title: 'Rutina diaria',
   activityId: 'vocabulary-daily',
   durationMinutes: 6,
+  level: 'A1',
+  objective: 'Al terminar esta lección podrás describir tu rutina diaria básica en alemán.',
+  explanation: {
+    vocabulary: [
+      { term: 'aufwachen', translation: 'despertarse', example: 'Ich wache um 7 Uhr auf.' },
+      { term: 'das Frühstück', translation: 'el desayuno', example: 'Zum Frühstück esse ich Brot.' },
+      { term: 'die Arbeit', translation: 'el trabajo', example: 'Ich gehe zur Arbeit.' },
+      { term: 'zu Hause', translation: 'en casa', example: 'Am Abend bin ich zu Hause.' },
+    ],
+  },
   questions: [
     {
       id: 'daily-q1',
@@ -75,6 +101,9 @@ export const readingLessonCity = {
   title: 'Lectura: La ciudad',
   activityId: 'reading-city',
   durationMinutes: 7,
+  level: 'A1',
+  objective: 'Al terminar esta lección podrás comprender un texto sobre la vida en la ciudad.',
+  passage: 'Laura wohnt in einer kleinen Stadt. Die Stadt ist sehr schön. Es gibt viele Parks und Cafés. Am Nachmittag geht Laura oft in den Park und liest ein Buch. Sie mag ihr Leben in der Stadt sehr gern.',
   questions: [
     {
       id: 'reading-city-q1',
@@ -111,6 +140,9 @@ export const readingLessonCafe = {
   title: 'Lectura: Café y amigos',
   activityId: 'reading-cafe',
   durationMinutes: 7,
+  level: 'A1',
+  objective: 'Al terminar esta lección podrás comprender una conversación en un café.',
+  passage: 'Anna und Marta sitzen im Café. Sie trinken Kaffee und reden. Das Café ist gemütlich. Marta empfiehlt den Apfelkuchen. Anna probiert den Kuchen und findet ihn sehr lecker. Die Freunde haben einen entspannten Nachmittag.',
   questions: [
     {
       id: 'reading-cafe-q1',
@@ -147,6 +179,16 @@ export const grammarLessonArticles = {
   title: 'Artículos y género',
   activityId: 'grammar-articles',
   durationMinutes: 8,
+  level: 'A1',
+  objective: 'Al terminar esta lección podrás usar los artículos der, die, das correctamente.',
+  explanation: {
+    rule: 'En alemán, los sustantivos tienen género masculino (der), femenino (die) o neutro (das). El género no siempre es lógico y debe memorizarse.',
+    examples: [
+      'Der Tisch ist neu. (La mesa es nueva - masculino)',
+      'Die Katze ist schwarz. (El gato es negro - femenino)',
+      'Das Buch ist interessant. (El libro es interesante - neutro)',
+    ],
+  },
   questions: [
     {
       id: 'grammar-articles-q1',
@@ -183,6 +225,16 @@ export const grammarLessonWordOrder = {
   title: 'Orden de palabras',
   activityId: 'grammar-word-order',
   durationMinutes: 8,
+  level: 'A1',
+  objective: 'Al terminar esta lección podrás usar el orden básico de palabras en alemán.',
+  explanation: {
+    rule: 'En alemán, el verbo conjugado va en segunda posición en una oración principal. El sujeto puede ir primero o después del elemento inicial.',
+    examples: [
+      'Ich gehe morgen zur Uni. (Voy a la universidad mañana)',
+      'Heute stehe ich früh auf. (Hoy me levanto temprano)',
+      'Wir essen heute im Restaurant. (Comemos hoy en el restaurante)',
+    ],
+  },
   questions: [
     {
       id: 'grammar-word-order-q1',
@@ -219,6 +271,15 @@ export const vocabularyLessonFood = {
   title: 'Comida y bebida',
   activityId: 'vocabulary-food',
   durationMinutes: 6,
+  level: 'A1',
+  objective: 'Al terminar esta lección podrás pedir comida y bebida básica en alemán.',
+  explanation: {
+    vocabulary: [
+      { term: 'der Apfel', translation: 'la manzana', example: 'Ich esse einen Apfel.' },
+      { term: 'das Wasser', translation: 'el agua', example: 'Ich möchte Wasser, bitte.' },
+      { term: 'das Brot', translation: 'el pan', example: 'Ich esse gern Brot.' },
+    ],
+  },
   questions: [
     { id: 'food-q1', prompt: '¿Cómo se dice "manzana" en alemán?', word: 'manzana', options: ['Apfel', 'Brot', 'Käse', 'Milch'], answer: 'Apfel', explanation: 'En alemán, la fruta «manzana» se llama «Apfel»; «der Apfel» es el sustantivo con su artículo masculino.', vocabulary: { term: 'der Apfel', translation: 'la manzana' }, hint: 'Es una fruta que suele ser roja o verde.' },
     { id: 'food-q2', prompt: '¿Qué significa "Wasser"?', word: 'Wasser', options: ['Agua', 'Leche', 'Café', 'Jugo'], answer: 'Agua', vocabulary: { term: 'das Wasser', translation: 'el agua' }, hint: 'Es una bebida transparente.' },
@@ -231,6 +292,15 @@ export const vocabularyLessonTravel = {
   title: 'Viajes y transporte',
   activityId: 'vocabulary-travel',
   durationMinutes: 6,
+  level: 'A1',
+  objective: 'Al terminar esta lección podrás usar vocabulario básico de viajes y transporte en alemán.',
+  explanation: {
+    vocabulary: [
+      { term: 'der Zug', translation: 'el tren', example: 'Ich fahre mit dem Zug.' },
+      { term: 'der Bahnhof', translation: 'la estación de tren', example: 'Der Bahnhof ist groß.' },
+      { term: 'der Bus', translation: 'el autobús', example: 'Ich nehme den Bus.' },
+    ],
+  },
   questions: [
     { id: 'travel-q1', prompt: '¿Cómo se dice "tren" en alemán?', word: 'tren', options: ['Zug', 'Bus', 'Fahrrad', 'Flugzeug'], answer: 'Zug', vocabulary: { term: 'der Zug', translation: 'el tren' }, hint: 'Viaja sobre raíles.' },
     { id: 'travel-q2', prompt: '¿Qué significa "Bahnhof"?', word: 'Bahnhof', options: ['Estación de tren', 'Aeropuerto', 'Hotel', 'Museo'], answer: 'Estación de tren', vocabulary: { term: 'der Bahnhof', translation: 'la estación de tren' }, hint: 'Es donde tomas el tren.' },
@@ -243,6 +313,15 @@ export const vocabularyLessonFamily = {
   title: 'La familia',
   activityId: 'vocabulary-family',
   durationMinutes: 5,
+  level: 'A1',
+  objective: 'Al terminar esta lección podrás nombrar a los miembros de tu familia en alemán.',
+  explanation: {
+    vocabulary: [
+      { term: 'die Mutter', translation: 'la madre', example: 'Meine Mutter heißt Anna.' },
+      { term: 'die Schwester', translation: 'la hermana', example: 'Ich habe eine Schwester.' },
+      { term: 'der Großvater', translation: 'el abuelo', example: 'Mein Großvater ist alt.' },
+    ],
+  },
   questions: [
     { id: 'family-q1', prompt: '¿Cómo se dice "madre" en alemán?', word: 'madre', options: ['Mutter', 'Vater', 'Bruder', 'Sohn'], answer: 'Mutter', vocabulary: { term: 'die Mutter', translation: 'la madre' }, hint: 'Es una de tus figuras parentales.' },
     { id: 'family-q2', prompt: '¿Qué significa "die Schwester"?', word: 'die Schwester', options: ['La hermana', 'El hermano', 'La hija', 'La abuela'], answer: 'La hermana', vocabulary: { term: 'die Schwester', translation: 'la hermana' }, hint: 'Es una hija de tus mismos padres.' },
@@ -255,6 +334,15 @@ export const vocabularyLessonShopping = {
   title: 'De compras',
   activityId: 'vocabulary-shopping',
   durationMinutes: 6,
+  level: 'A1',
+  objective: 'Al terminar esta lección podrás realizar compras básicas en alemán.',
+  explanation: {
+    vocabulary: [
+      { term: 'der Preis', translation: 'el precio', example: 'Wie viel kostet das?' },
+      { term: 'bezahlen', translation: 'pagar', example: 'Ich möchte bezahlen.' },
+      { term: 'das Geschäft', translation: 'la tienda', example: 'Das Geschäft ist geschlossen.' },
+    ],
+  },
   questions: [
     { id: 'shopping-q1', prompt: '¿Cómo se dice "precio" en alemán?', word: 'precio', options: ['Preis', 'Größe', 'Farbe', 'Kasse'], answer: 'Preis', vocabulary: { term: 'der Preis', translation: 'el precio' }, hint: 'Lo preguntas para saber cuánto cuesta algo.' },
     { id: 'shopping-q2', prompt: '¿Qué significa "Ich möchte bezahlen"?', word: 'Ich möchte bezahlen', options: ['Quisiera pagar', 'Quisiera comprar', '¿Dónde está la tienda?', 'Es demasiado grande'], answer: 'Quisiera pagar', vocabulary: { term: 'bezahlen', translation: 'pagar' }, hint: 'Se dice al terminar una compra o comida.' },
@@ -267,6 +355,9 @@ export const readingLessonStation = {
   title: 'Lectura: En la estación',
   activityId: 'reading-station',
   durationMinutes: 7,
+  level: 'A1',
+  objective: 'Al terminar esta lección podrás comprender instrucciones en una estación de tren.',
+  passage: 'Peter steht im Bahnhof. Er sucht Gleis drei. Auf dem Informationsschirm steht: Der Zug nach München fährt von Gleis drei um zehn Uhr. Peter kauft noch schnell eine Fahrkarte am Automaten. Dann geht er zum Gleis und wartet auf den Zug.',
   questions: [
     { id: 'station-q1', prompt: '¿Qué busca una persona que pregunta "Wo ist Gleis drei?"?', word: 'Gleis drei', options: ['El andén tres', 'La salida tres', 'El autobús tres', 'La habitación tres'], answer: 'El andén tres', vocabulary: { term: 'das Gleis', translation: 'el andén / la vía' }, hint: 'Es el lugar donde esperan los pasajeros para subir al tren.' },
     { id: 'station-q2', prompt: 'Si el tren sale um zehn Uhr, ¿a qué hora sale?', word: 'zehn Uhr', options: ['A las diez', 'A las doce', 'A las ocho', 'A las nueve'], answer: 'A las diez', vocabulary: { term: 'um zehn Uhr', translation: 'a las diez' }, hint: 'Zehn significa diez.' },
@@ -279,6 +370,9 @@ export const readingLessonMarket = {
   title: 'Lectura: En el mercado',
   activityId: 'reading-market',
   durationMinutes: 7,
+  level: 'A1',
+  objective: 'Al terminar esta lección podrás comprender una compra en el mercado.',
+  passage: 'Auf dem Markt gibt es viele Stände. Eine Verkäuferin verkauft frisches Obst und Gemüse. Ein Kunde kommt zu ihrem Stand. Sie fragt: "Was möchten Sie?" Der Kunde sagt: "Ein Kilo Äpfel, bitte." Die Verkäuferin wiegt die Äpfel und sagt den Preis. Der Kunde bezahlt und ist zufrieden.',
   questions: [
     { id: 'market-q1', prompt: 'La vendedora dice "Was möchten Sie?". ¿Qué quiere saber?', word: 'Was möchten Sie?', options: ['Qué desea el cliente', 'Dónde vive el cliente', 'Cuándo llega el tren', 'Cómo se llama el cliente'], answer: 'Qué desea el cliente', vocabulary: { term: 'möchten', translation: 'querer / desear (de forma cortés)' }, hint: 'Es una pregunta habitual al atender a alguien.' },
     { id: 'market-q2', prompt: '¿Qué significa "ein Kilo Äpfel, bitte"?', word: 'ein Kilo Äpfel', options: ['Un kilo de manzanas, por favor', 'Un litro de leche, por favor', 'Dos panes, por favor', 'Una taza de café, por favor'], answer: 'Un kilo de manzanas, por favor', vocabulary: { term: 'ein Kilo Äpfel', translation: 'un kilo de manzanas' }, hint: 'Äpfel es el plural de Apfel.' },
@@ -291,6 +385,9 @@ export const readingLessonWeather = {
   title: 'Lectura: El tiempo',
   activityId: 'reading-weather',
   durationMinutes: 7,
+  level: 'A1',
+  objective: 'Al terminar esta lección podrás comprender un texto sobre el tiempo atmosférico.',
+  passage: 'Heute regnet es. Das Wetter ist nicht gut. Wenn es kalt ist, sollte man eine Jacke tragen. Wenn die Sonne scheint, ist es warm und schön. Viele Menschen gehen dann spazieren. Das Wetter in Deutschland wechselt oft.',
   questions: [
     { id: 'weather-q1', prompt: '¿Qué significa "Heute regnet es"?', word: 'regnet', options: ['Hoy llueve', 'Hoy hace sol', 'Hoy nieva', 'Hoy hace calor'], answer: 'Hoy llueve', vocabulary: { term: 'regnen', translation: 'llover' }, hint: 'El verbo regnen describe la lluvia.' },
     { id: 'weather-q2', prompt: '¿Qué ropa conviene llevar si hace frío (es ist kalt)?', word: 'kalt', options: ['Una chaqueta', 'Un bañador', 'Unas sandalias', 'Unas gafas de sol'], answer: 'Una chaqueta', vocabulary: { term: 'kalt', translation: 'frío' }, hint: 'Elige una prenda que abriga.' },
@@ -303,6 +400,16 @@ export const grammarLessonPresent = {
   title: 'Verbos en presente',
   activityId: 'grammar-present',
   durationMinutes: 8,
+  level: 'A1',
+  objective: 'Al terminar esta lección podrás conjugar verbos regulares en presente.',
+  explanation: {
+    rule: 'Los verbos regulares en presente se conjugan añadiendo -e para ich, -st para du, -t para er/sie/es, -en para wir y ihr, y -en para sie/Sie.',
+    examples: [
+      'Ich spreche Deutsch. (Yo hablo alemán)',
+      'Du wohnst in Berlin. (Tú vives en Berlín)',
+      'Er trinkt Kaffee. (Él bebe café)',
+    ],
+  },
   questions: [
     { id: 'present-q1', prompt: 'Completa: Ich ___ Deutsch. (hablar)', word: 'sprechen', options: ['spreche', 'sprichst', 'spricht', 'sprechen'], answer: 'spreche', vocabulary: { term: 'sprechen', translation: 'hablar' }, hint: 'Con ich, sprechen se conjuga spreche.' },
     { id: 'present-q2', prompt: 'Completa: Du ___ in Berlin. (vivir)', word: 'wohnen', options: ['wohne', 'wohnst', 'wohnt', 'wohnen'], answer: 'wohnst', vocabulary: { term: 'wohnen', translation: 'vivir / residir' }, hint: 'Los verbos regulares suelen terminar en -st con du.' },
@@ -339,6 +446,15 @@ export const vocabularyLessonHome = {
   title: 'La casa y sus habitaciones',
   activityId: 'vocabulary-home',
   durationMinutes: 6,
+  level: 'A1',
+  objective: 'Al terminar esta lección podrás describir las habitaciones de una casa en alemán.',
+  explanation: {
+    vocabulary: [
+      { term: 'die Wohnung', translation: 'el apartamento', example: 'Ich wohne in einer Wohnung.' },
+      { term: 'die Küche', translation: 'la cocina', example: 'Die Küche ist groß.' },
+      { term: 'das Schlafzimmer', translation: 'el dormitorio', example: 'Ich schlafe im Schlafzimmer.' },
+    ],
+  },
   questions: [
     { id: 'home-q1', prompt: '¿Qué significa “die Wohnung”?', word: 'Wohnung', options: ['El apartamento', 'La estación', 'La oficina', 'El jardín'], answer: 'El apartamento', vocabulary: { term: 'die Wohnung', translation: 'el apartamento' }, hint: 'Es el lugar donde vives.' },
     { id: 'home-q2', prompt: '¿Cómo se dice “cocina” en alemán?', word: 'cocina', options: ['Küche', 'Fenster', 'Zimmer', 'Tür'], answer: 'Küche', vocabulary: { term: 'die Küche', translation: 'la cocina' }, hint: 'Es la habitación donde preparas la comida.' },
@@ -351,6 +467,15 @@ export const vocabularyLessonHealth = {
   title: 'Salud y bienestar',
   activityId: 'vocabulary-health',
   durationMinutes: 6,
+  level: 'A1',
+  objective: 'Al terminar esta lección podrás expresar estado de salud básico en alemán.',
+  explanation: {
+    vocabulary: [
+      { term: 'der Kopf', translation: 'la cabeza', example: 'Mir tut der Kopf weh.' },
+      { term: 'der Arzt', translation: 'el médico', example: 'Ich gehe zum Arzt.' },
+      { term: 'krank', translation: 'enfermo', example: 'Ich bin krank.' },
+    ],
+  },
   questions: [
     { id: 'health-q1', prompt: '¿Qué significa “der Kopf”?', word: 'Kopf', options: ['La cabeza', 'La mano', 'La espalda', 'El pie'], answer: 'La cabeza', vocabulary: { term: 'der Kopf', translation: 'la cabeza' }, hint: 'Está sobre el cuello.' },
     { id: 'health-q2', prompt: '¿Cómo se dice “médico” en alemán?', word: 'médico', options: ['Arzt', 'Lehrer', 'Koch', 'Fahrer'], answer: 'Arzt', vocabulary: { term: 'der Arzt', translation: 'el médico' }, hint: 'Visitas a esta persona cuando estás enfermo.' },
@@ -363,6 +488,15 @@ export const vocabularyLessonHobbies = {
   title: 'Tiempo libre y aficiones',
   activityId: 'vocabulary-hobbies',
   durationMinutes: 6,
+  level: 'A1',
+  objective: 'Al terminar esta lección podrás hablar de tus hobbies en alemán.',
+  explanation: {
+    vocabulary: [
+      { term: 'lesen', translation: 'leer', example: 'Ich lese gern Bücher.' },
+      { term: 'die Musik', translation: 'la música', example: 'Ich höre gern Musik.' },
+      { term: 'Fußball spielen', translation: 'jugar al fútbol', example: 'Ich spiele gern Fußball.' },
+    ],
+  },
   questions: [
     { id: 'hobbies-q1', prompt: '¿Qué significa “lesen”?', word: 'lesen', options: ['Leer', 'Cocinar', 'Bailar', 'Nadar'], answer: 'Leer', vocabulary: { term: 'lesen', translation: 'leer' }, hint: 'Lo haces cuando disfrutas de un libro.' },
     { id: 'hobbies-q2', prompt: '¿Cómo se dice “música” en alemán?', word: 'música', options: ['Musik', 'Sport', 'Film', 'Reise'], answer: 'Musik', vocabulary: { term: 'die Musik', translation: 'la música' }, hint: 'Se escucha y puede tener ritmo y melodía.' },
@@ -375,6 +509,15 @@ export const vocabularyLessonWork = {
   title: 'En el trabajo',
   activityId: 'vocabulary-work',
   durationMinutes: 6,
+  level: 'A2',
+  objective: 'Al terminar esta lección podrás hablar sobre tu trabajo en alemán.',
+  explanation: {
+    vocabulary: [
+      { term: 'der Kollege', translation: 'el compañero de trabajo', example: 'Mein Kollege ist sehr nett.' },
+      { term: 'die Besprechung', translation: 'la reunión', example: 'Wir haben eine Besprechung.' },
+      { term: 'von zu Hause arbeiten', translation: 'trabajar desde casa', example: 'Ich arbeite von zu Hause.' },
+    ],
+  },
   questions: [
     { id: 'work-q1', prompt: '¿Qué significa “der Kollege”?', word: 'Kollege', options: ['El compañero de trabajo', 'El vecino', 'El cliente', 'El profesor'], answer: 'El compañero de trabajo', vocabulary: { term: 'der Kollege', translation: 'el compañero de trabajo' }, hint: 'Trabaja contigo en el mismo lugar.' },
     { id: 'work-q2', prompt: '¿Cómo se dice “reunión” en alemán?', word: 'reunión', options: ['Besprechung', 'Pause', 'Aufgabe', 'Büro'], answer: 'Besprechung', vocabulary: { term: 'die Besprechung', translation: 'la reunión' }, hint: 'Es una conversación de trabajo entre varias personas.' },
@@ -387,6 +530,15 @@ export const vocabularyLessonGreetings = {
   title: 'Saludos y presentaciones',
   activityId: 'vocabulary-greetings',
   durationMinutes: 5,
+  level: 'A1',
+  objective: 'Al terminar esta lección podrás saludar y presentarte en alemán.',
+  explanation: {
+    vocabulary: [
+      { term: 'Guten Morgen', translation: 'buenos días', example: 'Guten Morgen, wie geht es dir?' },
+      { term: 'Wie heißt du?', translation: '¿Cómo te llamas?', example: 'Wie heißt du? Ich heiße Anna.' },
+      { term: 'Bis bald', translation: 'hasta pronto', example: 'Bis bald! Wir sehen uns später.' },
+    ],
+  },
   questions: [
     {
       id: 'greetings-q1',
@@ -432,6 +584,15 @@ export const vocabularyLessonStudy = {
   title: 'En clase y al estudiar',
   activityId: 'vocabulary-study',
   durationMinutes: 6,
+  level: 'A1',
+  objective: 'Al terminar esta lección podrás usar vocabulario de la escuela en alemán.',
+  explanation: {
+    vocabulary: [
+      { term: 'das Heft', translation: 'el cuaderno', example: 'Das Heft liegt auf dem Tisch.' },
+      { term: 'lernen', translation: 'aprender / estudiar', example: 'Ich lerne Deutsch.' },
+      { term: 'die Lehrerin', translation: 'la profesora', example: 'Die Lehrerin erklärt die Aufgabe.' },
+    ],
+  },
   questions: [
     {
       id: 'study-q1',
@@ -477,6 +638,9 @@ export const readingLessonDoctor = {
   title: 'Lectura: En la consulta médica',
   activityId: 'reading-doctor',
   durationMinutes: 7,
+  level: 'A2',
+  objective: 'Al terminar esta lección podrás comprender una consulta médica básica.',
+  passage: 'Der Patient kommt in die Arztpraxis. Der Arzt fragt: "Was fehlt Ihnen?" Der Patient antwortet: "Seit gestern habe ich Fieber und Kopfschmerzen." Der Arzt untersucht ihn und sagt: "Nehmen Sie diese Tabletten zweimal täglich." Der Patient dankt dem Arzt und geht nach Hause.',
   questions: [
     { id: 'doctor-q1', prompt: 'El médico pregunta “Was fehlt Ihnen?”. ¿Qué quiere saber?', word: 'Was fehlt Ihnen?', options: ['Qué le pasa al paciente', 'Dónde vive el paciente', 'Cuándo viaja', 'Qué desea comer'], answer: 'Qué le pasa al paciente', vocabulary: { term: 'fehlen', translation: 'faltar / encontrarse mal' }, hint: 'Es una forma habitual de preguntar por los síntomas.' },
     { id: 'doctor-q2', prompt: 'El paciente dice “Seit gestern habe ich Fieber”. ¿Desde cuándo tiene fiebre?', word: 'seit gestern', options: ['Desde ayer', 'Desde hoy', 'Desde hace una semana', 'Desde la mañana'], answer: 'Desde ayer', vocabulary: { term: 'seit gestern', translation: 'desde ayer' }, hint: 'Gestern significa ayer.' },
@@ -489,6 +653,9 @@ export const readingLessonWeekend = {
   title: 'Lectura: Planes para el fin de semana',
   activityId: 'reading-weekend',
   durationMinutes: 7,
+  level: 'A2',
+  objective: 'Al terminar esta lección podrás comprender planes para el fin de semana.',
+  passage: 'Anna plant ihr Wochenende. Am Samstag fährt sie an den See. Sie möchte dort schwimmen und Sonnenbaden. Am Sonntag trifft sie sich mit Freunden. Sie treffen sich um drei Uhr im Park. Wenn es regnet, bleiben sie zu Hause und sehen einen Film.',
   questions: [
     { id: 'weekend-q1', prompt: 'Anna dice “Am Samstag fahre ich an den See”. ¿Adónde va?', word: 'See', options: ['Al lago', 'A la oficina', 'A la estación', 'Al médico'], answer: 'Al lago', vocabulary: { term: 'der See', translation: 'el lago' }, hint: 'Es un lugar con agua rodeado de tierra.' },
     { id: 'weekend-q2', prompt: '¿Qué significa “Wir treffen uns um drei Uhr”?', word: 'treffen', options: ['Nos encontramos a las tres', 'Salimos a las cuatro', 'Llegamos a las dos', 'Nos vemos mañana'], answer: 'Nos encontramos a las tres', vocabulary: { term: 'sich treffen', translation: 'encontrarse' }, hint: 'Drei Uhr indica las tres.' },
@@ -501,6 +668,9 @@ export const readingLessonApartment = {
   title: 'Lectura: Buscar apartamento',
   activityId: 'reading-apartment',
   durationMinutes: 7,
+  level: 'A2',
+  objective: 'Al terminar esta lección podrás comprender un anuncio de alquiler.',
+  passage: 'Ein Student sucht eine Wohnung. Er findet eine Anzeige im Internet. Die Anzeige sagt: "Die Wohnung hat zwei Zimmer, eine Küche und ein Bad. Die Miete beträgt 800 Euro im Monat. Die Wohnung ist ab Juni frei." Der Student ruft sofort an und macht einen Termin.',
   questions: [
     { id: 'apartment-q1', prompt: 'La oferta dice “Die Wohnung hat zwei Zimmer”. ¿Cuántas habitaciones tiene?', word: 'zwei Zimmer', options: ['Dos', 'Una', 'Tres', 'Cuatro'], answer: 'Dos', vocabulary: { term: 'das Zimmer', translation: 'la habitación' }, hint: 'Zwei significa dos.' },
     { id: 'apartment-q2', prompt: '¿Qué significa “Die Miete beträgt 800 Euro”?', word: 'Miete', options: ['El alquiler es de 800 euros', 'El piso tiene 800 metros', 'La visita es a las ocho', 'El piso está en el centro'], answer: 'El alquiler es de 800 euros', vocabulary: { term: 'die Miete', translation: 'el alquiler' }, hint: 'Miete es el dinero que pagas por vivir en una vivienda.' },
