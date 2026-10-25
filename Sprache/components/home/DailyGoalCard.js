@@ -21,7 +21,7 @@ export default function DailyGoalCard({ completedSeconds = 0, goal = 10, unit = 
 	return (
 		<View style={styles.card}>
 			<Text style={styles.title} accessibilityRole="header">Tu objetivo de hoy</Text>
-			<Text style={styles.goal}>{formattedTime} / {goal} {unit}</Text>
+			<Text style={styles.goal}>{completedSeconds === 0 ? '0 s' : `${formattedTime} / ${goal} ${unit}`}</Text>
 			<ProgressBar
 				progress={progress * 100}
 				color={colors.gold}

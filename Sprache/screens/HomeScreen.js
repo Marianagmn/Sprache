@@ -36,7 +36,9 @@ export default function HomeScreen({ navigation }) {
         <WelcomeHeader name={user.name} level={user.level} motivation={user.motivation} greeting="Hola">
           <View style={styles.headerBadges}>
             <StreakBadge days={user.streak} />
-            <Text style={styles.daysLearned}>{user.totalLearningDays || 0} días aprendidos</Text>
+            <Text style={styles.daysLearned}>
+              {user.totalLearningDays === 1 ? '1 día aprendido' : `${user.totalLearningDays || 0} días aprendidos`}
+            </Text>
           </View>
         </WelcomeHeader>
 
@@ -60,7 +62,7 @@ export default function HomeScreen({ navigation }) {
               : hasPathLesson
                 ? `Es el siguiente paso de tu ruta de nivel ${nextPathLesson.levelCode}. ${nextPathLesson.time}`
                 : recommendation.description}
-          time={hasInProgressLesson ? 'Retomar' : hasReview ? `${reviewLesson.questions.length} palabras` : hasPathLesson ? nextPathLesson.time : recommendation.time}
+          time={hasInProgressLesson ? 'Retomar' : hasReview ? '' : hasPathLesson ? nextPathLesson.time : recommendation.time}
           iconName={hasInProgressLesson ? 'play' : hasReview ? 'refresh' : hasPathLesson ? 'school-outline' : recommendation.iconName}
           onPress={() => navigation.navigate('Lesson', hasInProgressLesson
             ? {
@@ -78,7 +80,7 @@ export default function HomeScreen({ navigation }) {
           <RecommendationCard
             title="Practica tus errores"
             description={`Tienes ${failedWordsLesson.questions.length} ${failedWordsLesson.questions.length === 1 ? 'palabra' : 'palabras'} para reforzar.`}
-            time={`${failedWordsLesson.questions.length} palabras`}
+            time=""
             iconName="refresh"
             onPress={() => navigation.navigate('Lesson', {
               activityId: failedWordsLesson.activityId,
