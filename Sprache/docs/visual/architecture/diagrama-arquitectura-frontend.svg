@@ -1,0 +1,162 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="2230" viewBox="0 0 1800 2230" role="img" aria-labelledby="title desc">
+  <title id="title">Arquitectura inicial implementada del frontend Sprache</title>
+  <desc id="desc">Composición Expo y React Native, navegación, pantallas, componentes, contextos, servicios, datos locales, persistencia y cliente HTTP opcional.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M1 1 L11 6 L1 11 Z" fill="#334155"/>
+    </marker>
+    <marker id="arrow-soft" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M1 1 L11 6 L1 11 Z" fill="#64748b"/>
+    </marker>
+    <style>
+      text { font-family: Arial, Helvetica, sans-serif; fill: #172033; }
+      .title { font-size: 42px; font-weight: 700; }
+      .subtitle { font-size: 22px; fill: #475569; }
+      .layer { font-size: 25px; font-weight: 700; }
+      .head { font-size: 21px; font-weight: 700; }
+      .body { font-size: 18px; }
+      .small { font-size: 16px; fill: #475569; }
+      .edge-label { font-size: 16px; font-weight: 600; fill: #334155; }
+      .frame { fill: #f8fafc; stroke: #94a3b8; stroke-width: 2.5; }
+      .box { fill: #ffffff; stroke: #64748b; stroke-width: 2.5; }
+      .app { fill: #e8f1fb; stroke: #35658d; stroke-width: 3; }
+      .state { fill: #f2eafb; stroke: #73519a; stroke-width: 3; }
+      .service { fill: #fff4d6; stroke: #a66d00; stroke-width: 2.5; }
+      .data { fill: #e6f4ec; stroke: #357653; stroke-width: 2.5; }
+      .platform { fill: #eef2f6; stroke: #64748b; stroke-width: 2.5; }
+      .external { fill: #fff7ed; stroke: #c26b2c; stroke-width: 2.5; stroke-dasharray: 9 7; }
+      .edge { fill: none; stroke: #334155; stroke-width: 3; marker-end: url(#arrow); }
+      .edge-soft { fill: none; stroke: #64748b; stroke-width: 2.5; marker-end: url(#arrow-soft); }
+      .edge-dashed { fill: none; stroke: #c26b2c; stroke-width: 2.5; stroke-dasharray: 9 7; marker-end: url(#arrow-soft); }
+    </style>
+  </defs>
+
+  <rect width="1800" height="2230" fill="#ffffff"/>
+  <text x="900" y="68" text-anchor="middle" class="title">Arquitectura inicial del frontend Sprache</text>
+  <text x="900" y="108" text-anchor="middle" class="subtitle">Vista de módulos y flujo de datos comprobados · el servidor queda fuera del alcance</text>
+
+  <rect x="90" y="135" width="1620" height="65" rx="14" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+  <rect x="115" y="153" width="30" height="28" rx="6" class="app"/><text x="158" y="174" class="small">Aplicación / navegación</text>
+  <rect x="400" y="153" width="30" height="28" rx="6" class="state"/><text x="443" y="174" class="small">Estado compartido</text>
+  <rect x="675" y="153" width="30" height="28" rx="6" class="service"/><text x="718" y="174" class="small">Servicios</text>
+  <rect x="880" y="153" width="30" height="28" rx="6" class="data"/><text x="923" y="174" class="small">Datos / persistencia</text>
+  <rect x="1200" y="153" width="30" height="28" rx="6" class="external"/><text x="1243" y="174" class="small">Integración externa opcional</text>
+
+  <rect x="70" y="225" width="1660" height="255" rx="22" class="frame"/>
+  <text x="105" y="270" class="layer">1 · Entrada y composición de la aplicación</text>
+  <rect x="160" y="315" width="330" height="105" rx="16" class="app"/>
+  <text x="325" y="355" text-anchor="middle" class="head">index.js</text>
+  <text x="325" y="389" text-anchor="middle" class="small">registerRootComponent(App)</text>
+  <rect x="650" y="315" width="440" height="105" rx="16" class="app"/>
+  <text x="870" y="355" text-anchor="middle" class="head">App.js</text>
+  <text x="870" y="389" text-anchor="middle" class="small">composición de providers y RootNavigation</text>
+  <rect x="1250" y="315" width="390" height="105" rx="16" class="platform"/>
+  <text x="1445" y="355" text-anchor="middle" class="head">Expo · React Native</text>
+  <text x="1445" y="385" text-anchor="middle" class="small">SDK 58 · RN 0.88 · React 19.3</text>
+  <text x="1445" y="408" text-anchor="middle" class="small">React Navigation 7</text>
+  <path d="M490 368 H650" class="edge"/>
+  <path d="M1090 368 H1250" class="edge-soft"/>
+  <text x="1165" y="348" text-anchor="middle" class="edge-label">runtime</text>
+
+  <rect x="70" y="510" width="1660" height="335" rx="22" class="frame"/>
+  <text x="105" y="555" class="layer">2 · Providers, estado raíz y navegación</text>
+  <rect x="120" y="590" width="770" height="205" rx="18" class="state"/>
+  <text x="505" y="628" text-anchor="middle" class="head">Providers anidados en App.js</text>
+  <rect x="155" y="660" width="205" height="95" rx="14" class="box"/>
+  <text x="257" y="697" text-anchor="middle" class="body">SafeAreaProvider</text>
+  <text x="257" y="728" text-anchor="middle" class="small">safe-area-context</text>
+  <rect x="400" y="660" width="225" height="95" rx="14" class="state"/>
+  <text x="512" y="697" text-anchor="middle" class="body">MotionPreferences</text>
+  <text x="512" y="728" text-anchor="middle" class="small">reduce motion</text>
+  <rect x="665" y="660" width="190" height="95" rx="14" class="state"/>
+  <text x="760" y="697" text-anchor="middle" class="body">AppProvider</text>
+  <text x="760" y="728" text-anchor="middle" class="small">AppContext</text>
+  <path d="M360 710 H400" class="edge-soft"/>
+  <path d="M625 710 H665" class="edge-soft"/>
+  <rect x="1010" y="590" width="650" height="205" rx="18" class="app"/>
+  <text x="1335" y="628" text-anchor="middle" class="head">RootNavigation</text>
+  <text x="1335" y="666" text-anchor="middle" class="body">NavigationContainer + Native Stack</text>
+  <text x="1335" y="701" text-anchor="middle" class="small">Stack condicional: Start/Register/Login o rutas autenticadas</text>
+  <text x="1335" y="736" text-anchor="middle" class="small">sesión restaurada desde AppContext · carga local inicial</text>
+  <path d="M870 420 V475 H505 V590" class="edge"/>
+  <path d="M890 690 H1010" class="edge"/>
+
+  <rect x="70" y="875" width="1660" height="415" rx="22" class="frame"/>
+  <text x="105" y="920" class="layer">3 · Navegación y pantallas</text>
+  <rect x="110" y="950" width="1040" height="295" rx="18" class="app"/>
+  <text x="630" y="988" text-anchor="middle" class="head">Rutas del Native Stack</text>
+  <rect x="140" y="1020" width="430" height="90" rx="14" class="box"/>
+  <text x="355" y="1055" text-anchor="middle" class="body">StartScreen · RegisterScreen · LoginScreen</text>
+  <text x="355" y="1084" text-anchor="middle" class="small">grupo invitado</text>
+  <rect x="600" y="1020" width="520" height="90" rx="14" class="box"/>
+  <text x="860" y="1055" text-anchor="middle" class="body">LessonScreen · ReadingScreen · TheoryScreen</text>
+  <text x="860" y="1084" text-anchor="middle" class="small">PronunciationScreen · grupo autenticado</text>
+  <rect x="140" y="1140" width="980" height="72" rx="14" class="app"/>
+  <text x="630" y="1170" text-anchor="middle" class="body">MainTabs · Bottom Tab Navigator</text>
+  <text x="630" y="1197" text-anchor="middle" class="small">HomeScreen · ActivitiesScreen · ProgressScreen · ProfileScreen</text>
+
+  <rect x="1190" y="950" width="500" height="295" rx="18" class="box"/>
+  <text x="1440" y="988" text-anchor="middle" class="head">Presentación reutilizable</text>
+  <text x="1225" y="1035" class="body">components/common</text>
+  <text x="1225" y="1073" class="body">components/home · progress</text>
+  <text x="1225" y="1111" class="body">components/learning</text>
+  <text x="1225" y="1149" class="body">components/profile · navigation</text>
+  <text x="1225" y="1200" class="small">SessionSummary se renderiza dentro de LessonScreen;</text>
+  <text x="1225" y="1225" class="small">no está registrada como ruta.</text>
+  <path d="M1335 795 V855 H630 V950" class="edge"/>
+  <path d="M1150 1095 H1190" class="edge-soft"/>
+
+  <rect x="70" y="1320" width="1660" height="380" rx="22" class="frame"/>
+  <text x="105" y="1365" class="layer">4 · Estado compartido y lógica de aplicación</text>
+  <rect x="110" y="1400" width="530" height="250" rx="18" class="state"/>
+  <text x="375" y="1438" text-anchor="middle" class="head">AppContext · usuario y progreso</text>
+  <text x="145" y="1480" class="body">Autenticación, carga/restauración y perfil</text>
+  <text x="145" y="1518" class="body">Lecciones, intentos, progreso y sesiones</text>
+  <text x="145" y="1556" class="body">Actualización serializada y estado React</text>
+  <text x="145" y="1605" class="small">screens consumen useApp(); el servicio actualiza el usuario</text>
+  <rect x="700" y="1400" width="600" height="250" rx="18" class="service"/>
+  <text x="1000" y="1438" text-anchor="middle" class="head">Servicios frontend</text>
+  <text x="735" y="1480" class="body">auth · profile · progress · lessons</text>
+  <text x="735" y="1518" class="body">activity · learning path · placement</text>
+  <text x="735" y="1556" class="body">spaced repetition · achievements · rewards</text>
+  <text x="735" y="1594" class="small">germanVoiceService · hapticFeedback</text>
+  <rect x="1370" y="1400" width="320" height="250" rx="18" class="state"/>
+  <text x="1530" y="1438" text-anchor="middle" class="head">MotionPreferences</text>
+  <text x="1400" y="1480" class="body">Context + useReduceMotion</text>
+  <text x="1400" y="1518" class="body">AccessibilityInfo</text>
+  <text x="1400" y="1565" class="small">preferencia del sistema</text>
+  <text x="1400" y="1600" class="small">transiciones y animaciones</text>
+  <path d="M1440 1245 V1380 H1530 V1400" class="edge-soft"/>
+  <path d="M640 1460 H700" class="edge"/>
+  <path d="M700 1625 H640" class="edge-soft"/>
+
+  <rect x="70" y="1730" width="1660" height="355" rx="22" class="frame"/>
+  <text x="105" y="1775" class="layer">5 · Datos locales y capacidades del dispositivo</text>
+  <rect x="115" y="1810" width="540" height="220" rx="18" class="data"/>
+  <text x="385" y="1848" text-anchor="middle" class="head">Módulos locales de data/</text>
+  <text x="150" y="1890" class="body">Activities.js · lessons.js · user.js</text>
+  <text x="150" y="1928" class="body">readingLessons.js · theoryModules.js</text>
+  <text x="150" y="1980" class="small">catálogos y contenidos consumidos por servicios/screens</text>
+
+  <rect x="705" y="1810" width="470" height="220" rx="18" class="data"/>
+  <text x="940" y="1848" text-anchor="middle" class="head">Persistencia local</text>
+  <text x="745" y="1890" class="body">authService + AsyncStorage</text>
+  <text x="745" y="1928" class="body">cuentas, sesión y usuario/progreso</text>
+  <text x="745" y="1980" class="small">restauración al abrir · actualizaciones locales</text>
+
+  <rect x="1225" y="1810" width="460" height="220" rx="18" class="platform"/>
+  <text x="1455" y="1848" text-anchor="middle" class="head">Capacidades Expo / sistema</text>
+  <text x="1260" y="1885" class="body">expo-speech · síntesis de voz</text>
+  <text x="1260" y="1922" class="body">expo-haptics · respuesta háptica</text>
+  <text x="1260" y="1959" class="body">expo-crypto · hash de contraseña</text>
+  <text x="1260" y="1996" class="small">AccessibilityInfo · movimiento</text>
+
+  <path d="M1100 1650 L940 1810" class="edge"/>
+  <path d="M1230 1650 L1455 1810" class="edge-soft"/>
+  <path d="M1530 1650 V1810" class="edge-soft"/>
+
+  <rect x="705" y="2070" width="980" height="95" rx="16" class="external"/>
+  <text x="1195" y="2108" text-anchor="middle" class="head">API externa · cliente HTTP opcional</text>
+  <text x="1195" y="2140" text-anchor="middle" class="small">apiService.js usa fetch y EXPO_PUBLIC_API_URL; no se encontraron consumidores en los flujos actuales.</text>
+  <path d="M1300 1600 H1345 V1680 H1710 V2117 H1685" class="edge-dashed"/>
+</svg>

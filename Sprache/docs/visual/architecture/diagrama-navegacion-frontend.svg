@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="2180" viewBox="0 0 1600 2180" role="img" aria-labelledby="title desc">
+  <title id="title">Diagrama de navegación del frontend Sprache</title>
+  <desc id="desc">Navegación implementada: acceso, cuatro pestañas, rutas de aprendizaje y resumen de sesión como componente de lección.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M1 1 L11 6 L1 11 Z" fill="#334155"/>
+    </marker>
+    <style>
+      text { font-family: Arial, Helvetica, sans-serif; fill: #172033; }
+      .title { font-size: 42px; font-weight: 700; }
+      .subtitle { font-size: 23px; fill: #475569; }
+      .section { font-size: 25px; font-weight: 700; }
+      .label { font-size: 22px; font-weight: 700; }
+      .small { font-size: 17px; fill: #475569; }
+      .edge-label { font-size: 17px; font-weight: 600; fill: #334155; }
+      .outer { fill: #f8fafc; stroke: #334155; stroke-width: 4; }
+      .group { fill: #ffffff; stroke: #94a3b8; stroke-width: 3; }
+      .screen { fill: #e8f1fb; stroke: #35658d; stroke-width: 3; }
+      .auth { fill: #fff4d6; stroke: #a66d00; stroke-width: 3; }
+      .tab { fill: #e6f4ec; stroke: #357653; stroke-width: 3; }
+      .component { fill: #f2eafb; stroke: #73519a; stroke-width: 3; }
+      .note { fill: #fff7ed; stroke: #c26b2c; stroke-width: 2; }
+      .edge { fill: none; stroke: #334155; stroke-width: 3; marker-end: url(#arrow); }
+      .edge-light { fill: none; stroke: #64748b; stroke-width: 2.5; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <rect width="1600" height="2180" fill="#ffffff"/>
+  <text x="800" y="68" text-anchor="middle" class="title">Navegación del frontend Sprache</text>
+  <text x="800" y="108" text-anchor="middle" class="subtitle">Rutas confirmadas en App.js y MainTabs.js · acceso y aprendizaje</text>
+
+  <rect x="82" y="136" width="1436" height="76" rx="14" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+  <rect x="108" y="158" width="34" height="30" rx="6" class="group"/>
+  <text x="154" y="181" class="small">Contenedor de navegación</text>
+  <rect x="442" y="158" width="34" height="30" rx="8" class="screen"/>
+  <text x="490" y="181" class="small">Pantalla registrada</text>
+  <rect x="755" y="158" width="34" height="30" rx="8" class="component"/>
+  <text x="803" y="181" class="small">Componente interno, no ruta</text>
+  <path d="M1165 173 H1225" class="edge"/>
+  <text x="1242" y="181" class="small">Transición implementada</text>
+
+  <rect x="60" y="245" width="1480" height="1870" rx="26" class="outer"/>
+  <text x="100" y="294" class="section">RootNavigation · NavigationContainer + Native Stack</text>
+  <text x="100" y="326" class="small">El stack cambia según la sesión local: grupo de invitado o grupo autenticado.</text>
+
+  <rect x="100" y="355" width="1360" height="450" rx="20" class="group"/>
+  <text x="132" y="399" class="section">Rutas de invitado</text>
+  <rect x="650" y="422" width="300" height="104" rx="16" class="auth"/>
+  <text x="800" y="464" text-anchor="middle" class="label">StartScreen</text>
+  <text x="800" y="495" text-anchor="middle" class="small">ruta: Start · bienvenida</text>
+
+  <rect x="330" y="620" width="340" height="112" rx="16" class="auth"/>
+  <text x="500" y="665" text-anchor="middle" class="label">LoginScreen</text>
+  <text x="500" y="699" text-anchor="middle" class="small">ruta: Login</text>
+  <rect x="930" y="620" width="340" height="112" rx="16" class="auth"/>
+  <text x="1100" y="665" text-anchor="middle" class="label">RegisterScreen</text>
+  <text x="1100" y="699" text-anchor="middle" class="small">ruta: Register</text>
+
+  <path d="M740 526 C700 572 610 584 535 620" class="edge"/>
+  <text x="602" y="568" class="edge-label">Iniciar sesión</text>
+  <path d="M860 526 C900 572 990 584 1065 620" class="edge"/>
+  <text x="941" y="568" class="edge-label">Crear cuenta</text>
+  <path d="M670 675 H930" class="edge-light"/>
+  <text x="800" y="658" text-anchor="middle" class="edge-label">Crear una cuenta</text>
+  <path d="M500 732 V855 H800 V941" class="edge"/>
+  <text x="524" y="842" class="edge-label">Login correcto</text>
+  <path d="M1100 732 V855 H800" class="edge"/>
+  <text x="1116" y="842" class="edge-label">Registro correcto</text>
+
+  <rect x="100" y="925" width="1360" height="520" rx="20" class="group"/>
+  <text x="132" y="969" class="section">Ruta MainApp → contenedor de pestañas MainTabs</text>
+  <text x="132" y="1001" class="small">Bottom Tab Navigator · cuatro pantallas hermanas; cambiar de sección selecciona otra pestaña.</text>
+
+  <rect x="145" y="1050" width="275" height="125" rx="16" class="tab"/>
+  <text x="282" y="1095" text-anchor="middle" class="label">HomeScreen</text>
+  <text x="282" y="1131" text-anchor="middle" class="small">Inicio · Home</text>
+  <rect x="475" y="1050" width="275" height="125" rx="16" class="tab"/>
+  <text x="612" y="1095" text-anchor="middle" class="label">ActivitiesScreen</text>
+  <text x="612" y="1131" text-anchor="middle" class="small">Actividades</text>
+  <rect x="805" y="1050" width="275" height="125" rx="16" class="tab"/>
+  <text x="942" y="1095" text-anchor="middle" class="label">ProgressScreen</text>
+  <text x="942" y="1131" text-anchor="middle" class="small">Progreso</text>
+  <rect x="1135" y="1050" width="275" height="125" rx="16" class="tab"/>
+  <text x="1272" y="1095" text-anchor="middle" class="label">ProfileScreen</text>
+  <text x="1272" y="1131" text-anchor="middle" class="small">Perfil</text>
+
+  <rect x="180" y="1220" width="1240" height="78" rx="14" class="note"/>
+  <text x="800" y="1252" text-anchor="middle" class="small">Inicio: recomendación, repaso o actividad → Lesson · botones → Lecturas, Teoría y Pronunciación</text>
+  <text x="800" y="1280" text-anchor="middle" class="small">Actividades y Progreso también pueden iniciar una actividad en Lesson · Perfil permite cerrar sesión</text>
+
+  <path d="M800 1298 V1460" class="edge"/>
+
+  <rect x="100" y="1480" width="1360" height="510" rx="20" class="group"/>
+
+  <rect x="145" y="1570" width="360" height="315" rx="18" class="screen"/>
+  <text x="325" y="1615" text-anchor="middle" class="label">LessonScreen</text>
+  <text x="325" y="1649" text-anchor="middle" class="small">ruta: Lesson · pregunta a pregunta</text>
+  <rect x="180" y="1695" width="290" height="112" rx="16" class="component"/>
+  <text x="325" y="1739" text-anchor="middle" class="label">SessionSummary</text>
+  <text x="325" y="1774" text-anchor="middle" class="small">componente final, no ruta</text>
+  <path d="M325 1649 V1695" class="edge-light"/>
+  <text x="480" y="1682" text-anchor="end" class="small">Al completar</text>
+
+  <rect x="555" y="1570" width="260" height="160" rx="16" class="screen"/>
+  <text x="685" y="1620" text-anchor="middle" class="label">ReadingScreen</text>
+  <text x="685" y="1656" text-anchor="middle" class="small">ruta: Lecturas</text>
+  <rect x="850" y="1570" width="260" height="160" rx="16" class="screen"/>
+  <text x="980" y="1620" text-anchor="middle" class="label">TheoryScreen</text>
+  <text x="980" y="1656" text-anchor="middle" class="small">ruta: Teoría</text>
+  <rect x="1145" y="1570" width="270" height="160" rx="16" class="screen"/>
+  <text x="1280" y="1620" text-anchor="middle" class="label">PronunciationScreen</text>
+  <text x="1280" y="1656" text-anchor="middle" class="small">ruta: Pronunciación</text>
+
+  <path d="M325 1460 H1280" class="edge-light"/>
+  <path d="M325 1460 V1570" class="edge"/>
+  <path d="M685 1460 V1570" class="edge"/>
+  <path d="M980 1460 V1570" class="edge"/>
+  <path d="M1280 1460 V1570" class="edge"/>
+  <text x="800" y="1815" text-anchor="middle" class="small">Los accesos a Lecturas, Teoría y Pronunciación parten de los botones de Home.</text>
+
+  <rect x="555" y="1860" width="530" height="82" rx="16" class="note"/>
+  <text x="820" y="1895" text-anchor="middle" class="label">Volver a la pantalla/tab de origen</text>
+  <text x="820" y="1925" text-anchor="middle" class="small">goBack() al finalizar el resumen o cerrar la lección</text>
+  <path d="M325 1807 V1900 H555" class="edge"/>
+
+  <path d="M1410 1110 H1480 V470 H950" class="edge"/>
+  <text x="1464" y="800" text-anchor="middle" class="edge-label" transform="rotate(-90 1464 800)">Cerrar sesión · vuelve a Start</text>
+
+  <rect x="180" y="2010" width="1240" height="70" rx="14" class="note"/>
+  <text x="800" y="2040" text-anchor="middle" class="small">No hay rutas propuestas pendientes en el inventario. SessionSummary está implementado dentro de LessonScreen;</text>
+  <text x="800" y="2066" text-anchor="middle" class="small">no existe ni se requiere una ruta independiente para el resumen.</text>
+</svg>
