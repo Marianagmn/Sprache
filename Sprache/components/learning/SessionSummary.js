@@ -50,7 +50,7 @@ export default function SessionSummary({ correctAnswers, totalQuestions, earnedX
           <CelebrationNotice key={notice.id} title={notice.title} message={notice.message} icon={notice.icon} />
         ))}
       </View>
-      <AppButton title="Volver a actividades" onPress={onFinish} style={styles.button} />
+      <AppButton title="Volver" onPress={onFinish} style={styles.button} />
     </Animated.View>
   );
 }

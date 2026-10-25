@@ -272,6 +272,26 @@ test('completar una lección registra duración real, aciertos, vocabulario y pr
   assert.equal(updatedUser.streak, 1);
 });
 
+test('el resumen de sesión refleja resultados, duración y experiencia guardados', () => {
+  const completion = buildLessonCompletion(
+    vocabularyLesson,
+    ['Haus', 'Puerta', 'Morgen'],
+    vocabularyLesson.activityId,
+    [true, false, true],
+    93,
+  );
+  const updatedUser = recordActivity(emptyUser, completion, referenceDate);
+  const [session] = updatedUser.sessions;
+  const summary = calculateSessionSummary(session.correctAnswers, session.totalQuestions);
+  const previousExperience = getExperience([]);
+  const currentExperience = getExperience(updatedUser.sessions);
+
+  assert.deepEqual(summary, { correctAnswers: 2, totalQuestions: 3, percentage: 67 });
+  assert.equal(session.durationSeconds, 93);
+  assert.equal(Math.floor(session.durationSeconds / 60), 1);
+  assert.equal(currentExperience.xp - previousExperience.xp, 41);
+});
+
 test('las respuestas correctas se validan igual en las lecciones y al guardar la sesión', () => {
   const answers = listeningLesson.questions.map((question) => question.questions[0].correctAnswer);
   const completion = buildLessonCompletion(listeningLesson, answers);
