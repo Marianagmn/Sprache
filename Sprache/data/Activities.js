@@ -1184,7 +1184,7 @@ export const activities = [
     title: storyLessonB1.title,
     description: 'Lee un cuento de nivel B1 y responde preguntas.',
     time: `${storyLessonB1.durationMinutes} min`,
-    iconName: 'book-open-outline',
+    iconName: 'book-outline',
     category: 'Lectura',
   },
   {
@@ -1192,7 +1192,7 @@ export const activities = [
     title: storyLessonB2_1.title,
     description: 'Lee un cuento de nivel B2 sobre temas de vida.',
     time: `${storyLessonB2_1.durationMinutes} min`,
-    iconName: 'book-open-outline',
+    iconName: 'book-outline',
     category: 'Lectura',
   },
   {
@@ -1320,7 +1320,7 @@ export const activities = [
     title: storyLessonA1.title,
     description: 'Lee un cuento sencillo de nivel A1.',
     time: `${storyLessonA1.durationMinutes} min`,
-    iconName: 'book-open-outline',
+    iconName: 'book-outline',
     category: 'Lectura',
   },
   {
@@ -1328,7 +1328,7 @@ export const activities = [
     title: storyLessonA2.title,
     description: 'Lee un cuento de nivel A2 sobre rutinas.',
     time: `${storyLessonA2.durationMinutes} min`,
-    iconName: 'book-open-outline',
+    iconName: 'book-outline',
     category: 'Lectura',
   },
   {
@@ -1336,7 +1336,7 @@ export const activities = [
     title: storyLessonB2_2.title,
     description: 'Lee un cuento de nivel B2 sobre viajes.',
     time: `${storyLessonB2_2.durationMinutes} min`,
-    iconName: 'book-open-outline',
+    iconName: 'book-outline',
     category: 'Lectura',
   },
   ...challengeLessons.map((lesson) => ({
