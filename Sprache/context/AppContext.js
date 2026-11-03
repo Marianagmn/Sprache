@@ -32,7 +32,8 @@ export function AppProvider({ children }) {
           setUser(restoredUser);
         }
       })
-      .catch(() => {
+      .catch((error) => {
+        console.error('No se pudo restaurar la sesión del usuario.', error);
         if (isMounted) {
           setUser(null);
         }
@@ -75,7 +76,16 @@ export function AppProvider({ children }) {
     return updatedUser;
   }, [persistUserUpdate]);
 
-  const saveWordAttempt = useCallback(async (question, correct) => {
+  const saveWordAttempt = useCallback(async (question, correct, persistRemotely = false) => {
+    if (isRemoteApiConfigured && persistRemotely) {
+      const response = await api.post('/progress/failed-word', { question, correct });
+      const updatedUser = await persistUserUpdate((currentUser) => ({
+        ...currentUser,
+        failedWords: response.failedWords,
+      }));
+      setUser(updatedUser);
+      return updatedUser;
+    }
     const updatedUser = await persistUserUpdate((currentUser) => ({
       ...currentUser,
       failedWords: updateFailedWords(currentUser.failedWords, question, correct),

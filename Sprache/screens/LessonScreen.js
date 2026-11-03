@@ -26,11 +26,45 @@ import ListeningComprehension from '../components/learning/ListeningComprehensio
 import MascotAvatar from '../components/profile/MascotAvatar';
 import { getExperience, getNewlyUnlockedAchievements } from '../services/achievementService.js';
 import { provideAnswerHapticFeedback } from '../services/hapticFeedback.js';
+import { api, isRemoteApiConfigured } from '../services/apiService.js';
+import Loading from '../components/common/Loading';
 import { colors, radii, spacing, typography } from '../theme';
 
 export default function LessonScreen({ navigation, route }) {
   const { user, completeActivity, saveLessonProgress, saveWordAttempt } = useApp();
-  const lesson = route.params?.reviewLesson || getLessonByActivityId(route.params?.activityId);
+  const isRemoteLesson = isRemoteApiConfigured && !route.params?.reviewLesson;
+  const [remoteLesson, setRemoteLesson] = useState(null);
+  const [isLoadingLesson, setIsLoadingLesson] = useState(isRemoteLesson);
+  const [lessonLoadError, setLessonLoadError] = useState('');
+  const lesson = route.params?.reviewLesson
+    || (isRemoteLesson ? remoteLesson : getLessonByActivityId(route.params?.activityId));
+
+  React.useEffect(() => {
+    if (!isRemoteLesson) return undefined;
+    if (!route.params?.activityId) {
+      setIsLoadingLesson(false);
+      setLessonLoadError('Falta el identificador de la actividad.');
+      return undefined;
+    }
+    let isActive = true;
+    setRemoteLesson(null);
+    setIsLoadingLesson(true);
+    setLessonLoadError('');
+    api.get(`/lessons/by-activity/${encodeURIComponent(route.params.activityId)}`)
+      .then((item) => {
+        if (isActive) setRemoteLesson(item);
+      })
+      .catch((error) => {
+        console.error('No se pudo cargar la lección remota.', error);
+        if (isActive) setLessonLoadError('No pudimos cargar esta lección. Revisa tu conexión e inténtalo de nuevo.');
+      })
+      .finally(() => {
+        if (isActive) setIsLoadingLesson(false);
+      });
+    return () => {
+      isActive = false;
+    };
+  }, [isRemoteLesson, route.params?.activityId]);
   const resumedProgress = route.params?.resumeProgress?.activityId === lesson?.activityId
     ? route.params.resumeProgress
     : null;
@@ -245,11 +279,18 @@ export default function LessonScreen({ navigation, route }) {
   };
 
   if (!lesson || !question) {
+    if (isLoadingLesson) {
+      return (
+        <SafeAreaView style={styles.container}>
+          <Loading message="Cargando lección..." />
+        </SafeAreaView>
+      );
+    }
     return (
       <SafeAreaView style={[styles.container, styles.unavailable]}>
         <EmptyState
           title="Lección no disponible"
-          message="Esta actividad todavía no tiene una lección. Prueba otra actividad más tarde."
+          message={lessonLoadError || 'Esta actividad todavía no tiene una lección. Prueba otra actividad más tarde.'}
           actionLabel="Volver a actividades"
           onAction={() => navigation.goBack()}
         />

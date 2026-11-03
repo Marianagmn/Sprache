@@ -250,23 +250,32 @@ private fun Route.lessonRoutes(database: UserDatabase, content: ContentCatalog) 
     route("/lessons") {
         get("/spaced-review") {
             val user = call.authenticatedUser(database)
-            val dueTerms = (user["wordProgress"] as? JsonObject).orEmpty().filterValues { progress ->
-                val dueAt = (progress as? JsonObject)?.stringOrNull("nextReviewAt")
-                dueAt == null || runCatching { Instant.parse(dueAt).isBefore(Instant.now().plusSeconds(1)) }.getOrDefault(false)
-            }.keys.take(5)
-            val questions = dueTerms.mapNotNull { term ->
+            val dueTerms = (user["wordProgress"] as? JsonObject).orEmpty()
+                .filterValues { progress ->
+                    val dueAt = (progress as? JsonObject)?.stringOrNull("nextReviewAt")
+                    dueAt == null || runCatching { Instant.parse(dueAt).isBefore(Instant.now().plusSeconds(1)) }.getOrDefault(false)
+                }
+                .entries
+                .sortedBy { (it.value as? JsonObject)?.stringOrNull("nextReviewAt") ?: "" }
+                .take(5)
+            val questions = dueTerms.mapIndexedNotNull { index, entry ->
+                val term = entry.key
                 content.questions.firstOrNull { question ->
                     question.stringOrNull("word").equals(term, true)
                         || question.nestedString("vocabulary", "term").equals(term, true)
-                }
+                }?.withFields(buildJsonObject { put("id", JsonPrimitive("review-$index-$term")) })
             }
             call.respond(reviewLesson("spaced-review", "Repaso de palabras", questions))
         }
         get("/failed-words-review") {
             val user = call.authenticatedUser(database)
             val failed = user["failedWords"] as? JsonObject ?: JsonObject(emptyMap())
-            val questions = failed.values
-                .mapNotNull { (it as? JsonObject)?.get("question") as? JsonObject }
+            val questions = failed.entries
+                .sortedBy { ((it.value as? JsonObject)?.stringOrNull("lastFailedAt") ?: "") }
+                .mapIndexedNotNull { index, (key, value) ->
+                    ((value as? JsonObject)?.get("question") as? JsonObject)
+                        ?.withFields(buildJsonObject { put("id", JsonPrimitive("failed-review-$index-$key")) })
+                }
                 .take(10)
             call.respond(reviewLesson("failed-words-review", "Repasar palabras", questions))
         }
@@ -286,11 +295,16 @@ private fun Route.lessonRoutes(database: UserDatabase, content: ContentCatalog) 
                     val user = database.findByEmail(userEmail)?.user
                         ?: throw ApiException(HttpStatusCode.Unauthorized, "UNAUTHORIZED", "La sesión ya no es válida.")
                     val reviewQuestions = if (lessonId == "spaced-review") {
-                        val dueTerms = (user["wordProgress"] as? JsonObject).orEmpty().filterValues { progress ->
-                            val dueAt = (progress as? JsonObject)?.stringOrNull("nextReviewAt")
-                            dueAt == null || runCatching { Instant.parse(dueAt).isBefore(Instant.now()) }.getOrDefault(false)
-                        }.keys.take(5)
-                        dueTerms.mapNotNull { term ->
+                        val dueTerms = (user["wordProgress"] as? JsonObject).orEmpty()
+                            .filterValues { progress ->
+                                val dueAt = (progress as? JsonObject)?.stringOrNull("nextReviewAt")
+                                dueAt == null || runCatching { Instant.parse(dueAt).isBefore(Instant.now()) }.getOrDefault(false)
+                            }
+                            .entries
+                            .sortedBy { (it.value as? JsonObject)?.stringOrNull("nextReviewAt") ?: "" }
+                            .take(5)
+                        dueTerms.mapNotNull { entry ->
+                            val term = entry.key
                             content.questions.firstOrNull { question ->
                                 question.stringOrNull("word").equals(term, true)
                                     || question.nestedString("vocabulary", "term").equals(term, true)
@@ -320,7 +334,8 @@ private fun Route.lessonRoutes(database: UserDatabase, content: ContentCatalog) 
                 val question = questionElement as? JsonObject ?: JsonObject(emptyMap())
                 val answer = (answers.getOrNull(index) as? JsonPrimitive)?.contentOrNull
                 val expected = question.stringOrNull("answer")
-                    ?: question.nestedString("questions", "correctAnswer")
+                    ?: ((question["questions"] as? JsonArray)?.firstOrNull() as? JsonObject)
+                        ?.stringOrNull("correctAnswer")
                 val correct = expected != null && answer != null &&
                     if (question.stringOrNull("type") in setOf("dictation", "fill-blanks", "write-response")) {
                         expected.trim().equals(answer.trim(), true)
@@ -371,6 +386,38 @@ private fun Route.lessonRoutes(database: UserDatabase, content: ContentCatalog) 
 
 private fun Route.progressRoutes(database: UserDatabase) {
     route("/progress") {
+        post("/failed-word") {
+            val email = call.authenticatedEmail()
+            val body = call.receive<JsonObject>()
+            val question = body["question"] as? JsonObject
+                ?: throw ApiException(HttpStatusCode.BadRequest, "BAD_REQUEST", "question debe ser un objeto JSON.")
+            val correct = body["correct"]?.jsonPrimitive?.contentOrNull?.toBooleanStrictOrNull()
+                ?: throw ApiException(HttpStatusCode.BadRequest, "BAD_REQUEST", "correct debe ser un valor booleano.")
+            val term = question.nestedString("vocabulary", "term") ?: question.stringOrNull("word")
+            if (term.isNullOrBlank()) {
+                throw ApiException(HttpStatusCode.BadRequest, "BAD_REQUEST", "La pregunta debe identificar una palabra.")
+            }
+            val key = term.trim().lowercase(Locale.ROOT)
+            val updated = database.update(email) { user ->
+                val failedWords = user["failedWords"] as? JsonObject ?: emptyJsonObject()
+                val nextFailedWords = if (correct) {
+                    JsonObject(failedWords - key)
+                } else {
+                    val previous = failedWords[key] as? JsonObject ?: emptyJsonObject()
+                    failedWords.withFields(buildJsonObject {
+                        put(key, previous.withFields(buildJsonObject {
+                            put("term", JsonPrimitive(term.trim()))
+                            put("translation", JsonPrimitive(question.nestedString("vocabulary", "translation") ?: ""))
+                            put("question", question)
+                            put("mistakes", JsonPrimitive((previous.intOrNull("mistakes") ?: 0) + 1))
+                            put("lastFailedAt", JsonPrimitive(Instant.now().toString()))
+                        }))
+                    })
+                }
+                user.withFields(buildJsonObject { put("failedWords", nextFailedWords) })
+            }
+            call.respond(buildJsonObject { put("failedWords", updated["failedWords"] ?: emptyJsonObject()) })
+        }
         get {
             val user = call.authenticatedUser(database)
             val sessions = (user["sessions"] as? JsonArray).orEmpty().mapNotNull { it as? JsonObject }

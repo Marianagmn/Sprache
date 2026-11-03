@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useApp } from '../context/AppContext';
@@ -6,6 +6,9 @@ import { theoryModules } from '../data/theoryModules';
 import AppButton from '../components/common/AppButton';
 import GermanAudioButton from '../components/learning/GermanAudioButton';
 import ScreenHeader from '../components/common/ScreenHeader';
+import Loading from '../components/common/Loading';
+import EmptyState from '../components/common/EmptyState';
+import { api, isRemoteApiConfigured } from '../services/apiService';
 import { colors, radii, spacing, typography } from '../theme';
 
 function isModuleComplete(module, progress = {}) {
@@ -34,12 +37,48 @@ export default function TheoryScreen() {
   const [answers, setAnswers] = useState({});
   const [feedback, setFeedback] = useState({});
   const [saveError, setSaveError] = useState('');
+  const [remoteModules, setRemoteModules] = useState(null);
+  const [isLoadingModules, setIsLoadingModules] = useState(isRemoteApiConfigured);
+  const [modulesError, setModulesError] = useState('');
+
+  useEffect(() => {
+    if (!isRemoteApiConfigured) return undefined;
+    let isActive = true;
+    setIsLoadingModules(true);
+    setModulesError('');
+    api.get('/theory')
+      .then((items) => {
+        if (isActive) setRemoteModules(items);
+      })
+      .catch((error) => {
+        console.error('No se pudieron cargar los módulos teóricos remotos.', error);
+        if (isActive) setModulesError('No pudimos cargar la teoría. Revisa tu conexión e inténtalo de nuevo.');
+      })
+      .finally(() => {
+        if (isActive) setIsLoadingModules(false);
+      });
+    return () => {
+      isActive = false;
+    };
+  }, []);
+
+  const modules = isRemoteApiConfigured ? remoteModules || [] : theoryModules;
+  if (isLoadingModules || modulesError || modules.length === 0) {
+    return (
+      <SafeAreaView style={styles.container}>
+        {isLoadingModules
+          ? <Loading message="Cargando teoría..." />
+          : <EmptyState title="Teoría no disponible" message={modulesError || 'No hay módulos teóricos disponibles.'} />}
+      </SafeAreaView>
+    );
+  }
+
   const learning = user.learningProgress?.theory || {};
-  const selectedModule = theoryModules[moduleIndex];
+  const selectedModule = modules[moduleIndex];
   const moduleProgress = learning[selectedModule.id] || {};
   const lesson = selectedModule.lessons[lessonIndex];
   const correctExerciseIds = moduleProgress.correctExerciseIds || [];
-  const allPreviousModulesComplete = theoryModules
+  const allPreviousModulesComplete = modules
     .slice(0, moduleIndex)
     .every((module) => isModuleComplete(module, learning[module.id]));
   const moduleUnlocked = moduleIndex === 0 || allPreviousModulesComplete;
@@ -70,7 +109,7 @@ export default function TheoryScreen() {
     }));
     setSaveError('');
     try {
-      await saveWordAttempt(reviewQuestion, correct);
+      await saveWordAttempt(reviewQuestion, correct, true);
       if (correct) {
         const updatedCorrectIds = [...new Set([...correctExerciseIds, exercise.id])];
         const lessonCompleted = lesson.exercises.every((item) => updatedCorrectIds.includes(item.id));
@@ -111,7 +150,7 @@ export default function TheoryScreen() {
       <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
         <ScreenHeader title="Aprende la teoría del alemán" subtitle="Los módulos se desbloquean progresivamente. Los botones de audio requieren una voz alemana (Alemania) instalada." />
         <View style={styles.moduleList}>
-          {theoryModules.map((module, index) => {
+          {modules.map((module, index) => {
             const unlocked = index === 0 || theoryModules
               .slice(0, index)
               .every((previous) => isModuleComplete(previous, learning[previous.id]));

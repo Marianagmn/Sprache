@@ -1,12 +1,50 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import ActivityCard from './ActivityCard';
 import { filterActivitiesByLevel, getActivities } from '../../services/activityService';
 import EmptyState from '../common/EmptyState';
+import Loading from '../common/Loading';
+import { api, isRemoteApiConfigured } from '../../services/apiService';
 import { colors, spacing, typography } from '../../theme';
 
 export default function ActivityList({ onActivityPress, levelCode = 'Todos' }) {
-    const activities = filterActivitiesByLevel(getActivities(), levelCode);
+    const [remoteActivities, setRemoteActivities] = useState(isRemoteApiConfigured ? [] : null);
+    const [isLoading, setIsLoading] = useState(isRemoteApiConfigured);
+    const [loadError, setLoadError] = useState('');
+
+    useEffect(() => {
+        if (!isRemoteApiConfigured) return undefined;
+        let isActive = true;
+        setIsLoading(true);
+        setLoadError('');
+        api.get(`/activities?level=${encodeURIComponent(levelCode)}`)
+            .then((items) => {
+                if (isActive) setRemoteActivities(items);
+            })
+            .catch((error) => {
+                console.error('No se pudieron cargar las actividades remotas.', error);
+                if (isActive) setLoadError('No pudimos cargar las actividades. Revisa tu conexión e inténtalo de nuevo.');
+            })
+            .finally(() => {
+                if (isActive) setIsLoading(false);
+            });
+        return () => {
+            isActive = false;
+        };
+    }, [levelCode]);
+
+    if (isLoading) {
+        return <Loading message="Cargando actividades..." />;
+    }
+
+    if (loadError) {
+        return <EmptyState title="Actividades no disponibles" message={loadError} />;
+    }
+
+    const activities = filterActivitiesByLevel(
+        isRemoteApiConfigured ? remoteActivities || [] : getActivities(),
+        levelCode,
+    );
     const activitiesByLevel = activities.reduce((groups, activity) => {
         const level = activity.levelCode || 'Otros';
         groups[level] = groups[level] || {};

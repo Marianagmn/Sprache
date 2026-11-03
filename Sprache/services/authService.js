@@ -20,8 +20,17 @@ function normalizeRemoteUser(user) {
   };
 }
 
-export async function cacheRemoteUser(user) {
+export async function cacheRemoteUser(user, { preserveDraft = false } = {}) {
   const normalizedUser = normalizeRemoteUser(user);
+  if (preserveDraft) {
+    const storedUser = await AsyncStorage.getItem(REMOTE_USER_KEY);
+    if (storedUser) {
+      const previousUser = JSON.parse(storedUser);
+      normalizedUser.activeLessonProgress = normalizedUser.activeLessonProgress
+        ?? previousUser.activeLessonProgress
+        ?? null;
+    }
+  }
   await AsyncStorage.setItem(REMOTE_USER_KEY, JSON.stringify(normalizedUser));
   return normalizedUser;
 }
@@ -55,7 +64,7 @@ async function restoreSession() {
   setApiToken(token);
   try {
     const response = await api.get('/auth/me');
-    return cacheRemoteUser(response.user);
+    return cacheRemoteUser(response.user, { preserveDraft: true });
   } catch (error) {
     if (error.status === 401) {
       await AsyncStorage.multiRemove([TOKEN_KEY, REMOTE_USER_KEY]);

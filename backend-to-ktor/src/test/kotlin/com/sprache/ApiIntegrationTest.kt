@@ -39,6 +39,7 @@ class ApiIntegrationTest {
         assertEquals(HttpStatusCode.OK, theory.status)
         assertTrue(Json.parseToJsonElement(theory.bodyAsText()).jsonArray.isNotEmpty())
 
+        assertEquals(HttpStatusCode.OK, client.get("/api/lessons/vocabulary-basics").status)
         assertEquals(HttpStatusCode.NotFound, client.get("/api/lessons/not-a-lesson").status)
         assertEquals(HttpStatusCode.NotFound, client.get("/api/lessons/by-activity/not-an-activity").status)
     }
@@ -70,6 +71,27 @@ class ApiIntegrationTest {
             jsonBody("""{"type":"readings","moduleId":"reading-city","payload":{"completed":true,"correctQuestionIds":["city-q1"]}}""")
         }
         assertEquals(HttpStatusCode.OK, learning.status)
+
+        val failedWord = client.post("/api/progress/failed-word") {
+            header(HttpHeaders.Authorization, authHeader)
+            jsonBody(
+                """{"question":{"id":"city-q1","word":"hola","vocabulary":{"term":"Hallo","translation":"hola"}},"correct":false}""",
+            )
+        }
+        assertEquals(HttpStatusCode.OK, failedWord.status)
+        val failedWordsReview = client.get("/api/lessons/failed-words-review") {
+            header(HttpHeaders.Authorization, authHeader)
+        }
+        assertTrue(failedWordsReview.bodyAsText().contains("failed-review-0-hallo"))
+
+        val correctedWord = client.post("/api/progress/failed-word") {
+            header(HttpHeaders.Authorization, authHeader)
+            jsonBody(
+                """{"question":{"id":"city-q1","word":"hola","vocabulary":{"term":"Hallo","translation":"hola"}},"correct":true}""",
+            )
+        }
+        assertEquals(HttpStatusCode.OK, correctedWord.status)
+        assertEquals("{}", Json.parseToJsonElement(correctedWord.bodyAsText()).jsonObject["failedWords"]!!.toString())
 
         val progress = client.get("/api/progress") { header(HttpHeaders.Authorization, authHeader) }
         assertEquals(HttpStatusCode.OK, progress.status)
@@ -128,6 +150,15 @@ class ApiIntegrationTest {
         }
         assertEquals(HttpStatusCode.BadRequest, invalid.status)
 
+        val listening = client.post("/api/lessons/listening-basics/complete") {
+            header(HttpHeaders.Authorization, "Bearer $token")
+            jsonBody(
+                """{"durationSeconds":30,"answers":["Thomas","De España","Una mesa para dos"]}""",
+            )
+        }
+        assertEquals(HttpStatusCode.OK, listening.status)
+        assertTrue(listening.bodyAsText().contains("\"correctAnswers\":3"))
+
         val placement = client.post("/api/placement/evaluate") {
             jsonBody("""{"answers":{"p1":"Hallo","p2":"Guten Morgen","p3":"der Tisch"}}""")
         }
@@ -152,6 +183,12 @@ class ApiIntegrationTest {
             jsonBody("""{"slot":"neck","accessoryId":"scarf"}""")
         }
         assertEquals(HttpStatusCode.Forbidden, lockedAccessory.status)
+
+        val unequip = client.put("/api/mascot/accessories") {
+            header(HttpHeaders.Authorization, "Bearer $token")
+            jsonBody("""{"slot":"neck","accessoryId":null}""")
+        }
+        assertEquals(HttpStatusCode.OK, unequip.status)
 
         val dismiss = client.post("/api/mascot/dismiss-reward") {
             header(HttpHeaders.Authorization, "Bearer $token")

@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useApp } from '../context/AppContext';
 import { readingLessons } from '../data/readingLessons';
 import GermanAudioButton from '../components/learning/GermanAudioButton';
 import ScreenHeader from '../components/common/ScreenHeader';
+import Loading from '../components/common/Loading';
+import EmptyState from '../components/common/EmptyState';
+import { api, isRemoteApiConfigured } from '../services/apiService';
 import { colors, radii, spacing, typography } from '../theme';
 
 const levels = ['A1', 'A2', 'B1', 'B2'];
@@ -16,7 +19,45 @@ export default function ReadingScreen() {
   const [answers, setAnswers] = useState({});
   const [feedback, setFeedback] = useState({});
   const [saveError, setSaveError] = useState('');
-  const lesson = readingLessons.find((item) => item.level === level);
+  const [remoteReadings, setRemoteReadings] = useState(null);
+  const [isLoadingReadings, setIsLoadingReadings] = useState(isRemoteApiConfigured);
+  const [readingsError, setReadingsError] = useState('');
+
+  useEffect(() => {
+    if (!isRemoteApiConfigured) return undefined;
+    let isActive = true;
+    setIsLoadingReadings(true);
+    setReadingsError('');
+    api.get(`/readings?level=${encodeURIComponent(level)}`)
+      .then((items) => {
+        if (isActive) setRemoteReadings(items);
+      })
+      .catch((error) => {
+        console.error('No se pudieron cargar las lecturas remotas.', error);
+        if (isActive) setReadingsError('No pudimos cargar las lecturas. Revisa tu conexión e inténtalo de nuevo.');
+      })
+      .finally(() => {
+        if (isActive) setIsLoadingReadings(false);
+      });
+    return () => {
+      isActive = false;
+    };
+  }, [level]);
+
+  const lesson = isRemoteApiConfigured
+    ? remoteReadings?.find((item) => item.level === level)
+    : readingLessons.find((item) => item.level === level);
+
+  if (isLoadingReadings || readingsError || !lesson) {
+    return (
+      <SafeAreaView style={styles.container}>
+        {isLoadingReadings
+          ? <Loading message="Cargando lectura..." />
+          : <EmptyState title="Lectura no disponible" message={readingsError || 'No hay lecturas para este nivel.'} />}
+      </SafeAreaView>
+    );
+  }
+
   const progress = user.learningProgress?.readings?.[lesson.id] || {};
   const correctQuestionIds = progress.correctQuestionIds || [];
   const readingComplete = progress.completed || correctQuestionIds.length === lesson.questions.length;
@@ -40,7 +81,7 @@ export default function ReadingScreen() {
     }));
     setSaveError('');
     try {
-      await saveWordAttempt(question, correct);
+      await saveWordAttempt(question, correct, true);
       if (correct) {
         const updatedQuestionIds = [...new Set([...correctQuestionIds, question.id])];
         await saveLearningProgress('readings', lesson.id, {

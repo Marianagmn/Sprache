@@ -228,7 +228,14 @@ En el servidor implementado, las rutas privadas requieren la cabecera `Authoriza
 
 ## 4. Progreso, Estadísticas y Gamificación (`/api/progress`)
 
-### 4.1 Resumen de Progreso
+### 4.1 Registrar intento fallido de vocabulario
+- **Método:** `POST`
+- **Ruta:** `/api/progress/failed-word`
+- **Público:** No; requiere JWT Bearer.
+- **Request Body:** `{"question": { ...pregunta con word o vocabulary.term... }, "correct": false}`
+- **Response (200 OK):** `{"failedWords": { ... }}`. Un intento correcto elimina esa palabra de la lista de repaso.
+
+### 4.2 Resumen de Progreso
 - **Método:** `GET`
 - **Ruta:** `/api/progress`
 - **Público:** No (Bearer Token)
@@ -251,7 +258,7 @@ En el servidor implementado, las rutas privadas requieren la cabecera `Authoriza
   }
   ```
 
-### 4.2 Registrar Avance en Lectura / Teoría / Pronunciación
+### 4.3 Registrar Avance en Lectura / Teoría / Pronunciación
 - **Método:** `POST`
 - **Ruta:** `/api/progress/learning-module`
 - **Público:** No (Bearer Token)
@@ -271,13 +278,13 @@ En el servidor implementado, las rutas privadas requieren la cabecera `Authoriza
   { "success": true, "learningProgress": { ... } }
   ```
 
-### 4.3 Reiniciar Progreso del Usuario
+### 4.4 Reiniciar Progreso del Usuario
 - **Método:** `POST`
 - **Ruta:** `/api/progress/reset`
 - **Público:** No (Bearer Token)
 - **Response (200 OK):** Usuario con historial de sesiones y palabras reiniciado, preservando credenciales y meta diaria.
 
-### 4.4 Listar Logros y Retos Semanales
+### 4.5 Listar Logros y Retos Semanales
 - **Método:** `GET`
 - **Ruta:** `/api/achievements`
 - **Público:** No (Bearer Token)
@@ -317,7 +324,7 @@ En el servidor implementado, las rutas privadas requieren la cabecera `Authoriza
   {
     "recommendedLevel": "A1",
     "score": 3,
-    "total": 5,
+    "total": 3,
     "analysis": "Se recomienda comenzar en el nivel A1 para reforzar las bases."
   }
   ```

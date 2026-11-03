@@ -7,6 +7,7 @@ import AppInput from '../components/common/AppInput';
 import BrandLogo from '../components/common/BrandLogo';
 import { useApp } from '../context/AppContext';
 import { evaluatePlacement, PLACEMENT_QUESTIONS, skipPlacementAssessment } from '../services/placementAssessmentService';
+import { api, isRemoteApiConfigured } from '../services/apiService';
 import { colors, elevation, radii, spacing, typography } from '../theme';
 
 const steps = [
@@ -93,12 +94,38 @@ export default function RegisterScreen({ navigation }) {
     return true;
   };
 
-  const handleNextStep = () => {
+  const handleNextStep = async () => {
     if (!validateCurrentStep()) return;
 
     if (!isLastStep) {
       if (currentStep.id === 'assessment') {
-        setPlacementAssessment(evaluatePlacement(assessmentAnswers));
+        if (isRemoteApiConfigured) {
+          setLoading(true);
+          try {
+            const result = await api.post('/placement/evaluate', {
+              answers: {
+                p1: assessmentAnswers[0],
+                p2: assessmentAnswers[1],
+                p3: assessmentAnswers[2],
+              },
+            });
+            setPlacementAssessment({
+              recommendedLevel: result.recommendedLevel,
+              correctAnswers: result.score,
+              totalQuestions: result.total,
+              assessedAt: new Date().toISOString(),
+              source: 'assessment',
+              version: 1,
+            });
+          } catch (assessmentError) {
+            setError(assessmentError.message);
+            return;
+          } finally {
+            setLoading(false);
+          }
+        } else {
+          setPlacementAssessment(evaluatePlacement(assessmentAnswers));
+        }
       }
       Keyboard.dismiss();
       setStepIndex((previous) => previous + 1);
