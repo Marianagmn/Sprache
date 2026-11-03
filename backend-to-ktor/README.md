@@ -1,62 +1,63 @@
-# Backend to Ktor Migration Kit
+# Backend Sprache — Kotlin y Ktor
 
-Esta carpeta contiene todo el material necesario para construir el backend de **Sprache** en **Ktor (Kotlin)** y sustituir la lógica local del frontend.
+Backend REST ejecutable de Sprache, desarrollado con Kotlin, Ktor 3, H2 y JWT. Lee el catálogo existente de `data/json/`, conserva cuentas y progreso en una base H2 local y expone las rutas descritas en [api-specification.md](./api-specification.md).
 
----
+## Requisitos
 
-## 📁 Estructura del Kit de Migración
+- JDK 21
+- Gradle Wrapper incluido
+- Acceso a Maven Central la primera vez para resolver dependencias
 
-```
-backend-to-ktor/
-├── README.md                  # Este documento
-├── api-specification.md       # Especificación completa de rutas, métodos, payloads y respuestas REST
-├── ktor-guide.md              # Guía de implementación en Ktor 3.x (Plugins, DTOs, Exposed ORM, Seeder)
-│
-├── data/                      # Datos para poblar la base de datos
-│   ├── json/                  # Archivos JSON listos para importar con kotlinx.serialization
-│   │   ├── activities.json    # Catálogo completo de actividades (A1-B2)
-│   │   ├── lessons.json       # Lecciones de vocabulario, gramática, retos y práctica
-│   │   ├── readingLessons.json# Lecturas graduadas por nivel
-│   │   ├── theoryModules.json # Módulos de teoría y gramática
-│   │   └── initialUser.json   # Estructura de usuario inicial y defaults
-│   ├── Activities.js          # Fuentes originales en JavaScript
-│   ├── lessons.js
-│   ├── readingLessons.js
-│   ├── theoryModules.js
-│   └── user.js
-│
-└── services/                  # Lógica de negocio de referencia (implementación JS a portar a Kotlin)
-    ├── achievementService.js  # Sistema de insignias y retos semanales
-    ├── activityService.js     # Filtros y recomendación de actividades
-    ├── authServiceCore.js     # Validaciones de usuario, login y hashing
-    ├── learningPathService.js # Ruta de aprendizaje CEFR (A1-B2) y desbloqueo
-    ├── learningProgressService.js # Seguimiento de lecturas, teoría y pronunciación
-    ├── lessonProgressService.js   # Cálculo de resultados de lección, fallos y resúmenes
-    ├── lessonService.js       # Búsqueda de lecciones y generación de repasos
-    ├── placementAssessmentService.js # Test de colocación y asignación de nivel
-    ├── profileService.js      # Actualización de perfil y metas
-    ├── progressService.js     # Cálculo de rachas, XP y estadísticas semanales
-    ├── mascotRewardsService.js # Desbloqueo de accesorios por racha y personalización
-    └── spacedRepetitionService.js # Algoritmo Leitner de repetición espaciada
+## Compilar, probar y ejecutar
+
+Desde la raíz del repositorio:
+
+```bash
+./backend-to-ktor/gradlew -p backend-to-ktor test
+./backend-to-ktor/gradlew -p backend-to-ktor build
+./backend-to-ktor/gradlew -p backend-to-ktor run
 ```
 
----
+El servidor escucha en `http://localhost:8080`. Verifica su disponibilidad:
 
-## 🚀 Pasos para la Migración a Ktor
+```bash
+curl http://localhost:8080/api/health
+```
 
-1. **Crear el proyecto Ktor:**
-   - Usa IntelliJ IDEA o [start.ktor.io](https://start.ktor.io) seleccionando Ktor 3.x, Netty, Kotlinx.Serialization y JWT.
-2. **Definir modelos y tablas de base de datos:**
-   - Consulta `ktor-guide.md` para las clases de datos (`@Serializable data class`) y tablas SQL (Exposed).
-3. **Poblar la base de datos:**
-   - Importa directamente los archivos de `data/json/*.json` mediante el seeder descrito en `ktor-guide.md`.
-4. **Implementar los servicios de negocio:**
-   - Convierte los algoritmos de `services/` (repetición espaciada, cálculo de racha, evaluación de test) a Kotlin.
-5. **Crear los endpoints REST:**
-   - Sigue rigurosamente la especificación en `api-specification.md`.
-6. **Conectar el Frontend:**
-   - Una vez levantado el servidor Ktor (por ejemplo en `http://localhost:8080`), en el frontend de React Native solo debes configurar la variable de entorno:
-     ```env
-     EXPO_PUBLIC_API_URL=http://localhost:8080
-     ```
-   - El cliente HTTP del frontend (`Sprache/services/apiService.js`) se encargará de dirigir las peticiones al backend.
+La aplicación Expo permanece en modo local por defecto. Para habilitar las operaciones remotas, define en `Sprache/.env`:
+
+```env
+EXPO_PUBLIC_API_URL=http://localhost:8080/api
+```
+
+En un teléfono físico, reemplaza `localhost` por la dirección IP accesible de la máquina que ejecuta Ktor. Reinicia Expo después de modificar la variable.
+
+## Configuración
+
+| Variable | Predeterminado | Uso |
+|---|---|---|
+| `PORT` | `8080` | Puerto HTTP |
+| `SPRACHE_DB_URL` | `jdbc:h2:file:./data/sprache;DB_CLOSE_ON_EXIT=FALSE` | URL JDBC; H2 mantiene los datos en `backend-to-ktor/data/` al ejecutar desde el proyecto |
+| `SPRACHE_DB_USER` | `sa` | Usuario de la base |
+| `SPRACHE_DB_PASSWORD` | vacío | Contraseña de la base local |
+| `JWT_SECRET` | Secreto solo de desarrollo | Clave de firma JWT; obligatoria en producción |
+| `JWT_ISSUER` | `sprache-api` | Emisor JWT |
+| `JWT_TTL_SECONDS` | `86400` | Vigencia del token (60–2592000 segundos) |
+| `KTOR_ENV` | `development` | Al usar `production`, el servidor exige `JWT_SECRET` |
+| `CORS_ORIGINS` | Sin orígenes web permitidos | Lista de hosts permitidos separada por comas |
+
+No uses el secreto predeterminado en producción. Configura TLS y secretos mediante el entorno de despliegue. CORS no reemplaza autenticación ni es un control de acceso para clientes móviles.
+
+## Rutas
+
+Incluye salud, autenticación/perfil, actividades, lecciones (incluidos repasos y completado), lecturas, teoría, progreso, logros/retos semanales, evaluación inicial y personalización de mascota. Las rutas privadas requieren la cabecera `Authorization` con esquema Bearer y JWT.
+
+Las respuestas de error usan JSON `{ "error": "...", "message": "..." }`. Consulta el contrato y sus payloads en [api-specification.md](./api-specification.md).
+
+## Persistencia y pruebas
+
+- Las contraseñas se almacenan con BCrypt; el backend nunca devuelve hashes.
+- H2 guarda cuentas, perfil, sesiones, palabras, progreso y estado de mascota en la fila JSON de cada usuario; las actualizaciones de usuario se realizan dentro de una transacción JDBC.
+- Los datos de actividades, lecciones, lecturas y teoría se cargan de los JSON versionados en `data/json/`.
+- `src/test/kotlin/` incluye pruebas HTTP con una base H2 en memoria.
+- `./gradlew clean` elimina solo productos de compilación; no elimina la base H2 guardada en `data/`.

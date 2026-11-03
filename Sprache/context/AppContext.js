@@ -5,6 +5,8 @@ import { recordActivity, resetProgress } from '../services/progressService';
 import { updateFailedWords } from '../services/lessonProgressService';
 import { updateLearningProgress } from '../services/learningProgressService';
 import { selectMascotAccessory } from '../services/mascotRewardsService';
+import { api, isRemoteApiConfigured } from '../services/apiService';
+import { cacheRemoteUser } from '../services/authService';
 
 const AppContext = createContext(null);
 
@@ -47,6 +49,18 @@ export function AppProvider({ children }) {
   }, []);
 
   const completeActivity = async (session) => {
+    if (isRemoteApiConfigured) {
+      if (!session.lessonId || !Array.isArray(session.answers)) {
+        throw new Error('Falta la información de la lección para sincronizar el resultado.');
+      }
+      const response = await api.post(
+        `/lessons/${encodeURIComponent(session.lessonId)}/complete`,
+        session,
+      );
+      const updatedUser = await cacheRemoteUser(response.updatedUser);
+      setUser(updatedUser);
+      return updatedUser;
+    }
     const updatedUser = await persistUserUpdate((currentUser) => recordActivity(currentUser, session));
     setUser(updatedUser);
     return updatedUser;
@@ -71,6 +85,19 @@ export function AppProvider({ children }) {
   }, [persistUserUpdate]);
 
   const saveLearningProgress = useCallback(async (section, key, progress) => {
+    if (isRemoteApiConfigured) {
+      const response = await api.post('/progress/learning-module', {
+        type: section,
+        moduleId: key,
+        payload: progress,
+      });
+      const updatedUser = await persistUserUpdate((currentUser) => ({
+        ...currentUser,
+        learningProgress: response.learningProgress,
+      }));
+      setUser(updatedUser);
+      return updatedUser;
+    }
     const updatedUser = await persistUserUpdate((currentUser) => ({
       ...currentUser,
       learningProgress: updateLearningProgress(currentUser.learningProgress, section, key, progress),
@@ -80,6 +107,15 @@ export function AppProvider({ children }) {
   }, [persistUserUpdate]);
 
   const saveMascotAccessory = useCallback(async (slot, accessoryId) => {
+    if (isRemoteApiConfigured) {
+      const response = await api.put('/mascot/accessories', { slot, accessoryId });
+      const updatedUser = await persistUserUpdate((currentUser) => ({
+        ...currentUser,
+        mascot: response.mascot,
+      }));
+      setUser(updatedUser);
+      return updatedUser;
+    }
     const updatedUser = await persistUserUpdate((currentUser) => ({
       ...currentUser,
       mascot: selectMascotAccessory(currentUser.mascot, slot, accessoryId),
@@ -89,6 +125,15 @@ export function AppProvider({ children }) {
   }, [persistUserUpdate]);
 
   const dismissMascotRewardNotice = useCallback(async () => {
+    if (isRemoteApiConfigured) {
+      const response = await api.post('/mascot/dismiss-reward');
+      const updatedUser = await persistUserUpdate((currentUser) => ({
+        ...currentUser,
+        mascot: response.mascot,
+      }));
+      setUser(updatedUser);
+      return updatedUser;
+    }
     const updatedUser = await persistUserUpdate((currentUser) => ({
       ...currentUser,
       mascot: { ...currentUser.mascot, newlyUnlockedAccessoryIds: [] },
@@ -110,12 +155,27 @@ export function AppProvider({ children }) {
   };
 
   const editProfile = async (changes) => {
+    if (isRemoteApiConfigured) {
+      const response = await api.put('/auth/profile', {
+        ...changes,
+        dailyGoalMinutes: changes.dailyGoal ?? changes.dailyGoalMinutes,
+      });
+      const updatedUser = await cacheRemoteUser(response.user);
+      setUser(updatedUser);
+      return updatedUser;
+    }
     const updatedUser = await persistUserUpdate((currentUser) => updateProfile(currentUser, changes));
     setUser(updatedUser);
     return updatedUser;
   };
 
   const resetUserProgress = async () => {
+    if (isRemoteApiConfigured) {
+      const response = await api.post('/progress/reset');
+      const updatedUser = await cacheRemoteUser(response.user);
+      setUser(updatedUser);
+      return updatedUser;
+    }
     const updatedUser = await persistUserUpdate(resetProgress);
     setUser(updatedUser);
     return updatedUser;

@@ -143,8 +143,11 @@ export function buildLessonCompletion(
   }, []);
 
   return {
+    lessonId: lesson?.id,
     activityId,
     durationSeconds: Number.isFinite(durationSeconds) ? Math.max(0, Math.floor(durationSeconds)) : 0,
+    answers,
+    hintsUsed: usedHints.map(Boolean),
     learnedWords,
     wordResults,
     ...summary,

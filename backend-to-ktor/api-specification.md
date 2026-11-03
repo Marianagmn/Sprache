@@ -6,6 +6,8 @@ Esta especificación detalla todos los contratos HTTP (endpoints, métodos, payl
 
 ## Convenciones Generales
 
+En el servidor implementado, las rutas privadas requieren la cabecera `Authorization` con esquema Bearer y JWT firmado. Solo registro, inicio de sesión y evaluación inicial son públicos. Las solicitudes sin token válido reciben HTTP 401.
+
 - **Base URL:** `http://localhost:8080/api` (en desarrollo)
 - **Content-Type:** `application/json`
 - **Autenticación:** Cabecera `Authorization: Bearer <jwt_token>` (para rutas protegidas)
